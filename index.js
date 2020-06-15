@@ -1,6 +1,6 @@
 const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-// let gridSize = Math.floor(vh * .75);
+let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
 let gridSize = vh * .75;
 
 const gameField = document.querySelector("#game-field");
@@ -16,7 +16,7 @@ let whereAppend = gameGrid;
 // let numSquares = 100;
 let numSquares = 625;
 
-console.log("gameGrid.innerHeight");
+console.log("gameGrid.clientHeight");
 console.log(gameGrid.clientHeight);
 // gridSize = gameGrid.clientWidth * .99;
 
@@ -72,9 +72,6 @@ const createBoard = function (whereAppend, numSquares, gridSize) {
                 // divide the size of squares evenly:
                 // let percentageSize = Math.floor(1 / sqRootNum * 100);
                 let pixelSize = gridSize / sqRootNum;
-                // let pixelSize = Math.floor(gridSize / sqRootNum);
-                // console.log(pixelSize);
-                // console.log(percentageSize);
                 newSquare.style.width = `${pixelSize}px`;
                 newSquare.style.height = `${pixelSize}px`;
 
@@ -104,84 +101,88 @@ const createBoard = function (whereAppend, numSquares, gridSize) {
 contentIDArray = createBoard(whereAppend, numSquares, gridSize);
 console.log(contentIDArray);
 
+const addStampToList = function () {
+    let timeStamp = Date.now();
+    const selector = document.getElementById("time-stamp-id");
+    let option = document.createElement("option");
+    option.text = timeStamp;
+    selector.add(option, selector[0]);
+    return timeStamp;
+};
 
-
-let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
 let levelsObject = {
-    001: [
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 6, 6, 6, 6, 4, 4, 5, 0, 1,
-        1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
-        1, 6, 6, 6, 4, 6, 2, 2, 2, 1,
-        1, 6, 6, 6, 4, 6, 2, 2, 2, 1,
-        1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
-        1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
-        1, 6, 6, 6, 6, 4, 4, 5, 0, 1,
-        1, 6, 6, 6, 4, 4, 4, 5, 0, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    ],
-    002: [
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 4, 5, 4, 5, 5, 5, 0, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 5, 4, 5, 0, 5, 5, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 2, 2, 4, 5, 5, 0, 0, 0, 1,
-        1, 6, 6, 6, 6, 4, 6, 6, 6, 4, 6, 6, 6, 4, 4, 6, 2, 2, 2, 0, 5, 5, 0, 5, 1,
-        1, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 2, 2, 4, 5, 5, 5, 0, 0, 1,
-        1, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 2, 5, 4, 5, 5, 5, 0, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 4, 4, 5, 4, 5, 5, 5, 5, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 4, 4, 4, 4, 4, 5, 5, 0, 0, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 2, 2, 4, 5, 0, 0, 0, 0, 1,
-        1, 6, 6, 4, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 4, 4, 0, 0, 5, 0, 5, 1,
-        1, 6, 6, 4, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 0, 0, 5, 5, 0, 0, 1,
-        1, 6, 6, 4, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 4, 0, 0, 5, 0, 5, 5, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 4, 6, 0, 0, 4, 5, 5, 5, 0, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 6, 0, 4, 4, 5, 5, 5, 0, 0, 1,
-        1, 6, 6, 4, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 4, 6, 4, 4, 4, 0, 5, 5, 0, 0, 1,
-        1, 6, 6, 4, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 5, 5, 0, 0, 5, 1,
-        1, 6, 6, 4, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 4, 4, 2, 4, 5, 5, 5, 0, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 2, 2, 5, 5, 5, 0, 0, 1,
-        1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 0, 5, 0, 0, 1,
-        1, 6, 6, 6, 6, 6, 4, 6, 6, 4, 6, 6, 6, 6, 6, 2, 2, 2, 4, 2, 2, 2, 0, 5, 1,
-        1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 4, 6, 6, 6, 4, 4, 4, 2, 4, 5, 5, 0, 0, 0, 1,
-        1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 4, 4, 4, 4, 0, 5, 5, 5, 0, 1,
-        1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 5, 4, 5, 5, 5, 0, 0, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    ],
-    myLevels: [],
-    loop: function (level, counter) {
-        // console.log(this[level][counter]);
-        return this[level][counter];
+
+    myLevels: {
+        001: [
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 6, 6, 6, 6, 4, 4, 5, 0, 1,
+            1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
+            1, 6, 6, 6, 4, 6, 2, 2, 2, 1,
+            1, 6, 6, 6, 4, 6, 2, 2, 2, 1,
+            1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
+            1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
+            1, 6, 6, 6, 6, 4, 4, 5, 0, 1,
+            1, 6, 6, 6, 4, 4, 4, 5, 0, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        ],
+
+        002: [
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 4, 5, 4, 5, 5, 5, 0, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 5, 4, 5, 0, 5, 5, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 2, 2, 4, 5, 5, 0, 0, 0, 1,
+            1, 6, 6, 6, 6, 4, 6, 6, 6, 4, 6, 6, 6, 4, 4, 6, 2, 2, 2, 0, 5, 5, 0, 5, 1,
+            1, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 2, 2, 4, 5, 5, 5, 0, 0, 1,
+            1, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 2, 5, 4, 5, 5, 5, 0, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 4, 4, 5, 4, 5, 5, 5, 5, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 4, 4, 4, 4, 4, 5, 5, 0, 0, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 2, 2, 4, 5, 0, 0, 0, 0, 1,
+            1, 6, 6, 4, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 4, 4, 0, 0, 5, 0, 5, 1,
+            1, 6, 6, 4, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 0, 0, 5, 5, 0, 0, 1,
+            1, 6, 6, 4, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 4, 0, 0, 5, 0, 5, 5, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 4, 6, 0, 0, 4, 5, 5, 5, 0, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 6, 0, 4, 4, 5, 5, 5, 0, 0, 1,
+            1, 6, 6, 4, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 4, 6, 4, 4, 4, 0, 5, 5, 0, 0, 1,
+            1, 6, 6, 4, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 5, 5, 0, 0, 5, 1,
+            1, 6, 6, 4, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 4, 4, 2, 4, 5, 5, 5, 0, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 2, 2, 5, 5, 5, 0, 0, 1,
+            1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 2, 2, 2, 0, 5, 0, 0, 1,
+            1, 6, 6, 6, 6, 6, 4, 6, 6, 4, 6, 6, 6, 6, 6, 2, 2, 2, 4, 2, 2, 2, 0, 5, 1,
+            1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 4, 6, 6, 6, 4, 4, 4, 2, 4, 5, 5, 0, 0, 0, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 4, 4, 4, 4, 0, 5, 5, 5, 0, 1,
+            1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 5, 4, 5, 5, 5, 0, 0, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        ]
     },
-    saveNew: function (savedLevelArray) {
-        let timeStamp = Date.now();
-        this.myLevels.push({
-            [timeStamp]: savedLevelArray
-        });
-        
+
+    loop: function (level, counter) {
+        return this.myLevels[level][counter];
+    },
+    saveNew: function (savedLevelArray, addStampToList) {
+        let timeStamp = addStampToList();
+        // console.log("timeStamp");
+        // console.log(timeStamp);
+        this.myLevels[timeStamp] = savedLevelArray;
         console.log(this);
         return this;
     }
 };
-        let timeStamp = Date.now();
-        console.log("timeStamp");
-        console.log(timeStamp);
 
-
-const contentBuilder = function (squareContentArray, contentIDArray, levelsObject) {
+let levelID = 002;
+const contentBuilder = function (squareContentArray, contentIDArray, levelsObject, levelID) {
     for (let i = 0; i < contentIDArray.length; i++) {
-        console.log(contentIDArray[i]);
-        let randomClass = Math.floor(Math.random() * 8);
+        // let randomClass = Math.floor(Math.random() * 8);
         let contentSpace = document.getElementById(`${contentIDArray[i]}`);
-        let levelClass = levelsObject.loop(002, i);
-        // let levelClass = levelsObject.loop(001, i);
+        let levelClass = levelsObject.loop(levelID, i);
+        contentSpace.classList.remove(contentSpace.classList[2]);
         contentSpace.classList.add(squareContentArray[levelClass]);
-        // contentSpace.classList.add(squareContentArray[randomClass]);
     };
 };
 
 // saveLevel:
 const saveLevel = function () {
     let savedLevelArray = [];
+    // let dynaSquareContent = document.querySelectorAll(".dyna-square-content");
     let dynaSquareContent = document.getElementsByClassName("dyna-square-content");
 
     for (let i = 0; i < dynaSquareContent.length; i++) {
@@ -213,20 +214,12 @@ const saveLevel = function () {
         } else {
             console.log("Error: dynamic-square-content does not contain any color squares.");
         };
-
-        console.log(contentIDArray[i]);
-        let randomClass = Math.floor(Math.random() * 8);
-        let contentSpace = document.getElementById(`${contentIDArray[i]}`);
-        let levelClass = levelsObject.loop(002, i);
-        // let levelClass = levelsObject.loop(001, i);
-        contentSpace.classList.add(squareContentArray[levelClass]);
-        // contentSpace.classList.add(squareContentArray[randomClass]);
     };
-    // console.log(savedLevelArray);
-    return levelsObject.saveNew(savedLevelArray);
+    return levelsObject.saveNew(savedLevelArray, addStampToList);
 };
 
-contentBuilder(squareContentArray, contentIDArray, levelsObject);
+
+contentBuilder(squareContentArray, contentIDArray, levelsObject, levelID);
 
 const darkGrayBrush = document.getElementById("dark-gray-brush");
 const purpleBrush = document.getElementById("purple-brush");
@@ -238,79 +231,109 @@ const lightBlueBrush = document.getElementById("light-blue-brush");
 const blackBrush = document.getElementById("black-brush");
 
 // const brushListener = function () {
-    let paletteBrushes = document.getElementsByClassName("palette");
-    for (let i = 0; i < paletteBrushes.length; i++) {
-        paletteBrushes[i].addEventListener("click", function (e) {
-            darkGrayBrush.classList.remove("in-use");
-            purpleBrush.classList.remove("in-use");
-            redBrush.classList.remove("in-use");
-            blueBrush.classList.remove("in-use");
-            greenBrush.classList.remove("in-use");
-            brownBrush.classList.remove("in-use");
-            lightBlueBrush.classList.remove("in-use");
-            blackBrush.classList.remove("in-use");
-            console.log(`You chose the ${e.target.id}.`);
-            if (!e.target.classList.contains("in-use")) {
-                e.target.classList.add("in-use");
-            };
-        });
-    };
+let paletteBrushes = document.getElementsByClassName("palette");
+for (let i = 0; i < paletteBrushes.length; i++) {
+    paletteBrushes[i].addEventListener("click", function (e) {
+        darkGrayBrush.classList.remove("in-use");
+        purpleBrush.classList.remove("in-use");
+        redBrush.classList.remove("in-use");
+        blueBrush.classList.remove("in-use");
+        greenBrush.classList.remove("in-use");
+        brownBrush.classList.remove("in-use");
+        lightBlueBrush.classList.remove("in-use");
+        blackBrush.classList.remove("in-use");
+        console.log(`You chose the ${e.target.id}.`);
+        if (!e.target.classList.contains("in-use")) {
+            e.target.classList.add("in-use");
+        };
+    });
+};
 // };
 
 const colorChange = function (event) {
-    console.log(event.target.id);
-    contentToColor = document.getElementById(event.target.id);
 
     if (event.buttons == 1 || event.buttons == 3) {
+        let contentToColor;
+        contentToColor = document.getElementById(event.target.id);
 
-    // TODO: create loop to remove classes if contains:
-    contentToColor.classList.remove("square-rock");
-    contentToColor.classList.remove("square-wall");
-    contentToColor.classList.remove("square-lava");
-    contentToColor.classList.remove("square-water");
-    contentToColor.classList.remove("square-grass");
-    contentToColor.classList.remove("square-soil");
-    contentToColor.classList.remove("square-sky");
-    contentToColor.classList.remove("square-night");
-    
-    let squareColor;
-    if (darkGrayBrush.classList.contains("in-use")) {
-        squareColor = "square-rock";
-    } else if (purpleBrush.classList.contains("in-use")) {
-        squareColor = "square-wall";
-    } else if (redBrush.classList.contains("in-use")) {
-        squareColor = "square-lava";
-    } else if (blueBrush.classList.contains("in-use")) {
-        squareColor = "square-water";
-    } else if (greenBrush.classList.contains("in-use")) {
-        squareColor = "square-grass";
-    } else if (brownBrush.classList.contains("in-use")) {
-        squareColor = "square-soil";
-    } else if (lightBlueBrush.classList.contains("in-use")) {
-        squareColor = "square-sky";
-    } else if (blackBrush.classList.contains("in-use")) {
-        squareColor = "square-night";
-    } else {
-        blackBrush.classList.add("in-use"); // adding a default brush assignment and color to square
-        squareColor = "square-night";
-        alert ("No brush has been selected. Please select a brush to begin.");
-    };
-    contentToColor.classList.add(squareColor);
+        // TODO: create loop to remove classes if contains:
+        // contentToColor.classList.remove(contentToColor.classList[2]);
+        //     "square-rock",
+        //     "square-wall",
+        //     "square-lava",
+        //     "square-water",
+        //     "square-grass",
+        //     "square-soil",
+        //     "square-sky",
+        //     "square-night"
+        //     );
+
+        if (darkGrayBrush.classList.contains("in-use")) {
+            let squareColor = "square-rock";
+            contentToColor.classList.remove(contentToColor.classList[2])
+            contentToColor.classList.add(squareColor);
+
+        } else if (purpleBrush.classList.contains("in-use")) {
+            let newToken = squareColor = "square-wall";
+            contentToColor.classList.remove(contentToColor.classList[2])
+            contentToColor.classList.add(newToken);
+            // contentToColor.classList.replace(oldToken, newToken);
+
+        } else if (redBrush.classList.contains("in-use")) {
+            let newToken = squareColor = "square-lava";
+            contentToColor.classList.remove(contentToColor.classList[2])
+            contentToColor.classList.add(newToken);
+
+        } else if (blueBrush.classList.contains("in-use")) {
+            let newToken = squareColor = "square-water";
+            contentToColor.classList.remove(contentToColor.classList[2])
+            contentToColor.classList.add(newToken);
+
+        } else if (greenBrush.classList.contains("in-use")) {
+            let squareColor = "square-grass";
+            contentToColor.classList.remove(contentToColor.classList[2])
+            contentToColor.classList.add(squareColor);
+
+        } else if (brownBrush.classList.contains("in-use")) {
+            let squareColor = "square-soil";
+            contentToColor.classList.remove(contentToColor.classList[2])
+            contentToColor.classList.add(squareColor);
+
+        } else if (lightBlueBrush.classList.contains("in-use")) {
+            let squareColor = "square-sky";
+            contentToColor.classList.remove(contentToColor.classList[2])
+            contentToColor.classList.add(squareColor);
+
+        } else if (blackBrush.classList.contains("in-use")) {
+            let squareColor = "square-night";
+            contentToColor.classList.remove(contentToColor.classList[2])
+            contentToColor.classList.add(squareColor);
+
+        } else {
+            blackBrush.classList.remove(contentToColor.classList[2]).add("in-use"); // adding a default brush assignment and color to square
+            let squareColor = "square-night";
+            alert("No brush has been selected. Please select a brush to begin.");
+            contentToColor.classList.add(squareColor);
+
+        };
     };
 };
 
 const createLevel = function () {
 
-    const dynaSquareContent = document.getElementsByClassName("dyna-square-content");
+    const dynaSquareContent = document.querySelectorAll(".dyna-square-content");
+    // const dynaSquareContent = document.getElementsByClassName("dyna-square-content");
     for (let i = 0; i < dynaSquareContent.length; i++) {
         let dynaSquare = dynaSquareContent[i];
-        dynaSquare.addEventListener("mousedown", colorChange, true);
-        dynaSquare.addEventListener('mouseover', colorChange, true);
-
-        dynaSquare.onclick = function () {
-            // TODO: need to being able to save to file and pass to function. Also, create a preview to user before loading.
-            console.log("Enjoy making your own levels. Then remember to save your file.");
-        }
-    }
+        let dynaSquareID = document.getElementById(dynaSquare.id);
+        dynaSquare.addEventListener("mousedown", colorChange);
+        dynaSquareID.addEventListener("mouseover", colorChange);
+    };
 };
 
+const loadMyLevel = function () {
+    let timeID = JSON.parse(document.getElementById("time-stamp-id").value);
+    // TODO: append ids so that user can access (create a drop-down) / this can also be use for history (undo/redo)
+    console.log(timeID);
+    return contentBuilder(squareContentArray, contentIDArray, levelsObject, timeID);
+};

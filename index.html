@@ -14,6 +14,12 @@
         </div>
         <input type="button" value="make-level" id="make-level" onclick="createLevel()">
         <input type="button" value="save-level" id="save-level" onclick="saveLevel()">
+        <!-- <input type="number" name="time-stamp-id" id="time-stamp-id"> -->
+        <select id="time-stamp-id" onChange="loadMyLevel(this);">
+            <option>Please select image history</option>
+            <option value="002">002</option>
+        </select>
+        <!-- <input type="button" value="load-level" id="load-level" onclick="loadMyLevel()"> -->
         <div class="palette-bar">
             <div class="palette" id="dark-gray-brush"></div>
             <div class="palette" id="purple-brush"></div>
