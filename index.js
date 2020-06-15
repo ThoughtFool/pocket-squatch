@@ -261,6 +261,8 @@ const colorChange = function (event) {
     console.log(event.target.id);
     contentToColor = document.getElementById(event.target.id);
 
+    if (event.buttons == 1 || event.buttons == 3) {
+
     // TODO: create loop to remove classes if contains:
     contentToColor.classList.remove("square-rock");
     contentToColor.classList.remove("square-wall");
@@ -294,6 +296,7 @@ const colorChange = function (event) {
         alert ("No brush has been selected. Please select a brush to begin.");
     };
     contentToColor.classList.add(squareColor);
+    };
 };
 
 const createLevel = function () {
@@ -301,7 +304,9 @@ const createLevel = function () {
     const dynaSquareContent = document.getElementsByClassName("dyna-square-content");
     for (let i = 0; i < dynaSquareContent.length; i++) {
         let dynaSquare = dynaSquareContent[i];
-        dynaSquare.addEventListener("click", colorChange);
+        dynaSquare.addEventListener("mousedown", colorChange, true);
+        dynaSquare.addEventListener('mouseover', colorChange, true);
+
         dynaSquare.onclick = function () {
             // TODO: need to being able to save to file and pass to function. Also, create a preview to user before loading.
             console.log("Enjoy making your own levels. Then remember to save your file.");
