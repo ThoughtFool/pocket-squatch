@@ -6,31 +6,16 @@
     <title>Pocket Squatch</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="game-screen">
-        <div id="game-field">
-            <!-- append dynamic grid -->
+    <div class="container">
+        <div class="title">
+            <h1>Pocket Squatch</h1>
         </div>
-        <input type="button" value="make-level" id="make-level" onclick="createLevel()">
-        <input type="button" value="save-level" id="save-level" onclick="saveLevel()">
-        <!-- <input type="number" name="time-stamp-id" id="time-stamp-id"> -->
-        <select id="time-stamp-id" onChange="loadMyLevel(this);">
-            <option>Please select image history</option>
-            <option value="002">002</option>
-        </select>
-        <!-- <input type="button" value="load-level" id="load-level" onclick="loadMyLevel()"> -->
-        <div class="palette-bar">
-            <div class="palette" id="dark-gray-brush"></div>
-            <div class="palette" id="purple-brush"></div>
-            <div class="palette" id="red-brush"></div>
-            <div class="palette" id="blue-brush"></div>
-            <div class="palette" id="green-brush"></div>
-            <div class="palette" id="brown-brush"></div>
-            <div class="palette" id="light-blue-brush"></div>
-            <div class="palette" id="black-brush"></div>
+        <div class="gameboard">
+            <div class="sprite-holder"></div>
+            <!-- <div class="ground"></div> -->
         </div>
     </div>
-    <script src="./index.js"></script>
+    <script src="./actions/sprite-logic.js"></script>
 </body>
 </html>
