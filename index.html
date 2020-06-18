@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pocket Squatch</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="title">
@@ -13,9 +15,30 @@
         </div>
         <div class="gameboard">
             <div class="sprite-holder"></div>
-            <!-- <div class="ground"></div> -->
         </div>
+
+        <form method="POST" id="myForm" action="/">
+            <label for="email">Strike or Defend:
+                <div>
+                    <input type="radio" name="strikeOrDefend" id="strike1" value="strike">
+                    <label for="false">strike</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="strikeOrDefend" id="defend2" value="defend">
+                    <label for="true">defend</label>
+                </div>
+            </label>
+            <br>
+
+            <input id="submit-btn" type="submit" value="submit">
+            <div>
+                Timer: <span id="counter-span"></span>
+            </div>
+        </form>
+
     </div>
-    <script src="./actions/sprite-logic.js"></script>
+    <script src="./index.js"></script>
 </body>
+
 </html>

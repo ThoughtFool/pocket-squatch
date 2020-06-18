@@ -1,10 +1,3 @@
-// const attackType = {
-//     strike: {
-//         human: "test",
-//         sasquatch: "test2"
-//     }
-// };
-
 class Sprite {
     constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes) {
         this.name = name;
@@ -25,6 +18,8 @@ class Sprite {
         this.timeOfDay = timeOfDay; // nightfall feeling sleepy
         this.asleep = this.isAsleep();
         this.beingType = this.transform();
+        this.spiritType = ["fox", "bird", "racerunner", "sand lion"];
+        this.creatureType = ["sasquatch", "yeti", "bigfoot", "abonimable", "swampthing", "sandman"];
         this.location = [
             "dream-world",
             "real-world",
@@ -33,12 +28,6 @@ class Sprite {
         ];
         this.timezone = ["dreamtime", "realtime"]; // slow vs. fast
         this.actionTypes = actionTypes;
-        this.attackType = {
-            strike: {
-                human: "test",
-                sasquatch: "test2"
-            }
-        };
     };
 
     transform() {

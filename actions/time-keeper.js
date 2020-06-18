@@ -3,69 +3,51 @@ const actionTypes = require("./action-types");
 let start = Date.now();
 let timer = 0;
 
-// test data:
-const gameData = {
-    enemySprite: {
-        health: 100
-    }
-};
+const startGame = function (gameData) {
+    const sprite_Lyric = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes); // name, health, hasStoneQueen, timeOfDay, asleep, timer
+    gameData.player = sprite_Lyric;
 
-const timeKeeper = function () {
-    
-    if (timer < 15) {
-        sprite_Lyric.timeOfDay = "daybreak";
-        console.log(`=======================`);
-        console.log(`timer: ${timer}`);
-        console.log(`=======================`);
-        if (timer <= 0) {
-            sprite_Lyric.transform();
-            console.log(sprite_Lyric);
-            console.log(sprite_Lyric.takeAction("strike", gameData));
-
-        };
+    const timeKeeper = function () {
         
-    } else if (timer >= 15 && timer < 30) {
-        sprite_Lyric.timeOfDay = "nightfall";
-        console.log(`=======================`);
-        console.log(`timer: ${timer}`);
-        console.log(`=======================`);
-        if (timer === 15) {
-            sprite_Lyric.transform();
-            console.log(sprite_Lyric);
-            console.log(sprite_Lyric.takeAction("strike", gameData));
-
+        if (timer < 15) {
+            sprite_Lyric.timeOfDay = "daybreak";
+            console.log(`=======================`);
+            console.log(`timer: ${timer}`);
+            
+            console.log(`=======================`);
+            if (timer <= 0) {
+                sprite_Lyric.transform();
+                // test data:
+                console.log(sprite_Lyric);    
+            };
+            
+        } else if (timer >= 15 && timer < 30) {
+            sprite_Lyric.timeOfDay = "nightfall";
+            console.log(`=======================`);
+            console.log(`timer: ${timer}`);
+            
+            console.log(`=======================`);
+            if (timer === 15) {
+                sprite_Lyric.transform();
+                // test data:
+                console.log(sprite_Lyric);
+            };
+    
+        } else if (timer >= 30) {
+            start = Date.now();
+            console.log(`=======================`);
+            console.log(`timer: ${timer}`);
+            
+            console.log(`restart timer!`);
+            console.log(`=======================`);
         };
-
-    } else if (timer >= 30) {
-        start = Date.now();
-        console.log(`=======================`);
-        console.log(`timer: ${timer}`);
-        console.log(`restart timer!`);
-        console.log(`=======================`);
+        // find difference in seconds:
+        timer = Math.floor((Date.now() - start) / 1000);
     };
-    timer = Math.floor((Date.now() - start) / 1000);
-
-    // if (timer === 0) {
-    //     sprite_Lyric.transform();
-    //     console.log(sprite_Lyric);
-    // } else if (timer === 15) {    
-    //     sprite_Lyric.transform();
-    //     console.log(sprite_Lyric);
-    // } else if (timer >= 30) {
-    //     start = Date.now();
-    // };
-    
-    
-    // run checker for transformations?
+    setInterval(timeKeeper, 1000);
 };
 
-const sprite_Lyric = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes); // name, health, hasStoneQueen, timeOfDay, asleep, timer
-setInterval(timeKeeper, 1000);
-
-
-
-// console.log(sprite_Lyric.takeAction("strike", gameData));
-// var startTime, endTime;
+module.exports = startGame;
 
 // function start() {
 //     startTime = new Date();
