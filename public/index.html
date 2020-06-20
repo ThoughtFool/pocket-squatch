@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pocket Squatch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Pocket Squatch</h1>
+        </div>
+        <div class="gameboard">
+            <div class="sprite-holder"></div>
+        </div>
+
+        <form name="myForm" method="POST" id="myForm" action="/">
+            <label for="actionType">Choose Your Action Type:
+                <div>
+                    <input type="radio" name="actionType" id="strike" value="strike">
+                    <label for="strike">strike</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="defend" value="defend">
+                    <label for="defend">defend</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="walk" value="walk">
+                    <label for="walk">walk</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="run" value="run">
+                    <label for="run">run</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="jump" value="jump">
+                    <label for="jump">jump</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="fly" value="fly">
+                    <label for="fly">fly</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="transform" value="transform">
+                    <label for="transform">transform</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="rest" value="rest">
+                    <label for="rest">rest</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="enemyStrike" value="enemyStrike">
+                    <label for="enemyStrike">enemy strike</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="isDefeated" value="isDefeated">
+                    <label for="isDefeated">is defeated</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="isWinner" value="isWinner">
+                    <label for="isWinner">is winner</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="receivesDmg" value="receivesDmg">
+                    <label for="receivesDmg">receives damage</label>
+                </div>
+
+                <div>
+                    <input type="radio" name="actionType" id="receivesHealth" value="receivesHealth">
+                    <label for="receivesHealth">receives health</label>
+                </div>
+
+            </label>
+            <br>
+
+            <input id="submit-btn" type="submit" value="submit">
+            <div>
+                Timer: <span id="counter-span"></span>
+            </div>
+        </form>
+
+    </div>
+    <script src="./index.js"></script>
+</body>
+
+</html>
