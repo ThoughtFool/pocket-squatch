@@ -4,11 +4,28 @@
     padding: 0px;
 }
 
-.title {
+.test-space {
+    padding-left: 50px;
+    color: whitesmoke;
+    font-size: x-large;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: whitesmoke solid 1px;
+}
+
+.title-box {
+    position: relative;
+    display: flex;
     padding: 20px;
     color: whitesmoke;
     max-height: 5%;
     text-align: center;
+    align-self: flex-end;
+}
+
+#subhead {
+    position: relative;
+    align-self: flex-end;
+    padding-left: 50px
 }
 
 .container {

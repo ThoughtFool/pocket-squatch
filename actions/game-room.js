@@ -45,7 +45,8 @@ const gameroom = {
         },
     },
     wins: 0,
-    losses: 0
+    losses: 0,
+    timer: 0
 };
 
 module.exports = gameroom;

@@ -24,7 +24,7 @@ class Sprite {
         this.timeOfDay = timeOfDay; // nightfall feeling sleepy
         this.asleep = this.isAsleep();
         this.beingType = this.transform();
-        this.spiritType = ["fox", "bird", "racerunner", "sand lion"];
+        this.spiritType = ["ghost fox", "cobalt corvid", "scarlet racerunner", "sand lion", "night frost"];
         this.creatureType = ["sasquatch", "yeti", "bigfoot", "abonimable", "swampthing", "sandman"];
         this.locType = [
             "dream-world",
@@ -63,16 +63,10 @@ class Sprite {
     takeAction(moveType) {
         console.log("moveType:");
         console.log(moveType);
-        
+
         return this[moveType]();
         return this.actionTypes[this.beingType][moveType](this.getStats(), this.beingType);
     };
-
-    // takeAction(moveType) {
-    //     console.log("this.beingType:");
-    //     console.log(this.beingType);
-    //     return this.actionTypes[this.beingType][moveType](this.getStats(), this.beingType);
-    // };
 
     getStats() {
         return this.stats;
@@ -109,53 +103,53 @@ class Sprite {
     };
 
     // same as "sleep" (stone-queen needs to rest between actions and returns to stone, while "Lyric" sleeps in arms of queen):
-        rest() {
-            console.log("You feel rested: +10 health!");
-            this.stats.friend[this.beingType].health += 10;
-            return this.stats
-        };
+    rest() {
+        console.log("You feel rested: +10 health!");
+        this.stats.friend[this.beingType].health += 10;
+        return this.stats
+    };
 
-        // (stone-queen's stone become increasingly fractured, while "Lyric"'s health is returned during sleep cycles):
-        isDefeated(gameroom) {
-            console.log("Sorry, you have lost this time. Try again?"); // create play again button or auto play level?
-            gameroom.losses++;
-            return gameroom;
-        };
+    // (stone-queen's stone become increasingly fractured, while "Lyric"'s health is returned during sleep cycles):
+    isDefeated(gameroom) {
+        console.log("Sorry, you have lost this time. Try again?"); // create play again button or auto play level?
+        gameroom.losses++;
+        return gameroom;
+    };
 
-        isWinner(gameroom) {
-            console.log("Congrats, you are the winner");
-            let currentLevel = parseInt(gameroom.currentLevel);
-            gameroom.levels[currentLevel].completed = true;
-            gameroom.levels[currentLevel + 1].locked = false;
-            gameroom.wins++;
-            console.log(gameroom);
-            return gameroom;
-        };
+    isWinner(gameroom) {
+        console.log("Congrats, you are the winner");
+        let currentLevel = parseInt(gameroom.currentLevel);
+        gameroom.levels[currentLevel].completed = true;
+        gameroom.levels[currentLevel + 1].locked = false;
+        gameroom.wins++;
+        // console.log(gameroom);
+        return gameroom;
+    };
 
-        // make this action interchangeable with strike depending on (attacker, defender) parameters:
-        receivesDmg() { // strings --> ("friend", "foe")?
-            console.log("<<<<<<<<<<<< ATTENTION (receivesDmg) >>>>>>>>>>>>");
-            console.log(`Your health is ${this.stats.friend[this.beingType].health} minus enemy power: ${this.stats.foe.enemySprite.strength}`);
-            console.log("<<<<<<<<<<<<<<<<<<<<<...>>>>>>>>>>>>>>>>>>>>>");
+    // make this action interchangeable with strike depending on (attacker, defender) parameters:
+    receivesDmg() { // strings --> ("friend", "foe")?
+        console.log("<<<<<<<<<<<< ATTENTION (receivesDmg) >>>>>>>>>>>>");
+        console.log(`Your health is ${this.stats.friend[this.beingType].health} minus enemy power: ${this.stats.foe.enemySprite.strength}`);
+        console.log("<<<<<<<<<<<<<<<<<<<<<...>>>>>>>>>>>>>>>>>>>>>");
 
-            this.stats.friend[this.beingType].health -= this.stats.foe.enemySprite.strength; //"THIS.enemy?
-            console.log(`Enemy health is NOW: ${this.stats.foe.enemySprite.health}`);
-            return this.stats;
+        this.stats.friend[this.beingType].health -= this.stats.foe.enemySprite.strength; //"THIS.enemy?
+        console.log(`Enemy health is NOW: ${this.stats.foe.enemySprite.health}`);
+        return this.stats;
 
-        };
+    };
 
-        receivesHealth() { // strings --> ("friend", "foe")?
-            let powerBonus = Math.floor(this.stats.friend[this.beingType].strength / 4);
+    receivesHealth() { // strings --> ("friend", "foe")?
+        let powerBonus = Math.floor(this.stats.friend[this.beingType].strength / 4);
 
-            console.log("<<<<<<<<<<<< ATTENTION (receivesHealth) >>>>>>>>>>>>");
-            console.log(`Your health is ${this.stats.friend[this.beingType].health} plus power health bonus: ${powerBonus}`);
-            console.log("<<<<<<<<<<<<<<<<<<<<<...>>>>>>>>>>>>>>>>>>>>>");
+        console.log("<<<<<<<<<<<< ATTENTION (receivesHealth) >>>>>>>>>>>>");
+        console.log(`Your health is ${this.stats.friend[this.beingType].health} plus power health bonus: ${powerBonus}`);
+        console.log("<<<<<<<<<<<<<<<<<<<<<...>>>>>>>>>>>>>>>>>>>>>");
 
-            this.stats.friend[this.beingType].health += powerBonus;
-            console.log(`Your health is NOW: ${this.stats.friend[this.beingType].health}`);
-            return this.stats;
+        this.stats.friend[this.beingType].health += powerBonus;
+        console.log(`Your health is NOW: ${this.stats.friend[this.beingType].health}`);
+        return this.stats;
 
-        };
+    };
 
     ////////////////////////////
 
@@ -184,7 +178,5 @@ class Sprite {
     };
 
 };
-
-// setInterval(thistimeKeeper, 1000);
 
 module.exports = Sprite;

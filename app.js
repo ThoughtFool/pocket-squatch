@@ -47,35 +47,86 @@ app.post("/", function (req, res) { // (handler: post)
     if (actionType === "isWinner" || actionType === "isDefeated") {
         gameroom.player[actionType](gameroom);
     } else {
-        let updatedStates = gameroom.player.takeAction(actionType);
-        
+        // let updateGameroom = gameroom.player.takeAction(actionType);
+        let updateGameroom = gameroom.player[actionType]();
+
         console.log("====================");
-        console.log("updatedStates:");
+        console.log("updateGameroom:");
         console.log("====================");
-        console.log(updatedStates);
+        console.log(updateGameroom);
         console.log("====================");
+        console.log(gameroom.timer);
     };
-
-    // if (actionType === "strike" || actionType === "defend") {
-
-    // } else {
-
-    // };
-
 
     // dbConnection.then(function (db) {
     //     delete req.body._id;
     //     db.collection("gameData").insertOne(req.body);
+    //         res.redirect("/");
     // });
-    // res.send(`Data received:\n ${JSON.stringify(gameData)}`);
+
+    res.send(`Data received:\n ${gameroom.timer}`);
     // res.end();
 });
 
 app.get("/gamescreen", function (req, res) {
-    res.render("index", JSON.stringify(gameData));
+    res.render("counter", {
+        spriteName: gameroom.player.name,
+        timer: parseInt(gameroom.timer),
+    });
 });
 
-app.post("/gamescreen", function (req, res) {});
+app.post("/gamescreen", function (req, res) {
+    res.render("counter", {
+        spriteName: gameroom.player.name,
+        timer: parseInt(gameroom.timer),
+    });
+});
+
+app.get("/test-actions", function (req, res) {
+    res.render("test-actions", {
+        roomID: gameroom.roomID,
+        spriteName: gameroom.player.name,
+        beingType: gameroom.player.beingType,
+        humanHealth: gameroom.player.stats.friend.human.health, // stats: { friend: [Object],
+        sasquatchHealth: gameroom.player.stats.friend.sasquatch.health,
+        enemyHealth: gameroom.player.stats.foe.enemySprite.health,
+        wins: parseInt(gameroom.wins),
+        losses: parseInt(gameroom.losses),
+        timer: parseInt(gameroom.timer), // create function to evalute timer on client with timer on server and update on change
+    });
+});
+
+app.post("/test-actions", function (req, res) {
+    let actionType = req.body["actionType"];
+
+    if (actionType != undefined) {
+        // if (actionType === "isWinner" || actionType === "isDefeated") {
+            gameroom.player[actionType](gameroom);
+        // } else {
+            // let updateGameroom = gameroom.player[actionType]();
+            // res.redirect("/test-actions");
+            // };
+
+    } else {
+        console.log("Please select a method before submitting form.");
+    }
+    res.redirect("/test-actions");
+
+
+        // console.log("====================");
+        // console.log("updateGameroom:");
+        // console.log("====================");
+        // console.log(updateGameroom);
+        // console.log("====================");
+        // console.log(gameroom.timer);
+    // // MongoDB data:
+    // dbConnection.then(function (db) {
+    //     delete req.body._id;
+    //     db.collection("gameData").insertOne(req.body);
+    //         res.redirect("/");
+    // });
+
+});
 
 const PORT = process.env.PORT || 3000 || process.env.IP || "0.0.0.0";
 app.listen(PORT);
