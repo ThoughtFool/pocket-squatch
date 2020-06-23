@@ -35,46 +35,81 @@ const clientTimeKeeper = function () {
 
     // find difference in seconds:
     myTimer = Math.floor((Date.now() - clientStart) / 1000);
-    // timerSpan.innerHTML = myTimer;
     return myTimer;
 };
 
 setInterval(clientTimeKeeper, 1000);
-// function start() {
-//     startTime = new Date();
-// };
 
-// function end() {
-//     endTime = new Date();
-//     var timeDiff = endTime - startTime; //in ms
-//     // strip the ms
-//     timeDiff /= 1000;
+// const hitBox = document.querySelector(".hit-box");
+// const hitBoxImg = document.querySelector("#hit-box-img");
 
-//     // get seconds 
-//     var seconds = Math.round(timeDiff);
-//     console.log(seconds + " seconds");
-// };
+const moveAndDisplay = {
+    a: {
+        src: "https://library.kissclipart.com/20180923/khw/kissclipart-weather-wind-and-rain-clipart-rain-wind-weather-ada11640c21dca10.png",
+        
+        moveClass: "move-left",
+        moveDirection: "left",
+        moveDist: - 100
+    },
+    d: {
+        src: "https://library.kissclipart.com/20180831/xyw/kissclipart-tornado-weather-drawing-clipart-tornado-drawing-cl-89df09c957b28724.png",
+        
+        moveClass: "move-right",
+        moveDirection: "left",
+        moveDist: + 100
+    },
+    w: {
+        src: "https://p7.hiclipart.com/preview/755/64/974/common-raven-t-shirt-drawing-clip-art-raven.jpg",
 
-// const getData = function (event) {
-//     event.preventDefault();
-//     console.log(event.target.value);
-//     console.log("this");
-//     console.log(this);
-// };
+        moveClass: "move-up",
+        moveDirection: "top",
+        moveDist: - 100
+        
+    },
+    s: {
+        src: "https://w7.pngwing.com/pngs/371/831/png-transparent-silhouette-of-crow-silhouette-bird-american-crow-ravens-3d-animated-animals-photography-monochrome.png",
+        
+        moveClass: "move-down",
+        moveDirection: "top",
+        moveDist: + 100
+    },
+    moveMethod: function (keyPressed, hitBox_ID) {
+        let moveBox = document.getElementById(hitBox_ID);
+        let hitBox_bg = moveBox.childNodes[1];
+        let rect = moveBox.getBoundingClientRect();
+        let loc = [this[keyPressed].moveDirection];
+        
+        moveBox.style[loc] = `${rect[loc] + this[keyPressed].moveDist}px`;
 
-// const radBtns = document.myForm.strikeOrDefend;
-// let prev = null;
-// for (let i = 0; i < radBtns.length; i++) {
-//     radBtns[i].addEventListener('change', function () {
-//         (prev) ? console.log(prev.value): null;
-//         if (this !== prev) {
-//             prev = this;
-//         };
-//         console.log(this.value);
-//     });
-// };
-// const counter = document.getElementById("counter-span");
-// const submitBtn = document.getElementById("submit-btn");
+        this.removeClass(hitBox_bg);
+        hitBox_bg.style.backgroundImage = `url("${this[keyPressed].src}")`;
+        hitBox_bg.classList.add(this[keyPressed].moveClass);
+    },
+    removeClass: function (element) {
+        element.classList.remove(
+            "move-left",
+            "move-right",
+            "move-up",
+            "move-down",
+        );
+    }
+};
 
-// submitBtn.addEventListener("click", getData);
-// // counter.innerHTML = myTimer;
+// function to update sprite div location && initiate animation sequence && also listen for sprite collisions with other on-screen objects:
+const moveSpriteDiv = function (keyPressed, sprite_ID) {
+    return moveAndDisplay.moveMethod(keyPressed, sprite_ID);
+};
+
+const btnPress = function (event) {
+
+    let keyPressed = event.key;
+    console.log(keyPressed.toLowerCase());
+    keyPressed = keyPressed.toLowerCase()
+
+    if (keyPressed == "w" || keyPressed == "a" || keyPressed == "s" || keyPressed == "d") {
+        let sprite_ID = "hit-box-lyric"; // TODO: userinput only / reuse function with diff parameters?
+        return moveSpriteDiv(keyPressed, sprite_ID); // dispalyMove(): separate func?
+    };
+};
+
+document.addEventListener("keypress", btnPress);
