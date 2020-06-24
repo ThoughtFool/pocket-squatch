@@ -96,6 +96,7 @@ app.get("/test-actions", function (req, res) {
     });
 });
 
+
 app.post("/test-actions", function (req, res) {
     let actionType = req.body["actionType"];
 
@@ -127,6 +128,26 @@ app.post("/test-actions", function (req, res) {
     // });
 
 });
+
+app.get("/test-animations", function (req, res) {
+    res.render("test-animations", {
+        
+        timer: parseInt(gameroom.timer) // create function to evalute timer on client with timer on server and update on change
+    });
+});
+
+// app.post("/test-animations", function (req, res) {
+//     let actionType = req.body["actionType"];
+
+//     if (actionType != undefined) {
+//         gameroom.player[actionType](gameroom);
+
+//     } else {
+//         console.log("Please select a method before submitting form.");
+//     }
+//     res.redirect("/test-animations");
+// });
+
 
 const PORT = process.env.PORT || 3000 || process.env.IP || "0.0.0.0";
 app.listen(PORT);
