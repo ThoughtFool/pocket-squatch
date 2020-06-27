@@ -30,21 +30,23 @@
 
 .transform-holder {
     position: absolute;
-    width: 300px;
-    height: 300px;
+    /* width: 300px;
+    height: 300px; */
     left: 0px;
     bottom: calc(var(--ground-height) + 5px);
     border: red dashed 1px;
-    background-image: url("https://via.placeholder.com/300x300");
+    background-image: url("./images/lyric-stand.png");
+    /* background-size: 300px 300px; */
+
     background-repeat: no-repeat;
-    background-size: 300px 300px;
+    height: 300px;
+    width: 300px;
 }
 
 #hit-box-lyric {
     position: absolute;
     width: 100px;
-    height: 200px;
-    /* background-color: cyan; */
+    height: 150px;
     left: 100px;
     bottom: 0px;
     border: grey dashed 3px;
@@ -64,13 +66,6 @@
     position: absolute;
     bottom: 0px;
 }
-
-                            /* .sprite-holder {
-                                height: 25vh;
-                                width: 5vh;
-                                border: gray dashed 2px;
-                                display: block;
-                            } */
 
 .test-space {
     padding-left: 50px;
@@ -121,4 +116,81 @@
     display: flex;
     margin-left: 5%;
     align-items: flex-end;
+}
+
+.move-down {
+    animation: rise-2 2s steps(4) infinite,
+        backwards 15s linear infinite;
+    transition-timing-function: ease-in;
+    /* transition: .25s; */
+}
+
+.move-right,
+.move-left {
+    animation: runs 1.25s steps(8);
+    animation-iteration-count: 1,
+        forwards 15s linear infinite;
+    transition-timing-function: ease-in-out;
+}
+
+.move-up,
+.move-down {
+    animation: jumps 1.25s steps(9);
+    animation-iteration-count: 1;
+    /* forwards 15s linear infinite; */
+    transition-timing-function: ease-in-out;
+}
+
+.move-stand {
+    /* animation-delay: 5.75s; */
+    animation: stands 2.5s steps(4);
+    animation-iteration-count: infinite;
+    /* forwards 15s linear infinite; */
+    transition-timing-function: ease-in-out;
+}
+
+.liftoff {
+    /* animation-delay: 5.75s; */
+    animation: flies 5s steps(11);
+    animation-iteration-count: infinite;
+    /* forwards 15s linear infinite; */
+    transition-timing-function: ease-in-out;
+}
+
+/* create an enemy fear pose: frozen in terror with pulse effect */
+.move-stand:hover,
+.move-right:hover,
+.move-left:hover,
+.move-up:hover
+.move-down:hover {
+    animation-play-state: paused;
+    background-color: deeppink;
+}
+
+@keyframes stands {
+
+    100% {
+        background-position: -1200px;
+    }
+}
+
+@keyframes runs {
+
+    100% {
+        background-position: -2400px;
+    }
+}
+
+@keyframes jumps {
+
+    100% {
+        background-position: -2700px;
+    }
+}
+
+@keyframes flies {
+
+    100% {
+        background-position: -3300px;
+    }
 }

@@ -41,52 +41,68 @@ const clientTimeKeeper = function () {
     return myTimer;
 };
 
-setInterval(clientTimeKeeper, 1000);
+// setInterval(clientTimeKeeper, 1000);
 
 // const hitBox = document.querySelector(".hit-box");
 // const hitBoxImg = document.querySelector("#hit-box-img");
 
 const moveAndDisplay = {
     a: {
-        src: "/images/lyric-sprite-left.png",
+        src: "/images/human-walk-left.png",
 
         moveClass: "move-left",
         moveDirection: "left",
-        moveDist: -100,
-        holdPos: "human"
+        moveDist: -50,
+        holdPos: "human",
+        keyState: false
     },
     d: {
-        src: "/images/lyric-sprite-right.png",
+        src: "/images/human-walk-right.png",
 
         moveClass: "move-right",
         moveDirection: "left",
-        moveDist: +100,
-        holdPos: "human"
+        moveDist: +50,
+        holdPos: "human",
+        keyState: false
     },
     w: {
-        src: "/images/lyric-sprite-up.png",
+        src: "/images/lyric-jump-right.png",
 
         moveClass: "move-up",
         moveDirection: "top",
-        moveDist: -100,
-        holdPos: "human"
+        moveDist: -50,
+        holdPos: "human",
+        keyState: false
 
     },
     s: {
-        src: "/images/lyric-sprite-jump.png",
+        src: "/images/lyric-jump-left.png",
 
         moveClass: "move-down",
         moveDirection: "top",
-        moveDist: +100,
-        holdPos: "human"
+        moveDist: +50,
+        holdPos: "human",
+        keyState: false
     },
+
+    l: {
+        src: "/images/lyric-liftoff.png",
+
+        moveClass: "move-down",
+        moveDirection: "top",
+        moveDist: +50,
+        holdPos: "human",
+        keyState: false
+    },
+
     A: {
         src: "/images/sassy-sprite-left.png",
 
         moveClass: "move-left",
         moveDirection: "left",
         moveDist: -100,
-        holdPos: "human"
+        holdPos: "sasquatch",
+        keyState: false
     },
     D: {
         src: "/images/sassy-sprite-right.png",
@@ -94,7 +110,8 @@ const moveAndDisplay = {
         moveClass: "move-right",
         moveDirection: "left",
         moveDist: +100,
-        holdPos: "human"
+        holdPos: "sasquatch",
+        keyState: false
     },
     W: {
         src: "/images/sassy-sprite-up-right.png",
@@ -102,7 +119,8 @@ const moveAndDisplay = {
         moveClass: "move-up",
         moveDirection: "top",
         moveDist: -100,
-        holdPos: "human"
+        holdPos: "sasquatch",
+        keyState: false
 
     },
     S: {
@@ -111,50 +129,116 @@ const moveAndDisplay = {
         moveClass: "move-down",
         moveDirection: "top",
         moveDist: +100,
-        holdPos: "human"
+        holdPos: "sasquatch",
+        keyState: false
+    },
+    moveStand: {
+        src: "/images/lyric-stand.png",
+
+        moveClass: "move-stand",
+        holdPos: "human",
+        keyState: false
     },
     moveMethod: function (keyPressed, hitBox_ID, sprite_holder) {
-        let spriteHolder = document.querySelector(`.${sprite_holder}`);
-        let moveBox = document.getElementById(hitBox_ID);
-        let hitBox_bg = moveBox.childNodes[1];
-        let rect = spriteHolder.getBoundingClientRect();
-        // let rect = moveBox.getBoundingClientRect();
-        let loc = [this[keyPressed].moveDirection];
 
-        console.log(`${rect[loc]} + ${this[keyPressed].moveDist}`);
-        console.log(rect[loc] + this[keyPressed].moveDist);
+        if (this[keyPressed].keyState === false) {
 
-        spriteHolder.style[loc] = `${rect[loc] + this[keyPressed].moveDist}px`;
-        // moveBox.style[loc] = `${rect[loc] + this[keyPressed].moveDist}px`;
+            let spriteHolder = document.querySelector(`.${sprite_holder}`);
+            let moveBox = document.getElementById(hitBox_ID);
+            let hitBox_bg = moveBox.childNodes[1];
+            let rect = spriteHolder.getBoundingClientRect();
+            let loc = [this[keyPressed].moveDirection];
+    
+            console.log(`${rect[loc]} + ${this[keyPressed].moveDist}`);
+            console.log(rect[loc] + this[keyPressed].moveDist);
+    
+            spriteHolder.style[loc] = `${rect[loc] + this[keyPressed].moveDist}px`;
+    
+            this.removeClass(spriteHolder);
+    
+            // needed to reset animation:
+            void spriteHolder.offsetWidth;
+    
+            spriteHolder.style.backgroundImage = `url("${this[keyPressed].src}")`;
+            spriteHolder.classList.add(this[keyPressed].moveClass);
+            spriteHolder.classList.add(this[keyPressed].holdPos);
+    
+            let animationClass = document.querySelector(".transform-holder");
+            console.log("animationClass");
+            console.log(animationClass);
+    
+            animationClass.onanimationend = () => {
+                this.removeClass(animationClass);
+                console.log(`Animation iteration has ended!`);
+    
+                this.addClass(animationClass);
+                animationClass.style.backgroundImage = `url("${this.moveStand.src}")`;
+            };
+    
+            // animationClass.addEventListener('animationiteration', this.nextAnimation(animationClass));
 
-        this.removeClass(hitBox_bg);
-        spriteHolder.style.backgroundImage = `url("${this[keyPressed].src}")`;
-        // hitBox_bg.style.backgroundImage = `url("${this[keyPressed].src}")`;
-        hitBox_bg.classList.add(this[keyPressed].moveClass);
-        spriteHolder.classList.add(this[keyPressed].holdPos);
+        } else {
+            console.log("this will always fire!");
+        };
+
+
     },
     removeClass: function (element) {
+        console.log("element");
+        console.log(element);
+
         element.classList.remove(
+            "move-stand",
             "move-left",
             "move-right",
             "move-up",
             "move-down",
         );
+    },
+    addClass: function (element) {
+        element.classList.add(
+            "move-stand"
+        );
+    },
+    nextAnimation: function (spriteHolder) {
+        console.log("Finished animation!");
+
+        animationClass.onanimationiteration
+
+        // // needed to reset animation:
+        // void spriteHolder.offsetWidth;
+
+        // this.removeClass(spriteHolder);
+        // this.addClass(spriteHolder);
+        console.log(event);
+    },
+    changeState: function (keyPressed, bool) {
+        console.log(`changeState bool: ${bool}`);
+
+        this[keyPressed].keyState = bool;
+        // console.log(this[keyPressed].keyState);
     }
 };
 
 // function to update sprite div location && initiate animation sequence && also listen for sprite collisions with other on-screen objects;
 // TODO: created this func just in case needed later to streamline code:
-const moveSpriteDiv = function (keyPressed, sprite_ID, sprite_holder) {
-    return moveAndDisplay.moveMethod(keyPressed, sprite_ID, sprite_holder);
+const moveSpriteDiv = function (keyPressed, sprite_ID, sprite_holder, eventType) {
+    if (eventType === "keydown") {
+        moveAndDisplay.moveMethod(keyPressed, sprite_ID, sprite_holder);
+        
+        let bool = true;
+        moveAndDisplay.changeState(keyPressed, bool);
+        // return;
+    } else {
+        let bool = false;
+        moveAndDisplay.changeState(keyPressed, bool);
+    }
 };
 
-const btnPress = function (event) {
-
+const btnDownUp = function (event) {
+    // let shapeshift = isShifted(); TODO: add this method to object moveAndDisplay
+    console.log(`shapeshift bool: ${shapeshift}`);
     let keyPressed = event.key;
-    // let keyCode = event.keyCode;
-    // let shapeshift = isShifted();
-    console.log(shapeshift);
 
     if (shapeshift) {
         keyPressed = keyPressed.toUpperCase();
@@ -162,12 +246,14 @@ const btnPress = function (event) {
         keyPressed = keyPressed.toLowerCase();
     };
 
-    if (keyPressed == "w" || keyPressed == "a" || keyPressed == "s" || keyPressed == "d" || keyPressed == "W" || keyPressed == "A" || keyPressed == "S" || keyPressed == "D") {
-        console.log(keyPressed);
+    let eventType = event.type;
+
+    if (keyPressed == "w" || keyPressed == "a" || keyPressed == "s" || keyPressed == "d" || keyPressed == "W" || keyPressed == "A" || keyPressed == "S" || keyPressed == "D" || keyPressed == "l") {
         let sprite_holder = "transform-holder";
         let sprite_ID = "hit-box-lyric"; // TODO: userinput only / reuse function with diff parameters?
-        return moveSpriteDiv(keyPressed, sprite_ID, sprite_holder); // dispalyMove(): separate func?
+        return moveSpriteDiv(keyPressed, sprite_ID, sprite_holder, eventType); // dispalyMove(): separate func?
     };
 };
 
-document.addEventListener("keypress", btnPress);
+document.addEventListener("keydown", btnDownUp, false);
+document.addEventListener("keyup", btnDownUp, false);
