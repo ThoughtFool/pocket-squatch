@@ -19,6 +19,7 @@ const clientTimeKeeper = function () {
         console.log(`=======================`);
         if (myTimer <= 0) {
             console.log("As a shapeshifter, your transformation begins!");
+            sprite_Data.beingType = "human";
             shapeshift = false;
         };
 
@@ -47,7 +48,7 @@ const clientTimeKeeper = function () {
     return myTimer;
 };
 
-// setInterval(clientTimeKeeper, 1000);
+setInterval(clientTimeKeeper, 1000);
 
 // const hitBox = document.querySelector(".hit-box");
 // const hitBoxImg = document.querySelector("#hit-box-img");
@@ -68,7 +69,7 @@ const moveAndDisplay = {
         },
         "sasquatch": {
             src: "/images/sassy-walk-left.png",
-            moveClass: "move-left",
+            moveClass: "move-left-squatch",
             moveDirection: "left",
             moveDist: -100,
             holdPos: "sasquatch",
@@ -103,7 +104,7 @@ const moveAndDisplay = {
         },
         "sasquatch": {
             src: "/images/sassy-walk-right.png",
-            moveClass: "move-right",
+            moveClass: "move-right-squatch",
             moveDirection: "left",
             moveDist: 100,
             holdPos: "sasquatch",
@@ -267,110 +268,56 @@ const moveAndDisplay = {
         preMove_pos: null
     },
     l: {
-            "human": {
-                src: "/images/liftoff.png",
-                moveClass: "liftoff",
-                moveDirection: "top",
-                moveDist: -50,
-                holdPos: "human",
-                keyState: false,
-                step_counter: 0,
-                preMove_pos: null
+        "human": {
+            src: "/images/liftoff.png",
+            moveClass: "liftoff",
+            moveDirection: "top",
+            moveDist: -50,
+            holdPos: "human",
+            keyState: false,
+            step_counter: 0,
+            preMove_pos: null
 
-            },
-            "sasquatch": {
-                src: "/images/sassy-jump-left.png",
-                moveClass: "move-down",
-                moveDirection: "top",
-                moveDist: 100,
-                holdPos: "sasquatch",
-                keyState: false,
-                step_counter: 0,
-                preMove_pos: null
-
-            },
-            "stone queen": {
-                src: "/images/landing.png",
-                moveClass: "landing",
-                moveDirection: "top",
-                moveDist: 50,
-                holdPos: "stone queen",
-                keyState: false,
-                step_counter: 0,
-                preMove_pos: null
-
-            }
         },
-    A: {
-        src: "/images/sassy-sprite-left.png",
-        src2: [
-            "/images/liftoff.png",
-            "/images/sassy-sprite-left.png",
-            // "/images/sassy-jump-left.png",
-        ],
+        "sasquatch": {
+            src: "/images/sassy-jump-left.png",
+            moveClass: "move-down",
+            moveDirection: "top",
+            moveDist: 100,
+            holdPos: "sasquatch",
+            keyState: false,
+            step_counter: 0,
+            preMove_pos: null
 
-        moveClass: "move-left",
-        moveDirection: "left",
-        moveDist: -100,
-        holdPos: "sasquatch",
-        keyState: false,
-        step_counter: 0,
-        preMove_pos: null
+        },
+        "stone queen": {
+            src: "/images/landing.png",
+            moveClass: "landing",
+            moveDirection: "top",
+            moveDist: 50,
+            holdPos: "stone queen",
+            keyState: false,
+            step_counter: 0,
+            preMove_pos: null
+
+        }
     },
-    D: {
-        src: "/images/sassy-sprite-right.png",
-        src2: [
-            "/images/liftoff.png",
-            "/images/sassy-sprite-right.png",
-            // "/images/sassy-jump-left.png",
-        ],
 
-        moveClass: "move-right",
-        moveDirection: "left",
-        moveDist: +100,
-        holdPos: "sasquatch",
-        keyState: false,
-        step_counter: 0,
-        preMove_pos: null
-    },
-    W: {
-        src: "/images/sassy-sprite-up-right.png",
-        src2: [
-            "/images/liftoff.png",
-            "/images/sassy-sprite-up-right.png",
-            // "/images/sassy-jump-left.png",
-        ],
-
-        moveClass: "move-up",
-        moveDirection: "top",
-        moveDist: -100,
-        holdPos: "sasquatch",
-        keyState: false,
-        step_counter: 0,
-        preMove_pos: null
-
-    },
-    S: {
-        src: "/images/sassy-sprite-up-left.png",
-        src2: [
-            "/images/liftoff.png",
-            "/images/sassy-sprite-up-left.png",
-            // "/images/sassy-jump-left.png",
-        ],
-
-        moveClass: "move-down",
-        moveDirection: "top",
-        moveDist: +100,
-        holdPos: "sasquatch",
-        keyState: false,
-        step_counter: 0,
-        preMove_pos: null
-    },
     moveStand: {
         src: "/images/lyric-stand.png",
 
         moveClass: "move-stand",
         holdPos: "human",
+        keyState: false,
+        step_counter: 0,
+        preMove_pos: null
+    },
+    idleSquatch: {
+        src: "/images/idle-squatch.png",
+
+        moveClass: "move-stand",
+        // moveClass: "idle-squatch",
+        holdPos: "sasquatch",
         keyState: false,
         step_counter: 0,
         preMove_pos: null
@@ -434,10 +381,22 @@ const moveAndDisplay = {
                 console.log("You have the power of the stone queen!");
 
             } else { // return to idle sprite "standing" animation:
+
                 console.log(keyPressed);
+                console.log("sprite_Data.beingType");
+                console.log(sprite_Data.beingType);
                 this.removeClass(animationClass);
+
+                if (sprite_Data.beingType === "human") {
+                    // this.addClass(animationClass, "move-stand");
+                    animationClass.style.backgroundImage = `url("${this.moveStand.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+
+                } else if (sprite_Data.beingType === "sasquatch") {
+                    // this.addClass(animationClass, "idle-squatch");
+                    animationClass.style.backgroundImage = `url("${this.idleSquatch.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+                };
                 this.addClass(animationClass, "move-stand");
-                animationClass.style.backgroundImage = `url("${this.moveStand.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+
             };
         };
     },
@@ -454,7 +413,9 @@ const moveAndDisplay = {
             "liftoff",
             "landing",
             "move-fly-left",
-            "move-fly-right"
+            "move-fly-right",
+            "move-right-squatch",
+            "move-left-squatch"
         );
     },
     addClass: function (element, className) {

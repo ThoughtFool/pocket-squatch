@@ -46,7 +46,7 @@
     height: 150px;
     left: 100px;
     bottom: 0px;
-    border: grey dashed 3px;
+    border: grey dashed 1px;
 }
 
 #hit-box-img {
@@ -163,6 +163,13 @@
     transition-timing-function: ease-in-out;
 }
 
+.move-right-squatch,
+.move-left-squatch {
+    animation: squatch-walks 1.5s steps(6);
+    animation-iteration-count: 1;
+    transition-timing-function: ease-in-out;
+}
+
 /* create an enemy fear pose: frozen in terror with pulse effect */
 .move-fly-right:hover,
 .move-fly-left:hover,
@@ -214,5 +221,19 @@
 
     100% {
         background-position: -3300px;
+    }
+}
+
+@keyframes flies {
+
+    100% {
+        background-position: -3300px;
+    }
+}
+
+@keyframes squatch-walks {
+
+    100% {
+        background-position: -1800px;
     }
 }
