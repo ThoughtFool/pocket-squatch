@@ -285,7 +285,7 @@ const moveAndDisplay = {
     nextAnimation: function (spriteHolder) {
         console.log("Finished animation!");
 
-        animationClass.onanimationiteration
+        spriteHolder.onanimationiteration
         console.log(event);
     },
     changeState: function (keyPressed, bool) {
@@ -345,8 +345,38 @@ const moveAndDisplay = {
             current_new_pos += step_dist;
             spriteHolderElem.style[topOrLeft] = current_new_pos + "px";
             console.log(`current_new_pos: ${current_new_pos}`);
-            setTimeout(loop, delay);
-        }
+
+            // Testing ONLY:
+            let mySprite = document.querySelector(".transform-holder");
+            let obstacles = ["step-01", "wall-01"];
+            let enemies = ["enemy-01"];
+            let grounds = ["ground-01"];
+
+            const gameScreenElems = {
+                obstacles,
+                enemies,
+                grounds
+            };
+            // console.log("gameScreenElems");
+            // console.log(gameScreenElems);
+
+            let collisionDetected = moveAndDisplay.spriteTouch(mySprite, gameScreenElems, gameScreenElems);
+            // let collisionDetected = moveAndDisplay.spriteTouch(mySprite, groundFloor);
+
+            if (!collisionDetected) {
+                setTimeout(loop, delay);
+
+            } else {
+                console.log(`[before: in else]: current_new_pos: ${current_new_pos}`);
+
+                current_new_pos -= step_dist;
+                spriteHolderElem.style[topOrLeft] = current_new_pos + "px";
+                console.log(`[after: in else]: current_new_pos: ${current_new_pos}`);
+
+                alert("when divs collide");
+                return;
+            };
+        };
 
         loop();
     },
@@ -374,6 +404,7 @@ const moveAndDisplay = {
 
                 // sprite_Data.beingType = "stone queen";
                 this.setBeingType("stone queen");
+                // this.addClass(spriteHolderElem, "divebomb");
                 this.addClass(spriteHolderElem, "move-fly-left");
                 spriteHolderElem.style.backgroundImage = `url("${this.moveFly.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
 
@@ -405,6 +436,122 @@ const moveAndDisplay = {
 
             };
         };
+    },
+    spriteTouch: function (mySprite, gameScreenElems, gameScreenElems_test) {
+    // spriteTouch: function (mySprite, groundFloor) {
+        // elem1, elem2:
+        // testing ONLY: pass in array of objects?
+        // let gameObstables = gameScreenElems.obstacles[0];
+        
+        let sprite_corners = mySprite.getBoundingClientRect();
+        // let groundFloor_corners = gameObstables.getBoundingClientRect();
+        // let groundFloor_corners = groundFloor.getBoundingClientRect();
+        
+        // for (let {
+        //         investor,
+        //         value,
+        //         investment
+        //     } of originalData) {
+        //     newData.find(x => x.investor === investor)[investment] += value;
+        // }
+
+        // console.log(newData);
+
+        for (nonPlayerElem in gameScreenElems_test) {
+
+            gameScreenElems_test[nonPlayerElem].forEach(id => {
+                let elemToCheck = document.getElementById(id);
+                let elem_coords = elemToCheck.getBoundingClientRect();
+                if (
+                    sprite_corners.left < elem_coords.right &&
+                    sprite_corners.right > elem_coords.left &&
+                    sprite_corners.top < elem_coords.bottom &&
+                    sprite_corners.bottom > elem_coords.top
+                ) {
+
+                    console.log(`
+                ${sprite_corners.left} < ${elem_coords.right} &&
+                ${sprite_corners.right} > ${elem_coords.left} &&
+                ${sprite_corners.top} < ${elem_coords.bottom} &&
+                ${sprite_corners.bottom} > ${elem_coords.top}
+            `);
+
+                    if (elem_coords.right - sprite_corners.left < 1) {
+                        console.log(`back collision: ${elem_coords.right - sprite_corners.left} < 1`);
+
+                    } else if (sprite_corners.right - elem_coords.left < 1) {
+                        console.log(`front collision: ${sprite_corners.right - elem_coords.left} < 1`);
+
+                    } else if (elem_coords.bottom - sprite_corners.top < 1) {
+                        console.log(`top collision: ${elem_coords.bottom - sprite_corners.top} < 1`);
+
+                    } else if (sprite_corners.bottom - elem_coords.top < 1) {
+                        console.log(`bottom collision: ${sprite_corners.bottom - elem_coords.top} < 1`);
+
+                    } else {
+                        console.log("none of them!");
+                    };
+
+                    console.log(`
+                ${sprite_corners.left} < ${elem_coords.right} &&
+                ${sprite_corners.right} > ${elem_coords.left} &&
+                ${sprite_corners.top} < ${elem_coords.bottom} &&
+                ${sprite_corners.bottom} > ${elem_coords.top}
+            `);
+
+                    console.log("when divs collide");
+                    return true;
+                } else {
+                    // alert("this is not working... and if it is, why?");
+
+                };
+            });
+        };
+        
+        // all or nothing: sometimes a div can have all 3, but it's not until they intersect, will all 4 be true:
+        // if (
+        //     sprite_corners.left < groundFloor_corners.right &&
+        //     sprite_corners.right > groundFloor_corners.left &&
+        //     sprite_corners.top < groundFloor_corners.bottom &&
+        //     sprite_corners.bottom > groundFloor_corners.top
+        // ) {
+
+        //     console.log(`
+        //         ${sprite_corners.left} < ${groundFloor_corners.right} &&
+        //         ${sprite_corners.right} > ${groundFloor_corners.left} &&
+        //         ${sprite_corners.top} < ${groundFloor_corners.bottom} &&
+        //         ${sprite_corners.bottom} > ${groundFloor_corners.top}
+        //     `);
+
+        //     if (groundFloor_corners.right - sprite_corners.left < 1) {
+        //         console.log(`back collision: ${groundFloor_corners.right - sprite_corners.left} < 1`);
+
+        //     } else if (sprite_corners.right - groundFloor_corners.left < 1) {
+        //         console.log(`front collision: ${sprite_corners.right - groundFloor_corners.left} < 1`);
+
+        //     } else if (groundFloor_corners.bottom - sprite_corners.top < 1) {
+        //         console.log(`top collision: ${groundFloor_corners.bottom - sprite_corners.top} < 1`);
+
+        //     } else if (sprite_corners.bottom - groundFloor_corners.top < 1) {
+        //         console.log(`bottom collision: ${sprite_corners.bottom - groundFloor_corners.top} < 1`);
+
+        //     } else {
+        //         console.log("none of them!");
+        //     };
+
+        //     console.log(`
+        //         ${sprite_corners.left} < ${groundFloor_corners.right} &&
+        //         ${sprite_corners.right} > ${groundFloor_corners.left} &&
+        //         ${sprite_corners.top} < ${groundFloor_corners.bottom} &&
+        //         ${sprite_corners.bottom} > ${groundFloor_corners.top}
+        //     `);
+            
+        //     console.log("when divs collide");
+        //     return true;
+        // } else {
+        //     // alert("this is not working... and if it is, why?");
+
+        // };
     }
 };
 
@@ -456,6 +603,19 @@ const btnDownUp = function (event) {
 document.addEventListener("keydown", btnDownUp, false);
 document.addEventListener("keyup", btnDownUp, false);
 
+
+//////////////////////////////////////////////////////////////////
+// testing if DOM elems intersect other elems:
+//////////////////////////////////////////////////////////////////
+
+const mySprite = document.querySelector(".transform-holder");
 const groundFloor = document.querySelector(".ground");
+
+console.log(mySprite.getClientRects());
+console.log(mySprite.getBoundingClientRect());
+
 console.log(groundFloor.getClientRects());
 console.log(groundFloor.getBoundingClientRect());
+
+const gameScreen = document.querySelector(".game-screen");
+
