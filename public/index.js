@@ -233,7 +233,7 @@ const moveAndDisplay = {
     },
     moveMethod: function (keyPressed, spriteHolderElem) {
         // TODO: break this method up into smaller, more modular methods
-        
+
         let beingType = this.getBeingType();
         let ClientRect = spriteHolderElem.getBoundingClientRect();
         let topOrLeft = [this[keyPressed][beingType].moveDirection];
@@ -321,7 +321,7 @@ const moveAndDisplay = {
             // step_tot = step_tot / 2;
             delay = delay / 2;
             step_dist = dist_tot / step_tot;
-            
+
             // TODO:
             // dist_tot = dist_tot * 2; // distance (back and forth)
             // element.style.top = jumpDist; // move up (jumping)
@@ -347,35 +347,32 @@ const moveAndDisplay = {
             console.log(`current_new_pos: ${current_new_pos}`);
 
             // Testing ONLY:
-            let mySprite = document.querySelector(".transform-holder");
-            let obstacles = ["step-01", "wall-01"];
-            let enemies = ["enemy-01"];
-            let grounds = ["ground-01"];
+            let elemArr = ["step-01", "wall-01", "enemy-01", "ground-01"];
 
-            const gameScreenElems = {
-                obstacles,
-                enemies,
-                grounds
-            };
-            // console.log("gameScreenElems");
-            // console.log(gameScreenElems);
 
-            let collisionDetected = moveAndDisplay.spriteTouch(mySprite, gameScreenElems, gameScreenElems);
-            // let collisionDetected = moveAndDisplay.spriteTouch(mySprite, groundFloor);
 
-            if (!collisionDetected) {
-                setTimeout(loop, delay);
+            let promise = new Promise(function(resolve, reject) {
+                console.log("promise begins!")
+                return resolve(moveAndDisplay.spriteTouch(mySprite, elemArr));
+            });
+                promise
+                .then(function (collisionDetected) {
+                console.log("collisionDetected");
+                console.log(collisionDetected);
+                if (!collisionDetected) {
+                    setTimeout(loop, delay);
 
-            } else {
-                console.log(`[before: in else]: current_new_pos: ${current_new_pos}`);
+                } else {
+                    console.log(`[before: in else]: current_new_pos: ${current_new_pos}`);
 
-                current_new_pos -= step_dist;
-                spriteHolderElem.style[topOrLeft] = current_new_pos + "px";
-                console.log(`[after: in else]: current_new_pos: ${current_new_pos}`);
+                    current_new_pos -= step_dist;
+                    spriteHolderElem.style[topOrLeft] = current_new_pos + "px";
+                    console.log(`[after: in else]: current_new_pos: ${current_new_pos}`);
 
-                alert("when divs collide");
-                return;
-            };
+                    alert("when divs collide");
+                    return;
+                };
+            });
         };
 
         loop();
@@ -393,7 +390,7 @@ const moveAndDisplay = {
 
     },
     transform: function (spriteHolderElem) {
-        
+
         spriteHolderElem.onanimationend = () => {
 
             let beingType = this.getBeingType();
@@ -437,122 +434,107 @@ const moveAndDisplay = {
             };
         };
     },
-    spriteTouch: function (mySprite, gameScreenElems, gameScreenElems_test) {
-    // spriteTouch: function (mySprite, groundFloor) {
+    spriteTouch: function (mySprite, elem_ID_array) {
         // elem1, elem2:
         // testing ONLY: pass in array of objects?
-        // let gameObstables = gameScreenElems.obstacles[0];
-        
+
         let sprite_corners = mySprite.getBoundingClientRect();
-        // let groundFloor_corners = gameObstables.getBoundingClientRect();
-        // let groundFloor_corners = groundFloor.getBoundingClientRect();
-        
-        // for (let {
-        //         investor,
-        //         value,
-        //         investment
-        //     } of originalData) {
-        //     newData.find(x => x.investor === investor)[investment] += value;
-        // }
+        let result;
 
-        // console.log(newData);
+        elem_ID_array.forEach(elem_ID => {
+            let elemToCheck = document.getElementById(elem_ID);
+            let elem_coords = elemToCheck.getBoundingClientRect();
+            console.log(elemToCheck);
+            console.log(elem_coords);
 
-        for (nonPlayerElem in gameScreenElems_test) {
+            if (
+                sprite_corners.left < elem_coords.right &&
+                sprite_corners.right > elem_coords.left &&
+                sprite_corners.top < elem_coords.bottom &&
+                sprite_corners.bottom > elem_coords.top
+            ) {
 
-            gameScreenElems_test[nonPlayerElem].forEach(id => {
-                let elemToCheck = document.getElementById(id);
-                let elem_coords = elemToCheck.getBoundingClientRect();
-                if (
-                    sprite_corners.left < elem_coords.right &&
-                    sprite_corners.right > elem_coords.left &&
-                    sprite_corners.top < elem_coords.bottom &&
-                    sprite_corners.bottom > elem_coords.top
-                ) {
-
-                    console.log(`
+                console.log(`
                 ${sprite_corners.left} < ${elem_coords.right} &&
                 ${sprite_corners.right} > ${elem_coords.left} &&
                 ${sprite_corners.top} < ${elem_coords.bottom} &&
                 ${sprite_corners.bottom} > ${elem_coords.top}
             `);
 
-                    if (elem_coords.right - sprite_corners.left < 1) {
-                        console.log(`back collision: ${elem_coords.right - sprite_corners.left} < 1`);
+                if (elem_coords.right - sprite_corners.left < 1) {
+                    console.log(`back collision: ${elem_coords.right - sprite_corners.left} < 1`);
 
-                    } else if (sprite_corners.right - elem_coords.left < 1) {
-                        console.log(`front collision: ${sprite_corners.right - elem_coords.left} < 1`);
+                } else if (sprite_corners.right - elem_coords.left < 1) {
+                    console.log(`front collision: ${sprite_corners.right - elem_coords.left} < 1`);
 
-                    } else if (elem_coords.bottom - sprite_corners.top < 1) {
-                        console.log(`top collision: ${elem_coords.bottom - sprite_corners.top} < 1`);
+                } else if (elem_coords.bottom - sprite_corners.top < 1) {
+                    console.log(`top collision: ${elem_coords.bottom - sprite_corners.top} < 1`);
 
-                    } else if (sprite_corners.bottom - elem_coords.top < 1) {
-                        console.log(`bottom collision: ${sprite_corners.bottom - elem_coords.top} < 1`);
+                } else if (sprite_corners.bottom - elem_coords.top < 1) {
+                    console.log(`bottom collision: ${sprite_corners.bottom - elem_coords.top} < 1`);
 
-                    } else {
-                        console.log("none of them!");
-                    };
-
-                    console.log(`
-                ${sprite_corners.left} < ${elem_coords.right} &&
-                ${sprite_corners.right} > ${elem_coords.left} &&
-                ${sprite_corners.top} < ${elem_coords.bottom} &&
-                ${sprite_corners.bottom} > ${elem_coords.top}
-            `);
-
-                    console.log("when divs collide");
-                    return true;
                 } else {
-                    // alert("this is not working... and if it is, why?");
-
+                    console.log("none of them!");
                 };
-            });
-        };
-        
-        // all or nothing: sometimes a div can have all 3, but it's not until they intersect, will all 4 be true:
-        // if (
-        //     sprite_corners.left < groundFloor_corners.right &&
-        //     sprite_corners.right > groundFloor_corners.left &&
-        //     sprite_corners.top < groundFloor_corners.bottom &&
-        //     sprite_corners.bottom > groundFloor_corners.top
-        // ) {
 
-        //     console.log(`
-        //         ${sprite_corners.left} < ${groundFloor_corners.right} &&
-        //         ${sprite_corners.right} > ${groundFloor_corners.left} &&
-        //         ${sprite_corners.top} < ${groundFloor_corners.bottom} &&
-        //         ${sprite_corners.bottom} > ${groundFloor_corners.top}
-        //     `);
+                console.log(`
+                ${sprite_corners.left} < ${elem_coords.right} &&
+                ${sprite_corners.right} > ${elem_coords.left} &&
+                ${sprite_corners.top} < ${elem_coords.bottom} &&
+                ${sprite_corners.bottom} > ${elem_coords.top}
+            `);
 
-        //     if (groundFloor_corners.right - sprite_corners.left < 1) {
-        //         console.log(`back collision: ${groundFloor_corners.right - sprite_corners.left} < 1`);
-
-        //     } else if (sprite_corners.right - groundFloor_corners.left < 1) {
-        //         console.log(`front collision: ${sprite_corners.right - groundFloor_corners.left} < 1`);
-
-        //     } else if (groundFloor_corners.bottom - sprite_corners.top < 1) {
-        //         console.log(`top collision: ${groundFloor_corners.bottom - sprite_corners.top} < 1`);
-
-        //     } else if (sprite_corners.bottom - groundFloor_corners.top < 1) {
-        //         console.log(`bottom collision: ${sprite_corners.bottom - groundFloor_corners.top} < 1`);
-
-        //     } else {
-        //         console.log("none of them!");
-        //     };
-
-        //     console.log(`
-        //         ${sprite_corners.left} < ${groundFloor_corners.right} &&
-        //         ${sprite_corners.right} > ${groundFloor_corners.left} &&
-        //         ${sprite_corners.top} < ${groundFloor_corners.bottom} &&
-        //         ${sprite_corners.bottom} > ${groundFloor_corners.top}
-        //     `);
-            
-        //     console.log("when divs collide");
-        //     return true;
-        // } else {
-        //     // alert("this is not working... and if it is, why?");
-
-        // };
+                console.log("when divs collide");
+                result = true;
+            };
+        });
+        return result;
     }
+
+    // all or nothing: sometimes a div can have all 3, but it's not until they intersect, will all 4 be true:
+    // if (
+    //     sprite_corners.left < groundFloor_corners.right &&
+    //     sprite_corners.right > groundFloor_corners.left &&
+    //     sprite_corners.top < groundFloor_corners.bottom &&
+    //     sprite_corners.bottom > groundFloor_corners.top
+    // ) {
+
+    //     console.log(`
+    //         ${sprite_corners.left} < ${groundFloor_corners.right} &&
+    //         ${sprite_corners.right} > ${groundFloor_corners.left} &&
+    //         ${sprite_corners.top} < ${groundFloor_corners.bottom} &&
+    //         ${sprite_corners.bottom} > ${groundFloor_corners.top}
+    //     `);
+
+    //     if (groundFloor_corners.right - sprite_corners.left < 1) {
+    //         console.log(`back collision: ${groundFloor_corners.right - sprite_corners.left} < 1`);
+
+    //     } else if (sprite_corners.right - groundFloor_corners.left < 1) {
+    //         console.log(`front collision: ${sprite_corners.right - groundFloor_corners.left} < 1`);
+
+    //     } else if (groundFloor_corners.bottom - sprite_corners.top < 1) {
+    //         console.log(`top collision: ${groundFloor_corners.bottom - sprite_corners.top} < 1`);
+
+    //     } else if (sprite_corners.bottom - groundFloor_corners.top < 1) {
+    //         console.log(`bottom collision: ${sprite_corners.bottom - groundFloor_corners.top} < 1`);
+
+    //     } else {
+    //         console.log("none of them!");
+    //     };
+
+    //     console.log(`
+    //         ${sprite_corners.left} < ${groundFloor_corners.right} &&
+    //         ${sprite_corners.right} > ${groundFloor_corners.left} &&
+    //         ${sprite_corners.top} < ${groundFloor_corners.bottom} &&
+    //         ${sprite_corners.bottom} > ${groundFloor_corners.top}
+    //     `);
+
+    //     console.log("when divs collide");
+    //     return true;
+    // } else {
+    //     // alert("this is not working... and if it is, why?");
+
+    // };
 };
 
 // function to update sprite div location && initiate animation sequence && also listen for sprite collisions with other on-screen objects;
@@ -618,4 +600,3 @@ console.log(groundFloor.getClientRects());
 console.log(groundFloor.getBoundingClientRect());
 
 const gameScreen = document.querySelector(".game-screen");
-
