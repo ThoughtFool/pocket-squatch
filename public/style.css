@@ -64,7 +64,7 @@
     bottom: calc(var(--ground-height) - 5px);
 }
 
-#wall {
+#wall-01 {
     width: 10%;
     height: calc(var(--ground-height) - 5px);
     border: gray solid 1px;
@@ -80,6 +80,15 @@
     position: absolute;
     left: calc(var(--ground-height) * 5);
     bottom: calc(var(--ground-height) * 2);
+}
+
+#enemy-02 {
+    width: 20%;
+    height: calc(var(--ground-height) / 2);
+    border: rgb(255, 166, 0) dashed 1px;
+    position: absolute;
+    left: calc(var(--ground-height) * 5);
+    bottom: calc(var(--ground-height) * 5.5);
 }
 
 .ground {

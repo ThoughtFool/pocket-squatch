@@ -7,12 +7,40 @@ const sprite_Data = {
     beingType: "human"
 };
 
+const enemy_sprite_Data = {
+    position: null,
+    getPosition: function (enemyBlock) {
+        console.log("this is firing!");
+        this.position = enemyBlock.getBoundingClientRect()[this.direction];
+        console.log(this.position);
+    },
+    checkPosition: function () {
+        if (this.position != null && this.counter % 5 === 0) {
+            this.steps *= -1;
+        };
+    },
+    steps: 50,
+    direction: "left",
+    counter: 0
+};
+
 const clientTimeKeeper = function () {
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // test ONLY (automatically move enemy sprites):
+    const enemyBlock = document.getElementById("enemy-01");
+    enemy_sprite_Data.counter = myTimer;
+    enemy_sprite_Data.checkPosition();
+    // TODO: create a generic function to pass in enemy id, similar to collision checker:
+    enemy_sprite_Data.getPosition(enemyBlock);
+    enemyBlock.style.left = enemy_sprite_Data.position + enemy_sprite_Data.steps + "px";
+    ////////////////////////////////////////////////////////////////////////////////////
+
     let spriteHolder = document.querySelector(".transform-holder");
     let timerSpan = document.querySelector("#timer-span");
     timerSpan.innerHTML = myTimer;
 
-    if (myTimer < 15) {
+    if (myTimer < 25) {
         console.log(`=======================`);
         console.log(`myTimer: ${myTimer}`);
 
@@ -26,12 +54,12 @@ const clientTimeKeeper = function () {
             });
         };
 
-    } else if (myTimer >= 15 && myTimer < 30) {
+    } else if (myTimer >= 25 && myTimer < 60) {
         console.log(`=======================`);
         console.log(`myTimer: ${myTimer}`);
 
         console.log(`=======================`);
-        if (myTimer === 15) {
+        if (myTimer === 25) {
             console.log("As a shapeshifter, your transformation begins!");
             window.requestAnimationFrame(function () {
                 shapeshift = true;
@@ -40,7 +68,7 @@ const clientTimeKeeper = function () {
             });
         };
 
-    } else if (myTimer >= 30) {
+    } else if (myTimer >= 60) {
         clientStart = Date.now();
         console.log(`=======================`);
         console.log(`myTimer: ${myTimer}`);
@@ -63,7 +91,7 @@ const moveAndDisplay = {
             src: "/images/human-walk-left.png",
             moveClass: "move-left",
             moveDirection: "left",
-            moveDist: -50,
+            moveDist: -250,
             holdPos: "human",
             keyState: false,
 
@@ -81,7 +109,7 @@ const moveAndDisplay = {
             src: "/images/lyric-fly-left.png",
             moveClass: "move-fly-left",
             moveDirection: "left",
-            moveDist: -50,
+            moveDist: -250,
             holdPos: "stone queen",
             keyState: false,
 
@@ -92,7 +120,7 @@ const moveAndDisplay = {
             src: "/images/human-walk-right.png",
             moveClass: "move-right",
             moveDirection: "left",
-            moveDist: 50,
+            moveDist: 250,
             holdPos: "human",
             keyState: false,
 
@@ -110,7 +138,7 @@ const moveAndDisplay = {
             src: "/images/lyric-fly-right.png",
             moveClass: "move-fly-right",
             moveDirection: "left",
-            moveDist: 50,
+            moveDist: 250,
             holdPos: "stone queen",
             keyState: false,
 
@@ -121,7 +149,7 @@ const moveAndDisplay = {
             src: "/images/lyric-jump-right.png",
             moveClass: "move-up",
             moveDirection: "top",
-            moveDist: -50,
+            moveDist: -250,
             holdPos: "human",
             keyState: false,
 
@@ -139,7 +167,7 @@ const moveAndDisplay = {
             src: "/images/lyric-fly-right.png",
             moveClass: "move-fly-right",
             moveDirection: "top",
-            moveDist: -50,
+            moveDist: -250,
             holdPos: "stone queen",
             keyState: false,
 
@@ -150,7 +178,7 @@ const moveAndDisplay = {
             src: "/images/lyric-jump-left.png",
             moveClass: "move-down",
             moveDirection: "top",
-            moveDist: 50,
+            moveDist: 250,
             holdPos: "human",
             keyState: false,
 
@@ -168,7 +196,7 @@ const moveAndDisplay = {
             src: "/images/lyric-fly-right.png",
             moveClass: "move-fly-right",
             moveDirection: "top",
-            moveDist: 50,
+            moveDist: 250,
             holdPos: "stone queen",
             keyState: false,
 
@@ -179,7 +207,7 @@ const moveAndDisplay = {
             src: "/images/liftoff.png",
             moveClass: "liftoff",
             moveDirection: "top",
-            moveDist: -50,
+            moveDist: -250,
             holdPos: "human",
             keyState: false,
 
@@ -197,7 +225,7 @@ const moveAndDisplay = {
             src: "/images/landing.png",
             moveClass: "landing",
             moveDirection: "top",
-            moveDist: 50,
+            moveDist: 250,
             holdPos: "stone queen",
             keyState: false,
 
@@ -369,7 +397,7 @@ const moveAndDisplay = {
                     spriteHolderElem.style[topOrLeft] = current_new_pos + "px";
                     console.log(`[after: in else]: current_new_pos: ${current_new_pos}`);
 
-                    alert("when divs collide");
+                    // alert("when divs collide");
                     return;
                 };
             });
