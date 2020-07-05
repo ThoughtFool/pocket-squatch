@@ -11,7 +11,14 @@
     /* --sprite-start-pos:; */
 }
 
-.game-screen {
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+#game-screen {
     height: 100vh;
     width: 100vw;
     background-size: 100%;
@@ -25,7 +32,7 @@
     width: 100%;
     height: 100%;
     position: relative;
-    border: red dashed 1px;
+    border: blueviolet dashed 1px;
 }
 
 .transform-holder {
@@ -38,6 +45,8 @@
     width: 300px;
     /* transition-property: all; */
     transition-property: transform;
+    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 0);
+    /* transition-timing-function: cubic-bezier(0.2, -2, 0.8, 2); */
 }
 
 #hit-box-lyric {
@@ -53,8 +62,9 @@
     position: relative;
     width: 100%;
     height: 100%;
-    /* border: red dashed 3px; */
+    /* border: blueviolet dashed 3px; */
 }
+
 .obstacle {
     width: 20%;
     height: calc(var(--ground-height) - 5px);
@@ -74,19 +84,35 @@
 }
 
 .enemy {
-    width: 20%;
+    width: 10%;
     height: calc(var(--ground-height) - 5px);
-    border: red dashed 1px;
+    border: blueviolet dashed 1px;
     position: absolute;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    background-image: url("./images/cryo-bot.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    transform-origin: bottom;
+    border-radius: 25%;
+}
+
+#enemy-01 {
+    /* bounce test: */
+    animation-name: bounce;
     left: calc(var(--ground-height) * 5);
     bottom: calc(var(--ground-height) * 2);
+    /* animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1); */
+    /* animation-timing-function: cubic-bezier(0, .52, 0, 1.44); */
+    animation-timing-function: cubic-bezier(.1, .9, .1, .9);
+    bottom: calc(var(--ground-height) + 10px);
 }
 
 #enemy-02 {
-    width: 20%;
+    width: calc(var(--ground-height) / 2);
     height: calc(var(--ground-height) / 2);
-    border: rgb(255, 166, 0) dashed 1px;
     position: absolute;
+    animation-timing-function: cubic-bezier(.1, .9, .1, .9);
     left: calc(var(--ground-height) * 5);
     bottom: calc(var(--ground-height) * 5.5);
 }
@@ -168,9 +194,10 @@
 
 .move-up,
 .move-down {
-    animation: jumps 1.25s steps(9);
+    animation: jumps 1.95s steps(9);
     animation-iteration-count: 1;
     transition-timing-function: ease-out;
+    animation-delay: -.1s;
 }
 
 .move-stand {
@@ -190,6 +217,7 @@
     animation: lifts-off 2s steps(11);
     animation-iteration-count: 1;
     transition-timing-function: ease-in-out;
+    /* animation-timing-function: cubic-bezier(0.42, 0, 0.58, .2); */
 }
 
 .landing {
@@ -224,6 +252,67 @@
         offset-rotate: -45deg;
     }
 } */
+
+/* test ONLY: */
+@keyframes bounce {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.1, .9) translateY(0);
+    }
+
+    30% {
+        transform: scale(.9, 1.1) translateY(-300px);
+    }
+
+    50% {
+        transform: scale(1.05, .95) translateY(0);
+    }
+
+    57% {
+        transform: scale(1, 1) translateY(-10px);
+    }
+
+    64% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(-5px);
+    }
+}
+
+@keyframes rebound {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    10% {
+        transform: scale(1.5, .8) translateY(-10px);
+    }
+
+    30% {
+        transform: scale(.9, 1.1) translateY(-300px);
+    }
+
+    50% {
+        transform: scale(1.05, .95) translateY(0);
+    }
+
+    57% {
+        transform: scale(1, 1) translateY(-10px);
+    }
+
+    64% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(-5px);
+    }
+}
 
 /* create an enemy fear pose: frozen in terror with pulse effect */
 .move-fly-right:hover,

@@ -25,7 +25,11 @@ app.set("view engine", "handlebars");
 app.use(bodyParser.urlencoded({
     extended: false
 })); // (handler: post)
+
 app.use(express.static(path.resolve(__dirname, "public")));
+
+// using webpack:
+app.use(express.static(path.resolve(__dirname, "dist")));
 
 app.get('/', (req, res) => {
 

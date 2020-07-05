@@ -1,7 +1,6 @@
 const Sprite = require("./sprite-logic");
 const actionTypes = require("./action-types");
 let start = Date.now();
-// let timer = 0;
 
 const startGame = function (gameData, gameroom) {
     const sprite_Lyric = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes, gameData); // name, health, hasStoneQueen, timeOfDay, asleep, timer
@@ -54,18 +53,3 @@ const startGame = function (gameData, gameroom) {
 };
 
 module.exports = startGame;
-
-// function start() {
-//     startTime = new Date();
-// };
-
-// function end() {
-//     endTime = new Date();
-//     var timeDiff = endTime - startTime; //in ms
-//     // strip the ms
-//     timeDiff /= 1000;
-
-//     // get seconds 
-//     var seconds = Math.round(timeDiff);
-//     console.log(seconds + " seconds");
-// };

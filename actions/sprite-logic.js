@@ -1,5 +1,3 @@
-// const gameroom = require("./game-room");
-
 class Sprite {
     constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes, gameData) {
         this.name = name;
@@ -65,12 +63,10 @@ class Sprite {
         console.log(moveType);
 
         return this[moveType]();
-        return this.actionTypes[this.beingType][moveType](this.getStats(), this.beingType);
     };
 
     getStats() {
         return this.stats;
-        // this.stats[this.beingType];
     };
 
     setStats(friendOrFoe, newData) {
