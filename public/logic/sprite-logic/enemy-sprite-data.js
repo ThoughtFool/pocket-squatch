@@ -1,9 +1,8 @@
 const enemy_sprite_Data = {
     position: null,
     getPosition: function (enemyBlock) {
-        console.log("this is firing!");
         this.position = enemyBlock.getBoundingClientRect()[this.direction];
-        console.log(this.position);
+        // console.log(this.position);
     },
     checkPosition: function () {
         if (this.position != null && this.counter % 5 === 0) {

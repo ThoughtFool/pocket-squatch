@@ -1,4 +1,4 @@
-const sprite_Data = require("./sprite-data");
+const sprite_Data = require("../../data/sprite-data");
 const mySprite = document.querySelector(".transform-holder");
 const groundFloor = document.querySelector(".ground");
 

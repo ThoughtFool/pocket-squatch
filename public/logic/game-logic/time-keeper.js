@@ -1,4 +1,4 @@
-const sprite_Data = require("../sprite-logic/sprite-data");
+const sprite_Data = require("../../data/sprite-data");
 const enemy_sprite_Data = require("../sprite-logic/enemy-sprite-data");
 const moveAndDisplay = require("../sprite-logic/move-and-display");
 const gravityFunc = require("./gravity-func");
@@ -8,7 +8,6 @@ let clientStart = Date.now();
 let myTimer = 0;
 
 const timeKeeper = function () {
-    console.log("IT IS WORKING!");
 
     ////////////////////////////////////////////////////////////////////////////////////
     // test ONLY (automatically move enemy sprites):
