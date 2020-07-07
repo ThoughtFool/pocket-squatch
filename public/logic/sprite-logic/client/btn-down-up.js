@@ -1,4 +1,4 @@
-const moveSpriteDiv = require("../sprite-logic/move-sprite-div");
+const moveSpriteDiv = require("./move-sprite-div");
 
 const btnDownUp = function (event) {
     // let shapeshift = isShifted(); TODO: add this method to object moveAndDisplay

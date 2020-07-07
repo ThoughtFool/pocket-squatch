@@ -1,9 +1,10 @@
 class Level {
-    constructor(name, level, ground, wall) {
+    constructor(name, level, ground, wall, enemy) {
         this.name = name;
         this.level = level;
         this.ground = ground;
         this.wall = wall;
+        this.enemy = enemy;
         this.blueprint = this.getBuild();
     };
 

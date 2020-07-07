@@ -1,8 +1,6 @@
 const gameData = {
-    enemySprite: {
-        health: 300,
-        strength: 15
-    }
+    timer: 0,
+    points: 0
 };
 
 module.exports = gameData;

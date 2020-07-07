@@ -1,20 +1,17 @@
-class Sprite_testPhysics {
-    constructor(gamescreen_ID, ground_ID, beingType, id, xPos, yPos, velocity) {
-        this.beingType = beingType;
+class Sprite_Physics {
+    constructor(gamescreen_ID, ground_ID, friendOrFoe, id, velocity, gravity, friction, xPos, yPos) {
         this.gamescreen_ID = gamescreen_ID;
         this.ground_ID = ground_ID;
+        this.friendOrFoe = friendOrFoe; // TODO: Move to placeSprite method in gamelevel class
         this.id = id;
+        this.velocity = velocity; // "dy"
+
+        // pos used to position sprite that has yet to be placed:
         this.xPos = xPos;
         this.yPos = yPos;
-        this.velocity = velocity; // "dy"
+
+        // game elements:
         this.elem = this.getElem(this.id);
-
-        this.gamescreenElem = this.getElem(this.gamescreen_ID);
-        this.gamescreenElem_Coords = this.get_Coords(this.gamescreenElem);
-
-        this.groundElem = this.getElem(this.ground_ID);
-        this.groundElem_Coords = this.get_Coords(this.groundElem);
-
         this.dimensions = this.get_Coords(this.elem);
         this.left = this.dimensions.left;
         this.top = this.dimensions.top;
@@ -22,9 +19,15 @@ class Sprite_testPhysics {
         this.bottom = this.dimensions.bottom;
         this.width = this.dimensions.width;
         this.height = this.dimensions.height;
-        this.gravity = 1;
-        this.friction = .8;
-        // // this.weight = weight;
+        
+        this.gamescreenElem = this.getElem(this.gamescreen_ID);
+        this.gamescreenElem_Coords = this.get_Coords(this.gamescreenElem);
+        
+        this.groundElem = this.getElem(this.ground_ID);
+        this.groundElem_Coords = this.get_Coords(this.groundElem);
+        
+        this.gravity = gravity;
+        this.friction = friction;
     };
 
     getElem(id) {
@@ -86,4 +89,4 @@ class Sprite_testPhysics {
     // append()
 };
 
-module.exports = Sprite_testPhysics;
+module.exports = Sprite_Physics;

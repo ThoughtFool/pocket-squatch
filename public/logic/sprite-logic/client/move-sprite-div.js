@@ -1,5 +1,5 @@
 const moveAndDisplay = require("./move-and-display");
-const sprite_Data = require("../../data/sprite-data");
+const sprite_Data = require("../../../data/sprite-data");
 
 const moveSpriteDiv = function (keyPressed, sprite_holderClassName, eventType) {
     let spriteHolderElem = document.querySelector(`.${sprite_holderClassName}`);

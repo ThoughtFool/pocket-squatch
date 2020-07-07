@@ -1,5 +1,6 @@
-const sprite_Data = {
-    beingType: "human"
+const spriteData = {
+    beingType: "human",
+    data: {}
 };
 
-module.exports = sprite_Data;
+module.exports = spriteData;

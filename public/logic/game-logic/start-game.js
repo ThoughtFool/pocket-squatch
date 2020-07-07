@@ -1,5 +1,5 @@
-const Sprite = require("../sprite-logic/sprite-logic");
-const actionTypes = require("../../data/action-types");
+const Sprite = require("../class/sprite-logic");
+const actionTypes = require("../sprite-logic/method/action-types");
 let start = Date.now();
 
 const startGame = function (gameData, gameroom) {

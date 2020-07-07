@@ -1,18 +1,20 @@
 const startGame = require("../public/logic/game-logic/start-game");
-const actionTypes = require("../public/data/action-types");
-
+const player_data = require("../public/data/player-data");
+const game_data = require("../public/data/game-data");
+const level_data = require("../public/data/level-data");
+const actionTypes = require("../public/logic/sprite-logic/method/action-types");
 
 // enemy data holder:
-const gameData = require("../public/data/game-data");
+const enemy_data = require("../public/data/enemy-data");
 
 // gamespace or room:
-const gameroom = require("../public/data/game-room");
+const gameroom = require("../public/data/game-room-data");
 
 // creates player "in-game" sprite:
-const Sprite = require("../public/logic/sprite-logic/sprite-logic");
+const Sprite = require("../public/logic/class/sprite-logic");
 
 // creates "holder" for all user/player data needed to play game (achievements, etc.):
-const Build_Instance = require("../public/logic/build-instance");
+const Build_Instance = require("../public/logic/class/build-instance");
 
 let currentTime;
 let currentGameroom = gameroom;
@@ -23,7 +25,7 @@ startBtn.addEventListener("click", function (event) {
     event.preventDefault();
     console.log("Game has begun!");
 
-    startGame(gameData, gameroom);
+    startGame(enemy_data, gameroom);
 });
 
 
@@ -34,6 +36,7 @@ startBtn.addEventListener("click", function (event) {
 // called when game is iniated;
 const Game_Screen = require("../public/logic/game-logic/gamescreen-class");
 const myGamescreen = new Game_Screen("game-screen", "fullscreen");
+console.log("myGamescreen");
 console.log(myGamescreen);
 
 // places sprite and is called after game is iniated:
@@ -41,20 +44,24 @@ const createSpriteElem = function (gameSpace_Data, gameScreen_ID, ground_ID, ) {
 
 };
 
-const Sprite_testPhysics = require("../public/logic/sprite-logic/sprite-class");
-const testSprite = new Sprite_testPhysics("game-screen", "ground-01", "enemy", "enemy-02", 300, 300, 2);
+const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak"); // name, health, hasStoneQueen, timeOfDay, asleep, timer
+// const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes, enemy_data);
+gameroom.player = sprite_data;
+gameroom.enemy = enemy_data;
+gameroom.data.timer = 0;
+
+const Sprite_Physics = require("../public/logic/class/sprite-physics-class");
+const testSprite = new Sprite_Physics("game-screen", "ground-01", "foe", "enemy-02", 2, 1, .8, 300, 300);
 console.log(testSprite);
 
 //////////////////////////////////////////////////////////////////
 // instance builder class:
 //////////////////////////////////////////////////////////////////
 
-const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes, gameData); // name, health, hasStoneQueen, timeOfDay, asleep, timer
-gameroom.player = sprite_data;
-gameroom.timer = 0;
+// level_data.enemy = enemy_data;  OR
+// enemy_data = level_data.enemy;
 
-// (sprite_data, game_data, action_types, level_data, game_timer):
-myInstance = new Build_Instance(sprite_data, gameData, actionTypes, myGamescreen, testSprite);
+myInstance = new Build_Instance(actionTypes, player_data, sprite_data, level_data, enemy_data, game_data, myGamescreen, testSprite);
 
 console.log("myInstance:");
 console.log(myInstance);
@@ -80,6 +87,6 @@ setInterval(timeKeeper, 1000);
 // event listener for moving player sprite(s):
 //////////////////////////////////////////////////////////////////
 
-const btnDownUp = require("../public/logic/game-logic/btn-down-up");
+const btnDownUp = require("../public/logic/sprite-logic/client/btn-down-up");
 document.addEventListener("keydown", btnDownUp, false);
 document.addEventListener("keyup", btnDownUp, false);

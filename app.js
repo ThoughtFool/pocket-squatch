@@ -4,8 +4,8 @@ const bodyParser = require("body-parser"); // (handler: post)
 const mongodb = require("mongodb"); // (database)
 const exphbs = require("express-handlebars");
 const startGame = require("./public/logic/game-logic/start-game");
-const gameData = require("./public/data/game-data");
-const gameroom = require("./public/data/game-room");
+const gameData = require("./public/data/enemy-data");
+const gameroom = require("./public/data/game-room-data");
 let currentTime;
 let currentGameroom = gameroom;
 
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 
 });
 
-startGame(gameData, gameroom);
+// startGame(gameData, gameroom);
 // console.log(currentGameroom);
 
 // call takeAction and provide actionType

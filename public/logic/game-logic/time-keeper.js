@@ -1,6 +1,6 @@
 const sprite_Data = require("../../data/sprite-data");
-const enemy_sprite_Data = require("../sprite-logic/enemy-sprite-data");
-const moveAndDisplay = require("../sprite-logic/move-and-display");
+const enemy_sprite_Data = require("../sprite-logic/method/enemy-sprite-data");
+const moveAndDisplay = require("../sprite-logic/client/move-and-display");
 const gravityFunc = require("./gravity-func");
 const groundObj = require("./ground-obj");
 

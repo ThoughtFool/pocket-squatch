@@ -17,11 +17,6 @@ class Game_Screen {
         return element;
     };
 
-    // getGamescreen() {
-    //     let gamescreen = document.querySelector(`#${this.id}`);
-    //     return gamescreen.getBoundingClientRect();
-    // };
-
     get_Coords(element) {
         return element.getBoundingClientRect();
     };

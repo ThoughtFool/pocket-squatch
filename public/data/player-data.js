@@ -1,7 +1,6 @@
-const gameroom = {
-    player: {},
-    roomID: 123, // placeholder
-    currentLevel: 01,
+const playerData = {
+    wins: 0,
+    losses: 0,
     levels: {
         01: {
             completed: false,
@@ -43,10 +42,5 @@ const gameroom = {
             completed: false,
             locked: true
         },
-    },
-    wins: 0,
-    losses: 0,
-    timer: 0
-};
-
-module.exports = gameroom;
+    }
+}
