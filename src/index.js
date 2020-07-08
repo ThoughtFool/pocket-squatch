@@ -17,7 +17,7 @@ const Sprite = require("../public/logic/class/sprite-logic");
 const Build_Instance = require("../public/logic/class/build-instance");
 
 let currentTime;
-let currentGameroom = gameroom;
+let gameroom_data = gameroom;
 
 const startBtn = document.getElementById("start-btn");
 const enemyBtn = document.getElementById("enemy-btn");
@@ -47,9 +47,9 @@ const createSpriteElem = function (gameSpace_Data, gameScreen_ID, ground_ID, ) {
 
 const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak"); // name, health, hasStoneQueen, timeOfDay, asleep, timer
 // const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes, enemy_data);
-gameroom.player = sprite_data;
-gameroom.enemy = enemy_data;
-gameroom.data.timer = 0;
+// gameroom.player = sprite_data;
+// gameroom.enemy = enemy_data;
+// gameroom.data.timer = 0;
 
 const Sprite_Physics = require("../public/logic/class/sprite-physics-class");
 const testSprite = new Sprite_Physics("game-screen", "ground-01", "foe", "enemy-02", 2, 1, .8, 300, 300);
@@ -61,16 +61,17 @@ console.log(testSprite);
 
 // level_data.enemy = enemy_data;  OR
 // enemy_data = level_data.enemy;
+const populate_level_enemy_data = require("../public/data/populate-level-enemy-data");
 
-myInstance = new Build_Instance(actionTypes, player_data, sprite_data, level_data, enemy_data, game_data, myGamescreen, testSprite);
+myInstance = new Build_Instance(actionTypes, player_data, sprite_data, level_data, enemy_data, game_data, populate_level_enemy_data, gameroom_data, myGamescreen, testSprite);
 
 console.log("myInstance:");
 console.log(myInstance);
+console.log("myInstance.set_gameroom()");
+console.log(myInstance.set_gameroom());
 
-const enemyLevelData = require("../public/data/enemy-level-data");
-
-enemyLevelData.loop(01, 5);
-console.log(enemyLevelData.spawn);
+// populate_level_enemy_data.loop(01, 5);
+// console.log(populate_level_enemy_data.spawn);
 
 //////////////////////////////////////////////////////////////////
 // testing enemy animation (gravity and velocity):

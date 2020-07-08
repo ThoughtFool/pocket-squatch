@@ -1,4 +1,4 @@
-// TODO: create methods to build enemies based on levels of difficulty:
+// TODO: create methods to build enemies based on the varying levels of difficulty:
 
 const enemyType = {
     // enemyType[this.level].type.length

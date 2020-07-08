@@ -27,7 +27,7 @@ const enemyLevelData = {
         this.spawn.loc = this.getLoc();
         for (let i = 0; i < numberOfEnemies; i++) {
 
-            this.spawn.horde.push({
+            let newEnemy = {
                 id: `enemy-${i}`,
                 friendOrFoe: "foe",
                 spriteType: "enemy",
@@ -36,8 +36,11 @@ const enemyLevelData = {
                 // create method to place enemy on space based on map/blueprint options:
                 xPos: this.spawn.loc[i].x,
                 yPos: this.spawn.loc[i].y
-            });
+            };
+
+            this.spawn.horde.push(newEnemy);
         };
+        return this.spawn.horde;
     }
 };
 

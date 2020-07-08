@@ -1,5 +1,6 @@
 const playerData = {
     wins: 0,
+    currentLevel: 01,
     losses: 0,
     levels: {
         01: {
@@ -43,4 +44,6 @@ const playerData = {
             locked: true
         },
     }
-}
+};
+
+module.exports = playerData;
