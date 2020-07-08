@@ -1,5 +1,6 @@
 class Sprite {
-    constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes, gameData) {
+    constructor(name, health, strength, hasStoneQueen, timeOfDay) {
+    // constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes, gameData) {
         this.name = name;
 
         // create a checkStats function depending on beingType type
@@ -14,7 +15,8 @@ class Sprite {
                     strength: strength * 2
                 }
             },
-            foe: this.getGameData(gameData)
+            foe: {}
+            // foe: this.getGameData(gameData)
             // getData from enemy constructor after "load_level(getEnemySprites(num, level))"
         };
 
@@ -32,7 +34,8 @@ class Sprite {
         ];
         this.myLocation = this.isWhere();
         this.timezone = ["dreamtime", "realtime"]; // slow vs. fast
-        this.actionTypes = actionTypes;
+        this.actionTypes = {};
+        // this.actionTypes = actionTypes;
     };
 
     transform() {

@@ -26,6 +26,7 @@ startBtn.addEventListener("click", function (event) {
     console.log("Game has begun!");
 
     startGame(enemy_data, gameroom);
+    startLevel(enemy_data, gameroom);
 });
 
 
@@ -65,6 +66,11 @@ myInstance = new Build_Instance(actionTypes, player_data, sprite_data, level_dat
 
 console.log("myInstance:");
 console.log(myInstance);
+
+const enemyLevelData = require("../public/data/enemy-level-data");
+
+enemyLevelData.loop(01, 5);
+console.log(enemyLevelData.spawn);
 
 //////////////////////////////////////////////////////////////////
 // testing enemy animation (gravity and velocity):
