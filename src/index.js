@@ -15,6 +15,7 @@ const Sprite = require("../public/logic/class/sprite-logic");
 
 // creates "holder" for all user/player data needed to play game (achievements, etc.):
 const Build_Instance = require("../public/logic/class/build-instance");
+const Gameroom_Instance = require("../public/logic/class/gameroom-instance");
 
 let currentTime;
 let gameroom_data = gameroom;
@@ -45,8 +46,24 @@ const createSpriteElem = function (gameSpace_Data, gameScreen_ID, ground_ID, ) {
 
 };
 
-const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak"); // name, health, hasStoneQueen, timeOfDay, asleep, timer
+//////////////////////////////////////////////////////////////////
+// create Sprite:
+const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes); // name, health, hasStoneQueen, timeOfDay, asleep, timer
+
+// add Sprite to player:
+player_data.sprite = sprite_data;
+
+// set game level:
+game_data.loadLevel(player_data.currentLevel);
+
+// create gameroom instance:
+const myGameInstance = new Gameroom_Instance(player_data, game_data);
+console.log("myGameInstance:");
+console.log(myGameInstance);
+//////////////////////////////////////////////////////////////////
+
 // const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes, enemy_data);
+
 // gameroom.player = sprite_data;
 // gameroom.enemy = enemy_data;
 // gameroom.data.timer = 0;
@@ -61,17 +78,10 @@ console.log(testSprite);
 
 // level_data.enemy = enemy_data;  OR
 // enemy_data = level_data.enemy;
-const populate_level_enemy_data = require("../public/data/populate-level-enemy-data");
+// const populate_level_enemy_data = require("../public/data/populate-level-enemy-data");
 
-myInstance = new Build_Instance(actionTypes, player_data, sprite_data, level_data, enemy_data, game_data, populate_level_enemy_data, gameroom_data, myGamescreen, testSprite);
+// const myInstance = new Build_Instance(actionTypes, player_data, sprite_data, level_data, enemy_data, game_data, populate_level_enemy_data, gameroom_data, myGamescreen, testSprite);
 
-console.log("myInstance:");
-console.log(myInstance);
-console.log("myInstance.set_gameroom()");
-console.log(myInstance.set_gameroom());
-
-// populate_level_enemy_data.loop(01, 5);
-// console.log(populate_level_enemy_data.spawn);
 
 //////////////////////////////////////////////////////////////////
 // testing enemy animation (gravity and velocity):

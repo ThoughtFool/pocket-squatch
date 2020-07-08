@@ -1,5 +1,5 @@
 class Sprite {
-    constructor(name, health, strength, hasStoneQueen, timeOfDay) {
+    constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes) {
     // constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes, gameData) {
         this.name = name;
 
@@ -34,8 +34,7 @@ class Sprite {
         ];
         this.myLocation = this.isWhere();
         this.timezone = ["dreamtime", "realtime"]; // slow vs. fast
-        this.actionTypes = {};
-        // this.actionTypes = actionTypes;
+        this.actionTypes = actionTypes;
     };
 
     transform() {

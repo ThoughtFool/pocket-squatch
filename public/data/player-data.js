@@ -1,4 +1,5 @@
 const playerData = {
+    sprite: {},
     wins: 0,
     currentLevel: 01,
     losses: 0,

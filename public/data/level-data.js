@@ -8,7 +8,8 @@ const levelData = {
     },
     
     build: function (level) {
-        this.loop(this.data[level].blueprint);
+        // this.loop(this.data[level].blueprint);
+        return this.data[level];
     },
 
     data: {

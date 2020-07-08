@@ -1,5 +1,5 @@
 const enemyData = {
-    enemySprite: {
+    enemySprite: {  // moving logic to level loader, TODO: need to update connection to Sprite-logic
         health: 300,
         strength: 15
     }
