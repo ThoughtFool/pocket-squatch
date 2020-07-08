@@ -3,9 +3,10 @@ const path = require("path");
 const bodyParser = require("body-parser"); // (handler: post)
 const mongodb = require("mongodb"); // (database)
 const exphbs = require("express-handlebars");
-const startGame = require("./public/logic/game-logic/start-game");
-const gameData = require("./public/data/enemy-data");
+const startGame = require("./public/logic/game-logic/enter-game");
 const gameroom = require("./public/data/game-room-data");
+
+// const gameData = require("./public/data/enemy-data");
 let currentTime;
 let currentGameroom = gameroom;
 

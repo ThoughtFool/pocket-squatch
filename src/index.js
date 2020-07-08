@@ -1,35 +1,37 @@
-const startGame = require("../public/logic/game-logic/start-game");
 const player_data = require("../public/data/player-data");
-const game_data = require("../public/data/game-data");
-const level_data = require("../public/data/level-data");
-const actionTypes = require("../public/logic/sprite-logic/method/action-types");
+const enterGame = require("../public/logic/game-logic/enter-game");
+const enterLevel = require("../public/logic/game-logic/enter-level");
+const timeKeeper = require("../public/logic/game-logic/time-keeper");
 
-// enemy data holder:
-const enemy_data = require("../public/data/enemy-data");
+//////////////////////////////////////////////////////////////////
 
-// gamespace or room:
-const gameroom = require("../public/data/game-room-data");
-
-// creates player "in-game" sprite:
-const Sprite = require("../public/logic/class/sprite-logic");
-
-// creates "holder" for all user/player data needed to play game (achievements, etc.):
-const Build_Instance = require("../public/logic/class/build-instance");
-const Gameroom_Instance = require("../public/logic/class/gameroom-instance");
-
-let currentTime;
-let gameroom_data = gameroom;
-
-const startBtn = document.getElementById("start-btn");
+// test ONLY:
+const enterGameBtn = document.getElementById("enter-game-btn");
+const enterLevelBtn = document.getElementById("enter-level-btn");
 const enemyBtn = document.getElementById("enemy-btn");
-startBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log("Game has begun!");
+let roomInstance;
+let transformTimer;
 
-    startGame(enemy_data, gameroom);
-    startLevel(enemy_data, gameroom);
+enterGameBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log("Entering game...");
+
+    // testing ONLY (user input needed):
+    let spriteName = "Lyric Elderkin";
+    roomInstance = enterGame(spriteName, player_data);
+    
+    return roomInstance;
 });
 
+enterLevelBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log("Entering level...");
+
+    console.log("roomInstance:");
+    console.log(roomInstance);
+
+    return enterLevel(timeKeeper);
+});
 
 //////////////////////////////////////////////////////////////////
 // test data: need to move backend logic to front for testing: (object-based game physics)
@@ -43,24 +45,31 @@ console.log(myGamescreen);
 
 // places sprite and is called after game is iniated:
 const createSpriteElem = function (gameSpace_Data, gameScreen_ID, ground_ID, ) {
-
+    
 };
 
-//////////////////////////////////////////////////////////////////
-// create Sprite:
-const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes); // name, health, hasStoneQueen, timeOfDay, asleep, timer
+// //////////////////////////////////////////////////////////////////
+// // create Sprite:
+// const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes); // name, health, hasStoneQueen, timeOfDay, asleep, timer
 
-// add Sprite to player:
-player_data.sprite = sprite_data;
+// // add Sprite to player:
+// player_data.sprite = sprite_data;
 
-// set game level:
-game_data.loadLevel(player_data.currentLevel);
+// // set game level:
+// game_data.loadLevel(player_data.currentLevel);
 
-// create gameroom instance:
-const myGameInstance = new Gameroom_Instance(player_data, game_data);
-console.log("myGameInstance:");
-console.log(myGameInstance);
-//////////////////////////////////////////////////////////////////
+// // create gameroom instance:
+// const myGameInstance = new Gameroom_Instance(player_data, game_data);
+
+// // game space:
+// const gamespace = require("../public/data/game-space");
+
+// // set gameroom instance and timestamp id:
+// gamespace.setData(myGameInstance);
+
+// console.log("gamespace.data[0].gameInstance.player.sprite");
+// console.log(gamespace.data[0].gameInstance.player.sprite);
+// //////////////////////////////////////////////////////////////////
 
 // const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes, enemy_data);
 
@@ -97,8 +106,8 @@ animateSprite();
 // initiates client-side timer for transformations:
 //////////////////////////////////////////////////////////////////
 
-const timeKeeper = require("../public/logic/game-logic/time-keeper");
-setInterval(timeKeeper, 1000);
+// const timeKeeper = require("../public/logic/game-logic/time-keeper");
+// setInterval(timeKeeper, 1000);
 
 //////////////////////////////////////////////////////////////////
 // event listener for moving player sprite(s):

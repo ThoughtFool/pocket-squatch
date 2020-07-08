@@ -1,5 +1,8 @@
+const gamespace = require("../../../data/game-space");
+// const sprite_Data = gamespace.data[0].gameInstance.player.sprite;
+const sprite_Data = gamespace.data.length < 1 ? {beingType: "human"} : gamespace.data[0].gameInstance.player.sprite;
+
 const moveAndDisplay = require("./move-and-display");
-const sprite_Data = require("../../../data/sprite-data");
 
 const moveSpriteDiv = function (keyPressed, sprite_holderClassName, eventType) {
     let spriteHolderElem = document.querySelector(`.${sprite_holderClassName}`);

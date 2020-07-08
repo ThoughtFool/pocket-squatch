@@ -1,4 +1,7 @@
-const sprite_Data = require("../../../data/sprite-data");
+const gamespace = require("../../../data/game-space");
+// const sprite_data = gamespace.data[0].gameInstance.player.sprite;
+const sprite_beingType = gamespace.data.length < 1 ? "human" : gamespace.data[0].gameInstance.player.sprite.beingType;
+
 const mySprite = document.querySelector(".transform-holder");
 const groundFloor = document.querySelector(".ground");
 
@@ -236,18 +239,18 @@ const moveAndDisplay = {
     },
     changeState: function (keyPressed, bool) {
         console.log(`changeState bool: ${bool}`);
-        this[keyPressed][sprite_Data.beingType].keyState = bool;
+        this[keyPressed][sprite_beingType].keyState = bool;
     },
     animateStep: function (spriteHolderElem, keyPressed, currentPos_TopOrLeft, newPos, dist, loopSpeed) {
 
         this.keyPressed = keyPressed;
         let moveType;
-        if (keyPressed === 38 && sprite_Data.beingType != "stone queen") {
+        if (keyPressed === 38 && sprite_beingType != "stone queen") {
             moveType = "jump up";
         } else {
             moveType = null;
         };
-        this.animationLoop(spriteHolderElem, this[keyPressed][sprite_Data.beingType].moveDist, currentPos_TopOrLeft, moveType);
+        this.animationLoop(spriteHolderElem, this[keyPressed][sprite_beingType].moveDist, currentPos_TopOrLeft, moveType);
 
     },
     animationLoop: function (spriteHolderElem, dist_tot, topOrLeft, moveType, passOrigin) {
@@ -331,11 +334,12 @@ const moveAndDisplay = {
         return element.getBoundingClientRect()[property];
     },
     getBeingType: function () {
-        return sprite_Data.beingType;
+        return sprite_beingType;
 
     },
     setBeingType: function (newType) {
-        return sprite_Data.beingType = newType;
+        return typeof(gamespace.data[0]) !== 'undefined' ? gamespace.data[0].gameInstance.player.sprite.beingType = newType : "human";
+        // return sprite_beingType = newType;
 
     },
     transform: function (spriteHolderElem) {
@@ -348,7 +352,7 @@ const moveAndDisplay = {
             if (spriteHolderElem.classList.contains("liftoff") && beingType === "human") {
                 this.removeClass(spriteHolderElem);
 
-                // sprite_Data.beingType = "stone queen";
+                // sprite_beingType = "stone queen";
                 this.setBeingType("stone queen");
                 // this.addClass(spriteHolderElem, "divebomb");
                 this.addClass(spriteHolderElem, "move-fly-left");
@@ -357,7 +361,7 @@ const moveAndDisplay = {
             } else if (spriteHolderElem.classList.contains("landing") && beingType != "sasquatch") {
                 this.removeClass(spriteHolderElem);
 
-                // sprite_Data.beingType = "human";
+                // sprite_beingType = "human";
                 this.setBeingType("human");
                 this.addClass(spriteHolderElem, "move-stand");
                 spriteHolderElem.style.backgroundImage = `url("${this.moveStand.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
