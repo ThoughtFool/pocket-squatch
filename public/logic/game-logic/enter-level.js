@@ -1,6 +1,7 @@
-let start = Date.now();
+// let start = Date.now();
 
 const enterLevel = function (timeKeeper) {
+    // const timeKeeper = require("../game-logic/time-keeper");
 
     // const timeKeeper = function () {
 

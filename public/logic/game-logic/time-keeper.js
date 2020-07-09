@@ -5,19 +5,26 @@ const moveAndDisplay = require("../sprite-logic/client/move-and-display");
 const gravityFunc = require("./gravity-func");
 const groundObj = require("./ground-obj");
 
-let clientStart = Date.now();
+let clientStart;
 
 const timeKeeper = function () {
+
+    if (clientStart != null) {
+        console.log("clientStart:");
+        console.log(clientStart);
+    } else {
+        clientStart = Date.now();
+    };
 
     ////////////////////////////////////////////////////////////////////////////////////
     // test ONLY (automatically move enemy sprites):
     const enemyBlock = document.getElementById("enemy-01");
-    // enemy_sprite_Data.counter = gamespace.data[0].gameInstance.data.timer;
-    // enemy_sprite_Data.checkPosition();
+    enemy_sprite_Data.counter = gamespace.data[0].gameInstance.data.timer;
+    enemy_sprite_Data.checkPosition();
 
     // TODO: create a generic function to pass in enemy id, similar to collision checker:
-    // enemy_sprite_Data.getPosition(enemyBlock);
-    // enemyBlock.style.left = `translateY(${enemy_sprite_Data.position + enemy_sprite_Data.steps}px`
+    enemy_sprite_Data.getPosition(enemyBlock);
+    enemyBlock.style.left = `translateY(${enemy_sprite_Data.position + enemy_sprite_Data.steps}px`
     enemyBlock.style.left = enemy_sprite_Data.position + enemy_sprite_Data.steps + "px";
 
     ////////////////////////////////////////////////////////////////////////////////////
