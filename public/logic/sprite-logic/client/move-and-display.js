@@ -1,24 +1,29 @@
+const space_key = require("../../../data/instance-data");
 const gamespace = require("../../../data/game-space");
-// const sprite_data = gamespace.data[0].gameInstance.player.sprite;
-// const sprite_beingType = gamespace.data.length < 1 ? "human" : gamespace.data[0].gameInstance.player.sprite.beingType;
+// const sprite_data = gamespace.data[space_key.index].gameInstance.player.sprite;
+// const sprite_beingType = gamespace.data.length < 1 ? "human" : gamespace.data[space_key.index].gameInstance.player.sprite.beingType;
 
 const mySprite = document.querySelector(".transform-holder");
 const groundFloor = document.querySelector(".ground");
 
 const moveAndDisplay = {
 
-    // sprite_beingType: gamespace.data.length < 1 ? "human" : gamespace.data[0].gameInstance.player.sprite.beingType,
+    // sprite_beingType: gamespace.data.length < 1 ? "human" : gamespace.data[space_key.index].gameInstance.player.sprite.beingType,
 
-    update_beignType: function () {
-        // gamespace.data[0].gameInstance.player.sprite.beingType = this.sprite_beingType;
+    update_beingType: function () {
+        gamespace.data[space_key.index].gameInstance.player.sprite.beingType = this.sprite_beingType;
     },
+        // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
 
     sprite_beingType: function () {
-        if (gamespace.data.length != undefined) {
+        if (space_key.index == null) {
 
-            return gamespace.data[0].gameInstance.player.sprite.beingType;
-        } else {
             return "human"
+
+        } else {
+            console.log("gamespace.............");
+            console.log(gamespace);
+            return gamespace.data[space_key.index].gameInstance.player.sprite.beingType;
         };
     },
 
@@ -336,6 +341,9 @@ const moveAndDisplay = {
                         // spriteHolderElem.style.backgroundColor = "deeppink";
                         console.log(`[after: in else]: current_new_pos: ${current_new_pos}`);
 
+                        // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
+                        console.log(gamespace.data[space_key.index].gameInstance.player.sprite);
+
                         // alert("when divs collide");
                         return;
                     };
@@ -353,7 +361,8 @@ const moveAndDisplay = {
 
     },
     setBeingType: function (newType) {
-        return typeof(gamespace.data[0]) !== 'undefined' ? gamespace.data[0].gameInstance.player.sprite.beingType = newType : "human";
+        return (space_key != null ? gamespace.data[space_key.index].gameInstance.player.sprite.beingType = newType : "human");
+        // return typeof(gamespace.data[space_key.index]) !== 'undefined' ? gamespace.data[space_key.index].gameInstance.player.sprite.beingType = newType : "human";
         // return this.sprite_beingType = newType;
 
     },

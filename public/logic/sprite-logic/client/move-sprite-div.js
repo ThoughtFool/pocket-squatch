@@ -1,6 +1,7 @@
+const space_key = require("../../../data/instance-data");
 const gamespace = require("../../../data/game-space");
-// const sprite_Data = gamespace.data[0].gameInstance.player.sprite;
-const sprite_Data = gamespace.data.length < 1 ? {beingType: "human"} : gamespace.data[0].gameInstance.player.sprite;
+// const sprite_Data = gamespace.data[space_key.index].gameInstance.player.sprite;
+const sprite_Data = gamespace.data.length < 1 ? {beingType: "human"} : gamespace.data[space_key.index].gameInstance.player.sprite;
 
 const moveAndDisplay = require("./move-and-display");
 

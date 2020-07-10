@@ -1,48 +1,25 @@
-// let start = Date.now();
+const Sprite_Physics = require("../class/sprite-physics-class");
+const space_key = require("../../data/instance-data");
+const gamespace = require("../../data/game-space");
 
 const enterLevel = function (timeKeeper) {
-    // const timeKeeper = require("../game-logic/time-keeper");
 
-    // const timeKeeper = function () {
+    const myPhysics = new Sprite_Physics("game-screen", "ground", "foe", "sprite-holder", 2, 1, .8, 300, 300);
+    // const myPhysics = new Sprite_Physics("game-screen", "ground-01", "foe", "enemy-02", 2, 1, .8, 300, 300);
+    console.log("myPhysics:");
+    console.log(myPhysics);
+    gamespace.data[space_key.index].gameInstance.player.sprite.physics = myPhysics;
+    console.log(gamespace.data[space_key.index].gameInstance.player.sprite);
 
-    //     if (roomInstance.data.timer < 15) {
-    //         roomInstance.player.sprite.timeOfDay = "daybreak";
-    //         console.log(`=======================`);
-    //         console.log(`roomInstance.data.timer: ${roomInstance.data.timer}`);
+    //////////////////////////////////////////////////////////////////
+    // testing enemy animation (gravity and velocity):
+    //////////////////////////////////////////////////////////////////
 
-    //         console.log(`=======================`);
-    //         if (roomInstance.data.timer <= 0) {
-    //             console.log("As a shapeshifter, your transformation begins!");
-    //             roomInstance.player.sprite.transform();
-    //             // test data:
-    //             // console.log(sprite_Lyric);
-    //         };
-
-    //     } else if (roomInstance.data.timer >= 15 && roomInstance.data.timer < 30) {
-    //         roomInstance.player.sprite.timeOfDay = "nightfall";
-    //         console.log(`=======================`);
-    //         console.log(`roomInstance.data.timer: ${roomInstance.data.timer}`);
-
-    //         console.log(`=======================`);
-    //         if (roomInstance.data.timer === 15) {
-    //             console.log("As a shapeshifter, your transformation begins!");
-    //             roomInstance.player.sprite.transform();
-    //             // test data:
-    //             // console.log(sprite_Lyric);
-    //         };
-
-    //     } else if (roomInstance.data.timer >= 30) {
-    //         start = Date.now();
-    //         console.log(`=======================`);
-    //         console.log(`roomInstance.data.timer: ${roomInstance.data.timer}`);
-
-    //         console.log(`restart roomInstance.data.timer!`);
-    //         console.log(`=======================`);
-    //     };
-
-    //     // find difference in seconds:
-    //     return roomInstance.data.timer = Math.floor((Date.now() - start) / 1000);
+    // function animateSprite() {
+    //     requestAnimationFrame(animateSprite);
+    //     testSprite.updatePos();
     // };
+    // animateSprite();
 
     return setInterval(timeKeeper, 1000);
 };

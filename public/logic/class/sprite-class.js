@@ -1,4 +1,7 @@
 class Sprite {
+    // Sprite_Physics(gamescreen_ID, ground_ID, friendOrFoe, id, velocity, gravity, friction, xPos, yPos);
+    // Sprite_Physics("game-screen", "ground-01", "friend", sprite-holder, 2, 1, .8, 300, 300);
+
     constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes) {
     // constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes, gameData) {
         this.name = name;
@@ -35,6 +38,7 @@ class Sprite {
         this.myLocation = this.isWhere();
         this.timezone = ["dreamtime", "realtime"]; // slow vs. fast
         this.actionTypes = actionTypes;
+        this.physics = {};
     };
 
     transform() {

@@ -1,4 +1,7 @@
-const Sprite = require("../class/sprite-logic"); // creates player "in-game" sprite
+// Test ONLY: holder for id and index of data created for new instances:
+const space_key = require("../../data/instance-data");
+
+const Sprite = require("../class/sprite-class"); // creates player "in-game" sprite
 const actionTypes = require("../sprite-logic/method/action-types");
 const Gameroom_Instance = require("../class/gameroom-instance"); // game instance (1 of many)
 const gamespace = require("../../data/game-space"); // game space (holder)
@@ -19,7 +22,15 @@ const enterGame = function (spriteName, player_data) {
     const myGameInstance = new Gameroom_Instance(player_data, game_data);
     
     // set gameroom instance and timestamp id:
-    gamespace.setData(myGameInstance);
+    let SpaceID = gamespace.setData(myGameInstance);
+    space_key.id = SpaceID;
+    let SpaceIndex = gamespace.getIndex(SpaceID);
+    space_key.index = SpaceIndex;
+
+    // Test ONLY:
+    let ternaryTest = gamespace.finder("index", SpaceID);
+    console.log("ternaryTest");
+    console.log(ternaryTest);
     
     return myGameInstance;
 };

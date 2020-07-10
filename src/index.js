@@ -38,7 +38,7 @@ enterLevelBtn.addEventListener("click", function (event) {
 //////////////////////////////////////////////////////////////////
 
 // called when game is iniated;
-const Game_Screen = require("../public/logic/game-logic/gamescreen-class");
+const Game_Screen = require("../public/logic/game-logic/_TBD/gamescreen-class");
 const myGamescreen = new Game_Screen("game-screen", "fullscreen");
 console.log("myGamescreen");
 console.log(myGamescreen);
@@ -77,9 +77,11 @@ const createSpriteElem = function (gameSpace_Data, gameScreen_ID, ground_ID, ) {
 // gameroom.enemy = enemy_data;
 // gameroom.data.timer = 0;
 
-const Sprite_Physics = require("../public/logic/class/sprite-physics-class");
-const testSprite = new Sprite_Physics("game-screen", "ground-01", "foe", "enemy-02", 2, 1, .8, 300, 300);
-console.log(testSprite);
+// const Sprite_Physics = require("../public/logic/class/sprite-physics-class");
+// const testSprite = new Sprite_Physics("game-screen", "ground", "foe", "enemy-02", 2, 1, .8, 300, 300);
+// // const testSprite = new Sprite_Physics("game-screen", "ground-01", "foe", "enemy-02", 2, 1, .8, 300, 300);
+// console.log("testSprite:");
+// console.log(testSprite);
 
 //////////////////////////////////////////////////////////////////
 // instance builder class:
@@ -96,11 +98,11 @@ console.log(testSprite);
 // testing enemy animation (gravity and velocity):
 //////////////////////////////////////////////////////////////////
 
-function animateSprite() {
-    requestAnimationFrame(animateSprite);
-    testSprite.updatePos();
-};
-animateSprite();
+// function animateSprite() {
+//     requestAnimationFrame(animateSprite);
+//     testSprite.updatePos();
+// };
+// animateSprite();
 
 //////////////////////////////////////////////////////////////////
 // initiates client-side timer for transformations:
