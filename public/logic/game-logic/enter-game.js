@@ -31,8 +31,15 @@ const enterGame = function (spriteName, player_data) {
     let ternaryTest = gamespace.finder("index", SpaceID);
     console.log("ternaryTest");
     console.log(ternaryTest);
-    
-    return myGameInstance;
+
+    ///////////////////////////////////////////////////////////////
+
+    return ({
+        gamespace,
+        SpaceID,
+        SpaceIndex,
+        space_key
+    });
 };
 
 module.exports = enterGame;

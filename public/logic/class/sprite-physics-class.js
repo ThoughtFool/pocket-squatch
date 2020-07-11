@@ -34,6 +34,8 @@ class Sprite_Physics {
         this.allGroundElems = this.getAllElems(this.ground_className);
         this.allGroundElems_Coords = this.get_All_Coords(this.allGroundElems);
         this.groundElem_Now = this.eval_All_Coords(this.allGroundElems);
+        this.groundElem_Coords = this.get_Coords(this.groundElem_Now);
+
         // setTimeout(() => {
         //     let testVal = this.eval_All_Coords(this.allGroundElems);
         //     alert(testVal);
@@ -125,9 +127,9 @@ class Sprite_Physics {
         // this.dimensions = this.get_Coords(this.elem);
         this.update_Coords(this.elem);
 
-        if (this.bottom > this.groundElem_Coords.top) {
+        if (this.bottom + 25 > this.groundElem_Coords.top) {
             // if (this.top + this.height > this.groundElem_Coords.top) {
-            this.velocity = -this.velocity * this.friction;
+            this.velocity = -this.velocity/2 * this.friction;
             // console.log("this.velocity");
             // console.log(this.velocity);
         } else {

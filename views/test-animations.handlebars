@@ -4,7 +4,10 @@
     </div>
     <div id="subhead">
         <h2>Greetings <span>{{spriteName}}</span></h2>
-        <h3>roomID: <span>{{roomID}}</span></h3>
+        <h4>roomID: <span>{{roomID}}</span></h4>
+        <h4>SpaceID: <span>{{SpaceID}}</span></h4>
+        <h5>SpaceIndex: <span>{{SpaceIndex}}</span></h5>
+        <h6>gamespace: <span>{{gamespace}}</span></h6>
     </div>
     <div class="result">Clientside Timer: <span id="timer-span"></span></div>
 
@@ -23,9 +26,19 @@
     <div class="enemy" id="enemy-02"></div>
     <div class="ground" id="ground-01"></div>
 
-    <button id="enter-game-btn">enter game</button>
-    <button id="enter-level-btn">enter level</button>
-    <button id="enemy-btn">enemy</button>
-    <button id="enemy-jump-btn">enemy jump</button>
+    <div>
+        <label style="color:blanchedalmond" for="createSprite">Choose a name for your Hero:</label><br>
+        <input type="text" name="createSprite" id="create-sprite" placeholder="Hero Name Here..." required><br>
+        <button id="enter-game-btn">enter game</button><br>
+    </div><br>
+    {{!-- <button id="enemy-btn">enemy</button> --}}
+    {{!-- <button id="enemy-jump-btn">enemy jump</button> --}}
+
+    <form id="myForm" name="myForm" autocomplete="on" method="POST" action="/login">
+        <div>
+            <label style="color:blanchedalmond" for="createSprite">Choose Level</label><br>
+            <button id="enter-level-btn" class="btn" id="register-btn" type="submit">enter level</button><br>
+        </div>
+    </form>
 
 </div>

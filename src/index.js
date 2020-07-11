@@ -9,7 +9,9 @@ const timeKeeper = require("../public/logic/game-logic/time-keeper");
 const enterGameBtn = document.getElementById("enter-game-btn");
 const enterLevelBtn = document.getElementById("enter-level-btn");
 const enemyBtn = document.getElementById("enemy-btn");
-let roomInstance;
+const createSprite = document.getElementById("create-sprite");
+
+let myGameInfo;
 let transformTimer;
 
 enterGameBtn.addEventListener("click", function (event) {
@@ -17,20 +19,20 @@ enterGameBtn.addEventListener("click", function (event) {
     console.log("Entering game...");
 
     // testing ONLY (user input needed):
-    let spriteName = "Lyric Elderkin";
-    roomInstance = enterGame(spriteName, player_data);
+    let spriteName = createSprite.value;
+    myGameInfo = enterGame(spriteName, player_data);
     
-    return roomInstance;
+    return myGameInfo;
 });
 
 enterLevelBtn.addEventListener("click", function (event) {
     event.preventDefault();
     console.log("Entering level...");
 
-    console.log("roomInstance:");
-    console.log(roomInstance);
+    console.log("myGameInfo:");
+    console.log(myGameInfo);
 
-    return enterLevel(timeKeeper);
+    return enterLevel(timeKeeper, myGameInfo);
 });
 
 //////////////////////////////////////////////////////////////////

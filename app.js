@@ -1,21 +1,28 @@
 const express = require("express");
+const mongojs = require("mongojs");
+const logger = require("morgan");
+global.fetch = require("node-fetch");
 const path = require("path");
 const bodyParser = require("body-parser"); // (handler: post)
-const mongodb = require("mongodb"); // (database)
 const exphbs = require("express-handlebars");
 const startGame = require("./public/logic/game-logic/enter-game");
+const space_key = require("./public/data/instance-data");
+const gamespace = require("./public/data/game-space");
 const gameroom = require("./public/data/game-room-data");
+const Sprite = require("./public/logic/class/sprite-class");
+const enterGame = require("./public/logic/game-logic/enter-game");
+const player_data = require("./public/data/player-data");
+const {
+    roomID
+} = require("./public/data/game-data");
 
 // const gameData = require("./public/data/enemy-data");
 let currentTime;
 let currentGameroom = gameroom;
 
-// const dbConnection = mongodb.MongoClient.connect("mongodb://localhost:27017", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }); // (database)
-
 const app = express();
+
+app.use(logger("dev"));
 
 // Set templating engine:
 app.engine("handlebars", exphbs({
@@ -24,23 +31,28 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 })); // (handler: post)
 
+app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static(path.resolve(__dirname, "dist"))); // using webpack:
 
-// using webpack:
-app.use(express.static(path.resolve(__dirname, "dist")));
+const databaseUrl = "pocketDB";
+const collections = ["mySquatches"];
 
-app.get('/', (req, res) => {
+// set up mongojs db:
+const db = mongojs(databaseUrl, collections);
 
-    res.render(path.join(__dirname + '/index.html'));
-
+db.on("error", error => {
+    console.log("Database Error:", error);
 });
 
+app.get('/', (req, res) => {
+    res.render(path.join(__dirname + '/index.html'));
+});
 // startGame(gameData, gameroom);
 // console.log(currentGameroom);
-
 // call takeAction and provide actionType
 // TODO: create actionType for defend, transform, etc.
 // TODO: create method for stone queen's different forms
@@ -63,15 +75,96 @@ app.post("/", function (req, res) { // (handler: post)
         console.log(gameroom.timer);
     };
 
-    // dbConnection.then(function (db) {
-    //     delete req.body._id;
-    //     db.collection("gameData").insertOne(req.body);
-    //         res.redirect("/");
-    // });
-
     res.send(`Data received:\n ${gameroom.timer}`);
     // res.end();
 });
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+
+app.post("/submit", (req, res) => {
+    console.log(req.body);
+
+    db.mySquatches.insert(req.body, (error, data) => {
+        if (error) {
+            res.send(error);
+        } else {
+            res.send(data);
+        }
+    });
+});
+
+app.get("/all", (req, res) => {
+    db.mySquatches.find({}, (error, data) => {
+        if (error) {
+            res.send(error);
+        } else {
+            res.json(data);
+        }
+    });
+});
+
+app.get("/find/:SpaceID", (req, res) => {
+    db.mySquatches.findOne({
+            // _id: mongojs.ObjectId(req.params.id)
+            SpaceID: req.params.SpaceID
+        },
+        (error, data) => {
+            if (error) {
+                res.send(error);
+            } else {
+                res.send(data);
+            }
+        }
+    );
+});
+
+app.post("/update/:id", (req, res) => {
+    db.mySquatches.update({
+            _id: mongojs.ObjectId(req.params.id)
+        }, {
+            $set: {
+                title: req.body.title,
+                note: req.body.note,
+                modified: Date.now()
+            }
+        },
+        (error, data) => {
+            if (error) {
+                res.send(error);
+            } else {
+                res.send(data);
+            }
+        }
+    );
+});
+
+app.delete("/delete/:id", (req, res) => {
+    db.mySquatches.remove({
+            _id: mongojs.ObjectID(req.params.id)
+        },
+        (error, data) => {
+            if (error) {
+                res.send(error);
+            } else {
+                res.send(data);
+            }
+        }
+    );
+});
+
+app.delete("/clearall", (req, res) => {
+    db.mySquatches.remove({}, (error, response) => {
+        if (error) {
+            res.send(error);
+        } else {
+            res.send(response);
+        }
+    });
+});
+
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+
 
 app.get("/gamescreen", function (req, res) {
     res.render("counter", {
@@ -107,38 +200,61 @@ app.post("/test-actions", function (req, res) {
 
     if (actionType != undefined) {
         // if (actionType === "isWinner" || actionType === "isDefeated") {
-            gameroom.player[actionType](gameroom);
+        gameroom.player[actionType](gameroom);
         // } else {
-            // let updateGameroom = gameroom.player[actionType]();
-            // res.redirect("/test-actions");
-            // };
+        // let updateGameroom = gameroom.player[actionType]();
+        // res.redirect("/test-actions");
+        // };
 
     } else {
         console.log("Please select a method before submitting form.");
     }
     res.redirect("/test-actions");
 
-
-        // console.log("====================");
-        // console.log("updateGameroom:");
-        // console.log("====================");
-        // console.log(updateGameroom);
-        // console.log("====================");
-        // console.log(gameroom.timer);
-    // // MongoDB data:
-    // dbConnection.then(function (db) {
-    //     delete req.body._id;
-    //     db.collection("gameData").insertOne(req.body);
-    //         res.redirect("/");
-    // });
-
 });
 
 app.get("/test-animations", function (req, res) {
     res.render("test-animations", {
-        
+
         timer: parseInt(gameroom.timer) // create function to evalute timer on client with timer on server and update on change
     });
+});
+
+app.get("/login", function (req, res) {
+    // res.send(gamespace);
+    res.render("login", {});
+});
+
+app.post("/login", function (req, res) {
+    let spriteName = req.body["createSprite"];
+    let {
+        gamespace,
+        SpaceID,
+        SpaceIndex
+    } = enterGame(spriteName, player_data);
+
+    db.mySquatches.insert({
+        roomID: roomID,
+        gamespace: gamespace,
+        SpaceID: SpaceID,
+        SpaceIndex: SpaceIndex
+    }, (error, data) => {
+        if (error) {
+            res.send(error);
+        } else {
+            console.log("data:");
+            console.log(data);
+            res.render("test-animations", {
+                spriteName: spriteName,
+                roomID: roomID,
+                gamespace: gamespace,
+                SpaceID: SpaceID,
+                SpaceIndex: SpaceIndex
+            });
+        };
+    });
+
+    // res.redirect("/");
 });
 
 // app.post("/test-animations", function (req, res) {

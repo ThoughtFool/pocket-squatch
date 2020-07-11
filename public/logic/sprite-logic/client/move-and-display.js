@@ -288,7 +288,7 @@ const moveAndDisplay = {
 
         if (moveType === "jump up") {
             // step_tot = step_tot / 2;
-            delay = delay / 2;
+            delay = delay;
             step_dist = dist_tot / step_tot;
 
             // TODO:
@@ -303,7 +303,7 @@ const moveAndDisplay = {
         };
 
         function loop() {
-            if (step_counter >= step_tot && moveType === "jump up") {
+            if (step_counter >= step_tot && moveType === "jump up_") {
                 step_counter = 1;
                 return moveAndDisplay.animationLoop(spriteHolderElem, dist_tot, topOrLeft, "jump down", preMove_pos);
             } else if (step_counter >= step_tot) {
@@ -342,6 +342,7 @@ const moveAndDisplay = {
                         console.log(`[after: in else]: current_new_pos: ${current_new_pos}`);
 
                         // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
+                        
                         console.log(gamespace.data[space_key.index].gameInstance.player.sprite);
 
                         // alert("when divs collide");
