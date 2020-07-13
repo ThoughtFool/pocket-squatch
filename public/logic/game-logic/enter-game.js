@@ -5,7 +5,8 @@ const Sprite = require("../class/sprite-class"); // creates player "in-game" spr
 const actionTypes = require("../sprite-logic/method/action-types");
 const Gameroom_Instance = require("../class/gameroom-instance"); // game instance (1 of many)
 const gamespace = require("../../data/game-space"); // game space (holder)
-const game_data = require ("../../data/game-data");
+const game_data = require("../../data/game-data");
+const updateClientScreen = require("./update-client");
 
 const enterGame = function (spriteName, player_data) {
 
@@ -20,26 +21,30 @@ const enterGame = function (spriteName, player_data) {
     
     // create gameroom instance:
     const myGameInstance = new Gameroom_Instance(player_data, game_data);
-    
+
     // set gameroom instance and timestamp id:
     let SpaceID = gamespace.setData(myGameInstance);
     space_key.id = SpaceID;
     let SpaceIndex = gamespace.getIndex(SpaceID);
     space_key.index = SpaceIndex;
-
+    
     // Test ONLY:
     let ternaryTest = gamespace.finder("index", SpaceID);
     console.log("ternaryTest");
     console.log(ternaryTest);
 
-    ///////////////////////////////////////////////////////////////
-
-    return ({
+    let dataObj = {
+        spriteName,
         gamespace,
         SpaceID,
         SpaceIndex,
         space_key
-    });
+    };
+    
+    ///////////////////////////////////////////////////////////////
+    updateClientScreen(dataObj);
+    
+    return dataObj;
 };
 
 module.exports = enterGame;

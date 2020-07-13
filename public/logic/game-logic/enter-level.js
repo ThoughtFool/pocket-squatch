@@ -5,6 +5,7 @@ const Sprite_Physics = require("../class/sprite-physics-class");
 const enterLevel = function (timeKeeper, myGameInfo) {
 
     let {
+            spriteName,
             gamespace,
             SpaceID,
             SpaceIndex,

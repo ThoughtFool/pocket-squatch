@@ -129,7 +129,8 @@ class Sprite_Physics {
 
         if (this.bottom + 25 > this.groundElem_Coords.top) {
             // if (this.top + this.height > this.groundElem_Coords.top) {
-            this.velocity = -this.velocity/2 * this.friction;
+            this.velocity = 0;
+            // this.velocity = -this.velocity / 2 * this.friction;
             // console.log("this.velocity");
             // console.log(this.velocity);
         } else {

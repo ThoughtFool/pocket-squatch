@@ -1,28 +1,22 @@
 const space_key = require("../../../data/instance-data");
 const gamespace = require("../../../data/game-space");
-// const sprite_Data = gamespace.data[space_key.index].gameInstance.player.sprite;
 const sprite_Data = gamespace.data.length < 1 ? {beingType: "human"} : gamespace.data[space_key.index].gameInstance.player.sprite;
+const moveAndDisplay = require("./move-and-display/move-and-display");
 
-const moveAndDisplay = require("./move-and-display");
-
-const moveSpriteDiv = function (keyPressed, sprite_holderClassName, eventType) {
-    let spriteHolderElem = document.querySelector(`.${sprite_holderClassName}`);
+const moveSpriteDiv = function (keyPressed, spriteHolderElem, eventType) {
 
     if (eventType === "keydown") {
-
-        console.log("moveAndDisplay[keyPressed][sprite_Data.beingType].keyState");
-        console.log(moveAndDisplay[keyPressed][sprite_Data.beingType].keyState);
 
         // if state is false and "keydown", then change state to true and fire moveMethod once:
         if (moveAndDisplay[keyPressed][sprite_Data.beingType].keyState === false) { // if (false):
             moveAndDisplay.moveMethod(keyPressed, spriteHolderElem);
             let bool = true;
-            moveAndDisplay.changeState(keyPressed, bool);
+            moveAndDisplay.changeKeyState(keyPressed, bool);
         }; // else (true) { do nothing }
 
     } else { // "keyup"
         let bool = false;
-        moveAndDisplay.changeState(keyPressed, bool);
+        moveAndDisplay.changeKeyState(keyPressed, bool);
     };
 };
 

@@ -2,7 +2,7 @@
 const space_key = require("../../data/instance-data");
 const gamespace = require("../../data/game-space");
 const enemy_sprite_Data = require("../sprite-logic/method/enemy-sprite-data");
-const moveAndDisplay = require("../sprite-logic/client/move-and-display");
+const moveAndDisplay = require("../sprite-logic/client/move-and-display/move-and-display");
 const gravityFunc = require("./_TBD/gravity-func");
 const groundObj = require("./_TBD/ground-obj");
 
