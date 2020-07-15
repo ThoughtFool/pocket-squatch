@@ -1,9 +1,12 @@
+const updatePos = require("../sprite-logic/method/update-pos");
+// const world = require("../../data/level-data");
+
 class Sprite {
     // Sprite_Physics(gamescreen_ID, ground_ID, friendOrFoe, id, velocity, gravity, friction, xPos, yPos);
     // Sprite_Physics("game-screen", "ground-01", "friend", sprite-holder, 2, 1, .8, 300, 300);
 
     constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes) {
-    // constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes, gameData) {
+        // constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes, gameData) {
         this.name = name;
 
         // create a checkStats function depending on beingType type
@@ -11,11 +14,22 @@ class Sprite {
             friend: {
                 human: {
                     health: health,
-                    strength: strength
+                    strength: strength,
+                    xPos: 0,
+                    yPos: 0,
                 },
                 sasquatch: {
                     health: health * 2,
-                    strength: strength * 2
+                    strength: strength * 2,
+                    xPos: 0,
+                    yPos: 0,
+                    // size: 50, TODO: add size based on shapeshift
+                    // powerRingColor: "green",
+                    // dx: 0,
+                    // dy: 0,
+                    // onGround: false,
+                    // jumpPower: -10,
+                    // moveSpeed: 5
                 }
             },
             foe: {}
@@ -38,8 +52,18 @@ class Sprite {
         this.myLocation = this.isWhere();
         this.timezone = ["dreamtime", "realtime"]; // slow vs. fast
         this.actionTypes = actionTypes;
+        // size: 25; TODO: add size based on shapeshift
+        this.powerRingColor = "blue";
+        this.dx = 0;
+        this.dy = 0;
+        this.onGround = true;
+        this.jumpPower = -5;
+        this.moveSpeed = 2;
+
         this.physics = {};
+        this.updatePos = updatePos;
     };
+
 
     transform() {
         if (this.hasStoneQueen) {

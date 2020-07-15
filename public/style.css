@@ -96,25 +96,22 @@ body {
     transform-origin: bottom;
     border-radius: 25%;
 }
+.bounce {
+    animation-name: bounce;
+    animation-timing-function: cubic-bezier(.1, .9, .1, .9);
+}
 
 #enemy-01 {
-    /* bounce test: */
-    animation-name: bounce;
-    left: calc(var(--ground-height) * 5);
-    bottom: calc(var(--ground-height) * 2);
-    /* animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1); */
-    /* animation-timing-function: cubic-bezier(0, .52, 0, 1.44); */
     animation-timing-function: cubic-bezier(.1, .9, .1, .9);
-    bottom: calc(var(--ground-height) + 10px);
+    /* left: calc(var(--ground-height) * 5);
+    /* bottom: calc(var(--ground-height) + 10px); */
+
 }
 
 #enemy-02 {
-    width: calc(var(--ground-height) / 2);
-    height: calc(var(--ground-height) / 2);
-    position: absolute;
     animation-timing-function: cubic-bezier(.1, .9, .1, .9);
-    left: calc(var(--ground-height) * 5);
-    bottom: calc(var(--ground-height) * 5.5);
+    /* left: calc(var(--ground-height) * 5);
+    bottom: calc(var(--ground-height) * 5.5); */
 }
 
 .ground {

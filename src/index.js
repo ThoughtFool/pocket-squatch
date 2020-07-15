@@ -35,6 +35,7 @@ enterLevelBtn.addEventListener("click", function (event) {
     return enterLevel(timeKeeper, myGameInfo);
 });
 
+console.log = function () {};
 //////////////////////////////////////////////////////////////////
 // test data: need to move backend logic to front for testing: (object-based game physics)
 //////////////////////////////////////////////////////////////////

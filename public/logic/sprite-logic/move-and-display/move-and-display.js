@@ -1,5 +1,5 @@
-const space_key = require("../../../../data/instance-data");
-const gamespace = require("../../../../data/game-space");
+const space_key = require("../../../data/instance-data");
+const gamespace = require("../../../data/game-space");
 
 const moveAndDisplay = {
 

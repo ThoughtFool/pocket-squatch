@@ -2,13 +2,25 @@
 const space_key = require("../../data/instance-data");
 const gamespace = require("../../data/game-space");
 const enemy_sprite_Data = require("../sprite-logic/method/enemy-sprite-data");
-const moveAndDisplay = require("../sprite-logic/client/move-and-display/move-and-display");
+const moveAndDisplay = require("../sprite-logic/move-and-display/move-and-display");
 const gravityFunc = require("./_TBD/gravity-func");
 const groundObj = require("./_TBD/ground-obj");
+const keyPress_handler = require("../sprite-logic/client/keypress-handler");
 
 let clientStart;
 
 const timeKeeper = function () {
+
+    // let world = gamespace.data[space_key.index].gameInstance.data.data;
+    // console.log("world");
+    // console.log(world);
+    // gamespace.data[space_key.index].gameInstance.player.sprite.physics.updatePos(world);
+    // // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
+    // // moveAndDisplay.moveMethod(keyPressed, spriteHolderElem);
+
+    if (keyPress_handler.any) {
+        keyPress_handler.any = false;
+    };
 
     if (clientStart != null) {
         console.log("clientStart:");
@@ -22,6 +34,7 @@ const timeKeeper = function () {
     const enemyBlock = document.getElementById("enemy-01");
     enemy_sprite_Data.counter = gamespace.data[space_key.index].gameInstance.data.timer;
     enemy_sprite_Data.checkPosition();
+    // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
 
     // TODO: create a generic function to pass in enemy id, similar to collision checker:
     enemy_sprite_Data.getPosition(enemyBlock);

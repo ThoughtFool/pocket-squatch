@@ -38,8 +38,11 @@ const enterGame = function (spriteName, player_data) {
         gamespace,
         SpaceID,
         SpaceIndex,
-        space_key
+        space_key,
+        myGameInstance
     };
+
+    console.log(myGameInstance);
     
     ///////////////////////////////////////////////////////////////
     updateClientScreen(dataObj);

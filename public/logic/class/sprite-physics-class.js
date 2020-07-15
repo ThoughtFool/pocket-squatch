@@ -1,16 +1,20 @@
+const keyPress_handler = require("../sprite-logic/client/keypress-handler");
+const gamespace = require("../../data/game-space"); // game space (holder)
+const space_key = require("../../data/instance-data");
+
 class Sprite_Physics {
-    constructor(gamescreen_ID, ground_className, friendOrFoe, id, velocity, gravity, friction, xPos, yPos) {
+    constructor(gamescreen_ID, ground_className, friendOrFoe, id) {
     // constructor(gamescreen_ID, ground_ID, friendOrFoe, id, velocity, gravity, friction, xPos, yPos) {
         this.gamescreen_ID = gamescreen_ID;
         // this.ground_ID = ground_ID;
         this.friendOrFoe = friendOrFoe; // TODO: Move to placeSprite method in gamelevel class
         this.id = id;
         // this.id = id;
-        this.velocity = velocity; // "dy"
+        // this.velocity = velocity; // "dy"
 
         // pos used to position sprite that has yet to be placed:
-        this.xPos = xPos;
-        this.yPos = yPos;
+        // this.xPos = xPos;
+        // this.yPos = yPos;
 
         // game elements:
         this.elem = this.getElem(this.id);
@@ -35,6 +39,16 @@ class Sprite_Physics {
         this.allGroundElems_Coords = this.get_All_Coords(this.allGroundElems);
         this.groundElem_Now = this.eval_All_Coords(this.allGroundElems);
         this.groundElem_Coords = this.get_Coords(this.groundElem_Now);
+        
+        this.size = 20;
+        this.powerRingColor = "blue";
+        this.dx = 0;
+        this.dy = 0;
+        this.onGround = true;
+        this.jumpPower = -10;
+        this.moveSpeed = 10;
+
+        // this.updatePos = updatePos;
 
         // setTimeout(() => {
         //     let testVal = this.eval_All_Coords(this.allGroundElems);
@@ -44,8 +58,8 @@ class Sprite_Physics {
             
         // this.testElem = this.testFunc(this.groundElem_Now);
         
-        this.gravity = gravity;
-        this.friction = friction;
+        // this.gravity = gravity;
+        // this.friction = friction;
     };
 
     getElem(id) {
@@ -114,7 +128,7 @@ class Sprite_Physics {
     updateDisplay() {
 
         this.elem.style.top = `${this.top}px`;
-        // this.elem.style.left = `${this.left}px`;
+        this.elem.style.left = `${this.left}px`;
         // this.elem.style.right = `${this.right}px`;
         // this.elem.style.bottom = `${this.bottom}px`;
         // this.elem.style.width = `${this.width}px`;
@@ -123,21 +137,56 @@ class Sprite_Physics {
         // console.log("udpateDisplay method fires");
     };
 
-    updatePos() {
+    updatePos(world) {
         // this.dimensions = this.get_Coords(this.elem);
         this.update_Coords(this.elem);
 
-        if (this.bottom + 25 > this.groundElem_Coords.top) {
-            // if (this.top + this.height > this.groundElem_Coords.top) {
-            this.velocity = 0;
-            // this.velocity = -this.velocity / 2 * this.friction;
-            // console.log("this.velocity");
-            // console.log(this.velocity);
-        } else {
-            this.velocity += this.gravity;
+        // react to keyPress_handler state
+        if (keyPress_handler.up && this.onGround) {
+            this.dy = this.jumpPower;
+        };
+        if (keyPress_handler.left) {
+            this.dx = -this.moveSpeed;
+        };
+        if (keyPress_handler.right) {
+            this.dx = this.moveSpeed;
         };
 
-        this.top += this.velocity; // add velocity to sprite
+        // ***************************************
+        this.dy += world.gravity;
+        this.dy *= world.drag;
+        this.dx *= this.onGround ? world.groundDrag : world.drag;
+        this.left += this.dx;
+        this.top += this.dy;
+        // ***************************************
+
+        // if (this.bottom >= (this.groundElem_Coords.top)) {
+        if (this.top + this.height >= (this.groundElem_Coords.top)) {
+            this.top = (this.groundElem_Coords.top - this.height);
+            this.dy = 0;
+            this.onGround = true;
+            // alert(`${this.bottom} and ${this.groundElem_Coords.top}`);
+        } else {
+            this.onGround = false;
+        };
+
+        if (this.left > this.gamescreenElem_Coords.width) {
+            this.left -= this.gamescreenElem_Coords.width;
+        } else if (this.left + this.size < 0) {
+            this.left += this.gamescreenElem_Coords.width;
+        };
+
+        // if (this.bottom + 25 > this.groundElem_Coords.top) {
+        //     // if (this.top + this.height > this.groundElem_Coords.top) {
+        //     this.velocity = 0;
+        //     // this.velocity = -this.velocity / 2 * this.friction;
+        //     // console.log("this.velocity");
+        //     // console.log(this.velocity);
+        // } else {
+        //     this.velocity += this.gravity;
+        // };
+
+        // this.top += this.velocity; // add velocity to sprite
         // console.log("this.top");
         // console.log(this.top);
 

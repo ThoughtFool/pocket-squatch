@@ -35,7 +35,14 @@ const enemyLevelData = {
 
                 // create method to place enemy on space based on map/blueprint options:
                 xPos: this.spawn.loc[i].x,
-                yPos: this.spawn.loc[i].y
+                yPos: this.spawn.loc[i].y,
+
+                // size: this.spawn.size, // randomSize
+                // dx: this.spawn.dx,
+                // dy: this.spawn.dy,
+                // onGround: true,
+                // jumpPower: this.enemyType.jumpPower,
+                // moveSpeed: this.enemyType.moveSpeed
             };
 
             this.spawn.horde.push(newEnemy);
