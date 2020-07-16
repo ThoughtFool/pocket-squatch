@@ -38,6 +38,7 @@ const animationLoop = function (spriteHolderElem, dist_tot, topOrLeft, moveType,
             step_counter = 1;
             return;
         };
+        
         step_counter += 1;
         current_new_pos += step_dist;
         // spriteHolderElem.style[topOrLeft] = `translateY(${current_new_pos}px`;
@@ -65,15 +66,9 @@ const animationLoop = function (spriteHolderElem, dist_tot, topOrLeft, moveType,
                     current_new_pos -= step_dist;
                     // spriteHolderElem.style[topOrLeft] = `translateY(${current_new_pos}px`;
                     spriteHolderElem.style[topOrLeft] = current_new_pos + "px";
-                    // spriteHolderElem.style.animationPlayState = "paused";
-                    // spriteHolderElem.style.backgroundColor = "deeppink";
+                    spriteHolderElem.style.animationPlayState = "paused";
+                    spriteHolderElem.style.backgroundColor = "deeppink";
                     console.log(`[after: in else]: current_new_pos: ${current_new_pos}`);
-
-                    // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
-
-                    // console.log(gamespace.data[space_key.index].gameInstance.player.sprite);
-
-                    // alert("when divs collide");
                     return;
                 };
             });

@@ -2,13 +2,13 @@ const Sprite_Physics = require("../class/sprite-physics-class");
 const drawLevel = require("./draw-level");
 
 const enterLevel = function (timeKeeper, myGameInfo) {
-    
+
     // test ONLY:
     let groundTop = document.querySelector(".ground").getBoundingClientRect().top;
 
     console.log("groundTop");
     console.log(groundTop);
-    
+
     const levelObj = {
         xPos: 500,
         yPos: groundTop - 100,
@@ -20,7 +20,6 @@ const enterLevel = function (timeKeeper, myGameInfo) {
         id: "enemy-02",
         imgUrl: "/images/cryo-bot.png"
     };
-
 
     const levelObj_1 = {
         xPos: 700,
@@ -38,15 +37,24 @@ const enterLevel = function (timeKeeper, myGameInfo) {
     drawLevel("game-screen", levelObj_1);
 
     let {
-            spriteName,
-            gamespace,
-            SpaceID,
-            SpaceIndex,
-            space_key,
-            myGameInstance
-        } = myGameInfo;
+        spriteName,
+        gamespace,
+        SpaceID,
+        SpaceIndex,
+        space_key,
+        myGameInstance
+    } = myGameInfo;
 
-    const myPhysics = new Sprite_Physics("game-screen", "ground", "friend", "sprite-holder");
+    // let obstacleObject = gamespace.data[space_key.index].gameInstance.data.data.obstacleObject;
+    let obstacleObject = {
+        ground_className: "ground",
+        // obstacle_className: "obstacle",
+        wall_className: "wall",
+        enemy_className: "enemy",
+        powerup_className: "powerup",
+    };
+
+    const myPhysics = new Sprite_Physics("game-screen", obstacleObject, "friend", "sprite-holder");
     // const myPhysics = new Sprite_Physics("game-screen", "ground-01", "foe", "enemy-02", 2, 1, .8, 300, 300);
     console.log("myPhysics:");
     console.log(myPhysics);
@@ -64,8 +72,8 @@ const enterLevel = function (timeKeeper, myGameInfo) {
     function animateSprite() {
         let world = gamespace.data[space_key.index].gameInstance.data.data;
         gamespace.data[space_key.index].gameInstance.player.sprite.physics.updatePos(world);
-    //     // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
-    //     timeKeeper(myGameInstance);
+        //     // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
+        //     timeKeeper(myGameInstance);
         requestAnimationFrame(animateSprite);
     };
     animateSprite();
