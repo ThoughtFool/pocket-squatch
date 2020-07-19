@@ -1,4 +1,5 @@
 const Sprite_Physics = require("../class/sprite-physics-class");
+const moveAndDisplay = require("../sprite-logic/move-and-display/move-and-display");
 const drawLevel = require("./draw-level");
 
 const enterLevel = function (timeKeeper, myGameInfo) {
@@ -54,7 +55,7 @@ const enterLevel = function (timeKeeper, myGameInfo) {
         powerup_className: "powerup",
     };
 
-    const myPhysics = new Sprite_Physics("game-screen", obstacleObject, "friend", "sprite-holder");
+    const myPhysics = new Sprite_Physics("game-screen", obstacleObject, "sprite-holder");
     // const myPhysics = new Sprite_Physics("game-screen", "ground-01", "foe", "enemy-02", 2, 1, .8, 300, 300);
     console.log("myPhysics:");
     console.log(myPhysics);
@@ -68,15 +69,22 @@ const enterLevel = function (timeKeeper, myGameInfo) {
     //////////////////////////////////////////////////////////////////
     // testing enemy animation (gravity and velocity):
     //////////////////////////////////////////////////////////////////
+    const animateFrame = require("./animate-frame");
 
-    function animateSprite() {
-        let world = gamespace.data[space_key.index].gameInstance.data.data;
-        gamespace.data[space_key.index].gameInstance.player.sprite.physics.updatePos(world);
-        //     // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
-        //     timeKeeper(myGameInstance);
-        requestAnimationFrame(animateSprite);
-    };
-    animateSprite();
+    animateFrame(30, gamespace, space_key);
+    
+    // function animateSprite() {
+        
+    //     // let spriteHolderElem = document.querySelector("#sprite-holder");
+    //     // moveAndDisplay.moveMethod(keyPressed, spriteHolderElem);
+        
+    //     let world = gamespace.data[space_key.index].gameInstance.data.data;
+    //     gamespace.data[space_key.index].gameInstance.player.sprite.physics.updatePos(world);
+    //     //     // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
+    //     //     timeKeeper(myGameInstance);
+    //     requestAnimationFrame(animateSprite);
+    // };
+    // animateSprite();
 
     return setInterval(timeKeeper, 1000);
 };

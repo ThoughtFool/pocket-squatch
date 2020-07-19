@@ -15,7 +15,7 @@ const moveSpriteDiv = function (keyPressed, spriteHolderElem, eventType) {
         if (moveAndDisplay[keyPressed][sprite_Data.beingType].keyState === false) { // if (false):
             let bool = true;
             moveAndDisplay.changeKeyState(keyPressed, bool);
-            // moveAndDisplay.moveMethod(keyPressed, spriteHolderElem);
+            moveAndDisplay.moveMethod(keyPressed, spriteHolderElem);
             // updatePos(sprite_Data);
         }; // else (true) { do nothing }
 

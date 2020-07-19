@@ -1,13 +1,14 @@
 const keyPress_handler = require("../sprite-logic/client/keypress-handler");
+const moveAndDisplay = require("../sprite-logic/move-and-display/move-and-display");
 const gamespace = require("../../data/game-space"); // game space (holder)
 const space_key = require("../../data/instance-data");
 
 class Sprite_Physics {
-    constructor(gamescreen_ID, obstacleObject, friendOrFoe, id) { // wall_className
+    constructor(gamescreen_ID, obstacleObject, id) { // wall_className
         // constructor(gamescreen_ID, ground_ID, friendOrFoe, id, velocity, gravity, friction, xPos, yPos) {
         this.gamescreen_ID = gamescreen_ID;
         // this.ground_ID = ground_ID;
-        this.friendOrFoe = friendOrFoe; // TODO: Move to placeSprite method in gamelevel class
+        // this.friendOrFoe = friendOrFoe; // TODO: Move to placeSprite method in gamelevel class
         this.id = id;
 
         // pos used to position sprite that has yet to be placed:
@@ -188,7 +189,7 @@ class Sprite_Physics {
         this.top += this.velocity;
         // ******************************************************************************
 
-        if (this.top + this.height >= (this.groundElem_Coords.top)) {
+        if (this.top + this.height > (this.groundElem_Coords.top)) {
             this.top = (this.groundElem_Coords.top - this.height);
             this.velocity = 0;
             this.onGround = true;
@@ -196,15 +197,84 @@ class Sprite_Physics {
             this.onGround = false;
         };
         // ******************************************************************************
-
-        if (this.left > this.gamescreenElem_Coords.width) {
-            this.left -= this.gamescreenElem_Coords.width;
-        } else if (this.left + this.size < 0) {
-            this.left += this.gamescreenElem_Coords.width;
-        };
+        // // transports sprite to other side of viewport:
+        // if (this.left > this.gamescreenElem_Coords.width) {
+        //     this.left -= this.gamescreenElem_Coords.width;
+        // } else if (this.left + this.size < 0) {
+        //     this.left += this.gamescreenElem_Coords.width;
+        // };
         // ******************************************************************************
 
-        this.spriteTouch(this.wallElemArray);
+        // this.spriteTouch(this.wallElemArray);
+        let result = false;
+        let elem_coords;
+
+        let elem_array = this.wallElemArray;
+
+        elem_array.forEach(elemToCheck => {
+            elem_coords = elemToCheck.getBoundingClientRect();
+            // alert(`${this.left} < ${elem_coords.right}?`);
+
+            if (
+                this.left < elem_coords.right &&
+                this.left + this.width > elem_coords.left &&
+                this.top < elem_coords.bottom &&
+                this.top + this.height > elem_coords.top
+            ) {
+
+                result = true;
+
+                if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
+                    this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-right side collison
+                    // alert(`bottom-right side collision: this.left: ${this.left}, this.width: ${this.width}, elem_coords.left: ${elem_coords.left}`);
+                    return this.left = elem_coords.left - this.width - 10;
+
+                } else if (this.left < elem_coords.right && this.left + (this.width / 2) < elem_coords.right &&
+                    this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-left side collison
+                    // alert(`bottom-left side collision:`);
+                    return this.left = elem_coords.right + 10;
+
+                } else if (this.left < elem_coords.right && this.left + (this.width / 2) > elem_coords.right &&
+                    this.top < elem_coords.bottom && this.top + (this.height / 2) > elem_coords.bottom) { // top-left side collison
+                    alert(`top-left side collision: this.left: ${this.left}, this.right: ${this.left + this.width}, elem_coords.right: ${elem_coords.right}`);
+                    this.velocity = 0;
+                    this.onGround = true;
+                    return this.top = elem_coords.top - this.height;
+
+                } else if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
+                    this.top < elem_coords.bottom && this.top + (this.height / 2) > elem_coords.bottom) { // top-right side collison
+                    // alert(`top-right side collision:`);
+                    this.velocity = 0;
+                    this.onGround = true;
+                    return this.top = elem_coords.top - this.height;
+
+
+                } else {
+                    alert(`
+                        left: ${this.left} < obstacle right: ${elem_coords.right} &&
+                        right: ${this.left + this.width} > obstacle left: ${elem_coords.left} &&
+                        top: ${this.top} < obstacle bottom: ${elem_coords.bottom} &&
+                        bottom: ${this.top + this.height} > obstacle top: ${elem_coords.top}
+                    `);
+                };
+                    
+            }; // this.onGround = true;
+        });
+            this.updateDisplay();
+
+
+
+        // if (result) {
+        //     // if(this.getDist(this.left, this.top, elem_coords.left, elem_coords.top) <
+        //     //     elem_coords.width / 2 + this.width / 2) {
+        //     //         this.right = elem_coords.left;
+        //     // this.updateDisplay();
+        //     this.updateDisplay();
+            
+        // } else {
+        //     // moveAndDisplay.moveMethod(keyCode, spriteHolderElem);
+        //     this.updateDisplay();
+        // };
 
         // if (result) {
 
@@ -237,26 +307,29 @@ class Sprite_Physics {
         elem_array.forEach(elemToCheck => {
             elem_coords = elemToCheck.getBoundingClientRect();
             // alert(`${this.left} < ${elem_coords.right}?`);
+            this.right = this.left + this.width;
+            this.bottom = this.top + this.height;
 
             if (
                 this.left < elem_coords.right &&
-                this.right > elem_coords.left &&
+                this.left + this.width > elem_coords.left &&
+                // this.right > elem_coords.left &&
                 this.top < elem_coords.bottom &&
-                this.bottom > elem_coords.top
+                this.top + this.height > elem_coords.top
             ) {
                 if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
                     this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-right side collison
                     // alert(`bottom-right side collision: this.left: ${this.left}, this.width: ${this.width}, elem_coords.left: ${elem_coords.left}`);
-                    this.left = elem_coords.left - this.width;
+                    this.left = elem_coords.left - this.width - 10;
 
                 } else if (this.left < elem_coords.right && this.left + (this.width / 2) < elem_coords.right &&
                     this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-left side collison
                     // alert(`bottom-left side collision:`);
-                    this.left = elem_coords.right;
+                    this.left = elem_coords.right + 10;
 
                 } else if (this.left < elem_coords.right && this.left + (this.width / 2) > elem_coords.right &&
                     this.top < elem_coords.bottom && this.top + (this.height / 2) > elem_coords.bottom) { // top-left side collison
-                    // alert(`top-left side collision: this.left: ${this.left}, this.right: ${this.right}, elem_coords.right: ${elem_coords.right}`);
+                    alert(`top-left side collision: this.left: ${this.left}, this.right: ${this.left + this.width}, elem_coords.right: ${elem_coords.right}`);
                     this.top = elem_coords.top - this.height;
 
                 } else if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
@@ -267,10 +340,10 @@ class Sprite_Physics {
 
                 } else {
                     alert(`
-                        ${this.left} < ${elem_coords.right} &&
-                        ${this.right} > ${elem_coords.left} &&
+                        left: ${this.left} < ${elem_coords.right} &&
+                        right: ${this.left + this.width} > ${elem_coords.left} &&
                         ${this.top} < ${elem_coords.bottom} &&
-                        ${this.bottom} > ${elem_coords.top}
+                        ${this.top + this.height} > ${elem_coords.top}
                     `);
                 };
                 result = true;

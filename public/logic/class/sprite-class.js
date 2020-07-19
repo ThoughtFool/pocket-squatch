@@ -116,7 +116,6 @@ class Sprite {
         return this.locType[Math.floor(Math.random() * this.locType.length)];
     };
 
-
     strike() {
         console.log("<<<<<<<<<<<< ATTENTION (strike enemy) >>>>>>>>>>>>");
         console.log(`Enemy health is ${this.stats.foe.enemySprite.health} minus human power: ${this.stats.friend[this.beingType].strength}`);

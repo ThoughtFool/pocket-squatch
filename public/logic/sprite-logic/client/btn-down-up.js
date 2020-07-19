@@ -1,4 +1,5 @@
 const moveSpriteDiv = require("../move-and-display/methods/move-sprite-div");
+const moveAndDisplay = require("../move-and-display/move-and-display");
 const keyPress_handler = require("./keypress-handler");
 
 const btnDownUp = function (event) {
@@ -18,11 +19,17 @@ const btnDownUp = function (event) {
         keyPress_handler.any = true;
     };
 
+    let sprite_holderClassName = "transform-holder";
+    let spriteHolderElem = document.querySelector(`.${sprite_holderClassName}`);
+
     if (keyCode == 37 || keyCode == 39 || keyCode == 38 || keyCode == 40 || keyCode == 76 || keyCode == 32) {
         // TODO: add switch statement below:
 
         if (keyCode == 37) { // Move: LEFT
             keyPress_handler.left = keyState;
+            // if (keyState) {
+            //     moveAndDisplay.moveMethod(keyCode, spriteHolderElem);
+            // };
 
         } else if (keyCode == 38) { // Move: UP ("stone queen") JUMP (!"stone queen")
             keyPress_handler.up = keyState;
@@ -39,10 +46,10 @@ const btnDownUp = function (event) {
         };
 
         console.log(`keyCode: ${keyCode}`);
-        let sprite_holderClassName = "transform-holder";
-        let spriteHolderElem = document.querySelector(`.${sprite_holderClassName}`);
+        // let spriteHolderElem = document.querySelector("#sprite-holder");
 
-        return moveSpriteDiv(keyCode, spriteHolderElem, eventType);
+
+        // return moveSpriteDiv(keyCode, spriteHolderElem, eventType);
     };
 };
 

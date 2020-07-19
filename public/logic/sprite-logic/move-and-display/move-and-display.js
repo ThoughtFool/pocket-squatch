@@ -185,28 +185,31 @@ const moveAndDisplay = {
         step_counter: 0,
         preMove_pos: null
     },
-    moveMethod: function (keyPressed, spriteHolderElem) {
+    moveMethod: function (keyPressed) {
+        alert(keyPressed);
+    // moveMethod: function (keyPressed, spriteHolderElem) {
         // TODO: break this method up into smaller, more modular methods
+        let spriteHolderElem = document.querySelector("#sprite-holder");
 
         let beingType = this.getBeingType();
-        let ClientRect = spriteHolderElem.getBoundingClientRect();
-        let topOrLeft = [this[keyPressed][beingType].moveDirection];
+        // let ClientRect = spriteHolderElem.getBoundingClientRect();
+        // let topOrLeft = [this[keyPressed][beingType].moveDirection];
 
-        console.log(`${ClientRect[topOrLeft]} + ${this[keyPressed][beingType].moveDist} = ${ClientRect[topOrLeft] + this[keyPressed][beingType].moveDist}`);
+        // console.log(`${ClientRect[topOrLeft]} + ${this[keyPressed][beingType].moveDist} = ${ClientRect[topOrLeft] + this[keyPressed][beingType].moveDist}`);
 
         // create incrementer:
         this.animateStep(
             spriteHolderElem,
             keyPressed,
-            topOrLeft,
-            (ClientRect[topOrLeft] + this[keyPressed][beingType].moveDist),
-            this[keyPressed][beingType].moveDist
+            // topOrLeft,
+            // (ClientRect[topOrLeft] + this[keyPressed][beingType].moveDist),
+            // this[keyPressed][beingType].moveDist
         );
 
         this.removeClass(spriteHolderElem);
 
         // reset animation:
-        void spriteHolderElem.offsetWidth;
+        // void spriteHolderElem.offsetWidth;
 
         spriteHolderElem.style.backgroundImage = `url("${this[keyPressed][beingType].src}")`;
         spriteHolderElem.classList.add(this[keyPressed][beingType].moveClass);
@@ -262,7 +265,7 @@ const moveAndDisplay = {
             moveType = null;
         };
 
-        this.animationLoop(spriteHolderElem, this[keyPressed][this.getBeingType()].moveDist, currentPos_TopOrLeft, moveType);
+        // this.animationLoop(spriteHolderElem, this[keyPressed][this.getBeingType()].moveDist, currentPos_TopOrLeft, moveType);
 
     },
     animationLoop: require("./methods/animation-loop"),
