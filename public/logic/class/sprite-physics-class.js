@@ -156,6 +156,14 @@ class Sprite_Physics {
         this.height = this.dimensions.height;
     };
 
+    updatePos () {
+        // add code to...?
+    };
+
+    animateMove() {
+        // add code to add class and animate keyframes
+    };
+
     updateDisplay() {
 
         this.elem.style.top = `${this.top}px`;
@@ -167,7 +175,7 @@ class Sprite_Physics {
     };
 
     // ******************************************************************************
-    updatePos(world) {
+    movePos(world) {
         this.update_Coords(this.elem);
 
         // react to state in keyPress_handler:

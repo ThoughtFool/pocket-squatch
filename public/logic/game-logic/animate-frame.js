@@ -54,7 +54,8 @@ const animateFrame = function (num, gamespace, space_key) {
 
             // draw stuff here:
             let world = gamespace.data[space_key.index].gameInstance.data.data;
-            gamespace.data[space_key.index].gameInstance.player.sprite.physics.updatePos(world);
+            gamespace.data[space_key.index].gameInstance.player.sprite.physics.movePos(world);
+            // gamespace.data[space_key.index].gameInstance.player.sprite.physics.updateDisplay();
 
             // TESTING...Report #seconds since start and achieved fps.
             var sinceStart = now - startTime;

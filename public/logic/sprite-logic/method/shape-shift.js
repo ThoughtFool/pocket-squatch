@@ -11,7 +11,7 @@ const shapeshift = function (isDaytime, hasQueen, isCooldown, isSummoned, biome)
 
     } else if (isDaytime && hasQueen && !isSummoned) {
         beingType = "human";
-        alert("You have the stone queen if you need her strength, summon her power!");
+        console.log("You have the stone queen if you need her strength, summon her power!");
 
     } else if (!isDaytime && hasQueen && isSummoned) {
         if (biome === "forest") {
@@ -25,7 +25,7 @@ const shapeshift = function (isDaytime, hasQueen, isCooldown, isSummoned, biome)
         };
 
     } else {
-
+        alert("error");
     };
 
 };
