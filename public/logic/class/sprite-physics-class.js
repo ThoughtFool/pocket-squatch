@@ -206,18 +206,19 @@ class Sprite_Physics {
             this.onGround = false;
         };
         // ******************************************************************************
-        // // transports sprite to other side of viewport:
-        // if (this.left > this.gamescreenElem_Coords.width) {
-        //     this.left -= this.gamescreenElem_Coords.width;
-        // } else if (this.left + this.size < 0) {
-        //     this.left += this.gamescreenElem_Coords.width;
-        // };
+        // transports sprite to other side of viewport:
+        if (this.left > this.gamescreenElem_Coords.width) {
+            this.left -= this.gamescreenElem_Coords.width;
+        } else if (this.left + this.size < 0) {
+            this.left += this.gamescreenElem_Coords.width;
+        };
         // ******************************************************************************
 
         // this.spriteTouch(this.wallElemArray);
         let result = false;
         let elem_coords;
 
+        // TODO: need to check all obstacles:
         let elem_array = this.wallElemArray;
 
         elem_array.forEach(elemToCheck => {
@@ -231,17 +232,31 @@ class Sprite_Physics {
                 this.top + this.height > elem_coords.top
             ) {
 
+                // Testing ONLY:
+                let spriteHolderElem = document.getElementById("sprite-holder");
+                spriteHolderElem.classList.add("collision");
+                setTimeout(() => {
+                    spriteHolderElem.classList.remove("collision");
+                }, 500);
+
                 result = true;
 
-                if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
+                if (this.top + this.height == elem_coords.top && this.left + (this.width / 2) < elem_coords.left &&
+                    this.left + (this.width / 2) > elem_coords.right) {
+                        console.info("And he sticks the landing, folks!");
+                        this.velocity = 0;
+                        this.onGround = true;
+                        return this.top = elem_coords.top - this.height;
+
+                } else if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
                     this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-right side collison
                     // alert(`bottom-right side collision: this.left: ${this.left}, this.width: ${this.width}, elem_coords.left: ${elem_coords.left}`);
-                    return this.left = elem_coords.left - this.width - 10;
+                    return this.left = elem_coords.left - this.width - 4;
 
                 } else if (this.left < elem_coords.right && this.left + (this.width / 2) < elem_coords.right &&
                     this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-left side collison
                     // alert(`bottom-left side collision:`);
-                    return this.left = elem_coords.right + 10;
+                    return this.left = elem_coords.right + 4;
 
                 } else if (this.left < elem_coords.right && this.left + (this.width / 2) > elem_coords.right &&
                     this.top < elem_coords.bottom && this.top + (this.height / 2) > elem_coords.bottom) { // top-left side collison

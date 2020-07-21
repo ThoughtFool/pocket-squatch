@@ -70,7 +70,7 @@ body {
     height: calc(var(--ground-height) - 5px);
     border: green solid 1px;
     position: absolute;
-    right: 0;
+    right: 450px;
     bottom: calc(var(--ground-height) - 5px);
 }
 
@@ -79,7 +79,7 @@ body {
     height: calc(var(--ground-height) - 5px);
     border: gray solid 1px;
     position: absolute;
-    right: 0;
+    right: 525px;
     bottom: calc(var(--ground-height) * 2 - 5px);
 }
 
@@ -312,13 +312,18 @@ body {
 }
 
 /* create an enemy fear pose: frozen in terror with pulse effect */
-.move-fly-right:hover,
+/* .move-fly-right:hover,
 .move-fly-left:hover,
 .liftoff:hover,
 .move-stand:hover,
 .move-right:hover,
 .move-left:hover,
 .move-up:hover .move-down:hover {
+    animation-play-state: paused;
+    background-color: deeppink;
+} */
+
+.collision {
     animation-play-state: paused;
     background-color: deeppink;
 }
