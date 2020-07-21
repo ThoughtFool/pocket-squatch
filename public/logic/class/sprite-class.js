@@ -5,8 +5,8 @@ class Sprite {
     // Sprite_Physics(gamescreen_ID, ground_ID, friendOrFoe, id, velocity, gravity, friction, xPos, yPos);
     // Sprite_Physics("game-screen", "ground-01", "friend", sprite-holder, 2, 1, .8, 300, 300);
 
-    constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes) {
-        // constructor(name, health, strength, hasStoneQueen, timeOfDay, actionTypes, gameData) {
+    constructor(name, health, strength, hasStoneQueen, isDaytime, actionTypes) {
+        // constructor(name, health, strength, hasStoneQueen, isDaytime, actionTypes, gameData) {
         this.name = name;
 
         // create a checkStats function depending on beingType type
@@ -38,9 +38,10 @@ class Sprite {
         };
 
         this.hasStoneQueen = hasStoneQueen;
-        this.timeOfDay = timeOfDay; // nightfall feeling sleepy
+        this.isDaytime = isDaytime; // nightfall feeling sleepy
         this.asleep = this.isAsleep();
-        this.beingType = this.transform();
+        this.beingType = "human";
+        // this.beingType = this.shapeshift();
         this.spiritType = ["ghost fox", "cobalt corvid", "scarlet racerunner", "sand lion", "night frost"];
         this.creatureType = ["sasquatch", "yeti", "bigfoot", "abonimable", "swampthing", "sandman"];
         this.locType = [
@@ -49,6 +50,8 @@ class Sprite {
             "past",
             "present"
         ];
+        // TODO: create biomeGetter();
+        this.biome = "forest"; // testing ONLY
         this.myLocation = this.isWhere();
         this.timezone = ["dreamtime", "realtime"]; // slow vs. fast
         this.actionTypes = actionTypes;
@@ -62,29 +65,70 @@ class Sprite {
 
         this.physics = {};
         this.updatePos = updatePos;
+        // TODO: create getter and setter:
+        this.isSummoned = false;
     };
 
+    set_timeOfDay(bool) {
+        return this.isDaytime = bool;
+    };
 
-    transform() {
+    shapeshift() {
         if (this.hasStoneQueen) {
-            console.log("I have the stone queen!");
+            console.info("I have the stone queen!");
 
             if (this.isAsleep()) {
-                console.log("I am Sasquatch!");
-                return this.beingType = "sasquatch"; // use array to determine type of wildling based on location
+
+                if (this.biome === "forest") {
+                    console.info("I am Sasquatch!");
+                    return this.beingType = "sasquatch"; // use array to determine type of wildling, based on location
+
+                } else if (this.biome === "snow") {
+                    console.info("I am Yeti!");
+                    return this.beingType = "yeti";
+
+                } else if (this.biome === "sand") {
+                    console.info("I am Sandman!");
+                    return this.beingType = "sandman";
+
+                } else if (this.biome === "swamp") {
+                    console.info("I am Swampthing!");
+                    return this.beingType = "swampthing";
+
+                } else {
+                    alert("no this.biome identified");
+                };
+
             } else {
-                console.log(`I am human! My name is ${this.name}.`);
-                return this.beingType = "human";
+
+                if (this.isSummoned) {
+                    console.info("You have summoned the strength and power of the stone queen!");
+                    return this.beingType = "stone queen";
+
+                } else {
+                    console.info(`I am human! My name is ${this.name}.`);
+                    return this.beingType = "human";
+
+                };
             };
+
+        } else if (!this.hasStoneQueen) {
+            console.info("You need the stone queen to be able to summon her strength");
+            return this.beingType = "human";
+
+        } else {
+            alert("error");
+
         };
-        return;
     };
 
     isAsleep() {
-        if (this.timeOfDay === "daybreak") {
-            return this.asleep = false;
-        } else if (this.timeOfDay === "nightfall") {
-            return this.asleep = true;
+        if (this.isDaytime) { // "daybreak"
+        this.asleep = false;
+        return false;
+        } else if (this.isDaytime == false) { // "nightfall"
+        this.asleep = true;
+        return true;
         };
     };
 

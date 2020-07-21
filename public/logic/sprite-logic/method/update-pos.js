@@ -9,13 +9,32 @@ const updatePos = function () {
     console.log(this.onGround);
 
     if (keyPress_handler.up && this.onGround) {
-        this.dy = this.jumpPower
-    }
+        this.dy = this.jumpPower;
+    };
+
     if (keyPress_handler.left) {
-        this.dx = -this.moveSpeed
-    }
+        this.dx = -this.moveSpeed;
+    };
+
     if (keyPress_handler.right) {
-        this.dx = this.moveSpeed
+        this.dx = this.moveSpeed;
+    };
+
+    if (keyPress_handler.isSummoned && !this.isSummoned) {
+        this.isSummoned = true;
+    } else if (keyPress_handler.isSummoned && this.isSummoned) {
+        this.isSummoned = false;
+
+        // if (keyPress_handler.up && this.isSummoned) {
+        //     this.dy = this.moveSpeed;
+        // }
+        // if (keyPress_handler.left) {
+        //     this.dx = -this.moveSpeed;
+        // }
+        // if (keyPress_handler.right) {
+        //     this.dx = this.moveSpeed;
+        // };
+        // gamespace.data[space_key.index].gameInstance.player.sprite.isSummoned = true;
     };
 
     // apply gravity drag and move player

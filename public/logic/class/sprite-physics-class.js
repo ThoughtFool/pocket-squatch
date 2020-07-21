@@ -30,6 +30,7 @@ class Sprite_Physics {
         this.onGround = true;
         this.jumpPower = -10;
         this.moveSpeed = 10;
+        
         // this.gravity = gravity;
         // this.friction = friction;
 

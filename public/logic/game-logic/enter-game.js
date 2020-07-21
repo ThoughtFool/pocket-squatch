@@ -11,7 +11,7 @@ const updateClientScreen = require("./update-client");
 const enterGame = function (spriteName, player_data) {
 
     // create Sprite:
-    const sprite_data = new Sprite(spriteName, 100, 25, true, "daybreak", actionTypes); // name, health, hasStoneQueen, timeOfDay, asleep, timer
+    const sprite_data = new Sprite(spriteName, 100, 25, true, true, actionTypes); // name, health, hasStoneQueen, isDaytime, asleep, timer
     
     // add Sprite to player:
     player_data.sprite = sprite_data; // TODO: create a profile/player class

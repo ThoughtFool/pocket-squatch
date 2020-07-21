@@ -128,7 +128,7 @@ const moveAndDisplay = {
 
         }
     },
-    76: {
+    32: {
         "human": {
             src: "/images/liftoff.png",
             moveClass: "liftoff",
@@ -185,11 +185,11 @@ const moveAndDisplay = {
         step_counter: 0,
         preMove_pos: null
     },
-    moveMethod: function (keyPressed) {
-        alert(keyPressed);
+    moveMethod: function (keyPressed, spriteHolderElem, isSummoned) {
+        // alert(keyPressed);
     // moveMethod: function (keyPressed, spriteHolderElem) {
         // TODO: break this method up into smaller, more modular methods
-        let spriteHolderElem = document.querySelector("#sprite-holder");
+        // let spriteHolderElem = document.querySelector("#sprite-holder");
 
         let beingType = this.getBeingType();
         // let ClientRect = spriteHolderElem.getBoundingClientRect();
@@ -198,13 +198,13 @@ const moveAndDisplay = {
         // console.log(`${ClientRect[topOrLeft]} + ${this[keyPressed][beingType].moveDist} = ${ClientRect[topOrLeft] + this[keyPressed][beingType].moveDist}`);
 
         // create incrementer:
-        this.animateStep(
-            spriteHolderElem,
-            keyPressed,
-            // topOrLeft,
-            // (ClientRect[topOrLeft] + this[keyPressed][beingType].moveDist),
-            // this[keyPressed][beingType].moveDist
-        );
+        // this.animateStep(
+        //     spriteHolderElem,
+        //     keyPressed,
+        //     // topOrLeft,
+        //     // (ClientRect[topOrLeft] + this[keyPressed][beingType].moveDist),
+        //     // this[keyPressed][beingType].moveDist
+        // );
 
         this.removeClass(spriteHolderElem);
 
@@ -255,19 +255,19 @@ const moveAndDisplay = {
         this[keyPressed][this.getBeingType()].keyState = bool;
 
     },
-    animateStep: function (spriteHolderElem, keyPressed, currentPos_TopOrLeft, newPos, dist, loopSpeed) {
-        // this.keyPressed = keyPressed;
-        let moveType;
+    // animateStep: function (spriteHolderElem, keyPressed, currentPos_TopOrLeft, newPos, dist, loopSpeed) {
+    //     // this.keyPressed = keyPressed;
+    //     let moveType;
 
-        if (keyPressed === 38 && this.getBeingType() != "stone queen") {
-            moveType = "jump up";
-        } else {
-            moveType = null;
-        };
+    //     if (keyPressed === 38 && this.getBeingType() != "stone queen") {
+    //         moveType = "jump up";
+    //     } else {
+    //         moveType = null;
+    //     };
 
         // this.animationLoop(spriteHolderElem, this[keyPressed][this.getBeingType()].moveDist, currentPos_TopOrLeft, moveType);
 
-    },
+    // },
     animationLoop: require("./methods/animation-loop"),
 
     transform: function (spriteHolderElem) {

@@ -71,13 +71,13 @@ const enterLevel = function (timeKeeper, myGameInfo) {
     //////////////////////////////////////////////////////////////////
     const animateFrame = require("./animate-frame");
 
-    animateFrame(30, gamespace, space_key);
-    
+    animateFrame(100, gamespace, space_key);
+
     // function animateSprite() {
-        
+
     //     // let spriteHolderElem = document.querySelector("#sprite-holder");
     //     // moveAndDisplay.moveMethod(keyPressed, spriteHolderElem);
-        
+
     //     let world = gamespace.data[space_key.index].gameInstance.data.data;
     //     gamespace.data[space_key.index].gameInstance.player.sprite.physics.updatePos(world);
     //     //     // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();

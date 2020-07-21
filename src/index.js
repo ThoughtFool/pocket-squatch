@@ -53,7 +53,7 @@ const createSpriteElem = function (gameSpace_Data, gameScreen_ID, ground_ID, ) {
 
 // //////////////////////////////////////////////////////////////////
 // // create Sprite:
-// const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes); // name, health, hasStoneQueen, timeOfDay, asleep, timer
+// const sprite_data = new Sprite("Lyric", 100, 25, true, "daybreak", actionTypes); // name, health, hasStoneQueen, isDaytime, asleep, timer
 
 // // add Sprite to player:
 // player_data.sprite = sprite_data;

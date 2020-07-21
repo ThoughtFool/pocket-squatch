@@ -1,26 +1,30 @@
-const shapeshift = require("../sprite-logic/method/shape-shift");
+let timerSpan = document.querySelector("#timer-span");
+// timerSpan.innerHTML = gamespace.data[space_key.index].gameInstance.data.timer;
 
 const animateFrame = function (num, gamespace, space_key) {
 
+    
     let stop = false;
     let frameCount = 0;
     let shiftCount = 0;
     let isDaytime, hasQueen, isCooldown, isSummoned, biome;
     // let $results = $("#results");
     let fps, fpsInterval, startTime, now, then, elapsed;
-
+    
+    
     startAnimating(num);
 
     function startAnimating(fps) {
         // converts requested fps to seconds:
         fpsInterval = 1000 / fps;
+
         then = Date.now();
         startTime = then;
-        console.log(startTime);
+        console.info(startTime);
 
         // get current time
         animate();
-    }
+    };
 
     function animate() {
 
@@ -37,13 +41,12 @@ const animateFrame = function (num, gamespace, space_key) {
         elapsed = now - then;
 
         if (shiftCount % 1000 == 0) {
-            shapeshift(true, true, false, true, "snow");
-
+                        
             if (shiftCount >= 10000) {
                 shiftCount = 0;
             };
         };
-
+        
         // if enough time has elapsed, draw the next frame:
         if (elapsed > fpsInterval) {
             shiftCount++;
@@ -55,7 +58,7 @@ const animateFrame = function (num, gamespace, space_key) {
             // draw stuff here:
             let world = gamespace.data[space_key.index].gameInstance.data.data;
             gamespace.data[space_key.index].gameInstance.player.sprite.physics.movePos(world);
-            // gamespace.data[space_key.index].gameInstance.player.sprite.physics.updateDisplay();
+            // gamespace.data[space_key.index].gameInstance.player.sprite.physics.animateMove(elem);
 
             // TESTING...Report #seconds since start and achieved fps.
             var sinceStart = now - startTime;

@@ -191,7 +191,7 @@ body {
 
 .move-up,
 .move-down {
-    animation: s 1.95s steps(9);
+    animation: jumps 1.95s steps(9);
     animation-iteration-count: 1;
     transition-timing-function: ease-out;
     animation-delay: -.1s;

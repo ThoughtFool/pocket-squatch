@@ -1,9 +1,9 @@
 // Testing ONLY: gamespace index based on spaceID:
 const space_key = require("../../data/instance-data");
 const gamespace = require("../../data/game-space");
-const enemy_sprite_Data = require("../sprite-logic/method/enemy-sprite-data");
+// const enemy_sprite_Data = require("../sprite-logic/method/enemy-sprite-data");
 const moveAndDisplay = require("../sprite-logic/move-and-display/move-and-display");
-const gravityFunc = require("./_TBD/gravity-func");
+// const gravityFunc = require("./_TBD/gravity-func");
 const groundObj = require("./_TBD/ground-obj");
 const keyPress_handler = require("../sprite-logic/client/keypress-handler");
 
@@ -31,22 +31,22 @@ const timeKeeper = function () {
 
     ////////////////////////////////////////////////////////////////////////////////////
     // test ONLY (automatically move enemy sprites):
-    const enemyBlock = document.getElementById("enemy-01");
-    enemy_sprite_Data.counter = gamespace.data[space_key.index].gameInstance.data.timer;
-    enemy_sprite_Data.checkPosition();
+    // const enemyBlock = document.getElementById("enemy-01");
+    // enemy_sprite_Data.counter = gamespace.data[space_key.index].gameInstance.data.timer;
+    // enemy_sprite_Data.checkPosition();
     // gamespace.data[space_key.index].gameInstance.player.sprite.updatePos();
 
     // TODO: create a generic function to pass in enemy id, similar to collision checker:
-    enemy_sprite_Data.getPosition(enemyBlock);
-    enemyBlock.style.left = `translateY(${enemy_sprite_Data.position + enemy_sprite_Data.steps}px`
-    enemyBlock.style.left = enemy_sprite_Data.position + enemy_sprite_Data.steps + "px";
+    // enemy_sprite_Data.getPosition(enemyBlock);
+    // enemyBlock.style.left = `translateY(${enemy_sprite_Data.position + enemy_sprite_Data.steps}px`
+    // enemyBlock.style.left = enemy_sprite_Data.position + enemy_sprite_Data.steps + "px";
 
     ////////////////////////////////////////////////////////////////////////////////////
-    let spriteHolder = document.querySelector(".transform-holder");
+    // let spriteHolder = document.querySelector(".transform-holder");
     let timerSpan = document.querySelector("#timer-span");
 
     ////////////////////////////////////////////////////////////////////////////////////
-    gravityFunc(spriteHolder, groundObj);
+    // gravityFunc(spriteHolder, groundObj);
 
     ////////////////////////////////////////////////////////////////////////////////////
 
@@ -58,12 +58,16 @@ const timeKeeper = function () {
 
         console.log(`=======================`);
         if (gamespace.data[space_key.index].gameInstance.data.timer <= 0) {
-            console.log("As a shapeshifter, your transformation begins!");
-            window.requestAnimationFrame(function () {
-                shapeshift = false;
-                gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "human";
-                moveAndDisplay.transform(spriteHolder, gamespace.data[space_key.index].gameInstance.player.sprite.beingType);
-            });
+            console.info("As a shapeshifter, your transformation begins!");
+            // window.requestAnimationFrame(function () {
+            //     shapeshift = false;
+                gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(true);
+                gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift();
+
+                // gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "human";
+                
+                // moveAndDisplay.transform(spriteHolder, gamespace.data[space_key.index].gameInstance.player.sprite.beingType);
+            // });
         };
 
     } else if (gamespace.data[space_key.index].gameInstance.data.timer >= 25 && gamespace.data[space_key.index].gameInstance.data.timer < 60) {
@@ -72,18 +76,21 @@ const timeKeeper = function () {
 
         console.log(`=======================`);
         if (gamespace.data[space_key.index].gameInstance.data.timer === 25) {
-            console.log("As a shapeshifter, your transformation begins!");
-            window.requestAnimationFrame(function () {
-                shapeshift = true;
-                gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "sasquatch";
-                console.log(spriteHolder);
-            });
+            console.info("As a shapeshifter, your transformation begins!");
+            // window.requestAnimationFrame(function () {
+            //     shapeshift = true;
+                gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(false);
+                gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift();
+
+                // gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "sasquatch";
+            //     console.log(spriteHolder);
+            // });
         };
 
     } else if (gamespace.data[space_key.index].gameInstance.data.timer >= 60) {
         clientStart = Date.now();
         console.log(`=======================`);
-        console.log(`gamespace.data[space_key.index].gameInstance.data.timer: ${gamespace.data[space_key.index].gameInstance.data.timer}`);
+        console.info(`gamespace.data[space_key.index].gameInstance.data.timer: ${gamespace.data[space_key.index].gameInstance.data.timer}`);
 
         console.log(`restart gamespace.data[space_key.index].gameInstance.data.timer!`);
         console.log(`=======================`);
@@ -91,6 +98,7 @@ const timeKeeper = function () {
 
     // find difference in seconds:
     gamespace.data[space_key.index].gameInstance.data.timer = Math.floor((Date.now() - clientStart) / 1000);
+
     return gamespace.data[space_key.index].gameInstance.data.timer;
 };
 

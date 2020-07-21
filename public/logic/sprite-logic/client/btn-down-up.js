@@ -14,7 +14,7 @@ const btnDownUp = function (event) {
     } else {
         keyState = false;
     };
-    
+
     if (keyState) {
         keyPress_handler.any = true;
     };
@@ -24,12 +24,10 @@ const btnDownUp = function (event) {
 
     if (keyCode == 37 || keyCode == 39 || keyCode == 38 || keyCode == 40 || keyCode == 76 || keyCode == 32) {
         // TODO: add switch statement below:
+        moveAndDisplay.moveMethod(keyCode, spriteHolderElem, keyCode == 76 ? true : false);
 
         if (keyCode == 37) { // Move: LEFT
             keyPress_handler.left = keyState;
-            // if (keyState) {
-            //     moveAndDisplay.moveMethod(keyCode, spriteHolderElem);
-            // };
 
         } else if (keyCode == 38) { // Move: UP ("stone queen") JUMP (!"stone queen")
             keyPress_handler.up = keyState;
@@ -41,9 +39,13 @@ const btnDownUp = function (event) {
             keyPress_handler.down = keyState;
 
         } else if (keyCode == 76 || keyCode == 32) { // transform: FLY ("stone queen")
+            keyPress_handler.isSummoned = keyState; // may need to change based on isShapeshifted();
+
+        } else { // transform: FLY ("stone queen")
             keyPress_handler.any = keyState; // may need to change based on isShapeshifted();
 
         };
+        
 
         console.log(`keyCode: ${keyCode}`);
         // let spriteHolderElem = document.querySelector("#sprite-holder");
