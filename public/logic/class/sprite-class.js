@@ -124,11 +124,11 @@ class Sprite {
 
     isAsleep() {
         if (this.isDaytime) { // "daybreak"
-        this.asleep = false;
-        return false;
+            this.asleep = false;
+            return false;
         } else if (this.isDaytime == false) { // "nightfall"
-        this.asleep = true;
-        return true;
+            this.asleep = true;
+            return true;
         };
     };
 

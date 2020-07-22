@@ -42,7 +42,7 @@ const timeKeeper = function () {
     // enemyBlock.style.left = enemy_sprite_Data.position + enemy_sprite_Data.steps + "px";
 
     ////////////////////////////////////////////////////////////////////////////////////
-    // let spriteHolder = document.querySelector(".transform-holder");
+    let spriteHolder = document.querySelector(".transform-holder");
     let timerSpan = document.querySelector("#timer-span");
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -61,12 +61,20 @@ const timeKeeper = function () {
             console.info("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
             //     shapeshift = false;
-                gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(true);
-                gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift();
+            gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(true);
+            gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift();
+            // window.requestAnimationFrame(gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift);
 
-                // gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "human";
-                
-                // moveAndDisplay.transform(spriteHolder, gamespace.data[space_key.index].gameInstance.player.sprite.beingType);
+            // gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "human";
+
+            if (keyPress_handler.left ||
+                keyPress_handler.right ||
+                keyPress_handler.up ||
+                keyPress_handler.down) {
+                console.info("already updating shifts through user actions");
+            } else {
+                moveAndDisplay.idleShift(spriteHolder);
+            };
             // });
         };
 
@@ -79,12 +87,21 @@ const timeKeeper = function () {
             console.info("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
             //     shapeshift = true;
-                gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(false);
-                gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift();
+            gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(false);
+            gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift();
+            // window.requestAnimationFrame(gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift);
 
-                // gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "sasquatch";
+            // gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "sasquatch";
             //     console.log(spriteHolder);
             // });
+            if (keyPress_handler.left ||
+                keyPress_handler.right ||
+                keyPress_handler.up ||
+                keyPress_handler.down) {
+                console.info("already updating shifts through user actions");
+            } else {
+                moveAndDisplay.idleShift(spriteHolder);
+            };
         };
 
     } else if (gamespace.data[space_key.index].gameInstance.data.timer >= 60) {

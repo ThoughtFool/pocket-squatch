@@ -157,6 +157,36 @@ const moveAndDisplay = {
 
         }
     },
+    idleMoveType: {
+        "human": {
+            src: "/images/lyric-stand.png",
+
+            moveClass: "move-stand",
+            holdPos: "human",
+            keyState: false,
+            step_counter: 0,
+            preMove_pos: null
+        },
+        "sasquatch": {
+            src: "/images/idle-squatch.png",
+
+            moveClass: "move-stand",
+            // moveClass: "idle-squatch",
+            holdPos: "sasquatch",
+            keyState: false,
+            step_counter: 0,
+            preMove_pos: null
+        },
+        "stone queen": {
+            src: "/images/lyric-fly-right.png",
+
+            moveClass: "move-fly-right",
+            holdPos: "stone queen hybrid",
+            keyState: false,
+            step_counter: 0,
+            preMove_pos: null
+        }
+    },
     moveStand: {
         src: "/images/lyric-stand.png",
 
@@ -187,7 +217,7 @@ const moveAndDisplay = {
     },
     moveMethod: function (keyPressed, spriteHolderElem, isSummoned) {
         // alert(keyPressed);
-    // moveMethod: function (keyPressed, spriteHolderElem) {
+        // moveMethod: function (keyPressed, spriteHolderElem) {
         // TODO: break this method up into smaller, more modular methods
         // let spriteHolderElem = document.querySelector("#sprite-holder");
 
@@ -214,7 +244,18 @@ const moveAndDisplay = {
         spriteHolderElem.style.backgroundImage = `url("${this[keyPressed][beingType].src}")`;
         spriteHolderElem.classList.add(this[keyPressed][beingType].moveClass);
 
-        this.transform(spriteHolderElem, beingType);
+        this.transform(spriteHolderElem);
+    },
+    idleShift: function (spriteHolderElem) {
+
+        let beingType = this.getBeingType();
+
+        this.removeClass(spriteHolderElem);
+
+        spriteHolderElem.style.backgroundImage = `url("${this.idleMoveType[beingType].src}")`;
+        spriteHolderElem.classList.add(this.idleMoveType[beingType].moveClass);
+
+        this.transform(spriteHolderElem);
     },
     removeClass: function (element) {
         console.log("element");
@@ -265,7 +306,7 @@ const moveAndDisplay = {
     //         moveType = null;
     //     };
 
-        // this.animationLoop(spriteHolderElem, this[keyPressed][this.getBeingType()].moveDist, currentPos_TopOrLeft, moveType);
+    // this.animationLoop(spriteHolderElem, this[keyPressed][this.getBeingType()].moveDist, currentPos_TopOrLeft, moveType);
 
     // },
     animationLoop: require("./methods/animation-loop"),
@@ -298,6 +339,8 @@ const moveAndDisplay = {
 
                 this.removeClass(spriteHolderElem);
                 let beingType = this.getBeingType();
+
+                // TODO: merge this with idleMoveType and idleShift method:
 
                 if (beingType === "human") {
                     // TODO: transform: if flying while transformed to sasquatch, then falls to ground (spritesheet fall and laying on ground and getting up):

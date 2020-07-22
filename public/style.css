@@ -70,7 +70,7 @@ body {
     height: calc(var(--ground-height) - 5px);
     border: green solid 1px;
     position: absolute;
-    right: 450px;
+    right: 425px;
     bottom: calc(var(--ground-height) - 5px);
 }
 
@@ -79,8 +79,26 @@ body {
     height: calc(var(--ground-height) - 5px);
     border: gray solid 1px;
     position: absolute;
-    right: 525px;
+    right: 425px;
     bottom: calc(var(--ground-height) * 2 - 5px);
+}
+
+#step-02 {
+    width: 10%;
+    height: calc(var(--ground-height) - 5px);
+    border: gray solid 1px;
+    position: absolute;
+    right: 1125px;
+    bottom: calc(var(--ground-height) * 3.5 - 5px);
+}
+
+#step-03 {
+    width: 10%;
+    height: calc(var(--ground-height) - 5px);
+    border: gray solid 1px;
+    position: absolute;
+    left: 125px;
+    bottom: calc(var(--ground-height) * 5 - 5px);
 }
 
 .enemy {
