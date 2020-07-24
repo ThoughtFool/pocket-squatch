@@ -113,10 +113,8 @@ class Sprite_Physics {
         for (let i = 0; i < elements.length; i++) {
             let coords = elements[i].getBoundingClientRect();
             coordsArray.push(coords);
-            // this.groundCoordsArray.push(coords);
         };
         return coordsArray;
-        // return this.groundCoordsArray;
     };
 
     testFunc(myTestVal) {
@@ -214,7 +212,6 @@ class Sprite_Physics {
         };
         // ******************************************************************************
 
-        // this.spriteTouch(this.wallElemArray);
         let result = false;
         let elem_coords;
 
@@ -223,28 +220,22 @@ class Sprite_Physics {
 
         elem_array.forEach(elemToCheck => {
             elem_coords = elemToCheck.getBoundingClientRect();
-            // alert(`${this.left} < ${elem_coords.right}?`);
-
             if (
                 this.left < elem_coords.right &&
                 this.left + this.width > elem_coords.left &&
                 this.top < elem_coords.bottom &&
                 this.top + this.height > elem_coords.top
             ) {
-
                 // Testing ONLY:
                 let spriteHolderElem = document.getElementById("sprite-holder");
                 spriteHolderElem.classList.add("collision");
                 setTimeout(() => {
                     spriteHolderElem.classList.remove("collision");
                 }, 100);
-
                 result = true;
 
                 if (this.top + this.height > elem_coords.top && this.top + (this.height * .75) < elem_coords.top &&
                     this.left + (this.width * .75) > elem_coords.left && this.left + (this.width * .25) < elem_coords.right) {
-
-                    // console.info("And he sticks the landing, folks!");
                     this.velocity = 0;
                     this.onGround = true;
                     return this.top = elem_coords.top - this.height; // lands on top of obstacle
@@ -256,95 +247,45 @@ class Sprite_Physics {
 
                 } else if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
                     this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-right side collison
-                    // alert(`bottom-right side collision: this.left: ${this.left}, this.width: ${this.width}, elem_coords.left: ${elem_coords.left}`);
-
+                    console.info(`bottom-right side collision:`);
                     return this.left = elem_coords.left - this.width - 1; // lands next to obstacle (left-side)
 
                 } else if (this.left < elem_coords.right && this.left + (this.width / 2) > elem_coords.right &&
                     this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-left side collison
-                    // alert(`bottom-left side collision:`);
-
+                    console.info(`bottom-left side collision:`);
                     return this.left = elem_coords.right + 1; // lands next to obstacle (right-side)
 
                 } else if (this.left < elem_coords.right && this.left + (this.width * .75) > elem_coords.right &&
                     this.top < elem_coords.bottom && this.top + (this.height * .75) > elem_coords.bottom) { // top-left side collison
-                    console.info(`top-left side collision: this.left: ${this.left}, this.right: ${this.left + this.width}, elem_coords.right: ${elem_coords.right}`);
-
+                    console.info(`top-left side collision: this.left:`);
                     return this.left = elem_coords.right + 1; // lands next to obstacle (right-side)
 
                 } else if (this.left + this.width > elem_coords.left && this.left + (this.width * .75) < elem_coords.left &&
                     this.top < elem_coords.bottom && this.top + (this.height * .75) > elem_coords.bottom) { // top-right side collison
                     console.info(`top-right side collision:`);
-
                     return this.left = elem_coords.left - this.width - 1; // lands next to obstacle (left-side)
-
 
                 } else {
                     return;
-                    // alert(`
-                    //     left: ${this.left} < obstacle right: ${elem_coords.right} &&
-                    //     right: ${this.left + this.width} > obstacle left: ${elem_coords.left} &&
-                    //     top: ${this.top} < obstacle bottom: ${elem_coords.bottom} &&
-                    //     bottom: ${this.top + this.height} > obstacle top: ${elem_coords.top}
-                    // `);
                 };
 
-            }; // this.onGround = true;
+            };
         });
         this.updateDisplay();
-
-
-
-        // if (result) {
-        //     // if(this.getDist(this.left, this.top, elem_coords.left, elem_coords.top) <
-        //     //     elem_coords.width / 2 + this.width / 2) {
-        //     //         this.right = elem_coords.left;
-        //     // this.updateDisplay();
-        //     this.updateDisplay();
-
-        // } else {
-        //     // moveAndDisplay.moveMethod(keyCode, spriteHolderElem);
-        //     this.updateDisplay();
-        // };
-
-        // if (result) {
-
-        // } else {
-        // this.updateDisplay();
-        // };
     };
 
     spriteTouch(elem_array) {
-        // this.update_Coords(this.elem);
         let result = false;
-
-        // if (keyPress_handler.up && this.onGround) {
-        //     this.velocity = this.jumpPower;
-        //         keyAction = "jump";
-
-        // };
-        // if (keyPress_handler.left) {
-        //     this.dx = -this.moveSpeed;
-        //         keyAction = "left";
-
-        // };
-        // if (keyPress_handler.right) {
-        //     this.dx = this.moveSpeed;
-        //         keyAction = "right";
-
-        // };
         let elem_coords
 
         elem_array.forEach(elemToCheck => {
             elem_coords = elemToCheck.getBoundingClientRect();
-            // alert(`${this.left} < ${elem_coords.right}?`);
             this.right = this.left + this.width;
             this.bottom = this.top + this.height;
 
             if (
                 this.left < elem_coords.right &&
                 this.left + this.width > elem_coords.left &&
-                // this.right > elem_coords.left &&
                 this.top < elem_coords.bottom &&
                 this.top + this.height > elem_coords.top
             ) {
