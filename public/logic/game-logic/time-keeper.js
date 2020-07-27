@@ -60,21 +60,20 @@ const timeKeeper = function () {
         if (gamespace.data[space_key.index].gameInstance.data.timer <= 0) {
             console.info("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
-            //     shapeshift = false;
             gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(true);
             gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift();
             // window.requestAnimationFrame(gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift);
 
             // gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "human";
 
-            if (keyPress_handler.left ||
-                keyPress_handler.right ||
-                keyPress_handler.up ||
-                keyPress_handler.down) {
-                console.info("already updating shifts through user actions");
-            } else {
+            // if (keyPress_handler.left ||
+            //     keyPress_handler.right ||
+            //     keyPress_handler.up ||
+            //     keyPress_handler.down) {
+            //     console.info("already updating shifts through user actions");
+            // } else {
                 moveAndDisplay.idleShift(spriteHolder);
-            };
+            // };
             // });
         };
 
