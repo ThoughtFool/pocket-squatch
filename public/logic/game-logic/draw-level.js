@@ -1,33 +1,43 @@
-const drawLevel = function (gamescreenID, levelObj) {
+const drawLevel = function (gamescreenID, levelObj, idArray) {
     let {xPos, yPos, width, height, elemType, class_actorType, class_moveType, id, imgUrl} = levelObj;
-
+    
     const createElem = function (elemType, class_actorType, class_moveType, id) {
-        let newElem = document.createElement(`${elemType}`);
+        let newDiv = document.createElement(`${elemType}`);
         if (class_actorType) {
-            newElem.classList.add(`${class_actorType}`);
+            newDiv.classList.add(`${class_actorType}`);
         };
 
         if (class_moveType) {
-            newElem.classList.add(`${class_moveType}`);
+            newDiv.classList.add(`${class_moveType}`);
         };
-
+        
         if (id) {
-            newElem.id = (`${id}`);
+            newDiv.id = (`${id}`);
         };
-        return newElem;
+        console.info("newDiv");
+        console.info(newDiv);
+        return newDiv;
     };
-
     let gamescreen = document.getElementById(gamescreenID);
-    let newElem = createElem(elemType, class_actorType, class_moveType, id);
-    newElem.style.position = "absolute";
-    newElem.style.left = `${xPos}px`;
-    newElem.style.top = `${yPos}px`;
-    newElem.style.width = `${width}px`;
-    newElem.style.height = `${height}px`;
-    newElem.style.backgroundImage = `url("${imgUrl}")`;
-    newElem.style.backgroundSize = `${width}px ${height}px`;
     
+    let newElem = createElem(elemType, class_actorType, class_moveType, id);
     gamescreen.appendChild(newElem);
+    let elemCreated = document.getElementById(`${id}`);
+    console.info("elemCreated");
+    console.info(elemCreated);
+    
+    elemCreated.style.position = "absolute";
+    elemCreated.style.left = `${xPos}px`;
+    elemCreated.style.top = `${yPos}px`;
+    elemCreated.style.width = `${width}px`;
+    elemCreated.style.height = `${height}px`;
+    elemCreated.style.backgroundImage = `url("${imgUrl}")`;
+    // elemCreated.style.backgroundSize = `${width}px ${height}px`;
+
+    return ({
+        idArray,
+        id
+    });
 };
 
 module.exports = drawLevel;

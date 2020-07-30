@@ -43,6 +43,7 @@ body {
     background-color: darkgrey;
     border: 3px black solid;
     display: flex;
+    position: relative;
 }
 
 .row {
@@ -172,12 +173,12 @@ body {
 
 .transform-holder {
     position: absolute;
-    left: 500px;
+    /* left: 500px;
     bottom: calc(var(--ground-height) + 5px);
     background-image: url("./images/lyric-stand.png");
     background-repeat: no-repeat;
     height: 300px;
-    width: 300px;
+    width: 300px; */
     /* transition-property: all; */
     transition-property: transform;
     transition-timing-function: cubic-bezier(0.42, 0, 0.58, 0);

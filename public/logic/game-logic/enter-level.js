@@ -59,8 +59,11 @@ const enterLevel = function (timeKeeper, myGameInfo) {
     // });
     // promise
     //     .then(function (result) {
-    setGameField(levelID, function (obstacleObject, contentIDArray) {
-        const myPhysics = new Sprite_Physics("game-screen", obstacleObject, "sprite-holder");
+    setGameField(levelID, function (obstacleObject, newElem_ID) {
+        console.info("newElem_ID");
+        console.info(newElem_ID);
+
+        const myPhysics = new Sprite_Physics("game-screen", obstacleObject, newElem_ID);
     
         gamespace.data[space_key.index].gameInstance.player.sprite.physics = myPhysics;
         console.info(gamespace.data[space_key.index].gameInstance.player.sprite);

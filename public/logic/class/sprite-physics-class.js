@@ -96,7 +96,7 @@ class Sprite_Physics {
     };
 
     get_Coords(element) {
-        console.info(element);
+        // console.info(element);
         return element.getBoundingClientRect();
     };
 
@@ -138,8 +138,8 @@ class Sprite_Physics {
             // console.info(bool);
 
             if (bool) {
-                console.info("elements[i].id:");
-                console.info(elements[i].id);
+                // console.info("elements[i].id:");
+                // console.info(elements[i].id);
                 return this.groundElem_Now = this.getElem(elements[i].id);
             };
         };
