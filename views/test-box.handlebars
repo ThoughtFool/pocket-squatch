@@ -1,36 +1,32 @@
 <div id="game-screen">
+    <div class="header">
+        <p id="greet">Greetings, <span id="greetings-span">{{spriteName}}</span></p>
+        <p id="timer">Clientside Timer: <span id="timer-span"></span></p>
+    </div>
+    {{!-- <div class="game-screen-square"> --}}
     <div class="title-box">
         <h1>Pocket Squatch</h1>
     </div>
     <div id="subhead">
-        <h2>Greetings <span id="greetings-span">{{spriteName}}</span></h2>
         <h4>roomID: <span id="roomID-span">{{roomID}}</span></h4>
         <h4>SpaceID: <span id="SpaceID-span">{{SpaceID}}</span></h4>
         <h5>SpaceIndex: <span id="SpaceIndex-span">{{SpaceIndex}}</span></h5>
         <h6>gamespace: <span id="gamspace-span">{{gamespace}}</span></h6>
+        <input type="button" value="get-new-elems" id="get-new-elems" onclick="getNewElems()">
     </div>
-    <div class="result">Clientside Timer: <span id="timer-span"></span></div>
-
-
-    <div class="transform-holder move-stand" id="sprite-holder">
-        <div class="hit-box">
-            <div id="hit-box-lyric">
-                <div class="hit-box"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="wall obstacle" id="step-01"></div>
-    <div class="wall obstacle" id="step-02"></div>
-    <div class="wall obstacle" id="step-03"></div>
-    <div class="wall obstacle" id="wall-01"></div>
-    <div class="square-grass" id="ground-01"></div>
-
+    {{!-- </div> --}}
+    <!-- append dynamic grid -->
+<div>
     <div>
         <label style="color:blanchedalmond" for="createSprite">Choose a name for your Hero:</label><br>
         <input type="text" name="createSprite" id="create-sprite" placeholder="Hero Name Here..." required><br>
         <button id="enter-game-btn">enter game</button><br>
     </div><br>
+
+    {{!-- <div>
+        <label for="createBoard">Draw GameBoard</label>
+        <button>load GameBoard</button>
+    </div> --}}
     {{!-- <button id="enemy-btn">enemy</button> --}}
     {{!-- <button id="enemy-jump-btn">enemy jump</button> --}}
 
@@ -40,5 +36,22 @@
             <button id="enter-level-btn" class="btn" id="register-btn" type="submit">enter level</button><br>
         </div>
     </form>
+</div>
 
+    <div id="game-field">
+        <div class="transform-holder move-stand" id="sprite-holder">
+            <div class="hit-box">
+                <div id="hit-box-lyric">
+                    <div class="hit-box"></div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- <div class="wall obstacle" id="step-01"></div> --}}
+        {{!-- <div class="wall obstacle" id="step-02"></div>
+    <div class="wall obstacle" id="step-03"></div> --}}
+        {{!-- <div class="wall obstacle" id="wall-01"></div>
+        <div class="square-grass" id="ground-01"></div> --}}
+
+    </div>
 </div>

@@ -8,12 +8,13 @@
 </head>
 
 <body>
-    <div class="game-screen">
+    <div class="game-screen-square">
         <div id="game-field">
             <!-- append dynamic grid -->
         </div>
         <input type="button" value="make-level" id="make-level" onclick="createLevel()">
         <input type="button" value="save-level" id="save-level" onclick="saveLevel()">
+        <input type="button" value="get-new-elems" id="get-new-elems" onclick="getNewElems()">
         <!-- <input type="number" name="time-stamp-id" id="time-stamp-id"> -->
         <select id="time-stamp-id" onChange="loadMyLevel(this);">
             <option>Please select image history</option>

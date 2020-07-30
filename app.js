@@ -225,7 +225,7 @@ app.get("/login", function (req, res) {
     res.render("login", {});
 });
 
-app.post("/login", function (req, res) {
+app.post("/enter-level", function (req, res) {
     let spriteName = req.body["createSprite"];
     let {
         gamespace,
@@ -244,7 +244,8 @@ app.post("/login", function (req, res) {
         } else {
             console.log("data:");
             console.log(data);
-            res.render("test-animations", {
+            res.render("test-box", {
+            // res.render("test-animations", {
                 spriteName: spriteName,
                 roomID: roomID,
                 gamespace: gamespace,
@@ -255,6 +256,13 @@ app.post("/login", function (req, res) {
     });
 
     // res.redirect("/");
+});
+
+app.get("/test-box", function (req, res) {
+    res.render("test-box", {
+
+        timer: parseInt(gameroom.timer) // create function to evalute timer on client with timer on server and update on change
+    });
 });
 
 // app.post("/test-animations", function (req, res) {

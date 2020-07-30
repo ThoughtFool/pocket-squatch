@@ -93,14 +93,14 @@ const timeKeeper = function () {
             // gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "sasquatch";
             //     console.log(spriteHolder);
             // });
-            if (keyPress_handler.left ||
-                keyPress_handler.right ||
-                keyPress_handler.up ||
-                keyPress_handler.down) {
-                console.info("already updating shifts through user actions");
-            } else {
+            // if (keyPress_handler.left ||
+            //     keyPress_handler.right ||
+            //     keyPress_handler.up ||
+            //     keyPress_handler.down) {
+            //     console.info("already updating shifts through user actions");
+            // // } else {
                 moveAndDisplay.idleShift(spriteHolder);
-            };
+            // };
         };
 
     } else if (gamespace.data[space_key.index].gameInstance.data.timer >= 60) {

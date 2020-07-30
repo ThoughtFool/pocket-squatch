@@ -11,7 +11,10 @@ const updateClientScreen = function (dataObj) {
         gamespace,
         SpaceID,
         SpaceIndex,
-        space_key
+        space_key,
+        myGameInstance,
+        contentIDArray
+
     } = dataObj;
 
     // gamespace.data[space_key.index].gameInstance.data.timer
@@ -23,6 +26,8 @@ const updateClientScreen = function (dataObj) {
     SpaceIDSpan.innerText = SpaceID;
     SpaceIndexSpan.innerText = SpaceIndex;
     gamspaceSpan.innerText = gamespace;
+
+    // return contentBuilder(squareContentArray, contentIDArray, myGameInstance, levelID);
 };
 
 module.exports = updateClientScreen;

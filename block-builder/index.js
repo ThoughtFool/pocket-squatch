@@ -1,7 +1,9 @@
 const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
 let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
+// let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "ground", "square-soil", "square-sky", "square-night"];
 let gridSize = vh * .75;
+const parentElems_coords = [];
 
 const gameField = document.querySelector("#game-field");
 const grid = document.createElement("div");
@@ -14,7 +16,8 @@ gameGrid.style.height = `${gridSize}px`;
 
 let whereAppend = gameGrid;
 // let numSquares = 100;
-let numSquares = 625;
+let numSquares = 400;
+// let numSquares = 625;
 
 console.log("gameGrid.clientHeight");
 console.log(gameGrid.clientHeight);
@@ -68,6 +71,9 @@ const createBoard = function (whereAppend, numSquares, gridSize) {
                 boardRow.appendChild(squareDiv);
                 newSquare = document.getElementById(squareId);
                 newSquare.classList.add("grid-square");
+                //////////////////////////////////////////////////////////////////////////////
+
+                //////////////////////////////////////////////////////////////////////////////
 
                 // divide the size of squares evenly:
                 // let percentageSize = Math.floor(1 / sqRootNum * 100);
@@ -84,8 +90,17 @@ const createBoard = function (whereAppend, numSquares, gridSize) {
                 newContentSquare.classList.add("dyna-square-content");
                 newContentSquare.classList.add("empty-space");
                 contentIDArray.push(contentId);
+
+                //////////////////////////////////////////////////////////////////////////////
+                parentElems_coords.push(squareId);
+                // parentElems_coords.push(newSquare.getBoundingClientRect());
+
+                //////////////////////////////////////////////////////////////////////////////
             };
         };
+
+        console.log("parentElems_coords");
+        console.log(parentElems_coords);
 
         return contentIDArray;
 
@@ -117,7 +132,7 @@ let levelsObject = {
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 6, 6, 6, 6, 4, 4, 5, 0, 1,
             1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
-            1, 6, 6, 6, 4, 6, 2, 2, 2, 1,
+            1, 6, 6, 6, 4, 6, 4, 2, 2, 1,
             1, 6, 6, 6, 4, 6, 2, 2, 2, 1,
             1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
             1, 6, 6, 6, 6, 6, 4, 5, 0, 1,
@@ -152,6 +167,28 @@ let levelsObject = {
             1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 4, 4, 4, 4, 0, 5, 5, 5, 0, 1,
             1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 5, 4, 5, 5, 5, 0, 0, 1,
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        ],
+        003: [
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 6, 6, 1, 1, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 4, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 4, 1,
+            1, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 1,
+            1, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 2, 2, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 2, 2, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 4, 6, 2, 2, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 1,
+            1, 6, 6, 4, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 4, 1,
+            1, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 4, 1,
+            1, 1, 1, 1, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
         ]
     },
 
@@ -168,7 +205,7 @@ let levelsObject = {
     }
 };
 
-let levelID = 002;
+let levelID = 003;
 const contentBuilder = function (squareContentArray, contentIDArray, levelsObject, levelID) {
     for (let i = 0; i < contentIDArray.length; i++) {
         // let randomClass = Math.floor(Math.random() * 8);
@@ -217,7 +254,6 @@ const saveLevel = function () {
     };
     return levelsObject.saveNew(savedLevelArray, addStampToList);
 };
-
 
 contentBuilder(squareContentArray, contentIDArray, levelsObject, levelID);
 
@@ -336,4 +372,75 @@ const loadMyLevel = function () {
     // TODO: append ids so that user can access (create a drop-down) / this can also be use for history (undo/redo)
     console.log(timeID);
     return contentBuilder(squareContentArray, contentIDArray, levelsObject, timeID);
+};
+
+const getNewElems = function () {
+    let levelCoordObject = {
+        
+        toKeep: [],
+        toCreate: [],
+        toRemove: [],
+        getCoords: function () {
+            for (let i = 0; i < this.toKeep.length; i++) {
+                // newLevelElem:
+                this.toCreate.push({
+                    id: this.toKeep[i].id,
+                    className: this.toKeep[i].children[0].classList[2],
+                    coords: this.toKeep[i].getBoundingClientRect()
+                });
+            };
+            return console.log(this.toCreate);
+        },
+        remove: function () {
+            for (let i = 0; i < this.toRemove.length; i++) {
+                this.toRemove[i].parentNode.removeChild(this.toRemove[i]);
+            };
+            return this.toRemove = [];
+        }
+    };
+    /////////////////////////////////////////////////////////////////////////////
+    let gridSquare = document.getElementsByClassName("grid-square");
+
+    for (let i = 0; i < gridSquare.length; i++) {
+
+        if (gridSquare[i].children[0].classList.contains("square-rock")) {
+            levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-wall")) {
+            levelCoordObject.toKeep.push(gridSquare[i]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-lava")) {
+            levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-water")) {
+            levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-grass")) {
+            levelCoordObject.toKeep.push(gridSquare[i]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-soil")) {
+            levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-sky")) {
+            levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-night")) {
+            levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
+
+        } else {
+            console.log("Error: dynamic-square-content does not contain any color squares.");
+        };
+    };
+    return levelCoordObject.getCoords();
+    return levelCoordObject.remove();
+    // contentIDArray[i].getBoundingClientRect();
+    // let allLevelElems_Coords = [];
+    return console.log(levelCoordObject);
+
 };

@@ -96,6 +96,7 @@ class Sprite_Physics {
     };
 
     get_Coords(element) {
+        console.info(element);
         return element.getBoundingClientRect();
     };
 
@@ -125,20 +126,20 @@ class Sprite_Physics {
 
     // TODO: take in additional argument to determine which array to push to (make method reusable with wall and enemy);
     eval_All_Coords(elements) {
+        let sprite_coords = this.elem.getBoundingClientRect();
         for (let i = 0; i < elements.length; i++) {
-            let sprite_coords = this.elem.getBoundingClientRect();
             let ground_coords = elements[i].getBoundingClientRect();
             console.log("ground_coords:");
             console.log(ground_coords);
 
             this.groundCoordsArray.push(ground_coords);
             let bool = this.isBelow(sprite_coords, ground_coords);
-            console.log("bool:");
-            console.log(bool);
+            // console.info("bool:");
+            // console.info(bool);
 
             if (bool) {
-                console.log("elements[i].id:");
-                console.log(elements[i].id);
+                console.info("elements[i].id:");
+                console.info(elements[i].id);
                 return this.groundElem_Now = this.getElem(elements[i].id);
             };
         };
