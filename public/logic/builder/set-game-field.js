@@ -2,6 +2,7 @@ const createBoard = require("./create-board");
 const level_data = require("../../data/level-data");
 const contentBuilder = require("./content-builder");
 const drawLevel = require("../game-logic/draw-level");
+const getNewElems = require("./get-new-elems");
 
 const setGameField = function (levelID, cb) {
     
@@ -11,45 +12,124 @@ const setGameField = function (levelID, cb) {
     let gridSize = vh * .95;
 
     const gameField = document.querySelector("#game-field");
-    const grid = document.createElement("div");
-    grid.className = "game-grid";
-    grid.id = "my-grid";
-    gameField.appendChild(grid);
 
-    const gameGrid = document.querySelector(".game-grid");
-    gameGrid.style.width = `${gridSize}px`;
-    gameGrid.style.height = `${gridSize}px`;
-    gameGrid.style.position = "relative";
+    const createGameGrid = function (gameField) {
+        const grid = document.createElement("div");
+        grid.className = "game-grid";
+        grid.id = "my-grid";
+        gameField.appendChild(grid);
 
-    let whereAppend = gameGrid;
+        const gameGrid = document.querySelector(".game-grid");
+        gameGrid.style.width = `${gridSize}px`;
+        gameGrid.style.height = `${gridSize}px`;
+        gameGrid.style.position = "relative";
+
+        return gameGrid;
+    };
+
+    const removeGameGrid = function (gameField) {
+        gameField.removeChild(gameField.children[0]);
+    };
+
     let numSquares = 400;
 
-    console.log("gameGrid.clientHeight");
-    console.log(gameGrid.clientHeight);
+    // console.log("gameGrid.clientHeight");
+    // console.log(gameGrid.clientHeight);
 
     let promise = new Promise(function (resolve, reject) {
         console.log("promise begins!")
-        return resolve(createBoard(whereAppend, numSquares, gridSize));
+        return resolve(createGameGrid(gameField));
     });
     promise
-        .then(function (contentIDArray) {
-            console.info("contentIDArray");
-            console.info(contentIDArray);
-            return contentBuilder(squareContentArray, contentIDArray, level_data, levelID);
+        .then(function (whereAppend) {
+            return createBoard(whereAppend, numSquares, gridSize);
         })
         .then(function (contentIDArray) {
+            // console.info("contentIDArray");
+            // console.info(contentIDArray);
+            return contentBuilder(squareContentArray, contentIDArray, level_data, levelID);
+        })
+        .then(function (squareContentArray) {
+            return getNewElems();
+        })
+        .then(function (toKeep) {
+            removeGameGrid(gameField);
+            return toKeep;
+        })
+        .then(function (toKeep) {
+            let gameGrid = createGameGrid(gameField);
+            return ({
+                toKeep,
+                gameGrid
+            });
+        })
+        // .then(function (obj) {
+        //     let {toKeep, gameGrid} = obj;
+
+        //     const joinAdjacentSquares = function (squaresToJoinArray) {
+        //         // sort squares by x and y
+        //         let newArr;
+        //         for (let a = 0; a < squaresToJoinArray.length; a++) {
+        //             for (let b = 0; b < squaresToJoinArray.length; b++) {
+
+        //             if (squaresToJoinArray[a].right == squaresToJoinArray[b].left) {
+        //                 squaresToJoinArray[a] =
+
+        //             }
+        //             squaresToJoinArray[i].right == 
+        //         }
+        //     }
+        // })
+        .then(function (obj) {
+            let {toKeep, gameGrid} = obj;
+            console.info("toKeep");
+            console.info(toKeep);
+            
+            const createLevelObj = function (toKeep) {
+                let levelObj;
+                let counter = 0;
+                for (let i = 0; i < toKeep.length; i++) {
+                    let {id, className, coords} = toKeep[i];
+                    counter ++;
+
+                    levelObj = {
+                        xPos: coords.x,
+                        yPos: coords.y,
+                        width: coords.width,
+                        height: coords.height,
+                        elemType: "div",
+                        class_actorType: className,
+                        class_moveType: "obstacle",
+                        id: id,
+                        // imgUrl: "/images/lyric-stand.png"
+                    };
+                    console.info(levelObj);
+                    // drawLevel("my-grid", levelObj);
+                    drawLevel("game-field", levelObj);
+                };
+                if (counter >= toKeep.length) {
+                    // console.info("counter");
+                    // console.info(counter);
+
+                    return "Done!";
+                };
+            };
+            createLevelObj(toKeep);
+        })
+        .then(function (isDone) {
             let levelObj = {
-                xPos: 700,
-                yPos: 500,
-                width: 200,
-                height: 200,
+                xPos: 500,
+                yPos: 400,
+                width: 300,
+                height: 300,
                 elemType: "div",
                 class_actorType: "transform-holder",
                 class_moveType: "move-stand",
                 id: "sprite-holder",
                 imgUrl: "/images/lyric-stand.png"
             };
-            return drawLevel("my-grid", levelObj, contentIDArray);
+            return drawLevel("game-field", levelObj);
+            return drawLevel("my-grid", levelObj);
         })
         .then(function (newElem) {
             console.log("newElem");

@@ -13,7 +13,8 @@ const getNewElems = function () {
                     coords: this.toKeep[i].getBoundingClientRect()
                 });
             };
-            return console.log(this.toCreate);
+            console.log(this.toCreate);
+            return this.toCreate;
         },
         remove: function () {
             for (let i = 0; i < this.toRemove.length; i++) {
@@ -33,6 +34,7 @@ const getNewElems = function () {
 
         } else if (gridSquare[i].children[0].classList.contains("square-wall")) {
             levelCoordObject.toKeep.push(gridSquare[i]);
+            levelCoordObject.toRemove.push(gridSquare[i]);
 
         } else if (gridSquare[i].children[0].classList.contains("square-lava")) {
             levelCoordObject.toRemove.push(gridSquare[i]);
@@ -44,6 +46,7 @@ const getNewElems = function () {
 
         } else if (gridSquare[i].children[0].classList.contains("square-grass")) {
             levelCoordObject.toKeep.push(gridSquare[i]);
+            levelCoordObject.toRemove.push(gridSquare[i]);
 
         } else if (gridSquare[i].children[0].classList.contains("square-soil")) {
             levelCoordObject.toRemove.push(gridSquare[i]);
@@ -61,12 +64,13 @@ const getNewElems = function () {
             console.log("Error: dynamic-square-content does not contain any color squares.");
         };
     };
-    return levelCoordObject.getCoords();
-    return levelCoordObject.remove();
+    console.log(levelCoordObject);
+    let toKeep = levelCoordObject.getCoords();
+    levelCoordObject.remove();
+    return toKeep;
+    // return levelCoordObject.remove();
     // contentIDArray[i].getBoundingClientRect();
     // let allLevelElems_Coords = [];
-    return console.log(levelCoordObject);
-
 };
 
 module.exports = getNewElems;

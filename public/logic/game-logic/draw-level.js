@@ -14,8 +14,8 @@ const drawLevel = function (gamescreenID, levelObj, idArray) {
         if (id) {
             newDiv.id = (`${id}`);
         };
-        console.info("newDiv");
-        console.info(newDiv);
+        // console.info("newDiv");
+        // console.info(newDiv);
         return newDiv;
     };
     let gamescreen = document.getElementById(gamescreenID);
@@ -23,8 +23,8 @@ const drawLevel = function (gamescreenID, levelObj, idArray) {
     let newElem = createElem(elemType, class_actorType, class_moveType, id);
     gamescreen.appendChild(newElem);
     let elemCreated = document.getElementById(`${id}`);
-    console.info("elemCreated");
-    console.info(elemCreated);
+    // console.info("elemCreated");
+    // console.info(elemCreated);
     
     elemCreated.style.position = "absolute";
     elemCreated.style.left = `${xPos}px`;
