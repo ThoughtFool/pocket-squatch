@@ -38,6 +38,9 @@ const compareSquares = function (squaresToCompare, className) {
 
                 };
             } else {
+                console.info("else:");
+                console.info(squaresToCompare[i]);
+                
                 newElemArray.push(squaresToCompare[i]);
             };
         } else {

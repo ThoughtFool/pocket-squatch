@@ -28,14 +28,27 @@ const enemyLevelData = {
         for (let i = 0; i < numberOfEnemies; i++) {
 
             let newEnemy = {
-                id: `enemy-${i}`,
-                friendOrFoe: "foe",
-                spriteType: "enemy",
-                enemyType: this.randType(),
+                coords: {
+                    left: this.spawn.loc[i].x,
+                    top: this.spawn.loc[i].y,
+                    width: 50,
+                    height: 50,
+                    right: this.left + this.width
+                },
+                elemType: "div",
+                className: "enemy",
+                class_moveType: this.randType(),
+                id: `enemy-${i}`
+
+                /////////////////////////////
+                // id: `enemy-${i}`,
+                // friendOrFoe: "foe",
+                // spriteType: "enemy",
+                // enemyType: this.randType(),
 
                 // create method to place enemy on space based on map/blueprint options:
-                xPos: this.spawn.loc[i].x,
-                yPos: this.spawn.loc[i].y,
+                // xPos: this.spawn.loc[i].x,
+                // yPos: this.spawn.loc[i].y,
 
                 // size: this.spawn.size, // randomSize
                 // dx: this.spawn.dx,

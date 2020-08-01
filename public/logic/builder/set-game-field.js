@@ -92,7 +92,8 @@ const setGameField = function (levelID, cb) {
                 // let levelObj;
                 let counter = 0;
                 for (let i = 0; i < sortedArray.length; i++) {
-                    let {id, className, coords} = sortedArray[i];
+                    let {coords, elemType, className, class_moveType, id, imgUrl} = sortedArray[i];
+                    // let {id, className, coords} = sortedArray[i];
                     counter ++;
 
                     // levelObj = {
@@ -121,12 +122,19 @@ const setGameField = function (levelID, cb) {
         })
         .then(function (isDone) {
             let levelObj = {
-                xPos: 500,
-                yPos: 400,
-                width: 300,
-                height: 300,
+                coords: {
+                    left: 500,
+                    top: 400,
+                    width: 300,
+                    height: 300,
+                    right: this.left + this.width
+                },
+                // xPos: 500,
+                // yPos: 400,
+                // width: 300,
+                // height: 300,
                 elemType: "div",
-                class_actorType: "transform-holder",
+                className: "transform-holder",
                 class_moveType: "move-stand",
                 id: "sprite-holder",
                 imgUrl: "/images/lyric-stand.png"

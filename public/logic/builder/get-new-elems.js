@@ -8,9 +8,11 @@ const getNewElems = function () {
             for (let i = 0; i < this.toKeep.length; i++) {
                 // newLevelElem:
                 this.toCreate.push({
-                    id: this.toKeep[i].id,
+                    coords: this.toKeep[i].getBoundingClientRect(),
+                    elemType: "div",
                     className: this.toKeep[i].children[0].classList[2],
-                    coords: this.toKeep[i].getBoundingClientRect()
+                    class_moveType: "",
+                    id: this.toKeep[i].id
                 });
             };
             console.log(this.toCreate);
