@@ -89,32 +89,32 @@ const setGameField = function (levelID, cb) {
             console.info(sortedArray);
             
             const createLevelObj = function (sortedArray) {
-                let levelObj;
+                // let levelObj;
                 let counter = 0;
                 for (let i = 0; i < sortedArray.length; i++) {
                     let {id, className, coords} = sortedArray[i];
                     counter ++;
 
-                    levelObj = {
-                        xPos: coords.x,
-                        yPos: coords.y,
-                        width: coords.width,
-                        height: coords.height,
-                        elemType: "div",
-                        class_actorType: className,
-                        class_moveType: "obstacle",
-                        id: id,
-                        // imgUrl: "/images/lyric-stand.png"
-                    };
+                    // levelObj = {
+                    //     xPos: coords.x,
+                    //     yPos: coords.y,
+                    //     width: coords.width,
+                    //     height: coords.height,
+                    //     elemType: "div",
+                    //     class_actorType: className,
+                    //     class_moveType: "obstacle",
+                    //     id: id,
+                    //     // imgUrl: "/images/lyric-stand.png"
+                    // };
                     // console.info(levelObj);
                     // drawLevel("my-grid", levelObj);
-                    drawLevel("game-field", levelObj);
+                    drawLevel("game-field", sortedArray[i]);
                 };
                 if (counter >= sortedArray.length) {
                     // console.info("counter");
                     // console.info(counter);
 
-                    return "Done!";
+                    return isDone = "Done!";
                 };
             };
             createLevelObj(sortedArray);
