@@ -3,11 +3,14 @@ const level_data = require("../../data/level-data");
 const contentBuilder = require("./content-builder");
 const drawLevel = require("../game-logic/draw-level");
 const getNewElems = require("./get-new-elems");
-const joinAdjacentSquares = require("./sort");
+const sortSquares = require("./sort");
+const sortAlphaNum = require("./sort-by-id");
 const seperateSquares = require("./join-divs/seperate-squares");
+const compareSquares = require("./join-divs/_compare-squares");
+const createLevelObj = require("./join-divs/create-level-obj");
 
 const setGameField = function (levelID, cb) {
-    
+
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
     let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
@@ -66,60 +69,43 @@ const setGameField = function (levelID, cb) {
             });
         })
         .then(function (obj) {
-            let {toKeep, gameGrid} = obj;
-            
+            let { toKeep, gameGrid } = obj;
+
             return seperateSquares(toKeep);
-            // joinAdjacentSquares(toKeep);
-            //     // sort squares by x and y
-            //     let newArr;
-            //     for (let a = 0; a < squaresToJoinArray.length; a++) {
-            //         for (let b = 0; b < squaresToJoinArray.length; b++) {
+        })
+        .then(function (squareDivObj) {
+            let { grassArr, wallArr } = squareDivObj;
+            // return sortSquares(grassArr);
 
-            //         if (squaresToJoinArray[a].right == squaresToJoinArray[b].left) {
-            //             squaresToJoinArray[a] =
+            ////////////////////////////////////////////
+            sortedArray = grassArr.sort(function (a, b) {
+                return a.id.localeCompare(b.id, undefined, {
+                    numeric: true,
+                    sensitivity: 'base'
+                });
+            });
+            console.log(sortedArray);
+            ////////////////////////////////////////////
+            // let sortedArray = grassArr.id.sort(sortAlphaNum);
+            console.info("sortedArray: before");
+            console.info(sortedArray);
 
-            //         }
-            //         squaresToJoinArray[i].right == 
-            //     }
-            // }
+            return sortedArray;
         })
         .then(function (sortedArray) {
-            // let {toKeep, gameGrid} = obj;
-            console.info("sortedArray");
+            console.info("sortedArray: after");
             console.info(sortedArray);
-            
-            const createLevelObj = function (sortedArray) {
-                // let levelObj;
-                let counter = 0;
-                for (let i = 0; i < sortedArray.length; i++) {
-                    let {coords, elemType, className, class_moveType, id, imgUrl} = sortedArray[i];
-                    // let {id, className, coords} = sortedArray[i];
-                    counter ++;
 
-                    // levelObj = {
-                    //     xPos: coords.x,
-                    //     yPos: coords.y,
-                    //     width: coords.width,
-                    //     height: coords.height,
-                    //     elemType: "div",
-                    //     class_actorType: className,
-                    //     class_moveType: "obstacle",
-                    //     id: id,
-                    //     // imgUrl: "/images/lyric-stand.png"
-                    // };
-                    // console.info(levelObj);
-                    // drawLevel("my-grid", levelObj);
-                    drawLevel("game-field", sortedArray[i]);
-                };
-                if (counter >= sortedArray.length) {
-                    // console.info("counter");
-                    // console.info(counter);
-
-                    return isDone = "Done!";
-                };
-            };
-            createLevelObj(sortedArray);
+            return compareSquares(sortedArray, "square-grass");
         })
+        .then(function (newElemArray) {
+            // let {toKeep, gameGrid} = obj;
+            console.info("newElemArray");
+            console.info(newElemArray);
+
+            return createLevelObj(newElemArray);
+        })
+        // need to roll this into the above function (draw) for enemies and avatar:
         .then(function (isDone) {
             let levelObj = {
                 coords: {
@@ -129,10 +115,6 @@ const setGameField = function (levelID, cb) {
                     height: 300,
                     right: this.left + this.width
                 },
-                // xPos: 500,
-                // yPos: 400,
-                // width: 300,
-                // height: 300,
                 elemType: "div",
                 className: "transform-holder",
                 class_moveType: "move-stand",

@@ -12,7 +12,8 @@ const getNewElems = function () {
                     elemType: "div",
                     className: this.toKeep[i].children[0].classList[2],
                     class_moveType: "",
-                    id: this.toKeep[i].id
+                    id: this.toKeep[i].id,
+                    imgUrl: ""
                 });
             };
             console.log(this.toCreate);

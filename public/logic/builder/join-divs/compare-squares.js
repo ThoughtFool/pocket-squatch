@@ -13,8 +13,8 @@ const compareSquares = function (squaresToCompare, className) {
         if (nextIndex < squaresToCompare.length) {
 
             if (squaresToCompare[i].coords.top === squaresToCompare[nextIndex].coords.top && // checks if on same row
-                squaresToCompare[i].coords.right === squaresToCompare[nextIndex].coords.left) { // checks if adjacent
-                // squaresToCompare[i].coords.left + squaresToCompare[i].coords.width === squaresToCompare[nextIndex].coords.left) { // checks if adjacent
+                // squaresToCompare[i].coords.right === squaresToCompare[nextIndex].coords.left) { // checks if adjacent
+                squaresToCompare[i].coords.left + squaresToCompare[i].coords.width === squaresToCompare[nextIndex].coords.left) { // checks if adjacent
 
                 console.info("squaresToCompare");
                 console.info(squaresToCompare);
@@ -23,24 +23,26 @@ const compareSquares = function (squaresToCompare, className) {
 
                 // checks if already exists in new elem array:
                 if (newElemArray.length < 1 || lastIndex < 0) {
-                    console.info("A");
-                    newElemArray.push(joinSquares(squaresToCompare[i], squaresToCompare[nextIndex]));
+                    console.info("Path: A...");
+                    newElemArray.push(joinSquares(false, squaresToCompare[i], squaresToCompare[nextIndex]));
 
-                } else if (newElemArray.length > 0 && squaresToCompare[i].id == newElemArray[lastIndex].id) {
-                    console.info("B");
+                } else if (squaresToCompare[i].id == newElemArray[lastIndex].id) {
+                    console.info("Path: B...");
                     let lastSquareHolder = newElemArray[lastIndex];
                     newElemArray.pop;
-                    newElemArray.push(joinSquares(lastSquareHolder, squaresToCompare[nextIndex]));
+                    newElemArray.push(joinSquares(true, lastSquareHolder, squaresToCompare[nextIndex]));
 
                 } else {
-                    console.info("C");
-                    newElemArray.push(joinSquares(squaresToCompare[i], squaresToCompare[nextIndex]));
+                    console.info("Path: C...");
+                    let lastSquareHolder = squaresToCompare[i];
+                    newElemArray.pop;
+                    newElemArray.push(joinSquares(false, lastSquareHolder, squaresToCompare[nextIndex]));
 
                 };
             } else {
                 console.info("else:");
                 console.info(squaresToCompare[i]);
-                
+
                 newElemArray.push(squaresToCompare[i]);
             };
         } else {

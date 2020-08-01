@@ -9,9 +9,9 @@ const joinAdjacentSquares = function(squaresToJoinArray) {
         //while the currentIndex does not reach the end of the sorted section or the array (index of -1)
         while (currentIndex > 0) {
             //get currentValue(value to be sorted)
-            currentVal = squaresToJoinArray[currentIndex].y;
+            currentVal = squaresToJoinArray[currentIndex].id;
             //if it is lesser than the last value, swap the two values, otherwise, break out of the loop
-            if (currentVal <= squaresToJoinArray[currentIndex - 1].y) {
+            if (currentVal <= squaresToJoinArray[currentIndex - 1].id) {
                 swap(squaresToJoinArray, currentIndex, currentIndex - 1);
                 currentIndex--;
             } else {
