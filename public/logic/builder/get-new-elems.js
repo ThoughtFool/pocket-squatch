@@ -31,35 +31,36 @@ const getNewElems = function () {
 
     for (let i = 0; i < gridSquare.length; i++) {
 
-        if (gridSquare[i].children[0].classList.contains("square-rock")) {
+        if (gridSquare[i].children[0].classList.contains("square-rock")) { // index: 0
             levelCoordObject.toRemove.push(gridSquare[i]);
             // gridSquare[i].removeChild(gridSquare[i].children[0]);
 
-        } else if (gridSquare[i].children[0].classList.contains("square-wall")) {
+        } else if (gridSquare[i].children[0].classList.contains("square-wall")) { // index: 1
+            // levelCoordObject.toKeep.push(gridSquare[i]);
+            levelCoordObject.toRemove.push(gridSquare[i]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-lava")) { // index: 2
+            levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-water")) { // index: 3
+            levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
+
+        } else if (gridSquare[i].children[0].classList.contains("square-grass")) { // index: 4
             levelCoordObject.toKeep.push(gridSquare[i]);
             levelCoordObject.toRemove.push(gridSquare[i]);
 
-        } else if (gridSquare[i].children[0].classList.contains("square-lava")) {
-            levelCoordObject.toRemove.push(gridSquare[i]);
-            // gridSquare[i].removeChild(gridSquare[i].children[0]);
-
-        } else if (gridSquare[i].children[0].classList.contains("square-water")) {
-            levelCoordObject.toRemove.push(gridSquare[i]);
-            // gridSquare[i].removeChild(gridSquare[i].children[0]);
-
-        } else if (gridSquare[i].children[0].classList.contains("square-grass")) {
+        } else if (gridSquare[i].children[0].classList.contains("square-soil")) { // index: 5
             levelCoordObject.toKeep.push(gridSquare[i]);
             levelCoordObject.toRemove.push(gridSquare[i]);
+            // gridSquare[i].removeChild(gridSquare[i].children[0]);
 
-        } else if (gridSquare[i].children[0].classList.contains("square-soil")) {
+        } else if (gridSquare[i].children[0].classList.contains("square-sky")) { // index: 6
             levelCoordObject.toRemove.push(gridSquare[i]);
             // gridSquare[i].removeChild(gridSquare[i].children[0]);
 
-        } else if (gridSquare[i].children[0].classList.contains("square-sky")) {
-            levelCoordObject.toRemove.push(gridSquare[i]);
-            // gridSquare[i].removeChild(gridSquare[i].children[0]);
-
-        } else if (gridSquare[i].children[0].classList.contains("square-night")) {
+        } else if (gridSquare[i].children[0].classList.contains("square-night")) { // index: 7
             levelCoordObject.toRemove.push(gridSquare[i]);
             // gridSquare[i].removeChild(gridSquare[i].children[0]);
 

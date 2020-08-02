@@ -1,6 +1,6 @@
 const joinSquares = require("./join-squares");
 
-const compareSquares = function (squaresToCompare, className) {
+const compareSquares = function (squaresToCompare) {
     let newElemArray = [];
 
     console.info("squaresToCompare");
@@ -18,7 +18,7 @@ const compareSquares = function (squaresToCompare, className) {
 
                 console.info("squaresToCompare");
                 console.info(squaresToCompare);
-                console.info("newElemArray");
+                console.info("newElemArray...");
                 console.info(newElemArray);
 
                 // checks if already exists in new elem array:

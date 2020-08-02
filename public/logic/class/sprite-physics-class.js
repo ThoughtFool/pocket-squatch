@@ -7,6 +7,8 @@ class Sprite_Physics {
     constructor(gamescreen_ID, obstacleObject, id) { // wall_className
         // constructor(gamescreen_ID, ground_ID, friendOrFoe, id, velocity, gravity, friction, xPos, yPos) {
         this.gamescreen_ID = gamescreen_ID;
+        // this.gameField_ID = "my-grid"; // TODO: change name?
+        this.gameField_ID = "game-field";
         // this.ground_ID = ground_ID;
         // this.friendOrFoe = friendOrFoe; // TODO: Move to placeSprite method in gamelevel class
         this.id = id;
@@ -37,6 +39,11 @@ class Sprite_Physics {
         // ******************************************************************************
         this.gamescreenElem = this.getElem(this.gamescreen_ID);
         this.gamescreenElem_Coords = this.get_Coords(this.gamescreenElem);
+        
+        // ******************************************************************************
+        this.gameFieldElem = this.getElem(this.gameField_ID);
+        this.gameFieldElem_Coords = this.get_Coords(this.gameFieldElem);
+
         // ******************************************************************************
 
         // Testing for multiple ground elements (ie: ground, wall, enemy);
@@ -206,11 +213,12 @@ class Sprite_Physics {
         };
         // ******************************************************************************
         // transports sprite to other side of viewport:
-        // if (this.left > this.gamescreenElem_Coords.width) {
-        //     this.left -= this.gamescreenElem_Coords.width;
+        if ((this.left * .80) + this.width > this.gameFieldElem_Coords.width) {
+            this.left -= this.gameFieldElem_Coords.width + this.width;
+        } else if ((this.left * .80) + this.width < 0) { // appear on left-side
         // } else if (this.left + this.size < 0) {
-        //     this.left += this.gamescreenElem_Coords.width;
-        // };
+            this.left += this.gameFieldElem_Coords.width + this.width;
+        };
         // ******************************************************************************
 
         let result = false;

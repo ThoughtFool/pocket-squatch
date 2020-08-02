@@ -8,6 +8,7 @@ const sortAlphaNum = require("./sort-by-id");
 const seperateSquares = require("./join-divs/seperate-squares");
 const compareSquares = require("./join-divs/_compare-squares");
 const createLevelObj = require("./join-divs/create-level-obj");
+const sortAllSquares = require("./join-divs/sort-all-squares");
 
 const setGameField = function (levelID, cb) {
 
@@ -73,34 +74,56 @@ const setGameField = function (levelID, cb) {
 
             return seperateSquares(toKeep);
         })
+        ///////////////////////////////////////////////////////////////////////// squareDivObj.soilArr ???
         .then(function (squareDivObj) {
-            let { grassArr, wallArr } = squareDivObj;
-            // return sortSquares(grassArr);
+            return sortAllSquares(squareDivObj);
 
-            ////////////////////////////////////////////
-            sortedArray = grassArr.sort(function (a, b) {
-                return a.id.localeCompare(b.id, undefined, {
-                    numeric: true,
-                    sensitivity: 'base'
-                });
-            });
-            console.log(sortedArray);
-            ////////////////////////////////////////////
-            // let sortedArray = grassArr.id.sort(sortAlphaNum);
-            console.info("sortedArray: before");
-            console.info(sortedArray);
+            
+            // let { grassArr, soilArr } = squareDivObj;
+            // // return sortSquares(grassArr);
 
-            return sortedArray;
+            // let sortedArray = grassArr.sort(function (a, b) {
+            //     return a.id.localeCompare(b.id, undefined, {
+            //         numeric: true,
+            //         sensitivity: 'base'
+            //     });
+            // });
+            // console.log(sortedArray);
+            // ////////////////////////////////////////////
+            // // let sortedArray = grassArr.id.sort(sortAlphaNum);
+            // console.info("sortedArray: before");
+            // console.info(sortedArray);
+
+            // return sortedArray;
         })
-        .then(function (sortedArray) {
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        .then(function (sortedObjArr) { 
+        // .then(function (sortedArray) {
             console.info("sortedArray: after");
-            console.info(sortedArray);
+            console.info(sortedObjArr);
+            
+            let newArrayHolder = [];
+            // let newElemArray = [];
+            
+            newArrayHolder = sortedObjArr.map(compareSquares);
+            // newArrayHolder.push(sortedObjArr.forEach(compareSquares));
+            console.info("newArrayHolder?");
+            console.info(newArrayHolder);
+            
+            // newElemArray.concat.apply([], newArrayHolder);
+            // OR:
+            let newElemArray = newArrayHolder.flat(1);
+            
+            console.info("newElemArray?");
+            console.info(newElemArray);
 
-            return compareSquares(sortedArray, "square-grass");
+            return newElemArray;
+
+            // return compareSquares(sortedObjArr);
         })
         .then(function (newElemArray) {
             // let {toKeep, gameGrid} = obj;
-            console.info("newElemArray");
+            console.info("newElemArray:");
             console.info(newElemArray);
 
             return createLevelObj(newElemArray);
@@ -122,15 +145,15 @@ const setGameField = function (levelID, cb) {
                 imgUrl: "/images/lyric-stand.png"
             };
             return drawLevel("game-field", levelObj);
-            return drawLevel("my-grid", levelObj);
+            // return drawLevel("my-grid", levelObj);
         })
         .then(function (newElem) {
             console.log("newElem");
             console.log(newElem);
 
             let obstacleObject = {
-                ground_className: "square-grass",
-                wall_className: "square-wall",
+                ground_className: "square-soil",
+                wall_className: "square-grass", // testing ONLY!
                 enemy_className: "enemy",
                 powerup_className: "powerup",
                 // obstacle_className: "obstacle",

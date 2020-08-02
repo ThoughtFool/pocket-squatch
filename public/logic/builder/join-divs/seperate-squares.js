@@ -4,20 +4,20 @@ const seperateSquares = function (squaresToJoinArray) {
 
     let squareDivObj = {
         grassArr: [],
-        wallArr: []
+        soilArr: []
     };
 
     for (let i = 0; i < squaresToJoinArray.length; i++) {
         if (squaresToJoinArray[i].className === "square-grass") { // horizontal joins
             squareDivObj.grassArr.push(squaresToJoinArray[i]);
-        } else if (squaresToJoinArray[i].className === "square-wall") { // verical joins
-            squareDivObj.wallArr.push(squaresToJoinArray[i]);
+        } else if (squaresToJoinArray[i].className === "square-soil") { // verical joins
+            squareDivObj.soilArr.push(squaresToJoinArray[i]);
         };
     };
 
     // squareDivObj;
     return squareDivObj;
-    return compareSquares(squareDivObj.grassArr, "square-grass");
+    // return compareSquares(squareDivObj.grassArr, "square-grass");
 };
 
 module.exports = seperateSquares;

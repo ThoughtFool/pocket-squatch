@@ -46,10 +46,11 @@ body {
 }
 
 .game-grid {
-    background-color: darkgrey;
-    border: 3px black solid;
+    /* background-color: darkgrey; */
+    border: 20px black solid;
     display: flex;
     position: relative;
+    overflow: hidden;
 }
 
 .game-screen-square {
@@ -100,16 +101,18 @@ body {
 .square-grass {
     height: 100%;
     width: 100%;
-    background-color: rgb(24, 156, 24);
+    background-color: rgb(60, 129, 60);
     background-position: center;
+    /* border: black dashed 1px; */
 }
 
 /* 5 */
 .square-soil {
     height: 100%;
     width: 100%;
-    background-color: rgb(109, 60, 60);
+    background-color: rgb(48, 34, 34);
     background-position: center;
+    /* border: black dashed 1px; */
 }
 
 /* 6 */
