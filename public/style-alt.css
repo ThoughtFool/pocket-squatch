@@ -30,9 +30,13 @@ body {
 }
 
 #game-area {
+    padding: 5vw 0vw 5vw 5vw;
     height: 100vh;
     width: calc(100vw - 100vh);
-    flex: 0 0 50%;
+    flex: 0 0 40%;
+    display: flex;
+    align-content: stretch;
+    flex-direction: column;
 }
 
 #game-field {
@@ -53,10 +57,10 @@ body {
     overflow: hidden;
 }
 
-.game-screen-square {
+/* .game-screen-square {
     width: 25vh;
     float: right;
-}
+} */
 
 .row {
     /* border: 1px blue solid; */
@@ -313,33 +317,34 @@ body {
 
 .header {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     color: whitesmoke;
     font-size: x-large;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-#greet {
+/* #greet {
     padding-right: 20%;
 }
 
 #timer {
     padding-left: 20%;
-}
+} */
 
 .title-box {
     position: relative;
     display: flex;
-    padding: 20px;
+    /* padding: 20px; */
     color: whitesmoke;
-    max-height: 5%;
+    /* max-height: 5%; */
     text-align: center;
-    align-self: flex-end;
+    /* align-self: flex-end; */
 }
 
 #subhead {
+    color: whitesmoke;
     position: relative;
-    align-self: flex-end;
+    /* align-self: flex-end; */
     padding-left: 50px,
 }
 

@@ -103,6 +103,7 @@ class Sprite_Physics {
     };
 
     get_Coords(element) {
+        // console.info("element");
         // console.info(element);
         return element.getBoundingClientRect();
     };
@@ -136,17 +137,15 @@ class Sprite_Physics {
         let sprite_coords = this.elem.getBoundingClientRect();
         for (let i = 0; i < elements.length; i++) {
             let ground_coords = elements[i].getBoundingClientRect();
-            console.log("ground_coords:");
-            console.log(ground_coords);
-
+            
             this.groundCoordsArray.push(ground_coords);
             let bool = this.isBelow(sprite_coords, ground_coords);
             // console.info("bool:");
             // console.info(bool);
 
             if (bool) {
-                // console.info("elements[i].id:");
-                // console.info(elements[i].id);
+                console.info("elements[i].id:");
+                console.info(elements[i].id);
                 return this.groundElem_Now = this.getElem(elements[i].id);
             };
         };
@@ -240,7 +239,7 @@ class Sprite_Physics {
                 spriteHolderElem.classList.add("collision");
                 setTimeout(() => {
                     spriteHolderElem.classList.remove("collision");
-                }, 100);
+                }, 50);
                 result = true;
 
                 if (this.top + this.height > elem_coords.top && this.top + (this.height * .75) < elem_coords.top &&
@@ -351,22 +350,22 @@ class Sprite_Physics {
     };
 
     isBelow(element01_coords, element02_coords) {
-        console.log("element01_coords.left:");
-        console.log(element01_coords.left);
+        console.info("element01_coords.left:");
+        console.info(element01_coords.left);
 
-        console.log("element01_coords.right:");
-        console.log(element01_coords.right);
+        console.info("element01_coords.right:");
+        console.info(element01_coords.right);
 
-        let spriteMedian = (element01_coords.left + element01_coords.width) / 2;
+        let spriteMedian = (element01_coords.left + (element01_coords.width / 2));
+        // let spriteMedian = (element01_coords.left + element01_coords.width) / 2;
         // let spriteMedian = (element01_coords.left + element01_coords.right) / 2;
-        console.log("spriteMedian:");
-        console.log(spriteMedian);
+        console.info("spriteMedian:");
+        console.info(spriteMedian);
 
-        if (spriteMedian > element02_coords.left && spriteMedian < element02_coords.right) {
+        if (spriteMedian > element02_coords.left && spriteMedian < element02_coords.left + element02_coords.width) {
             return true;
         } else {
             return false;
-
         };
     };
 

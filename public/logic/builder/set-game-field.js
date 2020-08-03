@@ -15,7 +15,12 @@ const setGameField = function (levelID, cb) {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
     let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
-    let gridSize = vh * .95;
+    let gridSize = vh;
+
+    // let gridSize = {
+    //     vw: vw * .80,
+    //     vh: vh,
+    // };
 
     const gameField = document.querySelector("#game-field");
 
@@ -99,8 +104,8 @@ const setGameField = function (levelID, cb) {
         ////////////////////////////////////////////////////////////////////////////////////////////
         .then(function (sortedObjArr) { 
         // .then(function (sortedArray) {
-            console.info("sortedArray: after");
-            console.info(sortedObjArr);
+            // console.info("sortedArray: after");
+            // console.info(sortedObjArr);
             
             let newArrayHolder = [];
             // let newElemArray = [];
@@ -130,9 +135,10 @@ const setGameField = function (levelID, cb) {
         })
         // need to roll this into the above function (draw) for enemies and avatar:
         .then(function (isDone) {
+            let gameFieldDimensions = gameField.getBoundingClientRect();
             let levelObj = {
                 coords: {
-                    left: 500,
+                    left: gameFieldDimensions.left + (gameFieldDimensions.width * .50),
                     top: 400,
                     width: 300,
                     height: 300,
