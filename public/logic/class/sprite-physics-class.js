@@ -244,14 +244,14 @@ class Sprite_Physics {
                 }, 50);
                 result = true;
 
-                if (this.top + this.height > elem_coords.top && this.top + (this.height * .75) < elem_coords.top &&
-                    this.left + (this.width * .75) > elem_coords.left && this.left + (this.width * .25) < elem_coords.right) {
+                if (this.top + this.height > elem_coords.top && this.top + (this.height * .90) < elem_coords.top &&
+                    this.left + (this.width * .90) > elem_coords.left && this.left + (this.width * .10) < elem_coords.right) {
                     this.velocity = 0;
                     this.onGround = true;
                     return this.top = elem_coords.top - this.height; // lands on top of obstacle
 
-                } else if (this.top < elem_coords.bottom && this.top + (this.height * .25) > elem_coords.bottom &&
-                    this.left + (this.width * .75) > elem_coords.left && this.left + (this.width * .25) < elem_coords.right) {
+                } else if (this.top < elem_coords.bottom && this.top + (this.height * .10) > elem_coords.bottom &&
+                    this.left + (this.width * .90) > elem_coords.left && this.left + (this.width * .10) < elem_coords.right) {
                     this.velocity = 0;
                     return this.top = elem_coords.bottom; // lands under obstacle
 
@@ -265,13 +265,13 @@ class Sprite_Physics {
                     // console.info(`bottom-left side collision:`);
                     return this.left = elem_coords.right + 1; // lands next to obstacle (right-side)
 
-                } else if (this.left < elem_coords.right && this.left + (this.width * .75) > elem_coords.right &&
-                    this.top < elem_coords.bottom && this.top + (this.height * .75) > elem_coords.bottom) { // top-left side collison
+                } else if (this.left < elem_coords.right && this.left + (this.width * .90) > elem_coords.right &&
+                    this.top < elem_coords.bottom && this.top + (this.height * .90) > elem_coords.bottom) { // top-left side collison
                     // console.info(`top-left side collision: this.left:`);
                     return this.left = elem_coords.right + 1; // lands next to obstacle (right-side)
 
-                } else if (this.left + this.width > elem_coords.left && this.left + (this.width * .75) < elem_coords.left &&
-                    this.top < elem_coords.bottom && this.top + (this.height * .75) > elem_coords.bottom) { // top-right side collison
+                } else if (this.left + this.width > elem_coords.left && this.left + (this.width * .90) < elem_coords.left &&
+                    this.top < elem_coords.bottom && this.top + (this.height * .90) > elem_coords.bottom) { // top-right side collison
                     // console.info(`top-right side collision:`);
                     return this.left = elem_coords.left - this.width - 1; // lands next to obstacle (left-side)
 
