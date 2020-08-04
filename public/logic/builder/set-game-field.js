@@ -12,10 +12,17 @@ const sortAllSquares = require("./join-divs/sort-all-squares");
 
 const setGameField = function (levelID, cb) {
 
+    const gamescreen = document.getElementById("game-screen");
+    const gamescreen_coords = gamescreen.getBoundingClientRect();
+
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
     let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
-    let gridSize = vh;
+    let gridSize = gamescreen_coords.height;
+    // let gridSize = vh;
+    
+    let gridClassName = "game-grid";
+    let gridID = "my-grid";
 
     // let gridSize = {
     //     vw: vw * .80,
@@ -24,16 +31,21 @@ const setGameField = function (levelID, cb) {
 
     const gameField = document.querySelector("#game-field");
 
-    const createGameGrid = function (gameField) {
+    const createGameGrid = function (gameField, gridClassName, gridID, gridSize) { 
         const grid = document.createElement("div");
-        grid.className = "game-grid";
-        grid.id = "my-grid";
+        grid.className = gridClassName;
+        // grid.className = "game-grid";
+        grid.id = gridID;
+        // grid.id = "my-grid";
         gameField.appendChild(grid);
 
-        const gameGrid = document.querySelector(".game-grid");
+        const gameGrid = document.querySelector(`#${gridID}`);
         gameGrid.style.width = `${gridSize}px`;
         gameGrid.style.height = `${gridSize}px`;
-        gameGrid.style.position = "relative";
+
+        // gameGrid.style.width = `100%`;
+        // gameGrid.style.height = `100%`;
+        // gameGrid.style.position = "relative";
 
         return gameGrid;
     };
@@ -49,10 +61,13 @@ const setGameField = function (levelID, cb) {
 
     let promise = new Promise(function (resolve, reject) {
         console.log("promise begins!")
-        return resolve(createGameGrid(gameField));
+        return resolve(createGameGrid(gameField, gridClassName, gridID, gridSize));
     });
     promise
         .then(function (whereAppend) {
+            // console.info("whereAppend.getBoundingClientRect()");
+            // console.info(whereAppend.getBoundingClientRect());
+
             return createBoard(whereAppend, numSquares, gridSize);
         })
         .then(function (contentIDArray) {
@@ -68,7 +83,7 @@ const setGameField = function (levelID, cb) {
             return toKeep;
         })
         .then(function (toKeep) {
-            let gameGrid = createGameGrid(gameField);
+            let gameGrid = createGameGrid(gameField, gridClassName, gridID, gridSize);
             return ({
                 toKeep,
                 gameGrid
@@ -126,20 +141,33 @@ const setGameField = function (levelID, cb) {
 
             // return compareSquares(sortedObjArr);
         })
+        
+        //////////////////////////////////////////////// moved from line 70?
+        // .then(function (toKeep) {
+        //     let gameGrid = createGameGrid(gameField);
+        //     return ({
+        //         toKeep,
+        //         gameGrid
+        //     });
+        // })
+        //////////////////////////////////////////////// moved from line 70?
+
         .then(function (newElemArray) {
             // let {toKeep, gameGrid} = obj;
             console.info("newElemArray:");
             console.info(newElemArray);
 
-            return createLevelObj(newElemArray);
+            return createLevelObj(newElemArray); // returns "Done!"
         })
         // need to roll this into the above function (draw) for enemies and avatar:
         .then(function (isDone) {
-            let gameFieldDimensions = gameField.getBoundingClientRect();
+            const grid = document.querySelector(`#${gridID}`);
+
+            let gridDimensions = grid.getBoundingClientRect();
             let levelObj = {
                 coords: {
-                    left: gameFieldDimensions.left + (gameFieldDimensions.width * .50),
-                    top: 400,
+                    left: gridDimensions.left,
+                    top: gridDimensions.top,
                     width: 300,
                     height: 300,
                     right: this.left + this.width
@@ -150,12 +178,12 @@ const setGameField = function (levelID, cb) {
                 id: "sprite-holder",
                 imgUrl: "/images/lyric-stand.png"
             };
-            return drawLevel("game-field", levelObj);
-            // return drawLevel("my-grid", levelObj);
+            // return drawLevel("game-field", levelObj);
+            return drawLevel("my-grid", levelObj);
         })
-        .then(function (newElem) {
-            console.log("newElem");
-            console.log(newElem);
+        .then(function (newElemResult) {
+            console.log("newElemResult");
+            console.log(newElemResult);
 
             let obstacleObject = {
                 ground_className: "square-soil",
@@ -164,7 +192,7 @@ const setGameField = function (levelID, cb) {
                 powerup_className: "powerup",
                 // obstacle_className: "obstacle",
             };
-            return cb(obstacleObject, newElem.id);
+            return cb(obstacleObject, newElemResult.id);
         });
 
     // contentIDArray = createBoard(whereAppend, numSquares, gridSize);

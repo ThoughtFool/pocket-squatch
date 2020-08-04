@@ -6,9 +6,9 @@ const space_key = require("../../data/instance-data");
 class Sprite_Physics {
     constructor(gamescreen_ID, obstacleObject, id) { // wall_className
         // constructor(gamescreen_ID, ground_ID, friendOrFoe, id, velocity, gravity, friction, xPos, yPos) {
-        this.gamescreen_ID = gamescreen_ID;
-        // this.gameField_ID = "my-grid"; // TODO: change name?
-        this.gameField_ID = "game-field";
+        // this.gamescreen_ID = gamescreen_ID;
+        this.gameField_ID = gamescreen_ID; // TODO: change name?
+        // this.gameField_ID = "game-field";
         // this.ground_ID = ground_ID;
         // this.friendOrFoe = friendOrFoe; // TODO: Move to placeSprite method in gamelevel class
         this.id = id;
@@ -37,8 +37,8 @@ class Sprite_Physics {
         // this.friction = friction;
 
         // ******************************************************************************
-        this.gamescreenElem = this.getElem(this.gamescreen_ID);
-        this.gamescreenElem_Coords = this.get_Coords(this.gamescreenElem);
+        // this.gamescreenElem = this.getElem(this.gamescreen_ID);
+        // this.gamescreenElem_Coords = this.get_Coords(this.gamescreenElem);
         
         // ******************************************************************************
         this.gameFieldElem = this.getElem(this.gameField_ID);
@@ -212,12 +212,12 @@ class Sprite_Physics {
         };
         // ******************************************************************************
         // transports sprite to other side of viewport:
-        if ((this.left * .80) + this.width > this.gameFieldElem_Coords.width) {
-            this.left -= this.gameFieldElem_Coords.width + this.width;
-        } else if ((this.left * .80) + this.width < 0) { // appear on left-side
-        // } else if (this.left + this.size < 0) {
-            this.left += this.gameFieldElem_Coords.width + this.width;
-        };
+        // if ((this.left * .80) + this.width > this.gameFieldElem_Coords.width) {
+        //     this.left -= this.gameFieldElem_Coords.width + this.width;
+        // } else if ((this.left * .80) + this.width < 0) { // appear on left-side
+        // // } else if (this.left + this.size < 0) {
+        //     this.left += this.gameFieldElem_Coords.width + this.width;
+        // };
         // ******************************************************************************
 
         let result = false;
@@ -356,9 +356,10 @@ class Sprite_Physics {
         console.info("element01_coords.right:");
         console.info(element01_coords.right);
 
-        let spriteMedian = (element01_coords.left + (element01_coords.width / 2));
-        // let spriteMedian = (element01_coords.left + element01_coords.width) / 2;
-        // let spriteMedian = (element01_coords.left + element01_coords.right) / 2;
+        // let spriteMedian = (element01_coords.left + (element01_coords.width / 2));
+        let spriteMedian = (element01_coords.left + ((element01_coords.width / 3) * 2));
+
+        
         console.info("spriteMedian:");
         console.info(spriteMedian);
 

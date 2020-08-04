@@ -1,4 +1,4 @@
-const drawLevel = function (gamescreenID, levelObj, idArray) {
+const drawLevel = function (gridID, levelObj, idArray) {
     let {coords, elemType, className, class_moveType, id, imgUrl} = levelObj;
     // let {xPos, yPos, width, height, elemType, className, class_moveType, id, imgUrl} = levelObj;
     
@@ -19,10 +19,10 @@ const drawLevel = function (gamescreenID, levelObj, idArray) {
         // console.info(newDiv);
         return newDiv;
     };
-    let gamescreen = document.getElementById(gamescreenID);
+    let gameGrid = document.getElementById(gridID);
     
     let newElem = createElem(elemType, className, class_moveType, id);
-    gamescreen.appendChild(newElem);
+    gameGrid.appendChild(newElem);
     let elemCreated = document.getElementById(`${id}`);
     // console.info("elemCreated");
     // console.info(elemCreated);
