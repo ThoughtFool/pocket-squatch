@@ -212,12 +212,14 @@ class Sprite_Physics {
         };
         // ******************************************************************************
         // transports sprite to other side of viewport:
-        // if ((this.left * .80) + this.width > this.gameFieldElem_Coords.width) {
-        //     this.left -= this.gameFieldElem_Coords.width + this.width;
-        // } else if ((this.left * .80) + this.width < 0) { // appear on left-side
-        // // } else if (this.left + this.size < 0) {
-        //     this.left += this.gameFieldElem_Coords.width + this.width;
-        // };
+        if (this.left > this.gameFieldElem_Coords.left + this.gameFieldElem_Coords.width) { // appear on left-side
+        // if ((this.left * .80) + this.width > this.gameFieldElem_Coords.left + this.gameFieldElem_Coords.width) {
+            this.left -= (this.gameFieldElem_Coords.width + (this.width * .80));
+        } else if (this.left + (this.width * .80) < this.gameFieldElem_Coords.left) { // appear on right-side
+        // } else if ((this.left * .80) + this.width < this.gameFieldElem_Coords.left) {
+        // } else if (this.left + this.size < 0) {
+            this.left += this.gameFieldElem_Coords.width;
+        };
         // ******************************************************************************
 
         let result = false;

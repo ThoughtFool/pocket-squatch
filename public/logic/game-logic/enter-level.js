@@ -63,8 +63,8 @@ const enterLevel = function (timeKeeper, myGameInfo) {
         console.info("newElem_ID");
         console.info(newElem_ID);
 
-        // const myPhysics = new Sprite_Physics("my-grid", obstacleObject, newElem_ID);
-        const myPhysics = new Sprite_Physics("game-screen", obstacleObject, newElem_ID);
+        const myPhysics = new Sprite_Physics("my-grid", obstacleObject, newElem_ID);
+        // const myPhysics = new Sprite_Physics("game-screen", obstacleObject, newElem_ID);
     
         gamespace.data[space_key.index].gameInstance.player.sprite.physics = myPhysics;
         console.info(gamespace.data[space_key.index].gameInstance.player.sprite);

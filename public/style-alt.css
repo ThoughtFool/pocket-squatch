@@ -65,6 +65,8 @@ body {
     min-width: var(--game-height);
     min-height: var(--game-height); */
     display: flex;
+    overflow: hidden;
+
     /* position: relative; */
 }
 
