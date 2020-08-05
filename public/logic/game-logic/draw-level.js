@@ -1,5 +1,7 @@
-const drawLevel = function (gridID, levelObj, idArray) {
+
+const drawLevel = function (gridID, levelObj, idArray, isSprite) {
     let {coords, elemType, className, class_moveType, id, imgUrl} = levelObj;
+    // const getImgSize = require("../builder/get-img-size");
     // let {xPos, yPos, width, height, elemType, className, class_moveType, id, imgUrl} = levelObj;
     
     const createElem = function (elemType, className, class_moveType, id) {
@@ -24,16 +26,25 @@ const drawLevel = function (gridID, levelObj, idArray) {
     let newElem = createElem(elemType, className, class_moveType, id);
     gameGrid.appendChild(newElem);
     let elemCreated = document.getElementById(`${id}`);
-    // console.info("elemCreated");
-    // console.info(elemCreated);
     
     elemCreated.style.position = "absolute";
     elemCreated.style.left = `${coords.left}px`;
     elemCreated.style.top = `${coords.top}px`;
     elemCreated.style.width = `${coords.width}px`;
     elemCreated.style.height = `${coords.height}px`;
+    // elemCreated.style.height = (typeof coords.height != "number") ? "auto" : `${coords.height}px`;
     elemCreated.style.backgroundImage = `url("${imgUrl}")`;
-    // elemCreated.style.backgroundSize = `${width}px ${height}px`;
+    // elemCreated.style.backgroundSize = "contain";
+    // let imgSize = (typeof elemCreated.style.backgroundImage != "undefined") ? elemCreated.style.backgroundSize : 100;
+    // console.info("imgSize");
+    // console.info(imgSize);
+    // if (isSprite) {
+    //     let img_coords = getImgSize(imgUrl);
+    //     console.info("img_coords");
+    //     console.info(img_coords);
+    //     elemCreated.style.backgroundSize = `${300 * .20}px ${300 * .20}px`;
+    // };
+
 
     return ({
         idArray,

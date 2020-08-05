@@ -10,8 +10,8 @@ const createLevelObj = function (newElemArray) {
 
     };
     if (counter >= newElemArray.length) {
-        console.info("tracker");
-        console.info(tracker);
+        // console.info("tracker");
+        // console.info(tracker);
         
         return isDone = "Done!";
     };

@@ -179,7 +179,7 @@ const setGameField = function (levelID, cb) {
                 imgUrl: "/images/lyric-stand.png"
             };
             // return drawLevel("game-field", levelObj);
-            return drawLevel("my-grid", levelObj);
+            return drawLevel("my-grid", levelObj, null, true);
         })
         .then(function (newElemResult) {
             console.log("newElemResult");

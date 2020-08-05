@@ -144,8 +144,8 @@ class Sprite_Physics {
             // console.info(bool);
 
             if (bool) {
-                console.info("elements[i].id:");
-                console.info(elements[i].id);
+                // console.info("elements[i].id:");
+                // console.info(elements[i].id);
                 return this.groundElem_Now = this.getElem(elements[i].id);
             };
         };
@@ -244,35 +244,41 @@ class Sprite_Physics {
                 }, 50);
                 result = true;
 
-                if (this.top + this.height > elem_coords.top && this.top + (this.height * .90) < elem_coords.top &&
-                    this.left + (this.width * .90) > elem_coords.left && this.left + (this.width * .10) < elem_coords.right) {
-                    this.velocity = 0;
+                if (this.top + this.height > elem_coords.top && this.top + (this.height * .95) < elem_coords.top &&
+                    this.left + (this.width * .90) > elem_coords.left && this.left < elem_coords.right ||
+                    
+                    this.top + this.height > elem_coords.top && this.top + (this.height * .95) < elem_coords.top &&
+                    this.left < elem_coords.left && this.left + (this.width * .90) > elem_coords.right) {
+                    
+                        this.velocity = 0;
                     this.onGround = true;
+                    // console.info(`lands on top of obstacle:`);
                     return this.top = elem_coords.top - this.height; // lands on top of obstacle
 
                 } else if (this.top < elem_coords.bottom && this.top + (this.height * .10) > elem_coords.bottom &&
                     this.left + (this.width * .90) > elem_coords.left && this.left + (this.width * .10) < elem_coords.right) {
                     this.velocity = 0;
+                    // console.info(`lands under obstacle:`);
                     return this.top = elem_coords.bottom; // lands under obstacle
 
                 } else if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
                     this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-right side collison
-                    // console.info(`bottom-right side collision:`);
+                    // console.info(`bottom-right side collision: lands next to obstacle (left-side)`);
                     return this.left = elem_coords.left - this.width - 1; // lands next to obstacle (left-side)
 
                 } else if (this.left < elem_coords.right && this.left + (this.width / 2) > elem_coords.right &&
                     this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-left side collison
-                    // console.info(`bottom-left side collision:`);
+                    // console.info(`bottom-left side collision: lands next to obstacle (right-side)`);
                     return this.left = elem_coords.right + 1; // lands next to obstacle (right-side)
 
                 } else if (this.left < elem_coords.right && this.left + (this.width * .90) > elem_coords.right &&
                     this.top < elem_coords.bottom && this.top + (this.height * .90) > elem_coords.bottom) { // top-left side collison
-                    // console.info(`top-left side collision: this.left:`);
+                    // console.info(`top-left side collision: this.left: lands next to obstacle (right-side)`);
                     return this.left = elem_coords.right + 1; // lands next to obstacle (right-side)
 
                 } else if (this.left + this.width > elem_coords.left && this.left + (this.width * .90) < elem_coords.left &&
                     this.top < elem_coords.bottom && this.top + (this.height * .90) > elem_coords.bottom) { // top-right side collison
-                    // console.info(`top-right side collision:`);
+                    // console.info(`top-right side collision: // lands next to obstacle (left-side)`);
                     return this.left = elem_coords.left - this.width - 1; // lands next to obstacle (left-side)
 
                 } else {
@@ -352,18 +358,17 @@ class Sprite_Physics {
     };
 
     isBelow(element01_coords, element02_coords) {
-        console.info("element01_coords.left:");
-        console.info(element01_coords.left);
+        // console.info("element01_coords.left:");
+        // console.info(element01_coords.left);
 
-        console.info("element01_coords.right:");
-        console.info(element01_coords.right);
+        // console.info("element01_coords.right:");
+        // console.info(element01_coords.right);
 
         // let spriteMedian = (element01_coords.left + (element01_coords.width / 2));
         let spriteMedian = (element01_coords.left + ((element01_coords.width / 3) * 2));
 
-        
-        console.info("spriteMedian:");
-        console.info(spriteMedian);
+        // console.info("spriteMedian:");
+        // console.info(spriteMedian);
 
         if (spriteMedian > element02_coords.left && spriteMedian < element02_coords.left + element02_coords.width) {
             return true;

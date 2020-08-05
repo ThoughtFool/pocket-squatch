@@ -53,7 +53,7 @@ body {
     /* float: left; */
     align-items: center;
     justify-content: center;
-    border: var(--game-border) black solid;
+    border: var(--game-border) rgba(8, 9, 95, 0.514) solid;
     overflow: hidden;
     display: flex;
     /* position: relative; */
