@@ -20,7 +20,7 @@ const setGameField = function (levelID, cb) {
     let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
     let gridSize = gamescreen_coords.height;
     // let gridSize = vh;
-    
+
     let gridClassName = "game-grid";
     let gridID = "my-grid";
 
@@ -31,7 +31,7 @@ const setGameField = function (levelID, cb) {
 
     const gameField = document.querySelector("#game-field");
 
-    const createGameGrid = function (gameField, gridClassName, gridID, gridSize) { 
+    const createGameGrid = function (gameField, gridClassName, gridID, gridSize) {
         const grid = document.createElement("div");
         grid.className = gridClassName;
         // grid.className = "game-grid";
@@ -98,7 +98,7 @@ const setGameField = function (levelID, cb) {
         .then(function (squareDivObj) {
             return sortAllSquares(squareDivObj);
 
-            
+
             // let { grassArr, soilArr } = squareDivObj;
             // // return sortSquares(grassArr);
 
@@ -117,23 +117,23 @@ const setGameField = function (levelID, cb) {
             // return sortedArray;
         })
         ////////////////////////////////////////////////////////////////////////////////////////////
-        .then(function (sortedObjArr) { 
-        // .then(function (sortedArray) {
+        .then(function (sortedObjArr) {
+            // .then(function (sortedArray) {
             // console.info("sortedArray: after");
             // console.info(sortedObjArr);
-            
+
             let newArrayHolder = [];
             // let newElemArray = [];
-            
+
             newArrayHolder = sortedObjArr.map(compareSquares);
             // newArrayHolder.push(sortedObjArr.forEach(compareSquares));
             console.info("newArrayHolder?");
             console.info(newArrayHolder);
-            
+
             // newElemArray.concat.apply([], newArrayHolder);
             // OR:
             let newElemArray = newArrayHolder.flat(1);
-            
+
             console.info("newElemArray?");
             console.info(newElemArray);
 
@@ -141,7 +141,7 @@ const setGameField = function (levelID, cb) {
 
             // return compareSquares(sortedObjArr);
         })
-        
+
         //////////////////////////////////////////////// moved from line 70?
         // .then(function (toKeep) {
         //     let gameGrid = createGameGrid(gameField);

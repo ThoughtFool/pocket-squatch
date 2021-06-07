@@ -1,73 +1,72 @@
 html,
 body {
-    margin: 0;
-    height: 100%;
-    overflow: hidden;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 * {
-    margin-left: 0px;
-    margin-top: 0px;
-    padding: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  padding: 0px;
 }
 
 :root {
-    --game-border: 20px;
-    --game-border-offset: calc(var(--game-border: 20px) * 2);
-    --game-height: 100vh;
-    --game-screen-width: 100vw;
-    --ground-height: calc(var(--game-height) - 87vh);
-    --ground-top: 80vh;
-    /* --sprite-start-pos:; */
+  --game-border: 20px;
+  --game-border-offset: calc(var(--game-border: 20px) * 2);
+  --game-height: 100vh;
+  --game-screen-width: 100vw;
+  --ground-height: calc(var(--game-height) - 87vh);
+  --ground-top: 80vh;
+  /* --sprite-start-pos:; */
 }
 
-
 #game-screen {
-    height: 100vh;
-    width: 100vw;
-    background-size: 100%;
-    background-image: url("./images/blue-valley.png");
-    position: relative;
-    background-repeat: no-repeat;
-    display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-size: 100%;
+  background-image: url("./images/blue-valley.png");
+  position: relative;
+  background-repeat: no-repeat;
+  display: flex;
 }
 
 #game-area {
-    padding: 5vw 0vw 5vw 5vw;
-    height: var(--game-height);
-    width: calc(var(--game-screen-width) - var(--game-height));
-    /* flex: 0 0 40%; */
-    display: flex;
-    align-content: stretch;
-    flex-direction: column;
+  padding: 5vw 0vw 5vw 5vw;
+  height: var(--game-height);
+  width: calc(var(--game-screen-width) - var(--game-height));
+  /* flex: 0 0 40%; */
+  display: flex;
+  align-content: stretch;
+  flex-direction: column;
 }
 
 #game-field {
-    height: calc(var(--game-height) - var(--game-border-offset));
-    width: calc(var(--game-height) - var(--game-border-offset));
-    min-width: calc(var(--game-height) - var(--game-border-offset));
-    min-height: calc(var(--game-height) - var(--game-border-offset));
-    /* max-width: calc(var(--game-height) - var(--game-border-offset));
+  height: calc(var(--game-height) - var(--game-border-offset));
+  width: calc(var(--game-height) - var(--game-border-offset));
+  min-width: calc(var(--game-height) - var(--game-border-offset));
+  min-height: calc(var(--game-height) - var(--game-border-offset));
+  /* max-width: calc(var(--game-height) - var(--game-border-offset));
     max-height: calc(var(--game-height) - var(--game-border-offset)); */
-    /* flex: 0 0 50%; */
-    /* float: left; */
-    align-items: center;
-    justify-content: center;
-    border: var(--game-border) rgba(8, 9, 95, 0.514) solid;
-    overflow: hidden;
-    display: flex;
-    /* position: relative; */
+  /* flex: 0 0 50%; */
+  /* float: left; */
+  align-items: center;
+  justify-content: center;
+  border: var(--game-border) rgba(8, 9, 95, 0.514) solid;
+  overflow: hidden;
+  display: flex;
+  /* position: relative; */
 }
 
 .game-grid {
-    /* height: var(--game-height);
+  /* height: var(--game-height);
     width: var(--game-height);
     min-width: var(--game-height);
     min-height: var(--game-height); */
-    display: flex;
-    overflow: hidden;
+  display: flex;
+  overflow: hidden;
 
-    /* position: relative; */
+  /* position: relative; */
 }
 
 /* .game-screen-square {
@@ -76,146 +75,143 @@ body {
 } */
 
 .row {
-    /* border: 1px blue solid; */
-    /* display: flex; */
-    /* align-self: stretch; */
-    width: 100%;
-    /* height: 20%; */
+  /* border: 1px blue solid; */
+  /* display: flex; */
+  /* align-self: stretch; */
+  width: 100%;
+  /* height: 20%; */
 }
 
 /* 0 */
 .square-rock {
-    /* background-image: url(https://garden.spoonflower.com/c/9094822/r/s/d-i-21/0IWfLy_7Jo_yPK0nb1vXQwVmNImm3T9axrM/8-bit_Texture_Dusty_Blue.jpg); */
-    height: 100%;
-    width: 100%;
-    background-color: rgb(47, 47, 53);
-    background-position: center;
+  /* background-image: url(https://garden.spoonflower.com/c/9094822/r/s/d-i-21/0IWfLy_7Jo_yPK0nb1vXQwVmNImm3T9axrM/8-bit_Texture_Dusty_Blue.jpg); */
+  height: 100%;
+  width: 100%;
+  background-color: rgb(47, 47, 53);
+  background-position: center;
 }
 
 /* 1 */
 .square-wall {
-    height: 100%;
-    width: 100%;
-    background-color: rgb(119, 32, 219);
-    background-position: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(119, 32, 219);
+  background-position: center;
 }
 
 /* 2 */
 .square-lava {
-    height: 100%;
-    width: 100%;
-    background-color: red;
-    background-position: center;
+  height: 100%;
+  width: 100%;
+  background-color: red;
+  background-position: center;
 }
 
 /* 3 */
 .square-water {
-    height: 100%;
-    width: 100%;
-    background-color: blue;
-    background-position: center;
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+  background-position: center;
 }
 
 /* 4 */
 .square-grass {
-    height: 100%;
-    width: 100%;
-    background-color: rgb(60, 129, 60);
-    background-position: center;
-    /* border: black dashed 1px; */
+  height: 100%;
+  width: 100%;
+  background-color: rgb(60, 129, 60);
+  background-position: center;
+  /* border: black dashed 1px; */
 }
 
 /* 5 */
 .square-soil {
-    height: 100%;
-    width: 100%;
-    background-color: rgb(48, 34, 34);
-    background-position: center;
-    /* border: black dashed 1px; */
+  height: 100%;
+  width: 100%;
+  background-color: rgb(48, 34, 34);
+  background-position: center;
+  /* border: black dashed 1px; */
 }
 
 /* 6 */
 .square-sky {
-    height: 100%;
-    width: 100%;
-    background-color: rgb(21, 172, 223);
-    background-position: center;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(21, 172, 223);
+  background-position: center;
 }
 
 /* 7 */
 .square-night {
-    height: 100%;
-    width: 100%;
-    background-color: black;
-    background-position: center;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  background-position: center;
 }
 
 .palette-bar {
-    display: flex;
-    justify-content: center;
-    /* justify-content: space-around; */
+  display: flex;
+  justify-content: center;
+  /* justify-content: space-around; */
 }
 
 .palette {
-    border: 1px;
-    height: 25px;
-    width: 25px;
+  border: 1px;
+  height: 25px;
+  width: 25px;
 }
 
 #dark-gray-brush {
-    background-color: rgb(47, 47, 53);
+  background-color: rgb(47, 47, 53);
 }
 
 #purple-brush {
-    background-color: rgb(119, 32, 219);
+  background-color: rgb(119, 32, 219);
 }
 
 #red-brush {
-    background-color: red;
+  background-color: red;
 }
 
 #blue-brush {
-    background-color: blue;
+  background-color: blue;
 }
 
 #green-brush {
-    background-color: rgb(24, 156, 24);
+  background-color: rgb(24, 156, 24);
 }
 
 #brown-brush {
-    background-color: rgb(109, 60, 60);
+  background-color: rgb(109, 60, 60);
 }
 
 #light-blue-brush {
-    background-color: rgb(21, 172, 223);
+  background-color: rgb(21, 172, 223);
 }
 
 #black-brush {
-    background-color: black;
+  background-color: black;
 }
 
-
-
-
 .hit-box {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border: blueviolet dashed 1px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: blueviolet dashed 1px;
 }
 
 .transform-holder {
-    position: absolute;
-    /* left: 500px;
+  position: absolute;
+  /* left: 500px;
     bottom: calc(var(--ground-height) + 5px);
     background-image: url("./images/lyric-stand.png");
     background-repeat: no-repeat;
     height: 300px;
     width: 300px; */
-    /* transition-property: all; */
-    transition-property: transform;
-    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 0);
-    /* transition-timing-function: cubic-bezier(0.2, -2, 0.8, 2); */
+  /* transition-property: all; */
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.42, 0, 0.58, 0);
+  /* transition-timing-function: cubic-bezier(0.2, -2, 0.8, 2); */
 }
 
 /* #human-holder {
@@ -231,19 +227,19 @@ body {
 } */
 
 #hit-box-lyric {
-    position: absolute;
-    width: 100px;
-    height: 150px;
-    left: 100px;
-    bottom: 0px;
-    border: grey dashed 1px;
+  position: absolute;
+  width: 100px;
+  height: 150px;
+  left: 100px;
+  bottom: 0px;
+  border: grey dashed 1px;
 }
 
 #hit-box-img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    /* border: blueviolet dashed 3px; */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* border: blueviolet dashed 3px; */
 }
 
 /* .obstacle {
@@ -283,34 +279,33 @@ body {
 } */
 
 .enemy {
-    width: 10%;
-    height: calc(var(--ground-height) - 5px);
-    border: blueviolet dashed 1px;
-    position: absolute;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-    background-image: url("./images/cryo-bot.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    transform-origin: bottom;
-    border-radius: 25%;
+  width: 10%;
+  height: calc(var(--ground-height) - 5px);
+  border: blueviolet dashed 1px;
+  position: absolute;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  background-image: url("./images/cryo-bot.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transform-origin: bottom;
+  border-radius: 25%;
 }
 
 .bounce {
-    animation-name: bounce;
-    animation-timing-function: cubic-bezier(.1, .9, .1, .9);
+  animation-name: bounce;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.1, 0.9);
 }
 
 #enemy-01 {
-    animation-timing-function: cubic-bezier(.1, .9, .1, .9);
-    /* left: calc(var(--ground-height) * 5);
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.1, 0.9);
+  /* left: calc(var(--ground-height) * 5);
     /* bottom: calc(var(--ground-height) + 10px); */
-
 }
 
 #enemy-02 {
-    animation-timing-function: cubic-bezier(.1, .9, .1, .9);
-    /* left: calc(var(--ground-height) * 5);
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.1, 0.9);
+  /* left: calc(var(--ground-height) * 5);
     bottom: calc(var(--ground-height) * 5.5); */
 }
 
@@ -323,19 +318,21 @@ body {
 } */
 
 .test-space {
-    padding-left: 50px;
-    color: whitesmoke;
-    font-size: x-large;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    border: whitesmoke solid 1px;
+  padding-left: 50px;
+  color: whitesmoke;
+  font-size: x-large;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border: whitesmoke solid 1px;
 }
 
 .header {
-    display: flex;
-    /* justify-content: space-around; */
-    color: whitesmoke;
-    font-size: x-large;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  /* justify-content: space-around; */
+  color: whitesmoke;
+  font-size: x-large;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 /* #greet {
@@ -347,96 +344,98 @@ body {
 } */
 
 .title-box {
-    position: relative;
-    display: flex;
-    /* padding: 20px; */
-    color: whitesmoke;
-    /* max-height: 5%; */
-    text-align: center;
-    /* align-self: flex-end; */
+  position: relative;
+  display: flex;
+  /* padding: 20px; */
+  color: whitesmoke;
+  /* max-height: 5%; */
+  text-align: center;
+  /* align-self: flex-end; */
 }
 
 #subhead {
-    color: whitesmoke;
-    position: relative;
-    /* align-self: flex-end; */
-    padding-left: 50px,
+  color: whitesmoke;
+  position: relative;
+  /* align-self: flex-end; */
+  padding-left: 50px;
 }
 
 .container {
-    height: 100%;
-    /* height: 100vh; */
-    width: 100vw;
-    background-image: linear-gradient(blue, pink);
-    position: relative;
-    /* display: flex; */
+  height: 100%;
+  /* height: 100vh; */
+  width: 100vw;
+  background-image: linear-gradient(blue, pink);
+  position: relative;
+  /* display: flex; */
 }
 
 .gameboard {
-    height: 90%;
-    width: 90%;
-    background-image: linear-gradient(rgba(158, 198, 214, 0.719), rgb(141, 26, 218));
-    position: relative;
-    display: flex;
-    margin-left: 5%;
-    align-items: flex-end;
+  height: 90%;
+  width: 90%;
+  background-image: linear-gradient(
+    rgba(158, 198, 214, 0.719),
+    rgb(141, 26, 218)
+  );
+  position: relative;
+  display: flex;
+  margin-left: 5%;
+  align-items: flex-end;
 }
 
 .move-down {
-    animation: rise-2 2s steps(4) infinite,
-        backwards 15s linear infinite;
-    transition-timing-function: ease-in;
-    /* transition: .25s; */
+  animation: rise-2 2s steps(4) infinite, backwards 15s linear infinite;
+  transition-timing-function: ease-in;
+  /* transition: .25s; */
 }
 
 .move-right,
 .move-left {
-    animation: runs 1.25s steps(8);
-    animation-iteration-count: 1;
-    transition-timing-function: ease-out;
-    /* forwards 15s linear infinite; */
-    /* animation-delay: 5.75s; */
+  animation: runs 1.25s steps(8);
+  animation-iteration-count: 1;
+  transition-timing-function: ease-out;
+  /* forwards 15s linear infinite; */
+  /* animation-delay: 5.75s; */
 }
 
 .move-up,
 .move-down {
-    animation: jumps 1.35s steps(9);
-    animation-iteration-count: 1;
-    transition-timing-function: ease-out;
-    animation-delay: -.1s;
+  animation: jumps 1.35s steps(9);
+  animation-iteration-count: 1;
+  transition-timing-function: ease-out;
+  animation-delay: -0.1s;
 }
 
 .move-stand {
-    animation: stands 3s steps(4);
-    animation-iteration-count: infinite;
-    transition-timing-function: ease-in-out;
+  animation: stands 3s steps(4);
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
 }
 
 .move-fly-right,
 .move-fly-left {
-    animation: flies 1.25s steps(11);
-    animation-iteration-count: infinite;
-    transition-timing-function: ease-in-out;
+  animation: flies 1.25s steps(11);
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
 }
 
 .liftoff {
-    animation: lifts-off 2s steps(11);
-    animation-iteration-count: 1;
-    transition-timing-function: ease-in-out;
-    /* animation-timing-function: cubic-bezier(0.42, 0, 0.58, .2); */
+  animation: lifts-off 2s steps(11);
+  animation-iteration-count: 1;
+  transition-timing-function: ease-in-out;
+  /* animation-timing-function: cubic-bezier(0.42, 0, 0.58, .2); */
 }
 
 .landing {
-    animation: lands 2s steps(11);
-    animation-iteration-count: 1;
-    transition-timing-function: ease-in-out;
+  animation: lands 2s steps(11);
+  animation-iteration-count: 1;
+  transition-timing-function: ease-in-out;
 }
 
 .move-right-squatch,
 .move-left-squatch {
-    animation: squatch-walks .75s steps(6);
-    animation-iteration-count: 1;
-    transition-timing-function: ease-in-out;
+  animation: squatch-walks 0.75s steps(6);
+  animation-iteration-count: 1;
+  transition-timing-function: ease-in-out;
 }
 
 /* .divebomb {
@@ -461,63 +460,63 @@ body {
 
 /* test ONLY: */
 @keyframes bounce {
-    0% {
-        transform: scale(1, 1) translateY(0);
-    }
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
 
-    10% {
-        transform: scale(1.1, .9) translateY(0);
-    }
+  10% {
+    transform: scale(1.1, 0.9) translateY(0);
+  }
 
-    30% {
-        transform: scale(.9, 1.1) translateY(-300px);
-    }
+  30% {
+    transform: scale(0.9, 1.1) translateY(-300px);
+  }
 
-    50% {
-        transform: scale(1.05, .95) translateY(0);
-    }
+  50% {
+    transform: scale(1.05, 0.95) translateY(0);
+  }
 
-    57% {
-        transform: scale(1, 1) translateY(-10px);
-    }
+  57% {
+    transform: scale(1, 1) translateY(-10px);
+  }
 
-    64% {
-        transform: scale(1, 1) translateY(0);
-    }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
 
-    100% {
-        transform: scale(1, 1) translateY(-5px);
-    }
+  100% {
+    transform: scale(1, 1) translateY(-5px);
+  }
 }
 
 @keyframes rebound {
-    0% {
-        transform: scale(1, 1) translateY(0);
-    }
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
 
-    10% {
-        transform: scale(1.5, .8) translateY(-10px);
-    }
+  10% {
+    transform: scale(1.5, 0.8) translateY(-10px);
+  }
 
-    30% {
-        transform: scale(.9, 1.1) translateY(-300px);
-    }
+  30% {
+    transform: scale(0.9, 1.1) translateY(-300px);
+  }
 
-    50% {
-        transform: scale(1.05, .95) translateY(0);
-    }
+  50% {
+    transform: scale(1.05, 0.95) translateY(0);
+  }
 
-    57% {
-        transform: scale(1, 1) translateY(-10px);
-    }
+  57% {
+    transform: scale(1, 1) translateY(-10px);
+  }
 
-    64% {
-        transform: scale(1, 1) translateY(0);
-    }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
 
-    100% {
-        transform: scale(1, 1) translateY(-5px);
-    }
+  100% {
+    transform: scale(1, 1) translateY(-5px);
+  }
 }
 
 /* create an enemy fear pose: frozen in terror with pulse effect */
@@ -533,62 +532,54 @@ body {
 } */
 
 .collision {
-    animation-play-state: paused;
-    background-color: deeppink;
+  animation-play-state: paused;
+  background-color: deeppink;
 }
 
 @keyframes stands {
-
-    100% {
-        background-position: -1200px;
-    }
+  100% {
+    background-position: -1200px;
+  }
 }
 
 @keyframes runs {
-
-    100% {
-        background-position: -2400px;
-    }
+  100% {
+    background-position: -2400px;
+  }
 }
 
 @keyframes jumps {
-
-    100% {
-        background-position: -2700px;
-    }
+  100% {
+    background-position: -2700px;
+  }
 }
 
 @keyframes lifts-off {
-
-    100% {
-        background-position: -3143px;
-    }
+  100% {
+    background-position: -3143px;
+  }
 }
 
 @keyframes lands {
-
-    100% {
-        background-position: -3137px;
-    }
+  100% {
+    background-position: -3137px;
+  }
 }
 
 @keyframes flies {
-
-    100% {
-        background-position: -3300px;
-    }
+  100% {
+    background-position: -3300px;
+  }
 }
 
 @keyframes flies {
-
-    100% {
-        background-position: -3300px;
-    }
+  100% {
+    background-position: -3300px;
+  }
 }
 
 @keyframes squatch-walks {
-
-    100% {
-        background-position: -1800px;
-    }
+  100% {
+    background-position: -1800px;
+  }
 }

@@ -65,18 +65,18 @@ const enterLevel = function (timeKeeper, myGameInfo) {
 
         const myPhysics = new Sprite_Physics("my-grid", obstacleObject, newElem_ID);
         // const myPhysics = new Sprite_Physics("game-screen", obstacleObject, newElem_ID);
-    
+
         gamespace.data[space_key.index].gameInstance.player.sprite.physics = myPhysics;
         console.info(gamespace.data[space_key.index].gameInstance.player.sprite);
-    
-    
+
+
         //////////////////////////////////////////////////////////////////
         // testing enemy animation (gravity and velocity):
         //////////////////////////////////////////////////////////////////
         const animateFrame = require("./animate-frame");
-    
+
         animateFrame(100, gamespace, space_key);
-    
+
         return setInterval(timeKeeper, 1000);
     });
 

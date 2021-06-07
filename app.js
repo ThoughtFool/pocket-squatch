@@ -48,9 +48,9 @@ db.on("error", error => {
     console.log("Database Error:", error);
 });
 
-app.get('/', (req, res) => {
-    res.render(path.join(__dirname + '/index.html'));
-});
+// app.get('/', (req, res) => {
+//     // res.render(path.join(__dirname + '/index.html'));
+// });
 // startGame(gameData, gameroom);
 // console.log(currentGameroom);
 // call takeAction and provide actionType
@@ -105,9 +105,9 @@ app.get("/all", (req, res) => {
 
 app.get("/find/:SpaceID", (req, res) => {
     db.mySquatches.findOne({
-            // _id: mongojs.ObjectId(req.params.id)
-            SpaceID: req.params.SpaceID
-        },
+        // _id: mongojs.ObjectId(req.params.id)
+        SpaceID: req.params.SpaceID
+    },
         (error, data) => {
             if (error) {
                 res.send(error);
@@ -120,14 +120,14 @@ app.get("/find/:SpaceID", (req, res) => {
 
 app.post("/update/:id", (req, res) => {
     db.mySquatches.update({
-            _id: mongojs.ObjectId(req.params.id)
-        }, {
-            $set: {
-                title: req.body.title,
-                note: req.body.note,
-                modified: Date.now()
-            }
-        },
+        _id: mongojs.ObjectId(req.params.id)
+    }, {
+        $set: {
+            title: req.body.title,
+            note: req.body.note,
+            modified: Date.now()
+        }
+    },
         (error, data) => {
             if (error) {
                 res.send(error);
@@ -140,8 +140,8 @@ app.post("/update/:id", (req, res) => {
 
 app.delete("/delete/:id", (req, res) => {
     db.mySquatches.remove({
-            _id: mongojs.ObjectID(req.params.id)
-        },
+        _id: mongojs.ObjectID(req.params.id)
+    },
         (error, data) => {
             if (error) {
                 res.send(error);
@@ -245,7 +245,7 @@ app.post("/enter-level", function (req, res) {
             console.log("data:");
             console.log(data);
             res.render("test-box", {
-            // res.render("test-animations", {
+                // res.render("test-animations", {
                 spriteName: spriteName,
                 roomID: roomID,
                 gamespace: gamespace,
@@ -258,7 +258,8 @@ app.post("/enter-level", function (req, res) {
     // res.redirect("/");
 });
 
-app.get("/test-box", function (req, res) {
+app.get("/", function (req, res) {
+    // app.get("/test-box", function (req, res) {
     res.render("test-box", {
 
         timer: parseInt(gameroom.timer) // create function to evalute timer on client with timer on server and update on change

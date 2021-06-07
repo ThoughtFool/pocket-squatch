@@ -14,6 +14,8 @@ const moveAndDisplay = {
     },
     37: {
         "human": {
+            height: "150px",
+            width: "150px",
             src: "/images/human-walk-left.png",
             moveClass: "move-left",
             moveDirection: "left",
@@ -23,6 +25,8 @@ const moveAndDisplay = {
 
         },
         "sasquatch": {
+            height: "300px",
+            width: "300px",
             src: "/images/sassy-walk-left.png",
             moveClass: "move-left-squatch",
             moveDirection: "left",
@@ -43,6 +47,8 @@ const moveAndDisplay = {
     },
     39: {
         "human": {
+            height: "150px",
+            width: "150px",
             src: "/images/human-walk-right.png",
             moveClass: "move-right",
             moveDirection: "left",
@@ -52,6 +58,8 @@ const moveAndDisplay = {
 
         },
         "sasquatch": {
+            height: "300px",
+            width: "300px",
             src: "/images/sassy-walk-right.png",
             moveClass: "move-right-squatch",
             moveDirection: "left",
@@ -72,6 +80,8 @@ const moveAndDisplay = {
     },
     38: {
         "human": {
+            height: "150px",
+            width: "150px",
             src: "/images/lyric-jump-right.png",
             moveClass: "move-up",
             moveDirection: "top",
@@ -81,6 +91,8 @@ const moveAndDisplay = {
 
         },
         "sasquatch": {
+            height: "300px",
+            width: "300px",
             src: "/images/sassy-jump-right.png",
             moveClass: "move-up",
             moveDirection: "top",
@@ -101,6 +113,8 @@ const moveAndDisplay = {
     },
     40: {
         "human": {
+            height: "150px",
+            width: "150px",
             src: "/images/lyric-jump-left.png",
             moveClass: "move-down",
             moveDirection: "top",
@@ -110,6 +124,8 @@ const moveAndDisplay = {
 
         },
         "sasquatch": {
+            height: "300px",
+            width: "300px",
             src: "/images/sassy-jump-left.png",
             moveClass: "move-down",
             moveDirection: "top",
@@ -130,6 +146,8 @@ const moveAndDisplay = {
     },
     32: {
         "human": {
+            height: "150px",
+            width: "150px",
             src: "/images/liftoff.png",
             moveClass: "liftoff",
             moveDirection: "top",
@@ -139,6 +157,8 @@ const moveAndDisplay = {
 
         },
         "sasquatch": {
+            height: "300px",
+            width: "300px",
             src: "/images/sassy-jump-left.png",
             moveClass: "move-down",
             moveDirection: "top",
@@ -159,6 +179,8 @@ const moveAndDisplay = {
     },
     idleMoveType: {
         "human": {
+            height: "150px",
+            width: "150px",
             src: "/images/lyric-stand.png",
 
             moveClass: "move-stand",
@@ -168,6 +190,8 @@ const moveAndDisplay = {
             preMove_pos: null
         },
         "sasquatch": {
+            height: "300px",
+            width: "300px",
             src: "/images/idle-squatch.png",
 
             moveClass: "move-stand",
@@ -236,15 +260,53 @@ const moveAndDisplay = {
         //     // this[keyPressed][beingType].moveDist
         // );
 
+        console.info("spriteHolderElem");
+        console.info(spriteHolderElem);
+
         this.removeClass(spriteHolderElem);
 
         // reset animation:
         // void spriteHolderElem.offsetWidth;
+        // if (this[keyPressed][beingType] === "sasquatch") {
+
+        //     this.shiftLoc(spriteHolderElem);
+        // };
 
         spriteHolderElem.style.backgroundImage = `url("${this[keyPressed][beingType].src}")`;
         spriteHolderElem.classList.add(this[keyPressed][beingType].moveClass);
+        // spriteHolderElem.style.height = `${this[keyPressed][beingType].height}`;
+        // spriteHolderElem.style.width = `${this[keyPressed][beingType].width}`;
+
 
         this.transform(spriteHolderElem);
+    },
+    shiftLoc: function (spriteHolderElem, newSize) {
+
+        let spriteShiftRect = spriteHolderElem.getBoundingClientRect();
+
+        if (newSize === 300) {
+
+            let shiftleft = newSize / 4;
+            let shiftTop = newSize / 2;
+
+            spriteHolderElem.style.left = `${spriteShiftRect.left - shiftleft}px`;
+            spriteHolderElem.style.top = `${spriteShiftRect.top - shiftTop}px`;
+
+        } else {
+
+            let shiftleft = newSize / 4;
+            let shiftTop = newSize / 2;
+
+            spriteHolderElem.style.left = `${spriteShiftRect.left + shiftleft}px`;
+            // spriteHolderElem.style.top = `${spriteShiftRect.top + shiftTop}px`;
+        };
+
+        this.resize(spriteHolderElem, newSize);
+    },
+    resize: function (spriteHolderElem, newSize) {
+
+        spriteHolderElem.style.height = `${newSize}px`;
+        spriteHolderElem.style.width = `${newSize}px`;
     },
     idleShift: function (spriteHolderElem) {
 
@@ -254,6 +316,8 @@ const moveAndDisplay = {
 
         spriteHolderElem.style.backgroundImage = `url("${this.idleMoveType[beingType].src}")`;
         spriteHolderElem.classList.add(this.idleMoveType[beingType].moveClass);
+        // spriteHolderElem.style.height = `${this.idleMoveType[beingType].height}`;
+        // spriteHolderElem.style.width = `${this.idleMoveType[beingType].width}`;
 
         this.transform(spriteHolderElem);
     },
@@ -324,12 +388,16 @@ const moveAndDisplay = {
                 this.setBeingType("stone queen");
                 this.addClass(spriteHolderElem, "move-fly-left");
                 spriteHolderElem.style.backgroundImage = `url("${this.moveFly.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+                // spriteHolderElem.style.height = `${this.moveFly.height}`;
+                // spriteHolderElem.style.width = `${this.moveFly.width}`;
 
             } else if (spriteHolderElem.classList.contains("landing") && beingType != "sasquatch") {
                 this.removeClass(spriteHolderElem);
                 this.setBeingType("human");
                 this.addClass(spriteHolderElem, "move-stand");
                 spriteHolderElem.style.backgroundImage = `url("${this.moveStand.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+                // spriteHolderElem.style.height = `${this.moveStand.height}`;
+                // spriteHolderElem.style.width = `${this.moveStand.width}`;
 
             } else if (spriteHolderElem.classList.contains("move-fly-left") && beingType === "stone queen" || spriteHolderElem.classList.contains("move-fly-right") && beingType === "stone queen") {
                 // TODO: countdown clock/timer only allows to use stone queen's powers. needs recharging
@@ -344,10 +412,15 @@ const moveAndDisplay = {
 
                 if (beingType === "human") {
                     // TODO: transform: if flying while transformed to sasquatch, then falls to ground (spritesheet fall and laying on ground and getting up):
+                    // this.shiftLoc(spriteHolderElem);
                     spriteHolderElem.style.backgroundImage = `url("${this.moveStand.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+                    // spriteHolderElem.style.height = `${this.moveStand.height}`;
+                    // spriteHolderElem.style.width = `${this.moveStand.width}`;
 
                 } else if (beingType === "sasquatch") {
                     spriteHolderElem.style.backgroundImage = `url("${this.idleSquatch.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+                    // spriteHolderElem.style.height = `${this.idleSquatch.height}`;
+                    // spriteHolderElem.style.width = `${this.idleSquatch.width}`;
                 };
                 this.addClass(spriteHolderElem, "move-stand");
 

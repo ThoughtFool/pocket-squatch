@@ -57,7 +57,7 @@ const timeKeeper = function () {
         console.log(`gamespace.data[space_key.index].gameInstance.data.timer: ${gamespace.data[space_key.index].gameInstance.data.timer}`);
 
         console.log(`=======================`);
-        if (gamespace.data[space_key.index].gameInstance.data.timer <= 0) {
+        if (gamespace.data[space_key.index].gameInstance.data.timer <= 0) { // becomes human
             console.info("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
             gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(true);
@@ -72,7 +72,10 @@ const timeKeeper = function () {
             //     keyPress_handler.down) {
             //     console.info("already updating shifts through user actions");
             // } else {
-                moveAndDisplay.idleShift(spriteHolder);
+
+            moveAndDisplay.shiftLoc(spriteHolder, 150);
+            moveAndDisplay.idleShift(spriteHolder);
+
             // };
             // });
         };
@@ -82,7 +85,7 @@ const timeKeeper = function () {
         console.log(`gamespace.data[space_key.index].gameInstance.data.timer: ${gamespace.data[space_key.index].gameInstance.data.timer}`);
 
         console.log(`=======================`);
-        if (gamespace.data[space_key.index].gameInstance.data.timer === 25) {
+        if (gamespace.data[space_key.index].gameInstance.data.timer === 25) { // become sasquatch
             console.info("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
             //     shapeshift = true;
@@ -99,7 +102,10 @@ const timeKeeper = function () {
             //     keyPress_handler.down) {
             //     console.info("already updating shifts through user actions");
             // // } else {
-                moveAndDisplay.idleShift(spriteHolder);
+
+            moveAndDisplay.shiftLoc(spriteHolder, 300);
+            moveAndDisplay.idleShift(spriteHolder);
+
             // };
         };
 

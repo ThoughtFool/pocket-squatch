@@ -39,7 +39,7 @@ class Sprite_Physics {
         // ******************************************************************************
         // this.gamescreenElem = this.getElem(this.gamescreen_ID);
         // this.gamescreenElem_Coords = this.get_Coords(this.gamescreenElem);
-        
+
         // ******************************************************************************
         this.gameFieldElem = this.getElem(this.gameField_ID);
         this.gameFieldElem_Coords = this.get_Coords(this.gameFieldElem);
@@ -137,7 +137,7 @@ class Sprite_Physics {
         let sprite_coords = this.elem.getBoundingClientRect();
         for (let i = 0; i < elements.length; i++) {
             let ground_coords = elements[i].getBoundingClientRect();
-            
+
             this.groundCoordsArray.push(ground_coords);
             let bool = this.isBelow(sprite_coords, ground_coords);
             // console.info("bool:");
@@ -213,11 +213,11 @@ class Sprite_Physics {
         // ******************************************************************************
         // transports sprite to other side of viewport:
         if (this.left > this.gameFieldElem_Coords.left + this.gameFieldElem_Coords.width) { // appear on left-side
-        // if ((this.left * .80) + this.width > this.gameFieldElem_Coords.left + this.gameFieldElem_Coords.width) {
+            // if ((this.left * .80) + this.width > this.gameFieldElem_Coords.left + this.gameFieldElem_Coords.width) {
             this.left -= (this.gameFieldElem_Coords.width + (this.width * .80));
         } else if (this.left + (this.width * .80) < this.gameFieldElem_Coords.left) { // appear on right-side
-        // } else if ((this.left * .80) + this.width < this.gameFieldElem_Coords.left) {
-        // } else if (this.left + this.size < 0) {
+            // } else if ((this.left * .80) + this.width < this.gameFieldElem_Coords.left) {
+            // } else if (this.left + this.size < 0) {
             this.left += this.gameFieldElem_Coords.width;
         };
         // ******************************************************************************
@@ -238,7 +238,7 @@ class Sprite_Physics {
             ) {
                 // Testing ONLY:
                 let spriteHolderElem = document.getElementById("sprite-holder");
-                spriteHolderElem.classList.add("collision");
+                // spriteHolderElem.classList.add("collision");
                 setTimeout(() => {
                     spriteHolderElem.classList.remove("collision");
                 }, 50);
@@ -246,11 +246,11 @@ class Sprite_Physics {
 
                 if (this.top + this.height > elem_coords.top && this.top + (this.height * .95) < elem_coords.top &&
                     this.left + (this.width * .90) > elem_coords.left && this.left < elem_coords.right ||
-                    
+
                     this.top + this.height > elem_coords.top && this.top + (this.height * .95) < elem_coords.top &&
                     this.left < elem_coords.left && this.left + (this.width * .90) > elem_coords.right) {
-                    
-                        this.velocity = 0;
+
+                    this.velocity = 0;
                     this.onGround = true;
                     // console.info(`lands on top of obstacle:`);
                     return this.top = elem_coords.top - this.height; // lands on top of obstacle
