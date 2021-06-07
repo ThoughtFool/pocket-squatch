@@ -74,6 +74,7 @@ const timeKeeper = function () {
             // } else {
 
             moveAndDisplay.shiftLoc(spriteHolder, 150);
+            // moveAndDisplay.therianthropyType(spriteHolder);
             moveAndDisplay.idleShift(spriteHolder);
 
             // };
@@ -104,7 +105,9 @@ const timeKeeper = function () {
             // // } else {
 
             moveAndDisplay.shiftLoc(spriteHolder, 300);
-            moveAndDisplay.idleShift(spriteHolder);
+            moveAndDisplay.therianthropy(spriteHolder);
+
+            // moveAndDisplay.idleShift(spriteHolder);
 
             // };
         };

@@ -211,6 +211,31 @@ const moveAndDisplay = {
             preMove_pos: null
         }
     },
+    therianthropyType: {
+        "human": {
+            height: "150px",
+            width: "150px",
+            src: "/images/human-transform.png",
+
+            moveClass: "move-day-shift",
+            holdPos: "human",
+            keyState: false,
+            step_counter: 0,
+            preMove_pos: null
+        },
+        "sasquatch": {
+            height: "300px",
+            width: "300px",
+            src: "/images/sassy-transform.png",
+
+            moveClass: "move-day-shift",
+            // moveClass: "idle-squatch",
+            holdPos: "sasquatch",
+            keyState: false,
+            step_counter: 0,
+            preMove_pos: null
+        }
+    },
     moveDance: {
         src: "/images/lyric-stand.png",
 
@@ -294,7 +319,7 @@ const moveAndDisplay = {
 
         } else {
 
-            let shiftleft = newSize / 4;
+            let shiftleft = newSize / 2;
             let shiftTop = newSize;
 
             spriteHolderElem.style.left = `${spriteShiftRect.left + shiftleft}px`;
@@ -321,11 +346,25 @@ const moveAndDisplay = {
 
         this.transform(spriteHolderElem);
     },
+    therianthropy: function (spriteHolderElem) {
+
+        let beingType = this.getBeingType();
+
+        this.removeClass(spriteHolderElem);
+
+        spriteHolderElem.style.backgroundImage = `url("${this.therianthropyType[beingType].src}")`;
+        spriteHolderElem.classList.add(this.therianthropyType[beingType].moveClass);
+        // spriteHolderElem.style.height = `${this.idleMoveType[beingType].height}`;
+        // spriteHolderElem.style.width = `${this.idleMoveType[beingType].width}`;
+
+        this.transform(spriteHolderElem);
+    },
     removeClass: function (element) {
         console.log("element");
         console.log(element);
 
         element.classList.remove(
+            "move-day-shift",
             "move-stand",
             "move-dance",
             "move-left",
@@ -376,19 +415,29 @@ const moveAndDisplay = {
     // },
     animationLoop: require("./methods/animation-loop"),
 
-    transform: function (spriteHolderElem) {
+    transform: function (spriteHolderElem,) {
 
         spriteHolderElem.onanimationend = () => {
 
             let beingType = this.getBeingType();
             console.log(`Animation iteration has ended!`);
 
+            // if (spriteHolderElem.classList.contains("move-day-shift") && beingType === "human") {
+            //     this.removeClass(spriteHolderElem);
+            //     spriteHolderElem.style.backgroundImage = `url("${this.moveDance.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+
+            // } else if (spriteHolderElem.classList.contains("move-day-shift") && beingType === "sasquatch") {
+            //     this.removeClass(spriteHolderElem);
+            //     spriteHolderElem.style.backgroundImage = `url("${this.idleSquatch.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+
+            // } else 
             if (spriteHolderElem.classList.contains("liftoff") && beingType === "human") {
                 // this.addClass(spriteHolderElem, "divebomb"); TODO::?
                 this.removeClass(spriteHolderElem);
                 this.setBeingType("stone queen");
                 this.addClass(spriteHolderElem, "move-fly-left");
                 //change to larger size box:
+
                 // this.shiftLoc(spriteHolderElem, 300);
 
                 spriteHolderElem.style.backgroundImage = `url("${this.moveFly.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
@@ -398,6 +447,9 @@ const moveAndDisplay = {
                 this.removeClass(spriteHolderElem);
                 this.setBeingType("human");
                 this.addClass(spriteHolderElem, "move-dance");
+
+                // this.shiftLoc(spriteHolderElem, 150);
+
                 spriteHolderElem.style.backgroundImage = `url("${this.moveDance.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
 
 
@@ -414,9 +466,13 @@ const moveAndDisplay = {
 
                 if (beingType === "human") {
                     // TODO: transform: if flying while transformed to sasquatch, then falls to ground (spritesheet fall and laying on ground and getting up):
+                    // this.shiftLoc(spriteHolderElem, 150);
+
                     spriteHolderElem.style.backgroundImage = `url("${this.moveDance.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
 
                 } else if (beingType === "sasquatch") {
+                    // this.shiftLoc(spriteHolderElem, 300);
+
                     spriteHolderElem.style.backgroundImage = `url("${this.idleSquatch.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
 
                 };
