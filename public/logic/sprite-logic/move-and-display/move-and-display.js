@@ -183,7 +183,7 @@ const moveAndDisplay = {
             width: "150px",
             src: "/images/lyric-stand.png",
 
-            moveClass: "move-stand",
+            moveClass: "move-dance",
             holdPos: "human",
             keyState: false,
             step_counter: 0,
@@ -211,10 +211,10 @@ const moveAndDisplay = {
             preMove_pos: null
         }
     },
-    moveStand: {
+    moveDance: {
         src: "/images/lyric-stand.png",
 
-        moveClass: "move-stand",
+        moveClass: "move-dance",
         holdPos: "human",
         keyState: false,
         step_counter: 0,
@@ -295,10 +295,10 @@ const moveAndDisplay = {
         } else {
 
             let shiftleft = newSize / 4;
-            let shiftTop = newSize / 2;
+            let shiftTop = newSize;
 
             spriteHolderElem.style.left = `${spriteShiftRect.left + shiftleft}px`;
-            // spriteHolderElem.style.top = `${spriteShiftRect.top + shiftTop}px`;
+            spriteHolderElem.style.top = `${spriteShiftRect.top + shiftTop}px`;
         };
 
         this.resize(spriteHolderElem, newSize);
@@ -327,6 +327,7 @@ const moveAndDisplay = {
 
         element.classList.remove(
             "move-stand",
+            "move-dance",
             "move-left",
             "move-right",
             "move-up",
@@ -387,17 +388,18 @@ const moveAndDisplay = {
                 this.removeClass(spriteHolderElem);
                 this.setBeingType("stone queen");
                 this.addClass(spriteHolderElem, "move-fly-left");
+                //change to larger size box:
+                // this.shiftLoc(spriteHolderElem, 300);
+
                 spriteHolderElem.style.backgroundImage = `url("${this.moveFly.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
-                // spriteHolderElem.style.height = `${this.moveFly.height}`;
-                // spriteHolderElem.style.width = `${this.moveFly.width}`;
+
 
             } else if (spriteHolderElem.classList.contains("landing") && beingType != "sasquatch") {
                 this.removeClass(spriteHolderElem);
                 this.setBeingType("human");
-                this.addClass(spriteHolderElem, "move-stand");
-                spriteHolderElem.style.backgroundImage = `url("${this.moveStand.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
-                // spriteHolderElem.style.height = `${this.moveStand.height}`;
-                // spriteHolderElem.style.width = `${this.moveStand.width}`;
+                this.addClass(spriteHolderElem, "move-dance");
+                spriteHolderElem.style.backgroundImage = `url("${this.moveDance.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+
 
             } else if (spriteHolderElem.classList.contains("move-fly-left") && beingType === "stone queen" || spriteHolderElem.classList.contains("move-fly-right") && beingType === "stone queen") {
                 // TODO: countdown clock/timer only allows to use stone queen's powers. needs recharging
@@ -412,15 +414,11 @@ const moveAndDisplay = {
 
                 if (beingType === "human") {
                     // TODO: transform: if flying while transformed to sasquatch, then falls to ground (spritesheet fall and laying on ground and getting up):
-                    // this.shiftLoc(spriteHolderElem);
-                    spriteHolderElem.style.backgroundImage = `url("${this.moveStand.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
-                    // spriteHolderElem.style.height = `${this.moveStand.height}`;
-                    // spriteHolderElem.style.width = `${this.moveStand.width}`;
+                    spriteHolderElem.style.backgroundImage = `url("${this.moveDance.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
 
                 } else if (beingType === "sasquatch") {
                     spriteHolderElem.style.backgroundImage = `url("${this.idleSquatch.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
-                    // spriteHolderElem.style.height = `${this.idleSquatch.height}`;
-                    // spriteHolderElem.style.width = `${this.idleSquatch.width}`;
+
                 };
                 this.addClass(spriteHolderElem, "move-stand");
 

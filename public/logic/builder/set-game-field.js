@@ -168,8 +168,8 @@ const setGameField = function (levelID, cb) {
                 coords: {
                     left: gridDimensions.left,
                     top: gridDimensions.top,
-                    width: 300,
-                    height: 300,
+                    width: 150,
+                    height: 150,
                     right: this.left + this.width
                 },
                 elemType: "div",
