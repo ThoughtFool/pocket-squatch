@@ -23,7 +23,7 @@ console.log("gameGrid.clientHeight");
 console.log(gameGrid.clientHeight);
 // gridSize = gameGrid.clientWidth * .99;
 
-const createSquareType = function (squareID, squareType) {};
+const createSquareType = function (squareID, squareType) { };
 
 const isSquare = function (num) {
     return num > 4 && Math.sqrt(num) % 1 === 0;
@@ -376,7 +376,7 @@ const loadMyLevel = function () {
 
 const getNewElems = function () {
     let levelCoordObject = {
-        
+
         toKeep: [],
         toCreate: [],
         toRemove: [],

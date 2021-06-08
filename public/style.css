@@ -193,10 +193,28 @@ body {
   background-position: center;
 }
 
+.builder {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.control-panel {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.button-array {
+  display: flex;
+  justify-content: center;
+}
+
 .palette-bar {
   display: flex;
   justify-content: center;
-  /* justify-content: space-around; */
 }
 
 .palette {
@@ -448,10 +466,20 @@ body {
 .move-down {
   height: var(--sprite-size-small);
   background-size: var(--animate-nine-small) var(--sprite-size-small);
-  animation: jumps 1.35s steps(var(--nine));
+  animation: jumps-small 1.35s steps(var(--nine));
   animation-iteration-count: 1;
   transition-timing-function: ease-out;
   animation-delay: -0.1s;
+}
+
+.jump-up,
+.jump-down {
+  height: var(--sprite-size-large);
+  background-size: var(--animate-eight-large) var(--sprite-size-large);
+  animation: jumps-large 1.35s steps(var(--eight));
+  animation-iteration-count: 1;
+  transition-timing-function: ease-out;
+  /* animation-delay: -0.1s; */
 }
 
 .move-stand {
@@ -654,9 +682,18 @@ body {
   }
 }
 
-@keyframes jumps {
+@keyframes jumps-small {
   from {
     background-position: var(--animate-nine-small);
+  }
+  to {
+    background-position: 0;
+  }
+}
+
+@keyframes jumps-large {
+  from {
+    background-position: var(--animate-eight-large);
   }
   to {
     background-position: 0;

@@ -167,17 +167,20 @@ const setGameField = function (levelID, cb) {
             let gridDimensions = grid.getBoundingClientRect();
             let levelObj = {
                 coords: {
-                    left: gridDimensions.left,
-                    top: gridDimensions.top,
-                    width: moveAndDisplay.relativeGridResizeFunc("human"),
-                    height: moveAndDisplay.relativeGridResizeFunc("human"),
+                    width: moveAndDisplay.relativeGridResizeFunc("sasquatch"),
+                    height: moveAndDisplay.relativeGridResizeFunc("sasquatch"),
+
+                    left: gridDimensions.width / 2 - this.width,
+                    // left: gridDimensions.left,
+                    top: gridDimensions.height / 2 - this.width,
+                    // top: gridDimensions.top,
                     right: this.left + this.width
                 },
                 elemType: "div",
                 className: "transform-holder",
                 class_moveType: "move-stand",
                 id: "sprite-holder",
-                imgUrl: "/images/lyric-stand.png"
+                imgUrl: "/images/discovery.png"
             };
             // return drawLevel("game-field", levelObj);
             return drawLevel("my-grid", levelObj, null, true);

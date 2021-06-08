@@ -48,9 +48,13 @@ db.on("error", error => {
     console.log("Database Error:", error);
 });
 
-// app.get('/', (req, res) => {
-//     // res.render(path.join(__dirname + '/index.html'));
-// });
+app.get("/block-builder", function (req, res) {
+    // app.get("/test-box", function (req, res) {
+    res.render("block-builder", {
+
+    });
+});
+
 // startGame(gameData, gameroom);
 // console.log(currentGameroom);
 // call takeAction and provide actionType

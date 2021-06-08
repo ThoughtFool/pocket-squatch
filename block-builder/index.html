@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,26 +13,30 @@
         <div id="game-field">
             <!-- append dynamic grid -->
         </div>
-        <input type="button" value="make-level" id="make-level" onclick="createLevel()">
-        <input type="button" value="save-level" id="save-level" onclick="saveLevel()">
-        <input type="button" value="get-new-elems" id="get-new-elems" onclick="getNewElems()">
-        <!-- <input type="number" name="time-stamp-id" id="time-stamp-id"> -->
-        <select id="time-stamp-id" onChange="loadMyLevel(this);">
-            <option>Please select image history</option>
-            <!-- <option value="002">002</option> -->
-        </select>
-        <!-- <input type="button" value="load-level" id="load-level" onclick="loadMyLevel()"> -->
-        <div class="palette-bar">
-            <div class="palette" id="dark-gray-brush"></div>
-            <div class="palette" id="purple-brush"></div>
-            <div class="palette" id="red-brush"></div>
-            <div class="palette" id="blue-brush"></div>
-            <div class="palette" id="green-brush"></div>
-            <div class="palette" id="brown-brush"></div>
-            <div class="palette" id="light-blue-brush"></div>
-            <div class="palette" id="black-brush"></div>
-        </div>
+
+        <aside class="control-panel">
+            <input type="button" value="make-level" id="make-level" onclick="createLevel()">
+            <input type="button" value="save-level" id="save-level" onclick="saveLevel()">
+            <input type="button" value="get-new-elems" id="get-new-elems" onclick="getNewElems()">
+            <!-- <input type="number" name="time-stamp-id" id="time-stamp-id"> -->
+            <select id="time-stamp-id" onChange="loadMyLevel(this);">
+                <option>Please select image history</option>
+                <!-- <option value="002">002</option> -->
+            </select>
+            <!-- <input type="button" value="load-level" id="load-level" onclick="loadMyLevel()"> -->
+            <div class="palette-bar">
+                <div class="palette" id="dark-gray-brush"></div>
+                <div class="palette" id="purple-brush"></div>
+                <div class="palette" id="red-brush"></div>
+                <div class="palette" id="blue-brush"></div>
+                <div class="palette" id="green-brush"></div>
+                <div class="palette" id="brown-brush"></div>
+                <div class="palette" id="light-blue-brush"></div>
+                <div class="palette" id="black-brush"></div>
+            </div>
+        </aside>
     </div>
-    <script src="./index.js"></script>
+    <script src="./block-logic.js"></script>
 </body>
+
 </html>
