@@ -38,7 +38,7 @@ const animationLoop = function (spriteHolderElem, dist_tot, topOrLeft, moveType,
             step_counter = 1;
             return;
         };
-        
+
         step_counter += 1;
         current_new_pos += step_dist;
         // spriteHolderElem.style[topOrLeft] = `translateY(${current_new_pos}px`;

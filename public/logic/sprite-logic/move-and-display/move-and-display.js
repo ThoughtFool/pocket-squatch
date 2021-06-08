@@ -213,8 +213,8 @@ const moveAndDisplay = {
     },
     therianthropyType: {
         "human": {
-            height: "150px",
-            width: "150px",
+            height: "300px",
+            width: "300px",
             src: "/images/human-transform.png",
 
             moveClass: "move-day-shift",
@@ -305,11 +305,11 @@ const moveAndDisplay = {
 
         this.transform(spriteHolderElem);
     },
-    shiftLoc: function (spriteHolderElem, newSize) {
+    shiftLoc: function (spriteHolderElem, newSize, beingType) {
 
         let spriteShiftRect = spriteHolderElem.getBoundingClientRect();
 
-        if (newSize === 300) {
+        if (beingType === "sasquatch") {
 
             let shiftleft = newSize / 4;
             let shiftTop = newSize / 2;
@@ -358,6 +358,43 @@ const moveAndDisplay = {
         // spriteHolderElem.style.width = `${this.idleMoveType[beingType].width}`;
 
         this.transform(spriteHolderElem);
+    },
+    relativeGridResizeFunc: function (beingType) {
+
+        let viewportHeight = document.documentElement.clientHeight;
+        // let viewportWidth = document.documentElement.clientWidth;
+
+        // let myGrid = document.getElementById("my-grid");
+        // let myGridCoords = myGrid.getBoundingClientRect();
+        // let myGridHeight = myGridCoords.height;
+
+        let myGridHeight = viewportHeight * 1.25;
+        // let myGridWidth = myGridCoords.width;
+        let spriteSizePercent;
+        // --my-grid-size: calc(var(--viewport-height) * 1.25); (CSS file)
+
+        console.info("myGridHeight:");
+        console.info(myGridHeight);
+        // console.info("myGridWidth:");
+        // console.info(myGridWidth);
+
+        // if (myGridHeight > myGridWidth) {
+        //     console.info("orientation: portrait");
+        // } else {
+        //     console.info("orientation: landscape");
+        // };
+
+        if (beingType === "sasquatch") {
+            spriteSizePercent = .20;
+
+        } else {
+            spriteSizePercent = .10;
+        };
+
+        let adjustedSize = myGridHeight * spriteSizePercent;
+
+        return adjustedSize;
+
     },
     removeClass: function (element) {
         console.log("element");
@@ -469,14 +506,17 @@ const moveAndDisplay = {
                     // this.shiftLoc(spriteHolderElem, 150);
 
                     spriteHolderElem.style.backgroundImage = `url("${this.moveDance.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+                    this.addClass(spriteHolderElem, "move-dance");
 
                 } else if (beingType === "sasquatch") {
                     // this.shiftLoc(spriteHolderElem, 300);
 
                     spriteHolderElem.style.backgroundImage = `url("${this.idleSquatch.src}")`; // TODO: create "idle" class for stands, flys, sits, etc.
+                    this.addClass(spriteHolderElem, "move-stand");
 
                 };
-                this.addClass(spriteHolderElem, "move-stand");
+
+                // this.addClass(spriteHolderElem, "move-stand");
 
             };
         };

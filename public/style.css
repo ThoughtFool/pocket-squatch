@@ -1,3 +1,10 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
 * {
   margin-left: 0px;
   margin-top: 0px;
@@ -5,17 +12,51 @@
 }
 
 :root {
+  --viewport-height: 100vh;
+  --viewport-width: 100vw;
+
+  --my-grid-size: calc(var(--viewport-height) * 1.25);
+
+  /* different size sprites */
+  --sprite-size-small: calc(var(--my-grid-size) * 0.1);
+  --sprite-size-large: calc(var(--my-grid-size) * 0.2);
+
+  --game-border: 20px;
+  --game-border-offset: calc(var(--game-border) * 2);
   --game-height: 100vh;
+  --game-screen-width: 100vw;
   --ground-height: calc(var(--game-height) - 87vh);
   --ground-top: 80vh;
+
+  /* numbers */
+  --four: 4;
+  --six: 6;
+  --eight: 8;
+  --nine: 9;
+  --eleven: 11;
+
+  /* animation frames */
+  --animate-four-small: calc(var(--sprite-size-small) * var(--four) * 1);
+  --animate-four-large: calc(var(--sprite-size-large) * var(--four) * 1);
+
+  --animate-six-small: calc(var(--sprite-size-small) * var(--six) * 1);
+  --animate-six-large: calc(var(--sprite-size-large) * var(--six) * 1);
+
+  --animate-eight-small: calc(var(--sprite-size-small) * var(--eight) * 1);
+  --animate-eight-large: calc(var(--sprite-size-large) * var(--eight) * 1);
+
+  --animate-nine-small: calc(var(--sprite-size-small) * var(--nine) * 1);
+  --animate-nine-large: calc(var(--sprite-size-large) * var(--nine) * 1);
+
+  --animate-eleven-small: calc(var(--sprite-size-small) * var(--eleven) * 1);
+  --animate-eleven-large: calc(var(--sprite-size-large) * var(--eleven) * 1);
+
   /* --sprite-start-pos:; */
 }
 
-html,
-body {
-  margin: 0;
-  height: 100%;
-  overflow: hidden;
+#my-grid {
+  height: var(--my-grid-size);
+  width: var(--my-grid-size);
 }
 
 #game-screen {
@@ -25,7 +66,169 @@ body {
   background-image: url("./images/blue-valley.PNG");
   position: relative;
   background-repeat: no-repeat;
+  display: flex;
+}
+
+#game-area {
+  padding: 5vw 0vw 5vw 5vw;
+  height: var(--game-height);
+  width: calc(var(--game-screen-width) - calc(var(--game-height) * 1.25));
+  /* flex: 0 0 40%; */
+  display: flex;
+  align-content: stretch;
+  flex-direction: column;
+}
+
+#game-field {
+  height: calc(var(--game-height) - var(--game-border-offset));
+  width: calc(var(--game-height) - var(--game-border-offset));
+  min-width: calc(var(--game-height) - var(--game-border-offset));
+  min-height: calc(var(--game-height) - var(--game-border-offset));
+  /* max-width: calc(var(--game-height) - var(--game-border-offset));
+    max-height: calc(var(--game-height) - var(--game-border-offset)); */
+  /* flex: 0 0 50%; */
+  /* float: left; */
+  align-items: center;
+  justify-content: center;
+  border: var(--game-border) rgba(8, 9, 95, 0.514) solid;
+  overflow: hidden;
+  display: flex;
+  /* position: relative; */
+}
+
+.game-grid {
+  /* height: var(--game-height);
+    width: var(--game-height);
+    min-width: var(--game-height);
+    min-height: var(--game-height); */
+  display: flex;
+  overflow: hidden;
+
+  /* position: relative; */
+}
+
+/* .game-screen-square {
+    width: 25vh;
+    float: right;
+} */
+
+.row {
+  /* border: 1px blue solid; */
   /* display: flex; */
+  /* align-self: stretch; */
+  width: 100%;
+  /* height: 20%; */
+}
+
+/* 0 */
+.square-rock {
+  /* background-image: url(https://garden.spoonflower.com/c/9094822/r/s/d-i-21/0IWfLy_7Jo_yPK0nb1vXQwVmNImm3T9axrM/8-bit_Texture_Dusty_Blue.jpg); */
+  height: 100%;
+  width: 100%;
+  background-color: rgb(47, 47, 53);
+  background-position: center;
+}
+
+/* 1 */
+.square-wall {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(119, 32, 219);
+  background-position: center;
+}
+
+/* 2 */
+.square-lava {
+  height: 100%;
+  width: 100%;
+  background-color: red;
+  background-position: center;
+}
+
+/* 3 */
+.square-water {
+  height: 100%;
+  width: 100%;
+  background-color: blue;
+  background-position: center;
+}
+
+/* 4 */
+.square-grass {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(60, 129, 60);
+  background-position: center;
+  /* border: black dashed 1px; */
+}
+
+/* 5 */
+.square-soil {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(48, 34, 34);
+  background-position: center;
+  /* border: black dashed 1px; */
+}
+
+/* 6 */
+.square-sky {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(21, 172, 223);
+  background-position: center;
+}
+
+/* 7 */
+.square-night {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  background-position: center;
+}
+
+.palette-bar {
+  display: flex;
+  justify-content: center;
+  /* justify-content: space-around; */
+}
+
+.palette {
+  border: 1px;
+  height: 25px;
+  width: 25px;
+}
+
+#dark-gray-brush {
+  background-color: rgb(47, 47, 53);
+}
+
+#purple-brush {
+  background-color: rgb(119, 32, 219);
+}
+
+#red-brush {
+  background-color: red;
+}
+
+#blue-brush {
+  background-color: blue;
+}
+
+#green-brush {
+  background-color: rgb(24, 156, 24);
+}
+
+#brown-brush {
+  background-color: rgb(109, 60, 60);
+}
+
+#light-blue-brush {
+  background-color: rgb(21, 172, 223);
+}
+
+#black-brush {
+  background-color: black;
 }
 
 .hit-box {
@@ -37,29 +240,29 @@ body {
 
 .transform-holder {
   position: absolute;
-  left: 0px;
-  bottom: calc(var(--ground-height) + 5px);
-  background-image: url("./images/lyric-stand.png");
-  background-repeat: no-repeat;
-  height: 300px;
-  width: 300px;
+  /* left: 500px;
+    bottom: calc(var(--ground-height) + 5px);
+    background-image: url("./images/lyric-stand.png");
+    background-repeat: no-repeat;
+    height: 300px;
+    width: 300px; */
   /* transition-property: all; */
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.42, 0, 0.58, 0);
   /* transition-timing-function: cubic-bezier(0.2, -2, 0.8, 2); */
 }
 
-#human-holder {
-  position: absolute;
-  left: 0px;
-  bottom: calc(var(--ground-height) + 5px);
-  background-image: url("./images/lyric-stand.png");
-  background-repeat: no-repeat;
-  height: 150px;
-  left: 100px;
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.42, 0, 0.58, 0);
-}
+/* #human-holder {
+    position: absolute;
+    left: 0px;
+    bottom: calc(var(--ground-height) + 5px);
+    background-image: url("./images/lyric-stand.png");
+    background-repeat: no-repeat;
+    height: 150px;
+    left: 100px;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 0);
+} */
 
 #hit-box-lyric {
   position: absolute;
@@ -77,41 +280,41 @@ body {
   /* border: blueviolet dashed 3px; */
 }
 
-.obstacle {
-  width: 20%;
-  height: calc(var(--ground-height) - 5px);
-  border: green solid 1px;
-  position: absolute;
-  right: 425px;
-  bottom: calc(var(--ground-height) - 5px);
-}
+/* .obstacle {
+    width: 20%;
+    height: calc(var(--ground-height) - 5px);
+    border: green solid 1px;
+    position: absolute;
+    right: 425px;
+    bottom: calc(var(--ground-height) - 5px);
+} */
 
-#wall-01 {
-  width: 10%;
-  height: calc(var(--ground-height) - 5px);
-  border: gray solid 1px;
-  position: absolute;
-  right: 425px;
-  bottom: calc(var(--ground-height) * 2 - 5px);
-}
+/* #wall-01 {
+    width: 10%;
+    height: calc(var(--ground-height) - 5px);
+    border: gray solid 1px;
+    position: absolute;
+    right: 425px;
+    bottom: calc(var(--ground-height) * 2 - 5px);
+} */
 
-#step-02 {
-  width: 10%;
-  height: calc(var(--ground-height) - 5px);
-  border: gray solid 1px;
-  position: absolute;
-  right: 1125px;
-  bottom: calc(var(--ground-height) * 3.5 - 5px);
-}
+/* #step-02 {
+    width: 10%;
+    height: calc(var(--ground-height) - 5px);
+    border: gray solid 1px;
+    position: absolute;
+    right: 1125px;
+    bottom: calc(var(--ground-height) * 3.5 - 5px);
+} */
 
-#step-03 {
-  width: 10%;
-  height: calc(var(--ground-height) - 5px);
-  border: gray solid 1px;
-  position: absolute;
-  left: 125px;
-  bottom: calc(var(--ground-height) * 5 - 5px);
-}
+/* #step-03 {
+    width: 10%;
+    height: calc(var(--ground-height) - 5px);
+    border: gray solid 1px;
+    position: absolute;
+    left: 125px;
+    bottom: calc(var(--ground-height) * 5 - 5px);
+} */
 
 .enemy {
   width: 10%;
@@ -126,6 +329,7 @@ body {
   transform-origin: bottom;
   border-radius: 25%;
 }
+
 .bounce {
   animation-name: bounce;
   animation-timing-function: cubic-bezier(0.1, 0.9, 0.1, 0.9);
@@ -143,13 +347,13 @@ body {
     bottom: calc(var(--ground-height) * 5.5); */
 }
 
-.ground {
-  width: 100%;
-  height: calc(var(--ground-height) - 5px);
-  border: black solid 1px;
-  position: absolute;
-  bottom: 0px;
-}
+/* .ground {
+    width: 100%;
+    height: calc(var(--ground-height) - 5px);
+    border: black solid 1px;
+    position: absolute;
+    bottom: 0px;
+} */
 
 .test-space {
   padding-left: 50px;
@@ -160,28 +364,37 @@ body {
   border: whitesmoke solid 1px;
 }
 
-.result {
-  padding-left: 70%;
+.header {
+  display: flex;
+  /* justify-content: space-around; */
   color: whitesmoke;
   font-size: x-large;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  border: whitesmoke solid 1px;
 }
+
+/* #greet {
+    padding-right: 20%;
+}
+
+#timer {
+    padding-left: 20%;
+} */
 
 .title-box {
   position: relative;
   display: flex;
-  padding: 20px;
+  /* padding: 20px; */
   color: whitesmoke;
-  max-height: 5%;
+  /* max-height: 5%; */
   text-align: center;
-  align-self: flex-end;
+  /* align-self: flex-end; */
 }
 
 #subhead {
+  color: whitesmoke;
   position: relative;
-  align-self: flex-end;
+  /* align-self: flex-end; */
   padding-left: 50px;
 }
 
@@ -208,14 +421,17 @@ body {
 }
 
 .move-down {
-  animation: rise-2 2s steps(4) infinite, backwards 15s linear infinite;
+  animation: rise-2 2s steps(var(--four)) infinite,
+    backwards 15s linear infinite;
   transition-timing-function: ease-in;
   /* transition: .25s; */
 }
 
 .move-right,
 .move-left {
-  animation: runs 1.25s steps(8);
+  height: var(--sprite-size-small);
+  background-size: var(--animate-eight-small) var(--sprite-size-small);
+  animation: runs 1.25s steps(var(--eight));
   animation-iteration-count: 1;
   transition-timing-function: ease-out;
   /* forwards 15s linear infinite; */
@@ -224,47 +440,67 @@ body {
 
 .move-up,
 .move-down {
-  animation: jumps 1.35s steps(9);
+  height: var(--sprite-size-small);
+  background-size: var(--animate-nine-small) var(--sprite-size-small);
+  animation: jumps 1.35s steps(var(--nine));
   animation-iteration-count: 1;
   transition-timing-function: ease-out;
   animation-delay: -0.1s;
 }
 
 .move-stand {
-  animation: stands 3s steps(4);
+  height: var(--sprite-size-large);
+  background-size: var(--animate-four-large) var(--sprite-size-large);
+  animation: stands 3s steps(var(--four));
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
+}
+
+.move-dance {
+  height: var(--sprite-size-small);
+  background-size: var(--animate-four-small) var(--sprite-size-small);
+  animation: dances 3s steps(var(--four));
   animation-iteration-count: infinite;
   transition-timing-function: ease-in-out;
 }
 
 .move-fly-right,
 .move-fly-left {
-  animation: flies 1.25s steps(11);
+  height: var(--sprite-size-small);
+  background-size: var(--animate-eleven-small) var(--sprite-size-small);
+  animation: flies 1.25s steps(var(--eleven));
   animation-iteration-count: infinite;
   transition-timing-function: ease-in-out;
 }
 
 .liftoff {
-  animation: lifts-off 2s steps(11);
+  height: var(--sprite-size-small);
+  background-size: var(--animate-eleven-small) var(--sprite-size-small);
+  animation: lifts-off 2s steps(var(--eleven));
   animation-iteration-count: 1;
   transition-timing-function: ease-in-out;
   /* animation-timing-function: cubic-bezier(0.42, 0, 0.58, .2); */
 }
 
 .landing {
-  animation: lands 2s steps(11);
+  height: var(--sprite-size-small);
+  background-size: var(--animate-eleven-small) var(--sprite-size-small);
+  animation: lands 2s steps(var(--eleven));
   animation-iteration-count: 1;
   transition-timing-function: ease-in-out;
 }
 
 .move-right-squatch,
 .move-left-squatch {
-  animation: squatch-walks 0.75s steps(6);
+  height: var(--sprite-size-large);
+  background-size: var(--animate-six-large) var(--sprite-size-large);
+  animation: squatch-walks 0.75s steps(var(--six));
   animation-iteration-count: 1;
   transition-timing-function: ease-in-out;
 }
 
 /* .divebomb {
-    animation: swoop 2.25s steps(11);
+    animation: swoop 2.25s steps(var(--eleven));
     animation-iteration-count: 1;
     transition-timing-function: ease-in-out;
     offset-rotate: 45deg;
@@ -356,61 +592,120 @@ body {
     background-color: deeppink;
 } */
 
+.move-day-shift {
+  height: var(--sprite-size-large);
+  background-size: var(--animate-eleven-large);
+  /* background-size: var(--animate-eleven-large) var(--sprite-size-large); */
+  animation: day-shifts 2s steps(var(--eleven));
+  animation-iteration-count: 1;
+  transition-timing-function: ease-in-out;
+}
+
 .collision {
-  animation-play-state: paused;
-  background-color: deeppink;
+  /* animation-play-state: paused; */
+  /* background-color: deeppink; */
+  /* border: 0.5px solid deeppink; */
+  border-radius: 50%;
+  animation: pulse 0.5s steps(var(--eleven));
+  animation-iteration-count: infinite;
+  transition-timing-function: ease-in-out;
+}
+
+@keyframes day-shifts {
+  from {
+    background-position: var(--animate-eleven-large);
+  }
+  to {
+    background-position: 0;
+    /* background-position: -3307px; */
+  }
 }
 
 @keyframes stands {
-  100% {
-    background-position: -1200px;
+  from {
+    background-position: var(--animate-four-large);
+  }
+  to {
+    background-position: 0;
   }
 }
 
 @keyframes dances {
-  100% {
-    background-position: -600px;
+  from {
+    background-position: var(--animate-four-small);
+  }
+  to {
+    background-position: 0;
   }
 }
 
 @keyframes runs {
-  100% {
-    background-position: -2400px;
+  from {
+    background-position: var(--animate-eight-small);
+  }
+  to {
+    background-position: 0;
   }
 }
 
 @keyframes jumps {
-  100% {
-    background-position: -2700px;
+  from {
+    background-position: var(--animate-nine-small);
+  }
+  to {
+    background-position: 0;
   }
 }
 
 @keyframes lifts-off {
-  100% {
-    background-position: -3143px;
+  from {
+    background-position: var(--animate-eleven-small);
+  }
+  to {
+    background-position: 0;
   }
 }
 
 @keyframes lands {
-  100% {
-    background-position: -3137px;
+  from {
+    background-position: var(--animate-eleven-small);
+  }
+  to {
+    background-position: 0;
   }
 }
 
 @keyframes flies {
-  100% {
-    background-position: -3300px;
+  from {
+    background-position: var(--animate-eleven-small);
   }
-}
-
-@keyframes flies {
-  100% {
-    background-position: -3300px;
+  to {
+    background-position: 0;
   }
 }
 
 @keyframes squatch-walks {
+  from {
+    background-position: var(--animate-six-large);
+  }
+  to {
+    background-position: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
+  }
+
+  70% {
+    -moz-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+  }
+
   100% {
-    background-position: -1800px;
+    -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
   }
 }

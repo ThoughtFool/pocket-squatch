@@ -236,12 +236,16 @@ class Sprite_Physics {
                 this.top < elem_coords.bottom &&
                 this.top + this.height > elem_coords.top
             ) {
-                // Testing ONLY:
-                let spriteHolderElem = document.getElementById("sprite-holder");
-                // spriteHolderElem.classList.add("collision");
-                setTimeout(() => {
-                    spriteHolderElem.classList.remove("collision");
-                }, 50);
+                // // Testing ONLY:
+                // let spriteHolderElem = document.getElementById("sprite-holder");
+
+                // if (!spriteHolderElem.classList.contains("collision")) {
+                //     spriteHolderElem.classList.add("collision");
+                //     setTimeout(() => {
+                //         spriteHolderElem.classList.remove("collision");
+                //     }, 100);
+
+                // };
                 result = true;
 
                 if (this.top + this.height > elem_coords.top && this.top + (this.height * .95) < elem_coords.top &&

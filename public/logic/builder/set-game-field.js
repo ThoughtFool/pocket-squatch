@@ -9,6 +9,7 @@ const seperateSquares = require("./join-divs/seperate-squares");
 const compareSquares = require("./join-divs/_compare-squares");
 const createLevelObj = require("./join-divs/create-level-obj");
 const sortAllSquares = require("./join-divs/sort-all-squares");
+const moveAndDisplay = require("../sprite-logic/move-and-display/move-and-display");
 
 const setGameField = function (levelID, cb) {
 
@@ -40,7 +41,7 @@ const setGameField = function (levelID, cb) {
         gameField.appendChild(grid);
 
         const gameGrid = document.querySelector(`#${gridID}`);
-        gameGrid.style.width = `${gridSize}px`;
+        gameGrid.style.width = `${gridSize * 1.25}px`;
         gameGrid.style.height = `${gridSize}px`;
 
         // gameGrid.style.width = `100%`;
@@ -168,8 +169,8 @@ const setGameField = function (levelID, cb) {
                 coords: {
                     left: gridDimensions.left,
                     top: gridDimensions.top,
-                    width: 150,
-                    height: 150,
+                    width: moveAndDisplay.relativeGridResizeFunc("human"),
+                    height: moveAndDisplay.relativeGridResizeFunc("human"),
                     right: this.left + this.width
                 },
                 elemType: "div",

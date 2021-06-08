@@ -73,9 +73,14 @@ const timeKeeper = function () {
             //     console.info("already updating shifts through user actions");
             // } else {
 
-            moveAndDisplay.shiftLoc(spriteHolder, 150);
-            // moveAndDisplay.therianthropyType(spriteHolder);
-            moveAndDisplay.idleShift(spriteHolder);
+            moveAndDisplay.therianthropy(spriteHolder);
+            setTimeout(() => {
+                moveAndDisplay.shiftLoc(spriteHolder, moveAndDisplay.relativeGridResizeFunc("human"), "human");
+
+                // moveAndDisplay.shiftLoc(spriteHolder, 150);
+            }, 2000);
+
+            // moveAndDisplay.idleShift(spriteHolder);
 
             // };
             // });
@@ -104,7 +109,9 @@ const timeKeeper = function () {
             //     console.info("already updating shifts through user actions");
             // // } else {
 
-            moveAndDisplay.shiftLoc(spriteHolder, 300);
+            moveAndDisplay.shiftLoc(spriteHolder, moveAndDisplay.relativeGridResizeFunc("sasquatch"), "sasquatch");
+            // moveAndDisplay.shiftLoc(spriteHolder, adjustedSize);
+            // moveAndDisplay.shiftLoc(spriteHolder, 300);
             moveAndDisplay.therianthropy(spriteHolder);
 
             // moveAndDisplay.idleShift(spriteHolder);
