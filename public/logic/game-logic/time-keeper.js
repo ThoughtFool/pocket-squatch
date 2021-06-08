@@ -57,7 +57,7 @@ const timeKeeper = function () {
         console.log(`gamespace.data[space_key.index].gameInstance.data.timer: ${gamespace.data[space_key.index].gameInstance.data.timer}`);
 
         console.log(`=======================`);
-        if (gamespace.data[space_key.index].gameInstance.data.timer <= 0) { // becomes human
+        if (gamespace.data[space_key.index].gameInstance.data.timer <= 0 || gamespace.data[space_key.index].gameInstance.player.sprite.beingType === "sasquatch") { // becomes human
             console.info("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
             gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(true);
@@ -91,7 +91,7 @@ const timeKeeper = function () {
         console.log(`gamespace.data[space_key.index].gameInstance.data.timer: ${gamespace.data[space_key.index].gameInstance.data.timer}`);
 
         console.log(`=======================`);
-        if (gamespace.data[space_key.index].gameInstance.data.timer === 25) { // become sasquatch
+        if (gamespace.data[space_key.index].gameInstance.data.timer === 25 || gamespace.data[space_key.index].gameInstance.player.sprite.beingType === "human") { // become sasquatch
             console.info("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
             //     shapeshift = true;
