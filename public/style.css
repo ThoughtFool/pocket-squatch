@@ -62,17 +62,19 @@ body {
 #game-screen {
   height: 100vh;
   width: 100vw;
-  background-size: 100%;
+  background-size: cover;
   background-image: url("./images/blue-valley.PNG");
   position: relative;
   background-repeat: no-repeat;
   display: flex;
+  justify-content: space-between;
 }
 
 #game-area {
   padding: 5vw 0vw 5vw 5vw;
   height: var(--game-height);
-  width: calc(var(--game-screen-width) - calc(var(--game-height) * 1.25));
+  width: auto;
+  /* width: calc(var(--game-screen-width) - calc(var(--game-height) * 1.25)); */
   /* flex: 0 0 40%; */
   display: flex;
   align-content: stretch;
@@ -93,7 +95,11 @@ body {
   border: var(--game-border) rgba(8, 9, 95, 0.514) solid;
   overflow: hidden;
   display: flex;
-  /* position: relative; */
+}
+
+.avatar {
+  height: 150px;
+  width: 150px;
 }
 
 .game-grid {

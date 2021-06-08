@@ -1,45 +1,78 @@
 <div id="game-screen">
-    
+
     <div id="game-area">
 
 
         {{!-- <div class="game-screen-square"> --}}
-        <div class="title-box">
-            <h1>Pocket Squatch</h1>
-        </div>
+            <div class="title-box">
+                <h1>Pocket Squatch</h1>
+            </div>
 
-        <div class="header">
-            <p id="greet">Greetings, <span id="greetings-span">{{spriteName}}</span></p>
-        </div>
+            <div class="header">
+                <p id="greet">Greetings, <span id="greetings-span">{{spriteName}}</span></p>
+            </div>
 
-        <div class="header">
-            <p id="timer">Clientside Timer: <span id="timer-span"></span></p>
-        </div>
+            <div class="header">
+                <p id="timer">Clientside Timer: <span id="timer-span"></span></p>
+            </div>
 
-        <div id="subhead">
-            <h4>roomID: <span id="roomID-span">{{roomID}}</span></h4>
-            <h4>SpaceID: <span id="SpaceID-span">{{SpaceID}}</span></h4>
-            <h5>SpaceIndex: <span id="SpaceIndex-span">{{SpaceIndex}}</span></h5>
-            <h6>gamespace: <span id="gamspace-span">{{gamespace}}</span></h6>
-        </div>
+            <div id="subhead">
+                <h4>roomID: <span id="roomID-span">{{roomID}}</span></h4>
+                <h4>SpaceID: <span id="SpaceID-span">{{SpaceID}}</span></h4>
+                <h5>SpaceIndex: <span id="SpaceIndex-span">{{SpaceIndex}}</span></h5>
+                <h6>gamespace: <span id="gamspace-span">{{gamespace}}</span></h6>
+            </div>
 
-        <div>
-            <div>
-                <label style="color:blanchedalmond" for="createSprite">Choose a name for your Hero:</label><br>
-                <input type="text" name="createSprite" id="create-sprite" placeholder="Hero Name Here..." required><br>
-                <button id="enter-game-btn">enter game</button><br>
-            </div><br>
+            {{!-- ============================================== --}}
 
-            <form id="myForm" name="myForm" autocomplete="on" method="POST" action="/enter-level">
-                <div>
-                    <label style="color:blanchedalmond" for="createSprite">Choose Level</label><br>
-                    <button id="enter-level-btn" class="btn" id="register-btn" type="submit">enter
-                        level</button><br>
+            <div class="bg-modal">
+                <div class="modal-content">
+                    <div class="divided-form">
+                        <div class="left-side-form">
+                            <div class="badge-icon">
+                                <img src="/images/lyric-sprite-up.png" alt="Avatar" class="avatar">
+                            </div>
+                            <div>
+                                <label style="color:blanchedalmond" for="createSprite">Choose a name for your
+                                    Hero:</label><br>
+                                <input type="text" name="createSprite" id="create-sprite"
+                                    placeholder="Hero Name Here..." required><br>
+                                <button id="enter-game-btn">enter game</button><br>
+                            </div>
+
+                        </div>
+                        <div class="right-side-form">
+                            <form id="myForm" name="myForm" autocomplete="on" method="POST" action="/enter-level">
+                                <div>
+                                    <label style="color:blanchedalmond" for="createSprite">Choose Level</label><br>
+                                    <button id="enter-level-btn" class="btn" id="register-btn" type="submit">enter
+                                        level</button><br>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
+            </div>
 
-        {{!-- </div> --}}
+            {{!-- <div>
+                <div>
+                    <label style="color:blanchedalmond" for="createSprite">Choose a name for your Hero:</label><br>
+                    <input type="text" name="createSprite" id="create-sprite" placeholder="Hero Name Here..."
+                        required><br>
+                    <button id="enter-game-btn">enter game</button><br>
+                </div><br>
+
+                <form id="myForm" name="myForm" autocomplete="on" method="POST" action="/enter-level">
+                    <div>
+                        <label style="color:blanchedalmond" for="createSprite">Choose Level</label><br>
+                        <button id="enter-level-btn" class="btn" id="register-btn" type="submit">enter
+                            level</button><br>
+                    </div>
+                </form>
+            </div> --}}
+
+            {{!--
+        </div> --}}
     </div>
 
     <div id="game-field">
