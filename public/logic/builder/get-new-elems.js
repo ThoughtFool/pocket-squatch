@@ -1,4 +1,6 @@
 const getNewElems = function () {
+    console.info("getNewElems function fires!")
+
     let levelCoordObject = {
 
         toKeep: [],

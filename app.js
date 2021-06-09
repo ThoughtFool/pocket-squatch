@@ -55,6 +55,17 @@ app.get("/block-builder", function (req, res) {
     });
 });
 
+app.post("/block-head", function (req, res) {
+
+    // let playerCreatedLevels = req.body["time-stamp-id"];
+    let gameLevel_ID = req.body['time-stamp-id'];
+    console.log(req.body);
+    res.render("test-box", {
+        gameLevel_ID
+    });
+    // console.log(playerCreatedLevels);
+});
+
 // startGame(gameData, gameroom);
 // console.log(currentGameroom);
 // call takeAction and provide actionType

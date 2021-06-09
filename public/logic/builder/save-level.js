@@ -3,10 +3,15 @@ const level_data = require("../../data/level-data");
 const saveLevel = function () {
     let savedLevelArray = [];
 
-    let newLevelName = document.querySelector("#coolName").value;
-
+    let newLevelName = document.querySelector("#coolName");
     console.log("newLevelName");
     console.log(newLevelName);
+
+    let newCoolName = newLevelName.value;
+    console.log("newCoolName");
+    console.log(newCoolName);
+
+
 
     // let dynaSquareContent = document.querySelectorAll(".dyna-square-content");
     let dynaSquareContent = document.getElementsByClassName("dyna-square-content");
@@ -41,7 +46,7 @@ const saveLevel = function () {
             console.log("Error: dynamic-square-content does not contain any color squares.");
         };
     };
-    return level_data.saveNew(savedLevelArray, newLevelName);
+    return level_data.saveNew(savedLevelArray, newCoolName);
     // return level_data.saveNew(savedLevelArray);
 };
 

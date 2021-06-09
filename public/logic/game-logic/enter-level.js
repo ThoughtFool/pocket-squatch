@@ -60,6 +60,9 @@ const enterLevel = function (timeKeeper, myGameInfo) {
     // promise
     //     .then(function (result) {
     setGameField(levelID, function (obstacleObject, newElem_ID) {
+        console.info("obstacleObject");
+        console.info(obstacleObject);
+
         console.info("newElem_ID");
         console.info(newElem_ID);
 

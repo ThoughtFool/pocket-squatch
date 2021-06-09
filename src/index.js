@@ -7,6 +7,7 @@ const timeKeeper = require("../public/logic/game-logic/time-keeper");
 const createBoard = require("../public/logic/builder/create-board");
 const contentBuilder = require("../public/logic/builder/content-builder");
 const levelData = require("../public/data/level-data");
+let contentIDArray;
 
 //////////////////////////////////////////////////////////////////
 // Add click event for saving user levels:
@@ -14,6 +15,8 @@ const saveNewLevelBtn = document.getElementById("save-level");
 const makeNewLevelBtn = document.getElementById("make-level");
 const getNewElemsBtn = document.getElementById("get-new-elems");
 const loadMyLevelBtn = document.getElementById("time-stamp-id");
+
+const playMyLevelsBtn = document.getElementById("play-your-levels-btn");
 
 if (saveNewLevelBtn !== null) {
 
@@ -52,13 +55,15 @@ if (saveNewLevelBtn !== null) {
     console.log(gameGrid.clientHeight);
 
     contentIDArray = createBoard(whereAppend, numSquares, gridSize);
+    console.log("contentIDArray");
     console.log(contentIDArray);
+    levelData.contentIDArray = contentIDArray;
 
 
     const saveLevel = require("../public/logic/builder/save-level");
     saveNewLevelBtn.addEventListener("click", saveLevel, false);
 
-    contentBuilder(squareContentArray, contentIDArray, levelData);
+    contentBuilder(squareContentArray, levelData.contentIDArray, levelData);
     // contentBuilder(squareContentArray, contentIDArray, levelData, levelID);
 
 
@@ -100,6 +105,17 @@ if (saveNewLevelBtn !== null) {
 
     const loadMyLevel = require("../public/logic/builder/load-my-level");
     loadMyLevelBtn.addEventListener("change", loadMyLevel, false);
+
+    playMyLevelsBtn.addEventListener("click", function () {
+        // event.preventDefault();
+        let level_data = require("../public/data/level-data");
+        console.log("playMyLevelsBtn fires...");
+        console.log(level_data);
+
+        // testing ONLY (user input needed):
+
+        return level_data;
+    });
 
 };
 

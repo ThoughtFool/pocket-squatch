@@ -16,11 +16,13 @@ const levelData = {
     loop: function (level, counter) {
         return this.data[level].blueprint[counter];
     },
+    userMade_idArr: [],
     saveNew: function (savedLevelArray, newLevelName) {
         // let timeStamp = Date.now();
         let timeStamp = this.addStampToList();
         // console.log("timeStamp");
         // console.log(timeStamp);
+        this.userMade_idArr.push({ [timeStamp]: newLevelName });
         this.data[timeStamp] = {
             blueprint: savedLevelArray,
             name: newLevelName,

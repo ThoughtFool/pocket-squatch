@@ -74,9 +74,11 @@ const setGameField = function (levelID, cb) {
         .then(function (contentIDArray) {
             // console.info("contentIDArray");
             // console.info(contentIDArray);
-            return contentBuilder(squareContentArray, contentIDArray, level_data, levelID);
+            level_data.contentIDArray = contentIDArray;
+            return contentBuilder(squareContentArray, level_data.contentIDArray, level_data, levelID);
         })
         .then(function (squareContentArray) {
+            console.info("In promise: before getNewElems()");
             return getNewElems();
         })
         .then(function (toKeep) {
@@ -186,8 +188,8 @@ const setGameField = function (levelID, cb) {
             return drawLevel("my-grid", levelObj, null, true);
         })
         .then(function (newElemResult) {
-            console.log("newElemResult");
-            console.log(newElemResult);
+            console.info("newElemResult");
+            console.info(newElemResult);
 
             let obstacleObject = {
                 ground_className: "square-soil",
