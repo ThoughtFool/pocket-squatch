@@ -1,4 +1,4 @@
-const contentBuilder = function (squareContentArray, contentIDArray, levelsObject, levelID) {
+const contentBuilder = function (squareContentArray, contentIDArray, levelsObject, levelID = 01) {
     for (let i = 0; i < contentIDArray.length; i++) {
         // let randomClass = Math.floor(Math.random() * 8);
         let contentSpace = document.getElementById(`${contentIDArray[i]}`);

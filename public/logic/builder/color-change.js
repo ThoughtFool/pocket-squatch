@@ -1,5 +1,18 @@
 const colorChange = function (event) {
 
+    const darkGrayBrush = document.getElementById("dark-gray-brush");
+
+    // if (darkGrayBrush !== null) {
+    const purpleBrush = document.getElementById("purple-brush");
+    const redBrush = document.getElementById("red-brush");
+    const blueBrush = document.getElementById("blue-brush");
+    const greenBrush = document.getElementById("green-brush");
+    const brownBrush = document.getElementById("brown-brush");
+    const lightBlueBrush = document.getElementById("light-blue-brush");
+    const blackBrush = document.getElementById("black-brush");
+
+
+
     if (event.buttons == 1 || event.buttons == 3) {
         let contentToColor;
         contentToColor = document.getElementById(event.target.id);

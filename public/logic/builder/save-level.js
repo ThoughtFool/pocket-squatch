@@ -1,8 +1,13 @@
 const level_data = require("../../data/level-data");
-const addStampToList = require("./")
 
 const saveLevel = function () {
     let savedLevelArray = [];
+
+    let newLevelName = document.querySelector("#coolName").value;
+
+    console.log("newLevelName");
+    console.log(newLevelName);
+
     // let dynaSquareContent = document.querySelectorAll(".dyna-square-content");
     let dynaSquareContent = document.getElementsByClassName("dyna-square-content");
 
@@ -36,8 +41,8 @@ const saveLevel = function () {
             console.log("Error: dynamic-square-content does not contain any color squares.");
         };
     };
-    return level_data.saveNew(savedLevelArray);
-    // return level_data.saveNew(savedLevelArray, addStampToList);
+    return level_data.saveNew(savedLevelArray, newLevelName);
+    // return level_data.saveNew(savedLevelArray);
 };
 
 module.exports = saveLevel;

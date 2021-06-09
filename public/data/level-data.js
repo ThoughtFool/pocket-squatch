@@ -1,5 +1,7 @@
 const levelData = {
 
+    addStampToList: require("../logic/builder/add-stamp"),
+
     loop_alt: function (blueprint) {
         for (let i = 0; i < blueprint.length; i++) {
             // TODO: insert loop from "block-builder folder"
@@ -14,16 +16,22 @@ const levelData = {
     loop: function (level, counter) {
         return this.data[level].blueprint[counter];
     },
-    saveNew: function (savedLevelArray) {
-        let timeStamp = Date.now();
-        // let timeStamp = addStampToList();
+    saveNew: function (savedLevelArray, newLevelName) {
+        // let timeStamp = Date.now();
+        let timeStamp = this.addStampToList();
         // console.log("timeStamp");
         // console.log(timeStamp);
-        this.myLevels[timeStamp] = savedLevelArray;
-        console.log(this);
-        return this;
+        this.data[timeStamp] = {
+            blueprint: savedLevelArray,
+            name: newLevelName,
+            enemy: {},
+            enemyTot: 5,
+            gravity: 0.2,
+            drag: 0.999,
+            groundDrag: 0.9,
+            ground: 150
+        };
     },
-
     data: {
 
         01: { // TODO: Add method to build level from array:
@@ -34,11 +42,11 @@ const levelData = {
                 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5,
                 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5,
                 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5,
-                1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 5,
-                1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 2, 2, 5,
-                1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 2, 2, 5,
-                1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 2, 2, 5,
-                1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 2, 2, 5,
+                1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5,
+                1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5,
+                1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 5,
+                1, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 5,
+                1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 5,
                 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5,
                 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5,
                 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5,

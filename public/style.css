@@ -67,7 +67,7 @@ body {
   position: relative;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 #game-area {
@@ -193,12 +193,12 @@ body {
   background-position: center;
 }
 
-.builder {
+/* .builder {
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: space-around;
-}
+} */
 
 .control-panel {
   width: auto;
@@ -210,7 +210,9 @@ body {
 
 .panel-card {
   height: 50vh;
-  width: 50vh;
+  width: auto;
+
+  /* width: 50%; */
   background-image: linear-gradient(rgb(124, 97, 245), rgb(10, 10, 0));
   border-radius: 5%;
   align-items: center;
