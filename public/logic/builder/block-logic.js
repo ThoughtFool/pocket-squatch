@@ -220,6 +220,11 @@ const contentBuilder = function (squareContentArray, contentIDArray, levelsObjec
 const saveLevel = function () {
     let savedLevelArray = [];
     // let dynaSquareContent = document.querySelectorAll(".dyna-square-content");
+    let newLevelName = document.querySelector("#coolName").value;
+
+    console.log("newLevelName");
+    console.log(newLevelName);
+
     let dynaSquareContent = document.getElementsByClassName("dyna-square-content");
 
     for (let i = 0; i < dynaSquareContent.length; i++) {
@@ -252,6 +257,19 @@ const saveLevel = function () {
             console.log("Error: dynamic-square-content does not contain any color squares.");
         };
     };
+
+    // {
+    //     {
+    // blueprint: [],
+    //             name: "insert cool name here",
+    //                 enemy: { },
+    //         enemyTot: 5,
+    //             gravity: 0.2,
+    //                 drag: 0.999,
+    //                     groundDrag: 0.9,
+    //                         ground: 150 --
+    //     }
+    // }
     return levelsObject.saveNew(savedLevelArray, addStampToList);
 };
 

@@ -201,10 +201,45 @@ body {
 }
 
 .control-panel {
+  width: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
   justify-content: center;
+}
+
+.panel-card {
+  height: 50vh;
+  width: 50vh;
+  background-image: linear-gradient(rgb(124, 97, 245), rgb(10, 10, 0));
+  border-radius: 5%;
+  align-items: center;
+  display: flex;
+}
+
+.panel-body {
+  padding: 25px;
+  margin: auto;
+  background-image: linear-gradient(rgb(239, 8, 247), whitesmoke);
+  border-radius: 5%;
+  width: 80%;
+  height: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-body {
+  width: auto;
+}
+
+.panel-body > h1 {
+  text-align: center;
+  color: antiquewhite;
+}
+
+.panel-body > h3 {
+  text-align: center;
+  color: antiquewhite;
 }
 
 .button-array {
@@ -212,15 +247,38 @@ body {
   justify-content: center;
 }
 
+.button-array > input {
+  background-image: linear-gradient(rgb(124, 97, 245), rgb(10, 10, 0));
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  /* font-size: 16px; */
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  border-radius: 15px;
+}
+
 .palette-bar {
+  width: auto;
+  height: 20vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.palette-bar > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .palette {
   border: 1px;
-  height: 25px;
-  width: 25px;
+  height: 75px;
+  width: 75px;
+  border-radius: 25%;
 }
 
 #dark-gray-brush {

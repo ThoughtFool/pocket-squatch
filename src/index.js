@@ -21,7 +21,7 @@ enterGameBtn.addEventListener("click", function (event) {
     // testing ONLY (user input needed):
     let spriteName = createSprite.value;
     myGameInfo = enterGame(spriteName, player_data);
-    
+
     return myGameInfo;
 });
 
@@ -35,7 +35,7 @@ enterLevelBtn.addEventListener("click", function (event) {
     return enterLevel(timeKeeper, myGameInfo);
 });
 
-console.log = function () {};
+console.log = function () { };
 //////////////////////////////////////////////////////////////////
 // test data: need to move backend logic to front for testing: (object-based game physics)
 //////////////////////////////////////////////////////////////////
@@ -47,8 +47,8 @@ console.log("myGamescreen");
 console.log(myGamescreen);
 
 // places sprite and is called after game is iniated:
-const createSpriteElem = function (gameSpace_Data, gameScreen_ID, ground_ID, ) {
-    
+const createSpriteElem = function (gameSpace_Data, gameScreen_ID, ground_ID,) {
+
 };
 
 // //////////////////////////////////////////////////////////////////

@@ -5,27 +5,63 @@
         </div>
 
         <aside class="control-panel">
-            <div class="button-array">
-                <input type="button" value="make-level" id="make-level" onclick="createLevel()">
-                <input type="button" value="save-level" id="save-level" onclick="saveLevel()">
-                <input type="button" value="get-new-elems" id="get-new-elems" onclick="getNewElems()">
-                <!-- <input type="number" name="time-stamp-id" id="time-stamp-id"> -->
-                <select id="time-stamp-id" onChange="loadMyLevel(this);">
-                    <option>Please select image history</option>
-                    <!-- <option value="002">002</option> -->
-                </select>
-            </div>
-            
-            <!-- <input type="button" value="load-level" id="load-level" onclick="loadMyLevel()"> -->
-            <div class="palette-bar">
-                <div class="palette" id="dark-gray-brush"></div>
-                <div class="palette" id="purple-brush"></div>
-                <div class="palette" id="red-brush"></div>
-                <div class="palette" id="blue-brush"></div>
-                <div class="palette" id="green-brush"></div>
-                <div class="palette" id="brown-brush"></div>
-                <div class="palette" id="light-blue-brush"></div>
-                <div class="palette" id="black-brush"></div>
+            <div class="panel-card">
+                <div class="panel-body">
+
+
+                    <h1>Let's Create a Cool, New Level</h1>
+
+                    <form action="/" method="post" target="_blank">
+                        <label for="coolName" >Name Your Level</label>
+                        <input type="text" id="coolName" name="coolName" value="insert cool name here"><br><br>
+
+                        {{!-- TODO: --}}
+                        {{!-- <input type="submit" value="Submit"> --}}
+                    </form>
+
+                    <div class="button-array">
+                        <input type="button" value="make-level" id="make-level" onclick="createLevel()">
+                        <input type="button" value="save-level" id="save-level" onclick="saveLevel()">
+                        <input type="button" value="get-new-elems" id="get-new-elems" onclick="getNewElems()">
+                        <!-- <input type="number" name="time-stamp-id" id="time-stamp-id"> -->
+                    </div>
+
+                    {{!-- blueprint: [],
+                    name: "insert cool name here",
+                    enemy: {},
+                    enemyTot: 5,
+                    gravity: 0.2,
+                    drag: 0.999,
+                    groundDrag: 0.9,
+                    ground: 150 --}}
+
+                    <!-- <input type="button" value="load-level" id="load-level" onclick="loadMyLevel()"> -->
+
+                    <h3 class="palette-label">Select a color block below to begin</h3>
+                    <hr>
+                    <div class="palette-bar">
+                        <div>
+                            <div class="palette" id="dark-gray-brush"></div>
+                            <div class="palette" id="purple-brush"></div>
+                            <div class="palette" id="red-brush"></div>
+                            <div class="palette" id="blue-brush"></div>
+                        </div>
+                        <div>
+                            <div class="palette" id="green-brush"></div>
+                            <div class="palette" id="brown-brush"></div>
+                            <div class="palette" id="light-blue-brush"></div>
+                            <div class="palette" id="black-brush"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="time-stamp-id">Load a Saved Level</label>
+                        <select id="time-stamp-id" onChange="loadMyLevel(this);">
+                            <option>Please select image history</option>
+                            <!-- <option value="002">002</option> -->
+                        </select>
+                    </div>
+                </div>
             </div>
         </aside>
     </div>

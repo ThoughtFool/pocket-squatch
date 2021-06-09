@@ -1,6 +1,7 @@
 const MakeSquare = require("./make-square");
 const isSquare = require("./is-square");
 
+// gridSize can dynamically assigned but will need to match saved levelboards:
 const createBoard = function (whereAppend, numSquares, gridSize) {
     const parentElems_coords = [];
     let contentIDArray = [];
