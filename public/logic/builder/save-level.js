@@ -1,6 +1,6 @@
 const level_data = require("../../data/level-data");
 // const PostMethod = require("../../../routes/post-method");
-const fetchFunc = require("../../../routes/fetch");
+const fetchFunc = require("../../../routes/fetch-func");
 const modalLoader = require("../../../public/logic/modal-loader");
 
 const saveLevel = function () {
@@ -13,6 +13,8 @@ const saveLevel = function () {
     let newCoolName = newLevelName.value;
     console.log("newCoolName");
     console.log(newCoolName);
+
+    let createdBy = localStorage.getItem("game-author");
 
     // let dynaSquareContent = document.querySelectorAll(".dyna-square-content");
     let dynaSquareContent = document.getElementsByClassName("dyna-square-content");
@@ -60,7 +62,7 @@ const saveLevel = function () {
             },
             body: JSON.stringify({
                 name: newCoolName,
-                createdBy: "Inversioneer",
+                createdBy: createdBy,
                 blueprint: savedLevelArray
             })
         };
@@ -72,43 +74,23 @@ const saveLevel = function () {
         .then(function (response) {
             console.log(response);
 
-            return level_data.saveNew(savedLevelArray, newCoolName, response);
+            let mongoID = response.created._id;
+            console.log(mongoID);
 
-            // .then(function (response) {
-            //     console.log(response);
+            let creationDate = response.created.creationDate;
+            console.log(creationDate);
 
-            //     let url = "http://localhost:3000/levels";
-            //     let objParam = {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json'
-            //         },
-            //         body: JSON.stringify({
-            //             name: newCoolName,
-            //             createdBy: "Inversioneer",
-            //             blueprint: savedLevelArray
-            //         })
-            //     };
+            console.log(response.created.createdBy);
+            console.log(response.created.creationDate);
 
-            //     return fetchFunc(url, objParam);
+            return level_data.saveNew(savedLevelArray, newCoolName, mongoID, createdBy, creationDate);
         })
-        // .then(function (response) {
-        //     console.log(response);
 
-        //     return fetchFunc(`http://localhost:3000/levels/block-builder/ids`);
-        // })
         .then(function (response) {
             console.log(response);
 
             return modalLoader("remove", "#game-screen");
         });
-    // .then(function (response) {
-    //     console.log(response);
-
-    // });
-
-    // return PostMethod("http://localhost:3000/levels", level_data.saveNew(savedLevelArray, newCoolName));
-    // return level_data.saveNew(savedLevelArray, newCoolName);
 };
 
 module.exports = saveLevel;

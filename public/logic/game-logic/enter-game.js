@@ -10,15 +10,19 @@ const updateClientScreen = require("./update-client");
 
 const enterGame = function (spriteName, player_data) {
 
+    console.log("here I am");
+
+    localStorage.setItem("game-author", spriteName);
+
     // create Sprite:
     const sprite_data = new Sprite(spriteName, 100, 25, true, true, actionTypes); // name, health, hasStoneQueen, isDaytime, asleep, timer
-    
+
     // add Sprite to player:
     player_data.sprite = sprite_data; // TODO: create a profile/player class
-    
+
     // set game level:
     game_data.loadLevel(player_data.currentLevel);
-    
+
     // create gameroom instance:
     const myGameInstance = new Gameroom_Instance(player_data, game_data);
 
@@ -27,7 +31,7 @@ const enterGame = function (spriteName, player_data) {
     space_key.id = SpaceID;
     let SpaceIndex = gamespace.getIndex(SpaceID);
     space_key.index = SpaceIndex;
-    
+
     // Test ONLY:
     let ternaryTest = gamespace.finder("index", SpaceID);
     console.log("ternaryTest");
@@ -44,7 +48,7 @@ const enterGame = function (spriteName, player_data) {
     };
 
     console.log(myGameInstance);
-    
+
     ///////////////////////////////////////////////////////////////
     updateClientScreen(dataObj);
 

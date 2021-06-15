@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const Level = require("../models/Level");
+const level_data = require("../public/data/level-data");
 
 // Get all:
 router.get("/", async (req, res) => {
@@ -29,17 +30,19 @@ router.get("/block-builder/ids", async (req, res) => {
         const idArray = await Level.distinct('_id', {}, function (err, result) {
             console.log("result");
             console.log(result);
-            return result;// result is your array of ids
+
+            return result; // result is your array of ids
         });
+
         console.log("idArray");
         console.log(idArray);
+
         res.render("block-builder", {
 
-            // levels: mongoose_DB.find()
             idArray: idArray
 
         });
-        // res.json(idArray);
+
     } catch (err) {
         res.status(500).json({ message: err.message });
     };

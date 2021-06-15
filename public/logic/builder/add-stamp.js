@@ -1,12 +1,14 @@
 const addStampToList = function (mongoID) {
 
-    let timeStamp = Date.now();
+    let objectIdStamp = mongoID;
     const selector = document.getElementById("time-stamp-id");
     let option = document.createElement("option");
-    option.value = timeStamp;
-    option.text = timeStamp;
+    option.value = objectIdStamp;
+    option.text = objectIdStamp;
+    option.id = objectIdStamp;
     selector.add(option, selector[0]);
-    return timeStamp;
+    return objectIdStamp;
+
 };
 
 module.exports = addStampToList;

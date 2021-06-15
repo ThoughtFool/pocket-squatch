@@ -1,6 +1,6 @@
 const contentBuilder = require("./content-builder");
 const level_data = require("../../data/level-data");
-const fetchFunc = require("../../../routes/fetch");
+const fetchFunc = require("../../../routes/fetch-func");
 const modalLoader = require("../../../public/logic/modal-loader");
 
 let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
@@ -28,15 +28,17 @@ const loadMyLevel = function () {
         .then(function (response) {
             console.log(response);
 
-
-
+            // response.blueprint
             return response;
         })
-        // .then(function (response) {
-        //     console.log(response);
+        .then(function (response) {
+            console.log("level_data");
+            console.log(level_data);
+            console.log("timeID");
+            console.log(timeID);
 
-        //     return contentBuilder(squareContentArray, level_data.contentIDArray, level_data, timeID);
-        // })
+            return contentBuilder(squareContentArray, level_data.contentIDArray, level_data, timeID);
+        })
         .then(function (response) {
             console.log(response);
 

@@ -17,24 +17,26 @@ const levelData = {
         return this.data[level].blueprint[counter];
     },
     userMade_idArr: [],
-    saveNew: function (savedLevelArray, newLevelName, mongoID) {
+    saveNew: function (savedLevelArray, newLevelName, mongoID, createdBy, creationDate) {
         console.log("mongoID");
         console.log(mongoID);
 
         // let timeStamp = Date.now();
-        let timeStamp = this.addStampToList();
-        // console.log("timeStamp");
-        // console.log(timeStamp);
-        this.userMade_idArr.push({ [timeStamp]: newLevelName });
-        this.data[timeStamp] = {
-            blueprint: savedLevelArray,
+        let objectIdStamp = this.addStampToList(mongoID);
+        // this.userMade_idArr.push({ [timeStamp]: newLevelName });
+        this.data[objectIdStamp] = {
+            _id: mongoID,
             name: newLevelName,
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
+            createdBy: createdBy,
+            blueprint: savedLevelArray,
+            creationDate: creationDate
+
+            // enemy: {},
+            // enemyTot: 5,
+            // gravity: 0.2,
+            // drag: 0.999,
+            // groundDrag: 0.9,
+            // ground: 150
         };
 
         console.log("this");
@@ -72,26 +74,6 @@ const levelData = {
             gravity: 0.2, // gravity per frame
             drag: 0.999,
             groundDrag: 0.9, // ground movement
-            ground: 150
-        },
-        02: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
-        },
-        03: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
             ground: 150
         }
     }

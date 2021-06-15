@@ -3,10 +3,13 @@ const enterGame = require("../public/logic/game-logic/enter-game");
 const enterLevel = require("../public/logic/game-logic/enter-level");
 const timeKeeper = require("../public/logic/game-logic/time-keeper");
 
+const fetchFunc = require("../routes/fetch-func");
+const modalLoader = require("../public/logic/modal-loader");
+
 // Block-Builder:
 const createBoard = require("../public/logic/builder/create-board");
 const contentBuilder = require("../public/logic/builder/content-builder");
-const levelData = require("../public/data/level-data");
+const level_data = require("../public/data/level-data");
 let contentIDArray;
 
 //////////////////////////////////////////////////////////////////
@@ -57,14 +60,53 @@ if (saveNewLevelBtn !== null) {
     contentIDArray = createBoard(whereAppend, numSquares, gridSize);
     console.log("contentIDArray");
     console.log(contentIDArray);
-    levelData.contentIDArray = contentIDArray;
 
+    let promise = new Promise(function (resolve, reject) {
+        console.log("promise...");
+        modalLoader("add", "#game-screen");
+
+        let url = "http://localhost:3000/levels";
+
+        return resolve(fetchFunc(url));
+    });
+
+    promise
+        .then(function (response) {
+            console.log(response);
+
+            function ObjById(obj) {
+                let currentId = obj._id;
+                level_data.data[currentId] = obj;
+                return currentId;
+            };
+
+            const ObjectIdArray = response.map(ObjById);
+            console.log("ObjectIdArray:");
+            console.log(ObjectIdArray);
+
+            console.log("level_data:");
+            console.log(level_data);
+
+            return ObjectIdArray;
+
+            // for (let id in response) {
+            //     level_data.data[id] = response;
+            // };
+
+        })
+        .then(function (response) {
+            console.log(response);
+
+            return modalLoader("remove", "#game-screen");
+        });
+
+    level_data.contentIDArray = contentIDArray;
 
     const saveLevel = require("../public/logic/builder/save-level");
     saveNewLevelBtn.addEventListener("click", saveLevel, false);
 
-    contentBuilder(squareContentArray, levelData.contentIDArray, levelData);
-    // contentBuilder(squareContentArray, contentIDArray, levelData, levelID);
+    contentBuilder(squareContentArray, level_data.contentIDArray, level_data);
+    // contentBuilder(squareContentArray, contentIDArray, level_data, levelID);
 
 
     const darkGrayBrush = document.getElementById("dark-gray-brush");
