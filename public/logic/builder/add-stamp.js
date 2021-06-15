@@ -1,4 +1,4 @@
-const addStampToList = function () {
+const addStampToList = function (mongoID) {
 
     let timeStamp = Date.now();
     const selector = document.getElementById("time-stamp-id");

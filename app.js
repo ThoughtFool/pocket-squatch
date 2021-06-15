@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongojs = require("mongojs");
 const logger = require("morgan");
@@ -15,12 +17,32 @@ const player_data = require("./public/data/player-data");
 const {
     roomID
 } = require("./public/data/game-data");
+const idArray = [];
 
 // const gameData = require("./public/data/enemy-data");
 let currentTime;
 let currentGameroom = gameroom;
 
 const app = express();
+
+// =============================================
+// =============================================
+
+const mongoose = require("mongoose");
+require('mongoose').set('debug', true)
+
+mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+});
+const mongoose_DB = mongoose.connection;
+
+mongoose_DB.on("error", (err) => console.error(err));
+mongoose_DB.once("open", () => console.log("Database: Connected!"));
+
+// =============================================
+// =============================================
 
 app.use(logger("dev"));
 
@@ -41,30 +63,63 @@ app.use(express.static(path.resolve(__dirname, "dist"))); // using webpack:
 const databaseUrl = "pocketDB";
 const collections = ["mySquatches"];
 
+// =============================================
+// =============================================
+
+const levelsRouter = require("./routes/levels");
+app.use("/levels", levelsRouter);
+
+// =============================================
+// =============================================
+
 // set up mongojs db:
 const db = mongojs(databaseUrl, collections);
 
 db.on("error", error => {
     console.log("Database Error:", error);
 });
+// ===================================================================
+// ===========================  refactor  ============================
+// ===================================================================
 
-app.get("/block-builder", function (req, res) {
+app.get("/levels/block-builder/ids", function (req, res) {
     // app.get("/test-box", function (req, res) {
+    // console.log("mongoose_DB.find()");
+    // console.log(mongoose_DB.find());
+
     res.render("block-builder", {
+
+        // levels: mongoose_DB.find()
+        idArray: idArray
 
     });
 });
 
-app.post("/block-head", function (req, res) {
+app.post("/block-builder", function (req, res) {
 
     // let playerCreatedLevels = req.body["time-stamp-id"];
     let gameLevel_ID = req.body['time-stamp-id'];
+    console.log("req.body");
     console.log(req.body);
-    res.render("test-box", {
-        gameLevel_ID
+
+    mongoose_DB.save({
+        // db.mySquatches.insert({
+        name: req.body.coolName,
+        createdBy: gameLevel_ID,
+        blueprint: [gameLevel_ID]
     });
+
+    // res.render("test-box", {
+
+    //     gameLevel_ID
+    // });
     // console.log(playerCreatedLevels);
 });
+
+// ===================================================================
+// ===========================  refactor  ============================
+// ===================================================================
+
 
 // startGame(gameData, gameroom);
 // console.log(currentGameroom);
@@ -248,7 +303,8 @@ app.post("/enter-level", function (req, res) {
         SpaceIndex
     } = enterGame(spriteName, player_data);
 
-    db.mySquatches.insert({
+    mongoose_DB.mySquatches.insert({
+        // db.mySquatches.insert({
         roomID: roomID,
         gamespace: gamespace,
         SpaceID: SpaceID,

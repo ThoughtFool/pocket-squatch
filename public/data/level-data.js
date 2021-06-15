@@ -17,7 +17,10 @@ const levelData = {
         return this.data[level].blueprint[counter];
     },
     userMade_idArr: [],
-    saveNew: function (savedLevelArray, newLevelName) {
+    saveNew: function (savedLevelArray, newLevelName, mongoID) {
+        console.log("mongoID");
+        console.log(mongoID);
+
         // let timeStamp = Date.now();
         let timeStamp = this.addStampToList();
         // console.log("timeStamp");
@@ -33,6 +36,10 @@ const levelData = {
             groundDrag: 0.9,
             ground: 150
         };
+
+        console.log("this");
+        console.log(this);
+        return this;
     },
     data: {
 
@@ -86,77 +93,7 @@ const levelData = {
             drag: 0.999,
             groundDrag: 0.9,
             ground: 150
-        },
-        04: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
-        },
-        05: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
-        },
-        06: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
-        },
-        07: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
-        },
-        07: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
-        },
-        09: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
-        },
-        10: {
-            blueprint: [],
-            name: "insert cool name here",
-            enemy: {},
-            enemyTot: 5,
-            gravity: 0.2,
-            drag: 0.999,
-            groundDrag: 0.9,
-            ground: 150
-        },
+        }
     }
 };
 

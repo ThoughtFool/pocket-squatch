@@ -6,7 +6,7 @@
 
 
                 <h1>let's create a cool, new level</h1>
-                <form id="post-blocks" name="post-blocks-form" autocomplete="on" method="POST" action="/block-head">
+                <form id="post-blocks" name="post-blocks-form" autocomplete="on" method="POST" action="/">
 
 
                     <div>
@@ -47,11 +47,14 @@
                     </div>
 
                     <div>
+
                         <label for="time-stamp-id">load a saved level</label>
                         <select id="time-stamp-id" for="time-stamp-id" name="time-stamp-id">
                             {{!-- <select id="time-stamp-id" onchange="loadmylevel(this);"> --}}
                                 <option>please select image history</option>
-                                <!-- <option value="002">002</option> -->
+                                {{#each idArray}}
+                                <option id="{{this}}" value="{{this}}">{{this}}</option>
+                                {{/each}}
                             </select>
                     </div>
 
