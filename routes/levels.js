@@ -11,13 +11,7 @@ router.get("/", async (req, res) => {
         console.log("levels");
         console.log(levels);
 
-        res.render("block-builder", {
-
-            levels: levels
-
-        });
-
-        // res.json(levels);
+        res.json(levels);
     } catch (err) {
         res.status(500).json({ message: err.message });
     };
@@ -83,6 +77,7 @@ router.post("/", async (req, res) => {
             // }
         );
         res.status(201).json({
+            status: "success!",
             message: "handlePOST: /levels",
             created: newLevel
         });

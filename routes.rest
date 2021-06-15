@@ -6,7 +6,7 @@ GET http://localhost:3000/levels
 
 ###
 
-GET http://localhost:3000/levels/60c7e8774fc6d22e24f047f2
+GET http://localhost:3000/levels/60c85b253adc7f21c8b38aca
 
 
 ###
@@ -15,14 +15,14 @@ POST http://localhost:3000/levels
 Content-Type: application/json
 
 {
-    "name": "Hello, Again!",
+    "name": "Quincy Taggert",
     "createdBy": "Inversioneer",
     "blueprint": ["1, 2, 3, 4, 5, 6, 7, 8"]
 }
 
 ###
 
-DELETE http://localhost:3000/levels/60c7e8a14fc6d22e24f047f3
+DELETE http://localhost:3000/levels/60c841ce59df7a1fd437e9d3
 
 ###
 

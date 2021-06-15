@@ -28,6 +28,8 @@ const loadMyLevel = function () {
         .then(function (response) {
             console.log(response);
 
+
+
             return response;
         })
         // .then(function (response) {

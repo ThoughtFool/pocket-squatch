@@ -1,6 +1,9 @@
 // let data = { element: "barium" };
 
 module.exports = PostMethod = function (url, data) {
+    console.log("url:");
+    console.log(url);
+
     console.log("data");
     console.log(data);
     let testData = {
