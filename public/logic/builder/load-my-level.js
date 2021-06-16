@@ -21,7 +21,7 @@ const loadMyLevel = function () {
         console.log("promise...");
         modalLoader("add", "#game-screen");
 
-        return resolve(fetchFunc(`http://localhost:3000/levels/${timeID}`));
+        return resolve(fetchFunc(`http://localhost:3000/levels/${timeID}`, { mode: 'cors' }));
     });
 
     promise

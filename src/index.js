@@ -67,7 +67,7 @@ if (saveNewLevelBtn !== null) {
 
         let url = "http://localhost:3000/levels";
 
-        return resolve(fetchFunc(url));
+        return resolve(fetchFunc(url, { mode: 'cors' }));
     });
 
     promise
