@@ -6,7 +6,7 @@ const gameData = {
     // populateEnemy: require("./populate-level-enemy-data"),
 
     roomID: "60c9268c5c0aa1525c0ef895", // placeholder
-    currentLevel: 0, // default value, set by player_data
+    currentLevel: "60c9268c5c0aa1525c0ef895", // default value, set by player_data
     timer: 0,
     points: 0,
     data: {}, // TODO: add to gamescreen method
