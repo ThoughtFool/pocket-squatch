@@ -64,7 +64,13 @@ const saveLevel = function () {
             body: JSON.stringify({
                 name: newCoolName,
                 createdBy: createdBy,
-                blueprint: savedLevelArray
+                blueprint: savedLevelArray,
+                enemy: {},
+                enemyTot: 4,
+                gravity: 0.2,
+                drag: 0.999,
+                groundDrag: 0.9,
+                ground: 150
             })
         };
 

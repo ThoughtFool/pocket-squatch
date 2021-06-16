@@ -5,7 +5,7 @@ const gameData = {
     // level_data: require("./level-data"),
     // populateEnemy: require("./populate-level-enemy-data"),
 
-    roomID: 123, // placeholder
+    roomID: "60c9268c5c0aa1525c0ef895", // placeholder
     currentLevel: 0, // default value, set by player_data
     timer: 0,
     points: 0,

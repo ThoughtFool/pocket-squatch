@@ -29,14 +29,14 @@ const levelData = {
             name: newLevelName,
             createdBy: createdBy,
             blueprint: savedLevelArray,
-            creationDate: creationDate
+            creationDate: creationDate,
 
-            // enemy: {},
-            // enemyTot: 5,
-            // gravity: 0.2,
-            // drag: 0.999,
-            // groundDrag: 0.9,
-            // ground: 150
+            enemy: {},
+            enemyTot: 5,
+            gravity: 0.2,
+            drag: 0.999,
+            groundDrag: 0.9,
+            ground: 150
         };
 
         console.log("this");
