@@ -1,5 +1,3 @@
-const { Double } = require("mongodb");
-const { Int32 } = require("mongodb");
 const mongoose = require("mongoose");
 
 const levelSchema = new mongoose.Schema({
@@ -22,19 +20,19 @@ const levelSchema = new mongoose.Schema({
         type: String
     },
     enemyTot: {
-        type: Int32
+        type: Number
     },
     gravity: {
-        type: Double
+        type: Number
     },
     drag: {
-        type: Double
+        type: Number
     },
     groundDrag: {
-        type: Double
+        type: Number
     },
     ground: {
-        type: Int32
+        type: Number
     }
 });
 
