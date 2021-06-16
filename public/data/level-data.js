@@ -9,9 +9,12 @@ const levelData = {
         console.log(blueprint);
     },
 
-    build: function (level) {
+    build: function (current_player_level) {
         // this.loop(this.data[level].blueprint);
-        return this.data[level];
+
+        // TODO: need to fix below:
+        let blueprint_ID = this.currentLevelId[current_player_level];
+        return this.data[blueprint_ID]
     },
     loop: function (level, counter) {
         return this.data[level].blueprint[counter];
@@ -42,6 +45,9 @@ const levelData = {
         console.log("this");
         console.log(this);
         return this;
+    },
+    currentLevelId: {
+        01: "60c9690e91e2ddf727f4ba7e"
     },
     data: {
 

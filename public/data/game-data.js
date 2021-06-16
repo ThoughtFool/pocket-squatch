@@ -5,8 +5,8 @@ const gameData = {
     // level_data: require("./level-data"),
     // populateEnemy: require("./populate-level-enemy-data"),
 
-    roomID: "60c9268c5c0aa1525c0ef895", // placeholder
-    currentLevel: "60c9268c5c0aa1525c0ef895", // default value, set by player_data
+    roomID: "60c9690e91e2ddf727f4ba7e", // placeholder
+    currentLevel: 01, // default value, set by player_data
     timer: 0,
     points: 0,
     data: {}, // TODO: add to gamescreen method
@@ -17,8 +17,11 @@ const gameData = {
     },
 
     loadLevel: function (level) {
+
         this.data = level_data.build(level);
+        console.info(this.data);
         this.currentLevel = level;
+        console.info(this.currentLevel);
 
         this.set_gameData();
     },

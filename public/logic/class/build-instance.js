@@ -10,21 +10,22 @@ class Build_Instance {
         this.gameroom_data = gameroom_data; // build-out: current game area
 
         this.myGamescreen = myGamescreen;
-        this.testSprite = testSprite;    };
+        this.testSprite = testSprite;
+    };
 
     // TODO: combine files: level-data and enemy-type-data
-    set_gameroom () {
+    set_gameroom() {
         this.gameroom_data.player = this.sprite_data;
         this.gameroom_data.enemy = this.enemy_data; // TODO: remove this memory redundancy
         this.gameroom_data.currentLevel = this.player_data.currentLevel;
         this.level_data.build(this.gameroom_data.currentLevel); // TODO: add to gamescreen method
-        this.populate_level_enemy_data.loop(this.gameroom_data.currentLevel, this.level_data.data[this.gameroom_data.currentLevel].enemyTot);
+        this.populate_level_enemy_data.loop(this.gameroom_data.currentLevel, this.level_data.data[this.level_data.currentLevelId[this.gameroom_data.currentLevel]].enemyTot);
         this.gameroom_data.enemy = this.populate_level_enemy_data.spawn;
-        
+
         return this.gameroom_data;
     };
 
-    
+
 };
 
 module.exports = Build_Instance;
