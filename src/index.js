@@ -65,7 +65,7 @@ if (saveNewLevelBtn !== null) {
         console.log("promise...");
         modalLoader("add", "#game-screen");
 
-        let url = "http://localhost:3000/levels";
+        let url = "/levels";
 
         return resolve(fetchFunc(url, { mode: 'cors' }));
     });

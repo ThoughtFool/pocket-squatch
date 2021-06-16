@@ -54,12 +54,13 @@ const saveLevel = function () {
         console.log("promise...");
         modalLoader("add", "#game-screen");
 
-        let url = "http://localhost:3000/levels";
+        let url = "/levels";
         let objParam = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
+            mode: "cors",
             body: JSON.stringify({
                 name: newCoolName,
                 createdBy: createdBy,
