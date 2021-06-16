@@ -1,4 +1,4 @@
-const contentBuilder = function (squareContentArray, contentIDArray, levelsObject, levelID = 01) {
+const contentBuilder = function (squareContentArray, contentIDArray, levelsObject, levelID = "60c94fff9b6a7faabbdb91c5" || 01) {
     // console.log("contentIDArray in contentBuilder");
     // console.log(contentIDArray);
 

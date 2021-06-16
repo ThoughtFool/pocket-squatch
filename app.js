@@ -30,8 +30,9 @@ const app = express();
 
 const mongoose = require("mongoose");
 require('mongoose').set('debug', true)
+const MONGODB_URI = process.env.DATABASE_URL || "mongodb://localhost/level_data";
 
-mongoose.connect(process.env.DATABASE_URL, {
+mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
