@@ -71,12 +71,12 @@ body {
 }
 
 .solar-cycle {
-  animation: sunset 60s infinite;
+  animation: sunset 61s infinite;
   /* animation: sunset 25s forwards 1, sunrise 35s ease-in-out forwards 1; */
   /* animation: rise-and-set 0.5s steps(var(--eleven)); */
   /* animation-iteration-count: infinite; */
   transition-timing-function: ease-in-out;
-  animation-delay: 2s;
+  animation-delay: 1.5s;
 }
 
 @keyframes sunset {
@@ -113,8 +113,8 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 15px #aed1ee;
   background-color: #4badfdcb;
-  animation: sets-and-rises 60s ease-out infinite;
-  animation-delay: 2s;
+  animation: sets-and-rises 61s ease-out infinite;
+  animation-delay: 1.75s;
 }
 
 .sunny {
@@ -134,7 +134,7 @@ body {
   left: 0%;
   border-radius: 50%;
   box-shadow: 0 0 15px #287ec6;
-  animation: solar-flares 2s ease-out infinite;
+  animation: solar-flares 2.5s ease-out infinite;
 }
 
 .sunny:after {
@@ -173,7 +173,7 @@ body {
 }
 
 #game-area {
-  margin: 2em 2em 2em;
+  margin: 1rem 1rem 1rem;
   height: var(--game-height);
   width: auto;
   /* width: calc(var(--game-screen-width) - calc(var(--game-height) * 1.25)); */
@@ -200,8 +200,13 @@ body {
 }
 
 .avatar {
+  background-image: url("/images/lyric-sprite-up.png");
   height: 150px;
   width: 150px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  overflow: hidden;
 }
 
 .game-grid {
@@ -567,9 +572,15 @@ body {
   color: rgba(245, 245, 245, 0.781);
   top: 0;
   right: 0;
-  font-size: 20px;
+  font-size: 15px;
+  align-content: center;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.game-title {
+  font-size: 3rem;
+  display: flex;
 }
 
 /* #greet {
@@ -581,12 +592,14 @@ body {
 } */
 
 .title-box {
+  padding-top: 150px;
   position: relative;
   display: flex;
   /* padding: 20px; */
   color: whitesmoke;
   /* max-height: 5%; */
   text-align: center;
+  justify-content: space-evenly;
   /* align-self: flex-end; */
 }
 
