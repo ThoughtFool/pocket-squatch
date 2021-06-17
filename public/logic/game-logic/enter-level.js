@@ -49,9 +49,9 @@ const enterLevel = function (timeKeeper, myGameInfo) {
     // let obstacleObject = gamespace.data[space_key.index].gameInstance.data.data.obstacleObject;
 
     let _levelID = myGameInstance.player.currentLevel;
-    console.info("_levelID");
-    console.info(_levelID);
-    // console.info(myGameInstance);
+    console.log("_levelID");
+    console.log(_levelID);
+    // console.log(myGameInstance);
 
     // let promise = new Promise(function (resolve, reject) {
     //     console.log("promise begins!")
@@ -62,17 +62,17 @@ const enterLevel = function (timeKeeper, myGameInfo) {
 
     // TODO: add dynamic levelTheme instead of levelID:
     setGameField(levelID = "60c9690e91e2ddf727f4ba7e", function (obstacleObject, newElem_ID) {
-        console.info("obstacleObject");
-        console.info(obstacleObject);
+        console.log("obstacleObject");
+        console.log(obstacleObject);
 
-        console.info("newElem_ID");
-        console.info(newElem_ID);
+        console.log("newElem_ID");
+        console.log(newElem_ID);
 
         const myPhysics = new Sprite_Physics("my-grid", obstacleObject, newElem_ID);
         // const myPhysics = new Sprite_Physics("game-screen", obstacleObject, newElem_ID);
 
         gamespace.data[space_key.index].gameInstance.player.sprite.physics = myPhysics;
-        console.info(gamespace.data[space_key.index].gameInstance.player.sprite);
+        console.log(gamespace.data[space_key.index].gameInstance.player.sprite);
 
 
         //////////////////////////////////////////////////////////////////

@@ -19,9 +19,9 @@ const gameData = {
     loadLevel: function (level) {
 
         this.data = level_data.build(level);
-        console.info(this.data);
+        console.log(this.data);
         this.currentLevel = level;
-        console.info(this.currentLevel);
+        console.log(this.currentLevel);
 
         this.set_gameData();
     },

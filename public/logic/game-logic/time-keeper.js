@@ -58,7 +58,7 @@ const timeKeeper = function () {
 
         console.log(`=======================`);
         if (gamespace.data[space_key.index].gameInstance.data.timer <= 0 || gamespace.data[space_key.index].gameInstance.player.sprite.beingType === "sasquatch") { // becomes human
-            console.info("As a shapeshifter, your transformation begins!");
+            console.log("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
             gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(true);
             gamespace.data[space_key.index].gameInstance.player.sprite.shapeshift();
@@ -70,7 +70,7 @@ const timeKeeper = function () {
             //     keyPress_handler.right ||
             //     keyPress_handler.up ||
             //     keyPress_handler.down) {
-            //     console.info("already updating shifts through user actions");
+            //     console.log("already updating shifts through user actions");
             // } else {
 
             moveAndDisplay.therianthropy(spriteHolder);
@@ -92,7 +92,7 @@ const timeKeeper = function () {
 
         console.log(`=======================`);
         if (gamespace.data[space_key.index].gameInstance.data.timer === 25 || gamespace.data[space_key.index].gameInstance.player.sprite.beingType === "human") { // become sasquatch
-            console.info("As a shapeshifter, your transformation begins!");
+            console.log("As a shapeshifter, your transformation begins!");
             // window.requestAnimationFrame(function () {
             //     shapeshift = true;
             gamespace.data[space_key.index].gameInstance.player.sprite.set_timeOfDay(false);
@@ -106,7 +106,7 @@ const timeKeeper = function () {
             //     keyPress_handler.right ||
             //     keyPress_handler.up ||
             //     keyPress_handler.down) {
-            //     console.info("already updating shifts through user actions");
+            //     console.log("already updating shifts through user actions");
             // // } else {
 
             moveAndDisplay.shiftLoc(spriteHolder, moveAndDisplay.relativeGridResizeFunc("sasquatch"), "sasquatch");
@@ -122,7 +122,7 @@ const timeKeeper = function () {
     } else if (gamespace.data[space_key.index].gameInstance.data.timer >= 60) {
         clientStart = Date.now();
         console.log(`=======================`);
-        console.info(`gamespace.data[space_key.index].gameInstance.data.timer: ${gamespace.data[space_key.index].gameInstance.data.timer}`);
+        console.log(`gamespace.data[space_key.index].gameInstance.data.timer: ${gamespace.data[space_key.index].gameInstance.data.timer}`);
 
         console.log(`restart gamespace.data[space_key.index].gameInstance.data.timer!`);
         console.log(`=======================`);

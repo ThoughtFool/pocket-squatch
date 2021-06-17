@@ -54,7 +54,8 @@ const saveLevel = function () {
         console.log("promise...");
         modalLoader("add", "#game-screen");
 
-        let url = "/levels";
+        let url = __dirname + "levels";
+
         let objParam = {
             method: 'POST',
             headers: {

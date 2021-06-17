@@ -11,7 +11,7 @@
 
 
 // let newElemArray;
-// console.info(newElemArray = compareSquares(sortedArray, "square-grass"));
+// console.log(newElemArray = compareSquares(sortedArray, "square-grass"));
 
 
 

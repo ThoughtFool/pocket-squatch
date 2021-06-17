@@ -43,6 +43,7 @@ const setGameField = function (levelID, cb) {
 
     solarHolderElem.style.position = "absolute";
     solarHolderElem.style.left = "10%";
+    solarHolderElem.style.top = "-20%";
     solarHolderElem.style.display = "block";
 
     const solarBody = document.createElement("div");
@@ -74,10 +75,11 @@ const setGameField = function (levelID, cb) {
         // grid.id = "my-grid";
         gameField.appendChild(grid);
 
-        console.info("gamescreen");
-        console.info(gamescreen);
+        console.log("gamescreen");
+        console.log(gamescreen);
 
         gamescreen.style.backgroundImage = `url("")`;
+        gamescreen.style.backgroundColor = "#0a216b";
         gamescreen.classList.add("solar-cycle");
 
         const gameGrid = document.querySelector(`#${gridID}`);
@@ -98,7 +100,11 @@ const setGameField = function (levelID, cb) {
     };
 
     const removeGameGrid = function (gameField) {
+        console.log("removeGameGrid: gameField");
+        console.log(gameField);
+        console.log(gameField.children[0]);
         gameField.removeChild(gameField.children[0]);
+        return;
     };
 
     let numSquares = 400;
@@ -107,24 +113,25 @@ const setGameField = function (levelID, cb) {
     // console.log(gameGrid.clientHeight);
 
     let promise = new Promise(function (resolve, reject) {
-        console.log("promise begins!")
+        console.log("promise begins!");
+        removeGameGrid(gameField);
         return resolve(createGameGrid(gameField, gridClassName, gridID, gridSize));
     });
     promise
         .then(function (whereAppend) {
-            // console.info("whereAppend.getBoundingClientRect()");
-            // console.info(whereAppend.getBoundingClientRect());
+            // console.log("whereAppend.getBoundingClientRect()");
+            // console.log(whereAppend.getBoundingClientRect());
 
             return createBoard(whereAppend, numSquares, gridSize);
         })
         .then(function (contentIDArray) {
-            // console.info("contentIDArray");
-            // console.info(contentIDArray);
+            // console.log("contentIDArray");
+            // console.log(contentIDArray);
             level_data.contentIDArray = contentIDArray;
             return contentBuilder(squareContentArray, level_data.contentIDArray, level_data, levelID);
         })
         .then(function (squareContentArray) {
-            console.info("In promise: before getNewElems()");
+            console.log("In promise: before getNewElems()");
             return getNewElems();
         })
         .then(function (toKeep) {
@@ -133,6 +140,7 @@ const setGameField = function (levelID, cb) {
         })
         .then(function (toKeep) {
             let gameGrid = createGameGrid(gameField, gridClassName, gridID, gridSize);
+
             return ({
                 toKeep,
                 gameGrid
@@ -160,16 +168,16 @@ const setGameField = function (levelID, cb) {
             // console.log(sortedArray);
             // ////////////////////////////////////////////
             // // let sortedArray = grassArr.id.sort(sortAlphaNum);
-            // console.info("sortedArray: before");
-            // console.info(sortedArray);
+            // console.log("sortedArray: before");
+            // console.log(sortedArray);
 
             // return sortedArray;
         })
         ////////////////////////////////////////////////////////////////////////////////////////////
         .then(function (sortedObjArr) {
             // .then(function (sortedArray) {
-            // console.info("sortedArray: after");
-            // console.info(sortedObjArr);
+            console.info("sortedArray: after");
+            console.info(sortedObjArr);
 
             let newArrayHolder = [];
             // let newElemArray = [];
@@ -213,6 +221,11 @@ const setGameField = function (levelID, cb) {
             const grid = document.querySelector(`#${gridID}`);
 
             let gridDimensions = grid.getBoundingClientRect();
+
+            console.info("gridDimensions");
+            console.info(gridDimensions);
+            console.info(gridDimensions.width / 2 - this.width);
+
             let levelObj = {
                 coords: {
                     width: moveAndDisplay.relativeGridResizeFunc("sasquatch"),
@@ -248,8 +261,8 @@ const setGameField = function (levelID, cb) {
         });
 
     // contentIDArray = createBoard(whereAppend, numSquares, gridSize);
-    // console.info("contentIDArray");
-    // console.info(contentIDArray);
+    // console.log("contentIDArray");
+    // console.log(contentIDArray);
 
     // contentBuilder(squareContentArray, contentIDArray, level_data, levelID);
 

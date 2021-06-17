@@ -31,22 +31,22 @@ elem_array.forEach(elemToCheck => {
 
         } else if (this.left + this.width > elem_coords.left && this.left + (this.width / 2) < elem_coords.left &&
             this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-right side collison
-            // console.info(`bottom-right side collision:`);
+            // console.log(`bottom-right side collision:`);
             return this.left = elem_coords.left - this.width - 1; // lands next to obstacle (left-side)
 
         } else if (this.left < elem_coords.right && this.left + (this.width / 2) > elem_coords.right &&
             this.top + this.height > elem_coords.top && this.top + (this.height / 2) < elem_coords.top) { // bottom-left side collison
-            // console.info(`bottom-left side collision:`);
+            // console.log(`bottom-left side collision:`);
             return this.left = elem_coords.right + 1; // lands next to obstacle (right-side)
 
         } else if (this.left < elem_coords.right && this.left + (this.width * .80) > elem_coords.right &&
             this.top < elem_coords.bottom && this.top + (this.height * .80) > elem_coords.bottom) { // top-left side collison
-            // console.info(`top-left side collision: this.left:`);
+            // console.log(`top-left side collision: this.left:`);
             return this.left = elem_coords.right + 1; // lands next to obstacle (right-side)
 
         } else if (this.left + this.width > elem_coords.left && this.left + (this.width * .80) < elem_coords.left &&
             this.top < elem_coords.bottom && this.top + (this.height * .80) > elem_coords.bottom) { // top-right side collison
-            // console.info(`top-right side collision:`);
+            // console.log(`top-right side collision:`);
             return this.left = elem_coords.left - this.width - 1; // lands next to obstacle (left-side)
 
         } else {

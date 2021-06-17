@@ -3,8 +3,8 @@ const joinSquares = require("./join-squares");
 const compareSquares = function (squaresToCompare) {
     let newElemArray = [];
 
-    console.info("squaresToCompare");
-    console.info(squaresToCompare);
+    console.log("squaresToCompare");
+    console.log(squaresToCompare);
 
     for (let i = 0; i < squaresToCompare.length; i++) {
         // doesn't exceed length of array:
@@ -16,41 +16,41 @@ const compareSquares = function (squaresToCompare) {
                 // squaresToCompare[i].coords.right === squaresToCompare[nextIndex].coords.left) { // checks if adjacent
                 squaresToCompare[i].coords.left + squaresToCompare[i].coords.width === squaresToCompare[nextIndex].coords.left) { // checks if adjacent
 
-                console.info("squaresToCompare");
-                console.info(squaresToCompare);
-                console.info("newElemArray...");
-                console.info(newElemArray);
+                console.log("squaresToCompare");
+                console.log(squaresToCompare);
+                console.log("newElemArray...");
+                console.log(newElemArray);
 
                 // checks if already exists in new elem array:
                 if (newElemArray.length < 1 || lastIndex < 0) {
-                    console.info("Path: A...");
+                    console.log("Path: A...");
                     newElemArray.push(joinSquares(false, squaresToCompare[i], squaresToCompare[nextIndex]));
 
                 } else if (squaresToCompare[i].id == newElemArray[lastIndex].id) {
-                    console.info("Path: B...");
+                    console.log("Path: B...");
                     let lastSquareHolder = newElemArray[lastIndex];
                     newElemArray.pop;
                     newElemArray.push(joinSquares(true, lastSquareHolder, squaresToCompare[nextIndex]));
 
                 } else {
-                    console.info("Path: C...");
+                    console.log("Path: C...");
                     let lastSquareHolder = squaresToCompare[i];
                     newElemArray.pop;
                     newElemArray.push(joinSquares(false, lastSquareHolder, squaresToCompare[nextIndex]));
 
                 };
             } else {
-                console.info("else:");
-                console.info(squaresToCompare[i]);
+                console.log("else:");
+                console.log(squaresToCompare[i]);
 
                 newElemArray.push(squaresToCompare[i]);
             };
         } else {
-            console.info("DONE!");
+            console.log("DONE!");
         };
     };
-    console.info("newElemArray");
-    console.info(newElemArray);
+    console.log("newElemArray");
+    console.log(newElemArray);
 
     return newElemArray;
 };

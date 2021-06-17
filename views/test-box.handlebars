@@ -1,26 +1,33 @@
 <div id="game-screen">
 
+    {{> side-nav }}
+
+
     <div id="game-area">
 
+        {{> game-header }}
 
         {{!-- <div class="game-screen-square"> --}}
             <div class="title-box">
+                <div class="badge-icon">
+                    <img src="/images/lyric-sprite-up.png" alt="Avatar" class="avatar">
+                </div>
                 <h1>Pocket Squatch</h1>
             </div>
 
-            <div class="header">
-                <p id="greet">Greetings, <span id="greetings-span">{{spriteName}}</span></p>
-            </div>
+            {{!-- <div class="header">
+                <p id="greet">Greetings, <span id="greetings-span"></span></p>
+            </div> --}}
 
-            <div class="header">
+            {{!-- <div class="header">
                 <p id="timer">Clientside Timer: <span id="timer-span"></span></p>
-            </div>
+            </div> --}}
 
             <div id="subhead">
-                <h4>roomID: <span id="roomID-span">{{roomID}}</span></h4>
-                <h4>SpaceID: <span id="SpaceID-span">{{SpaceID}}</span></h4>
-                <h5>SpaceIndex: <span id="SpaceIndex-span">{{SpaceIndex}}</span></h5>
-                <h6>gamespace: <span id="gamspace-span">{{gamespace}}</span></h6>
+                <h3>roomID: <span id="roomID-span">{{roomID}}</span></h3>
+                <h3>SpaceID: <span id="SpaceID-span">{{SpaceID}}</span></h3>
+                <h3>SpaceIndex: <span id="SpaceIndex-span">{{SpaceIndex}}</span></h3>
+                <h3>gamespace: <span id="gamspace-span">{{gamespace}}</span></h3>
             </div>
 
             {{!-- ============================================== --}}
@@ -29,9 +36,6 @@
                 <div class="modal-content">
                     <div class="divided-form">
                         <div class="left-side-form">
-                            <div class="badge-icon">
-                                <img src="/images/lyric-sprite-up.png" alt="Avatar" class="avatar">
-                            </div>
                             <div>
                                 <label style="color:blanchedalmond" for="createSprite">Choose a name for your
                                     Hero:</label><br>

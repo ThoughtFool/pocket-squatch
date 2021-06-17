@@ -3,15 +3,15 @@ let timerSpan = document.querySelector("#timer-span");
 
 const animateFrame = function (num, gamespace, space_key) {
 
-    
+
     let stop = false;
     let frameCount = 0;
     let shiftCount = 0;
     let isDaytime, hasQueen, isCooldown, isSummoned, biome;
     // let $results = $("#results");
     let fps, fpsInterval, startTime, now, then, elapsed;
-    
-    
+
+
     startAnimating(num);
 
     function startAnimating(fps) {
@@ -20,7 +20,7 @@ const animateFrame = function (num, gamespace, space_key) {
 
         then = Date.now();
         startTime = then;
-        console.info(startTime);
+        console.log(startTime);
 
         // get current time
         animate();
@@ -41,12 +41,12 @@ const animateFrame = function (num, gamespace, space_key) {
         elapsed = now - then;
 
         if (shiftCount % 1000 == 0) {
-                        
+
             if (shiftCount >= 10000) {
                 shiftCount = 0;
             };
         };
-        
+
         // if enough time has elapsed, draw the next frame:
         if (elapsed > fpsInterval) {
             shiftCount++;

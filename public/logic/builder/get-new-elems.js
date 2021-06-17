@@ -1,5 +1,5 @@
 const getNewElems = function () {
-    console.info("getNewElems function fires!")
+    console.log("getNewElems function fires!")
 
     let levelCoordObject = {
 
@@ -8,6 +8,7 @@ const getNewElems = function () {
         toRemove: [],
         getCoords: function () {
             for (let i = 0; i < this.toKeep.length; i++) {
+
                 // newLevelElem:
                 this.toCreate.push({
                     coords: this.toKeep[i].getBoundingClientRect(),
@@ -70,7 +71,7 @@ const getNewElems = function () {
             console.log("Error: dynamic-square-content does not contain any color squares.");
         };
     };
-    console.log(levelCoordObject);
+    // console.info(levelCoordObject);
     let toKeep = levelCoordObject.getCoords();
     levelCoordObject.remove();
     return toKeep;

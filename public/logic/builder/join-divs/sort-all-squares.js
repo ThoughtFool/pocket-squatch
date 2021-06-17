@@ -11,7 +11,7 @@ const sortAllSquares = function (squareDivObj) {
         });
         sortedObjArr.push(sortedArray);
     };
-    console.info(sortedObjArr);
+    console.log(sortedObjArr);
     return sortedObjArr;
 };
 

@@ -12,14 +12,41 @@ const contentBuilder = require("../public/logic/builder/content-builder");
 const level_data = require("../public/data/level-data");
 let contentIDArray;
 
-//////////////////////////////////////////////////////////////////
+// =============================================================================
 // Add click event for saving user levels:
+
 const saveNewLevelBtn = document.getElementById("save-level");
 const makeNewLevelBtn = document.getElementById("make-level");
 const getNewElemsBtn = document.getElementById("get-new-elems");
 const loadMyLevelBtn = document.getElementById("time-stamp-id");
 
 const playMyLevelsBtn = document.getElementById("play-your-levels-btn");
+
+// =============================================================================
+
+/* Set the width of the side navigation to 250px */
+function openSideNav() {
+    document.getElementById("my-side-nav").style.width = `${50}%`;
+}
+
+/* Set the width of the side navigation to 0 */
+function closeSideNav() {
+    document.getElementById("my-side-nav").style.width = "0";
+};
+
+// =============================================================================
+// Add click event for nav slider:
+
+const openNavBtn = document.getElementById("open-me");
+openNavBtn.addEventListener("click", openSideNav, null);
+const closeNavBtn = document.getElementById("close-me");
+closeNavBtn.addEventListener("click", closeSideNav, null);
+
+// =============================================================================
+// disable console.log; TODO: remove all console logs
+console.log = function () { };
+
+// =============================================================================
 
 if (saveNewLevelBtn !== null) {
 
@@ -31,7 +58,8 @@ if (saveNewLevelBtn !== null) {
     let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "square-grass", "square-soil", "square-sky", "square-night"];
     // let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "ground", "square-soil", "square-sky", "square-night"];
 
-    let gridSize = gamescreen_coords.height;
+    gridSize = gamescreen_coords.height;
+    // let gridSize = gamescreen_coords.height;
     // let gridSize = vh * .75;
     const parentElems_coords = [];
 
@@ -60,6 +88,14 @@ if (saveNewLevelBtn !== null) {
     console.log("gameGrid.clientHeight");
     console.log(gameGrid.clientHeight);
 
+    console.info(gridSize);
+
+    // let pixelSize = (gridSize - 40) / sqRootNum;
+    // TODO: change the number 20 to dynamic variable based on board size:
+
+    let gridSquareSize = gridSize - 40 / 20;
+    console.info(gridSquareSize);
+
     contentIDArray = createBoard(whereAppend, numSquares, gridSize);
     console.log("contentIDArray");
     console.log(contentIDArray);
@@ -68,7 +104,7 @@ if (saveNewLevelBtn !== null) {
         console.log("promise...");
         modalLoader("add", "#game-screen");
 
-        let url = "/levels";
+        let url = __dirname + "levels";
 
         return resolve(fetchFunc(url, { mode: 'cors' }));
     });
@@ -190,10 +226,13 @@ if (enterGameBtn !== null) {
     // if (enterLevelBtn !== null) {
     enterLevelBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        console.log("Entering level...");
+        console.info("Entering level...");
 
         console.log("myGameInfo:");
         console.log(myGameInfo);
+
+        let bgModal = document.querySelector(".bg-modal");
+        bgModal.style.display = "none";
 
         return enterLevel(timeKeeper, myGameInfo);
     });

@@ -67,7 +67,7 @@ body {
   position: relative;
   background-repeat: no-repeat;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .solar-cycle {
@@ -76,11 +76,14 @@ body {
   /* animation: rise-and-set 0.5s steps(var(--eleven)); */
   /* animation-iteration-count: infinite; */
   transition-timing-function: ease-in-out;
-  animation-delay: -0.1s;
+  animation-delay: 2s;
 }
 
 @keyframes sunset {
   0% {
+    background: #0a216b;
+  }
+  5% {
     background: #173aac;
   }
   10% {
@@ -90,7 +93,7 @@ body {
     background: #01011b;
   }
   100% {
-    background: #173aac;
+    background: #0a216b;
   }
 }
 
@@ -111,6 +114,7 @@ body {
   box-shadow: 0 0 15px #aed1ee;
   background-color: #4badfdcb;
   animation: sets-and-rises 60s ease-out infinite;
+  animation-delay: 2s;
 }
 
 .sunny {
@@ -164,12 +168,12 @@ body {
     transform: scale(0.5, 0.5);
   }
   0% {
-    top: -10%;
+    top: -20%;
   }
 }
 
 #game-area {
-  padding: 5vw 0vw 5vw 5vw;
+  margin: 2em 2em 2em;
   height: var(--game-height);
   width: auto;
   /* width: calc(var(--game-screen-width) - calc(var(--game-height) * 1.25)); */
@@ -264,7 +268,9 @@ body {
 .square-grass {
   height: 100%;
   width: 100%;
-  background-color: rgb(60, 129, 60);
+  /* background-color: rgb(60, 129, 60); */
+  background-image: url("./images/square-grass.PNG");
+  background-size: cover;
   background-position: center;
   /* border: black dashed 1px; */
 }
@@ -273,7 +279,9 @@ body {
 .square-soil {
   height: 100%;
   width: 100%;
-  background-color: rgb(48, 34, 34);
+  /* background-color: rgb(48, 34, 34); */
+  background-image: url("./images/square-soil.PNG");
+  background-size: cover;
   background-position: center;
   /* border: black dashed 1px; */
 }
@@ -314,8 +322,8 @@ body {
   width: auto;
 
   /* width: 50%; */
-  background-image: linear-gradient(rgb(124, 97, 245), rgb(10, 10, 0));
-  border-radius: 5%;
+  /* background-image: linear-gradient(rgb(124, 97, 245), rgb(10, 10, 0)); */
+  /* border-radius: 5%; */
   align-items: center;
   display: flex;
 }
@@ -549,11 +557,17 @@ body {
   border: whitesmoke solid 1px;
 }
 
-.header {
+.game-header {
   display: flex;
+  justify-content: space-around;
+  position: absolute;
+  width: calc(var(--game-height) - var(--game-border-offset));
+
   /* justify-content: space-around; */
-  color: whitesmoke;
-  font-size: x-large;
+  color: rgba(245, 245, 245, 0.781);
+  top: 0;
+  right: 0;
+  font-size: 20px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
@@ -580,7 +594,19 @@ body {
   color: whitesmoke;
   position: relative;
   /* align-self: flex-end; */
-  padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 25px;
+  margin-bottom: 75px;
+}
+
+.bg-modal {
+  background-image: linear-gradient(purple, blue);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
@@ -947,5 +973,62 @@ body {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+/* =============================================================== */
+/* ====================== w3 side-nav test ======================= */
+
+/* The side navigation menu */
+.side-nav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the side-nav */
+}
+
+/* The navigation menu links */
+.side-nav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+#open-me {
+  bottom: 0;
+  left: 0;
+  color: #aed1ee;
+}
+
+/* When you mouse over the navigation links, change their color */
+.side-nav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.side-nav .close-btn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* On smaller screens (height: less than 450px) */
+@media screen and (max-height: 450px) {
+  .side-nav {
+    padding-top: 15px;
+  }
+  .side-nav a {
+    font-size: 18px;
   }
 }

@@ -285,8 +285,8 @@ const moveAndDisplay = {
         //     // this[keyPressed][beingType].moveDist
         // );
 
-        console.info("spriteHolderElem");
-        console.info(spriteHolderElem);
+        console.log("spriteHolderElem");
+        console.log(spriteHolderElem);
 
         this.removeClass(spriteHolderElem);
 
@@ -373,15 +373,15 @@ const moveAndDisplay = {
         let spriteSizePercent;
         // --my-grid-size: calc(var(--viewport-height) * 1.25); (CSS file)
 
-        console.info("myGridHeight:");
-        console.info(myGridHeight);
-        // console.info("myGridWidth:");
-        // console.info(myGridWidth);
+        console.log("myGridHeight:");
+        console.log(myGridHeight);
+        // console.log("myGridWidth:");
+        // console.log(myGridWidth);
 
         // if (myGridHeight > myGridWidth) {
-        //     console.info("orientation: portrait");
+        //     console.log("orientation: portrait");
         // } else {
-        //     console.info("orientation: landscape");
+        //     console.log("orientation: landscape");
         // };
 
         if (beingType === "sasquatch") {
@@ -392,6 +392,9 @@ const moveAndDisplay = {
         };
 
         let adjustedSize = myGridHeight * spriteSizePercent;
+
+        console.info("adjustedSize");
+        console.info(adjustedSize);
 
         return adjustedSize;
 

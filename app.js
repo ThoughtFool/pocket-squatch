@@ -49,7 +49,9 @@ app.use(logger("dev"));
 
 // Set templating engine:
 app.engine("handlebars", exphbs({
-    defaultLayout: "main"
+    defaultLayout: "main",
+    layoutsDir: __dirname + '/views/layouts/',
+    partialsDir: __dirname + '/views/partials/'
 }));
 app.set("view engine", "handlebars");
 
@@ -128,7 +130,7 @@ app.post("/block-builder", function (req, res) {
 // TODO: create actionType for defend, transform, etc.
 // TODO: create method for stone queen's different forms
 
-app.post("/", function (req, res) { // (handler: post)
+app.post("/battle", function (req, res) { // (handler: post)
 
     let actionType = req.body["actionType"];
 

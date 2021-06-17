@@ -75,24 +75,24 @@ class Sprite {
 
     shapeshift() {
         if (this.hasStoneQueen) {
-            console.info("I have the stone queen!");
+            console.log("I have the stone queen!");
 
             if (this.isAsleep()) {
 
                 if (this.biome === "forest") {
-                    console.info("I am Sasquatch!");
+                    console.log("I am Sasquatch!");
                     return this.beingType = "sasquatch"; // use array to determine type of wildling, based on location
 
                 } else if (this.biome === "snow") {
-                    console.info("I am Yeti!");
+                    console.log("I am Yeti!");
                     return this.beingType = "yeti";
 
                 } else if (this.biome === "sand") {
-                    console.info("I am Sandman!");
+                    console.log("I am Sandman!");
                     return this.beingType = "sandman";
 
                 } else if (this.biome === "swamp") {
-                    console.info("I am Swampthing!");
+                    console.log("I am Swampthing!");
                     return this.beingType = "swampthing";
 
                 } else {
@@ -102,18 +102,18 @@ class Sprite {
             } else {
 
                 if (this.isSummoned) {
-                    console.info("You have summoned the strength and power of the stone queen!");
+                    console.log("You have summoned the strength and power of the stone queen!");
                     return this.beingType = "stone queen";
 
                 } else {
-                    console.info(`I am human! My name is ${this.name}.`);
+                    console.log(`I am human! My name is ${this.name}.`);
                     return this.beingType = "human";
 
                 };
             };
 
         } else if (!this.hasStoneQueen) {
-            console.info("You need the stone queen to be able to summon her strength");
+            console.log("You need the stone queen to be able to summon her strength");
             return this.beingType = "human";
 
         } else {

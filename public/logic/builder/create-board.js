@@ -45,7 +45,8 @@ const createBoard = function (whereAppend, numSquares, gridSize) {
 
                 // divide the size of squares evenly:
                 // let percentageSize = Math.floor(1 / sqRootNum * 100);
-                let pixelSize = gridSize / sqRootNum;
+                let pixelSize = (gridSize - 40) / sqRootNum;
+
                 newSquare.style.width = `${pixelSize}px`;
                 newSquare.style.height = `${pixelSize}px`;
 

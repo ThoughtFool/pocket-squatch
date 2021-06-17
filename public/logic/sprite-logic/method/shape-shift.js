@@ -4,17 +4,17 @@ const shapeshift = function (gamespace, space_key, isDaytime, hasStoneQueen, isC
     if (isDaytime && hasStoneQueen && isSummoned) { /////////////////////
         gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "stone queen";
 
-        console.info("You have summoned the strength and power of the stone queen!");
+        console.log("You have summoned the strength and power of the stone queen!");
 
     } else if (isDaytime && !hasStoneQueen && isSummoned) {
         gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "human";
 
-        console.info("You need the stone queen to be able to summon her strength");
+        console.log("You need the stone queen to be able to summon her strength");
 
     } else if (isDaytime && hasStoneQueen && !isSummoned) { /////////////////////
         gamespace.data[space_key.index].gameInstance.player.sprite.beingType = "human";
 
-        console.info("You have the stone queen if you need her strength, summon her power!");
+        console.log("You have the stone queen if you need her strength, summon her power!");
 
     } else if (!isDaytime && hasStoneQueen && isSummoned) { /////////////////////
         // if (biome === "forest") {

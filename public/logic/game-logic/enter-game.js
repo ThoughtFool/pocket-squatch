@@ -22,7 +22,7 @@ const enterGame = function (spriteName, player_data) {
 
     // set game level:
 
-    console.info(player_data);
+    console.log(player_data);
     game_data.loadLevel(player_data.currentLevel);
 
     // create gameroom instance:

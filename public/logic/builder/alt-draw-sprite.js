@@ -1,9 +1,9 @@
         .then(function (isDone) {
 
             let gameField = document.getElementById("my-grid").getBoundingClientRect();
-            console.info("gameField");
-            console.info(gameField);
-            
+            console.log("gameField");
+            console.log(gameField);
+
             let levelObj = {
                 coords: {
                     left: gameField.left + gameField.width * .5,
