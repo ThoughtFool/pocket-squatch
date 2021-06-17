@@ -67,105 +67,8 @@ body {
   position: relative;
   background-repeat: no-repeat;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
-}
-
-.solar-cycle {
-  animation: sunset 60s infinite;
-  /* animation: sunset 25s forwards 1, sunrise 35s ease-in-out forwards 1; */
-  /* animation: rise-and-set 0.5s steps(var(--eleven)); */
-  /* animation-iteration-count: infinite; */
-  transition-timing-function: ease-in-out;
-  animation-delay: -0.1s;
-}
-
-@keyframes sunset {
-  0% {
-    background: #173aac;
-  }
-  10% {
-    background: #f5ff9b;
-  }
-  60% {
-    background: #01011b;
-  }
-  100% {
-    background: #173aac;
-  }
-}
-
-/* @keyframes sunrise {
-  0% {
-    background: #040427;
-  }
-  70% {
-    background: #d2c13a;
-  }
-  100% {
-    background: #48bcff;
-  }
-} */
-
-.solar-holder {
-  border-radius: 50%;
-  box-shadow: 0 0 15px #aed1ee;
-  background-color: #4badfdcb;
-  animation: sets-and-rises 60s ease-out infinite;
-}
-
-.sunny {
-  border-radius: 50%;
-  box-shadow: 0 0 15px #aed1ee;
-  /* animation: solar-flare 2s ease-out infinite; */
-}
-
-.sunny:before,
-.sunny:after,
-.sunny > span {
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 100%;
-  top: 0%;
-  left: 0%;
-  border-radius: 50%;
-  box-shadow: 0 0 15px #287ec6;
-  animation: solar-flares 2s ease-out infinite;
-}
-
-.sunny:after {
-  animation-delay: 0.66s;
-}
-
-.sunny > span {
-  animation-delay: 1.33s;
-}
-
-@keyframes solar-flares {
-  0% {
-    opacity: 0;
-    transform: scale(1);
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-@keyframes sets-and-rises {
-  0% {
-    top: 0;
-  }
-  100% {
-    top: 110%;
-    transform: scale(0.5, 0.5);
-  }
-  0% {
-    top: -10%;
-  }
 }
 
 #game-area {
@@ -205,9 +108,6 @@ body {
     width: var(--game-height);
     min-width: var(--game-height);
     min-height: var(--game-height); */
-  background-size: cover;
-  background-image: url("./images/blue-valley.PNG");
-  background-repeat: no-repeat;
   display: flex;
   overflow: hidden;
 

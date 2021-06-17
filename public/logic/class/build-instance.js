@@ -19,7 +19,6 @@ class Build_Instance {
         this.gameroom_data.enemy = this.enemy_data; // TODO: remove this memory redundancy
         this.gameroom_data.currentLevel = this.player_data.currentLevel;
         this.level_data.build(this.gameroom_data.currentLevel); // TODO: add to gamescreen method
-        this.populate_level_enemy_data.loop(this.gameroom_data.currentLevel, this.level_data.data[this.level_data.currentLevelId[this.gameroom_data.currentLevel]].enemyTot);
         this.gameroom_data.enemy = this.populate_level_enemy_data.spawn;
 
         return this.gameroom_data;

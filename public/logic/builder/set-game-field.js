@@ -30,6 +30,40 @@ const setGameField = function (levelID, cb) {
     //     vh: vh,
     // };
 
+    // ===============================================
+
+    // create sun:
+    const solarBodyHolder = document.createElement("div");
+    solarBodyHolder.className = "solar-holder";
+    gamescreen.appendChild(solarBodyHolder);
+
+    const solarHolderElem = document.querySelector(".solar-holder");
+    solarHolderElem.style.width = `${gridSize * .15}px`;
+    solarHolderElem.style.height = `${gridSize * .15}px`;
+
+    solarHolderElem.style.position = "absolute";
+    solarHolderElem.style.left = "10%";
+    solarHolderElem.style.display = "block";
+
+    const solarBody = document.createElement("div");
+
+    solarBody.className = "sunny";
+    solarBody.id = "apollo";
+    solarHolderElem.appendChild(solarBody);
+
+    const solarBodyElem = document.querySelector(`#apollo`);
+    solarBodyElem.style.width = "100%";
+    solarBodyElem.style.height = "100%";
+
+    solarBodyElem.style.position = "relative";
+    // solarBodyElem.style.left = "10%";
+    solarBodyElem.style.display = "block";
+
+    const solarSpan = document.createElement("span");
+    solarBodyElem.appendChild(solarSpan);
+
+    // ===============================================
+
     const gameField = document.querySelector("#game-field");
 
     const createGameGrid = function (gameField, gridClassName, gridID, gridSize) {
@@ -40,9 +74,21 @@ const setGameField = function (levelID, cb) {
         // grid.id = "my-grid";
         gameField.appendChild(grid);
 
+        console.info("gamescreen");
+        console.info(gamescreen);
+
+        gamescreen.style.backgroundImage = `url("")`;
+        gamescreen.classList.add("solar-cycle");
+
         const gameGrid = document.querySelector(`#${gridID}`);
-        gameGrid.style.width = `${gridSize * 1.25}px`;
-        gameGrid.style.height = `${gridSize}px`;
+        // gameGrid.style.width = `${gridSize}px`;
+        // gameGrid.style.height = `${gridSize}px`;
+        gameGrid.style.width = `100%`;
+        gameGrid.style.height = `100%`;
+
+        // gameGrid.style.background.size = "cover";
+        // gameGrid.style.background.image = `url("./images/blue-valley.PNG")`;
+        // gameGrid.style.background.repeat = "no-repeat";
 
         // gameGrid.style.width = `100%`;
         // gameGrid.style.height = `100%`;

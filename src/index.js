@@ -46,8 +46,11 @@ if (saveNewLevelBtn !== null) {
 
     const gameGrid = document.querySelector(`#${gridID}`);
     // const gameGrid = document.querySelector(".game-grid");
-    gameGrid.style.width = `${gridSize * 1.25}px`;
-    gameGrid.style.height = `${gridSize}px`;
+    // gameGrid.style.width = `${gridSize}px`;
+    // gameGrid.style.height = `${gridSize}px`;
+
+    gameGrid.style.width = `100%`;
+    gameGrid.style.height = `100%`;
 
     let whereAppend = gameGrid;
     // let numSquares = 100;
