@@ -7,15 +7,15 @@
     {{!-- <div class="control-panel" id="game-area"> --}}
         <div class="panel-card">
             <div class="panel-body">
-    
+
                 <h1>let's create a cool, new level</h1>
                 <form id="post-blocks" name="post-blocks-form" autocomplete="on" method="POST" action="/">
-    
+
                     <div>
                         <label for="coolName">name your level</label>
                         <input type="text" id="coolName" name="coolName" value="insert cool name here"><br><br>
                     </div>
-    
+
                     <div class="button-array">
                         <input type="button" value="make-level" id="make-level">
                         {{!-- <input type="button" value="make-level" id="make-level" onclick="createlevel()"> --}}
@@ -26,11 +26,11 @@
                         --}}
                         <!-- <input type="number" name="time-stamp-id" id="time-stamp-id"> -->
                     </div>
-    
-    
-    
+
+
+
                     <!-- <input type="button" value="load-level" id="load-level" onclick="loadmylevel()"> -->
-    
+
                     <h3 class="palette-label">select a color block below to begin</h3>
                     <hr>
                     <div class="palette-bar">
@@ -47,9 +47,8 @@
                             <div class="palette" id="black-brush"></div>
                         </div>
                     </div>
-    
-                    <div>
-    
+
+                    <div id="level-dropdown">
                         <label for="time-stamp-id">load a saved level</label>
                         <select id="time-stamp-id" for="time-stamp-id" name="time-stamp-id">
                             {{!-- <select id="time-stamp-id" onchange="loadmylevel(this);"> --}}
@@ -59,20 +58,24 @@
                                 {{/each}}
                             </select>
                     </div>
-    
+
                     {{!-- <form id="post-blocks" name="post-blocks-form" autocomplete="on" method="POST"
                         action="/block-head"> --}}
-                        <label for="playYourLevels">Play Your Levels</label>
-                        <button id="play-your-levels-btn" name="play-Your-Levels" class="btn" type="submit"
-                            value="submit">Play Now!</button>
-                        <br><br>
-                        <span name="test-obj"></span>
+
+                        {{!-- <div>
+                            <label for="playYourLevels">Play Your Levels</label>
+                            <button id="play-your-levels-btn" name="play-Your-Levels" class="btn" type="submit"
+                                value="submit">Play Now!</button>
+                            <br><br>
+                            <span name="test-obj"></span>
+                        </div> --}}
+
                     </form>
-    
+
             </div>
         </div>
-    {{!-- </div> --}}
+        {{!--
+    </div> --}}
 </div>
 
-<span id="open-me" style="font-size:30px;cursor:pointer" >&#9776; open</span>
-
+<span id="open-me" style="font-size:30px;cursor:pointer">&#9776; open</span>

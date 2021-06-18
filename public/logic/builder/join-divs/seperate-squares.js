@@ -1,4 +1,4 @@
-const compareSquares = require("./_compare-squares");
+// const compareSquares = require("./_compare-squares");
 
 const seperateSquares = function (squaresToJoinArray) {
 
@@ -15,7 +15,9 @@ const seperateSquares = function (squaresToJoinArray) {
         };
     };
 
-    // squareDivObj;
+    console.log("squareDivObj");
+    console.log(squareDivObj);
+
     return squareDivObj;
     // return compareSquares(squareDivObj.grassArr, "square-grass");
 };

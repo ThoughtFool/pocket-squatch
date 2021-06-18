@@ -16,6 +16,9 @@ body {
   --viewport-width: 100vw;
 
   --my-grid-size: calc(var(--viewport-height) * 1.25);
+  --my-grid-size-portrait: calc(
+    var(--viewport-width) - var(--game-border-offset)
+  );
 
   /* different size sprites */
   --sprite-size-small: calc(var(--my-grid-size) * 0.1);
@@ -219,14 +222,8 @@ body {
   background-repeat: no-repeat;
   display: flex;
   overflow: hidden;
-
   /* position: relative; */
 }
-
-/* .game-screen-square {
-    width: 25vh;
-    float: right;
-} */
 
 .row {
   /* border: 1px blue solid; */
@@ -241,7 +238,8 @@ body {
   /* background-image: url(https://garden.spoonflower.com/c/9094822/r/s/d-i-21/0IWfLy_7Jo_yPK0nb1vXQwVmNImm3T9axrM/8-bit_Texture_Dusty_Blue.jpg); */
   height: 100%;
   width: 100%;
-  background-color: rgb(47, 47, 53);
+  background-image: url("./images/square-rock.PNG");
+  background-size: cover;
   background-position: center;
 }
 
@@ -249,7 +247,8 @@ body {
 .square-wall {
   height: 100%;
   width: 100%;
-  background-color: rgb(119, 32, 219);
+  background-image: url("./images/square-wall.PNG");
+  background-size: cover;
   background-position: center;
 }
 
@@ -257,7 +256,8 @@ body {
 .square-lava {
   height: 100%;
   width: 100%;
-  background-color: red;
+  background-image: url("./images/square-lava.PNG");
+  background-size: cover;
   background-position: center;
 }
 
@@ -265,7 +265,8 @@ body {
 .square-water {
   height: 100%;
   width: 100%;
-  background-color: blue;
+  background-image: url("./images/square-water.PNG");
+  background-size: cover;
   background-position: center;
 }
 
@@ -295,7 +296,8 @@ body {
 .square-sky {
   height: 100%;
   width: 100%;
-  background-color: rgb(21, 172, 223);
+  background-image: url("./images/square-sky.PNG");
+  background-size: cover;
   background-position: center;
 }
 
@@ -303,7 +305,8 @@ body {
 .square-night {
   height: 100%;
   width: 100%;
-  background-color: black;
+  background-image: url("./images/square-night.PNG");
+  background-size: cover;
   background-position: center;
 }
 
@@ -336,16 +339,22 @@ body {
 .panel-body {
   padding: 25px;
   margin: auto;
-  background-image: linear-gradient(rgb(239, 8, 247), whitesmoke);
-  border-radius: 5%;
+  background-image: linear-gradient(rgb(241, 156, 241), rgb(25, 85, 119));
+  border-radius: 1%;
   width: 80%;
-  height: 80%;
+  height: 100%;
   align-items: center;
   justify-content: center;
 }
 
-.panel-body {
-  width: auto;
+input {
+  height: 2rem;
+  margin-bottom: 15px;
+  width: 250px;
+}
+
+#post-blocks > h3 {
+  text-align: center;
 }
 
 .panel-body > h1 {
@@ -376,6 +385,11 @@ body {
   border-radius: 15px;
 }
 
+#level-dropdown {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
 .palette-bar {
   width: auto;
   height: 20vh;
@@ -391,42 +405,51 @@ body {
 }
 
 .palette {
+  cursor: pointer;
   border: 1px;
-  height: 75px;
-  width: 75px;
+  height: 4rem;
+  width: 4rem;
   border-radius: 25%;
 }
 
 #dark-gray-brush {
-  background-color: rgb(47, 47, 53);
+  background-image: url("./images/square-rock.PNG");
+  /* background-color: rgb(47, 47, 53); */
 }
 
 #purple-brush {
-  background-color: rgb(119, 32, 219);
+  background-image: url("./images/square-wall.PNG");
+  /* background-color: rgb(119, 32, 219); */
 }
 
 #red-brush {
-  background-color: red;
+  background-image: url("./images/square-lava.PNG");
+  /* background-color: red; */
 }
 
 #blue-brush {
-  background-color: blue;
+  background-image: url("./images/square-water.PNG");
+  /* background-color: blue; */
 }
 
 #green-brush {
-  background-color: rgb(24, 156, 24);
+  background-image: url("./images/square-grass.PNG");
+  /* background-color: rgb(24, 156, 24); */
 }
 
 #brown-brush {
-  background-color: rgb(109, 60, 60);
+  background-image: url("./images/square-soil.PNG");
+  /* background-color: rgb(109, 60, 60); */
 }
 
 #light-blue-brush {
-  background-color: rgb(21, 172, 223);
+  background-image: url("./images/square-sky.PNG");
+  /* background-color: rgb(21, 172, 223); */
 }
 
 #black-brush {
-  background-color: black;
+  background-image: url("./images/square-night.PNG");
+  /* background-color: black; */
 }
 
 .hit-box {
@@ -614,12 +637,16 @@ body {
 }
 
 .bg-modal {
-  background-image: linear-gradient(purple, blue);
-  border-radius: 10px;
+  position: absolute;
+  width: 400px;
+  background-image: linear-gradient(rgb(241, 156, 241), rgb(25, 85, 119));
+  border-radius: 2%;
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  top: calc(var(--viewport-height / 2px));
+  left: calc(var(--viewport-width / 2 - calc(400px * 0.5)));
 }
 
 .container {
@@ -1043,5 +1070,93 @@ body {
   }
   .side-nav a {
     font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  #game-screen {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #game-area {
+    margin: 1rem 1rem 1rem;
+    height: auto;
+    /* height: calc(var(--game-width) / 2); */
+    width: auto;
+    /* width: calc(var(--game-screen-width) - calc(var(--game-height) * 1.25)); */
+    /* flex: 0 0 40%; */
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  #game-field {
+    height: calc(var(--game-screen-width) - var(--game-border-offset));
+    width: calc(var(--game-screen-width) - var(--game-border-offset));
+    min-width: calc(var(--game-screen-width) - var(--game-border-offset));
+    min-height: calc(var(--game-screen-width) - var(--game-border-offset));
+    display: flex;
+    align-content: center;
+  }
+  #my-grid {
+    height: var(--my-grid-size-portrait);
+    width: var(--my-grid-size-portrait);
+  }
+
+  .title-box {
+    padding-top: 10px;
+    position: relative;
+    display: flex;
+    height: 10vw;
+    width: 100%;
+    /* padding: 20px; */
+    color: whitesmoke;
+    /* max-height: 5%; */
+    text-align: center;
+    justify-content: space-evenly;
+    /* align-self: flex-end; */
+  }
+
+  #subhead {
+    color: whitesmoke;
+    position: relative;
+    /* align-self: flex-end; */
+    display: flex;
+    padding-left: 25px;
+    margin-bottom: 75px;
+    flex-direction: row;
+    font-size: xx-small;
+    justify-content: space-evenly;
+  }
+
+  #subhead > h3 {
+    display: flex;
+    width: 150px;
+  }
+
+  .game-header {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    width: calc(var(--game-screen-width) - var(--game-border-offset));
+
+    /* justify-content: space-around; */
+    color: rgba(245, 245, 245, 0.781);
+    top: 0;
+    right: 0;
+    font-size: 15px;
+    align-content: center;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+
+  .game-title {
+    font-size: 2em;
+    display: flex;
   }
 }

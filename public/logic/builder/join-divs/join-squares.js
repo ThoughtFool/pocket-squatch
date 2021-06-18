@@ -35,7 +35,7 @@ const joinSquares = function (bool, div01, div02) {
             className: div01.className,
             class_moveType: "obstacle",
             id: div01.id,
-            imgUrl: ""
+            imgUrl: `./images/${div01.className}.PNG`
         };
     };
     return levelObj;

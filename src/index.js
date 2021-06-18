@@ -59,6 +59,10 @@ if (saveNewLevelBtn !== null) {
     // let squareContentArray = ["square-rock", "square-wall", "square-lava", "square-water", "ground", "square-soil", "square-sky", "square-night"];
 
     gridSize = gamescreen_coords.height;
+
+    if (vw < vh) {
+        gridSize = gamescreen_coords.width;
+    };
     // let gridSize = gamescreen_coords.height;
     // let gridSize = vh * .75;
     const parentElems_coords = [];
@@ -88,13 +92,13 @@ if (saveNewLevelBtn !== null) {
     console.log("gameGrid.clientHeight");
     console.log(gameGrid.clientHeight);
 
-    console.info(gridSize);
+    console.log(gridSize);
 
     // let pixelSize = (gridSize - 40) / sqRootNum;
     // TODO: change the number 20 to dynamic variable based on board size:
 
     let gridSquareSize = gridSize - 40 / 20;
-    console.info(gridSquareSize);
+    console.log(gridSquareSize);
 
     contentIDArray = createBoard(whereAppend, numSquares, gridSize);
     console.log("contentIDArray");
@@ -187,16 +191,16 @@ if (saveNewLevelBtn !== null) {
     const loadMyLevel = require("../public/logic/builder/load-my-level");
     loadMyLevelBtn.addEventListener("change", loadMyLevel, false);
 
-    playMyLevelsBtn.addEventListener("click", function () {
-        // event.preventDefault();
-        let level_data = require("../public/data/level-data");
-        console.log("playMyLevelsBtn fires...");
-        console.log(level_data);
+    // playMyLevelsBtn.addEventListener("click", function () {
+    //     // event.preventDefault();
+    //     let level_data = require("../public/data/level-data");
+    //     console.log("playMyLevelsBtn fires...");
+    //     console.log(level_data);
 
-        // testing ONLY (user input needed):
+    //     // testing ONLY (user input needed):
 
-        return level_data;
-    });
+    //     return level_data;
+    // });
 
 };
 
@@ -226,7 +230,7 @@ if (enterGameBtn !== null) {
     // if (enterLevelBtn !== null) {
     enterLevelBtn.addEventListener("click", function (event) {
         event.preventDefault();
-        console.info("Entering level...");
+        console.log("Entering level...");
 
         console.log("myGameInfo:");
         console.log(myGameInfo);

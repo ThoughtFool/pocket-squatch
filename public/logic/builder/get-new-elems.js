@@ -16,7 +16,7 @@ const getNewElems = function () {
                     className: this.toKeep[i].children[0].classList[2],
                     class_moveType: "",
                     id: this.toKeep[i].id,
-                    imgUrl: ""
+                    imgUrl: `./images/${this.className}.PNG`
                 });
             };
             console.log(this.toCreate);
@@ -71,7 +71,7 @@ const getNewElems = function () {
             console.log("Error: dynamic-square-content does not contain any color squares.");
         };
     };
-    // console.info(levelCoordObject);
+    // console.log(levelCoordObject);
     let toKeep = levelCoordObject.getCoords();
     levelCoordObject.remove();
     return toKeep;

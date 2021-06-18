@@ -3,6 +3,7 @@ const createLevelObj = function (newElemArray) {
     let tracker = [];
     // let levelObj;
     let counter = 0;
+    console.log("inside create level obj function");
     for (let i = 0; i < newElemArray.length; i++) {
         counter++;
         // drawLevel("game-field", newElemArray[i]);

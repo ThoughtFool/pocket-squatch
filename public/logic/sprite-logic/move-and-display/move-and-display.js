@@ -393,8 +393,8 @@ const moveAndDisplay = {
 
         let adjustedSize = myGridHeight * spriteSizePercent;
 
-        console.info("adjustedSize");
-        console.info(adjustedSize);
+        console.log("adjustedSize");
+        console.log(adjustedSize);
 
         return adjustedSize;
 

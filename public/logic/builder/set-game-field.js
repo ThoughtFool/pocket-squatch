@@ -22,6 +22,10 @@ const setGameField = function (levelID, cb) {
     let gridSize = gamescreen_coords.height;
     // let gridSize = vh;
 
+    if (vw < vh) {
+        gridSize = gamescreen_coords.width;
+    };
+
     let gridClassName = "game-grid";
     let gridID = "my-grid";
 
@@ -176,23 +180,23 @@ const setGameField = function (levelID, cb) {
         ////////////////////////////////////////////////////////////////////////////////////////////
         .then(function (sortedObjArr) {
             // .then(function (sortedArray) {
-            console.info("sortedArray: after");
-            console.info(sortedObjArr);
+            console.log("sortedArray: after");
+            console.log(sortedObjArr);
 
             let newArrayHolder = [];
             // let newElemArray = [];
 
             newArrayHolder = sortedObjArr.map(compareSquares);
             // newArrayHolder.push(sortedObjArr.forEach(compareSquares));
-            console.info("newArrayHolder?");
-            console.info(newArrayHolder);
+            console.log("newArrayHolder?");
+            console.log(newArrayHolder);
 
             // newElemArray.concat.apply([], newArrayHolder);
             // OR:
             let newElemArray = newArrayHolder.flat(1);
 
-            console.info("newElemArray?");
-            console.info(newElemArray);
+            console.log("newElemArray?");
+            console.log(newElemArray);
 
             return newElemArray;
 
@@ -211,8 +215,8 @@ const setGameField = function (levelID, cb) {
 
         .then(function (newElemArray) {
             // let {toKeep, gameGrid} = obj;
-            console.info("newElemArray:");
-            console.info(newElemArray);
+            console.log("newElemArray:");
+            console.log(newElemArray);
 
             return createLevelObj(newElemArray); // returns "Done!"
         })
@@ -222,9 +226,8 @@ const setGameField = function (levelID, cb) {
 
             let gridDimensions = grid.getBoundingClientRect();
 
-            console.info("gridDimensions");
-            console.info(gridDimensions);
-            console.info(gridDimensions.width / 2 - this.width);
+            console.log("gridDimensions");
+            console.log(gridDimensions);
 
             let levelObj = {
                 coords: {
@@ -243,12 +246,14 @@ const setGameField = function (levelID, cb) {
                 id: "sprite-holder",
                 imgUrl: "/images/discovery.png"
             };
+            console.log("levelObj");
+            console.log(levelObj);
             // return drawLevel("game-field", levelObj);
             return drawLevel("my-grid", levelObj, null, true);
         })
         .then(function (newElemResult) {
-            console.info("newElemResult");
-            console.info(newElemResult);
+            console.log("newElemResult");
+            console.log(newElemResult);
 
             let obstacleObject = {
                 ground_className: "square-soil",
