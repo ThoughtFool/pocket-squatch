@@ -34,6 +34,7 @@ https://pocketsquatch.herokuapp.com/
 ###### Make a Builder for constructing game levels
 
 ![pocket-squatch-level-builder](assets/pocket-squatch-level-builder.gif)
+https://pocketsquatch.herokuapp.com/levels/block-builder/ids
 
 ---
 
