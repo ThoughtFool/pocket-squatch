@@ -6,7 +6,7 @@ const logger = require("morgan");
 global.fetch = require("node-fetch");
 const path = require("path");
 const bodyParser = require("body-parser"); // (handler: post)
-const exphbs = require("express-handlebars");
+const { engine } = require("express-handlebars");
 const startGame = require("./public/logic/game-logic/enter-game");
 const space_key = require("./public/data/instance-data");
 const gamespace = require("./public/data/game-space");
@@ -48,7 +48,8 @@ mongoose_DB.once("open", () => console.log("Database: Connected!"));
 app.use(logger("dev"));
 
 // Set templating engine:
-app.engine("handlebars", exphbs({
+app.engine("handlebars", engine({
+    extname: ".hbs",
     defaultLayout: "main",
     layoutsDir: __dirname + '/views/layouts/',
     partialsDir: __dirname + '/views/partials/'
