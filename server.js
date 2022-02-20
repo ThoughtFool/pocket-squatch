@@ -6,11 +6,7 @@ const PORT = 3001;
 const mongoose = require("mongoose");
 require('mongoose').set('debug', true)
 
-mongoose.connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-});
+mongoose.connect(process.env.DATABASE_URL);
 const dbTest = mongoose.connection;
 
 dbTest.on("error", (err) => console.error(err));
