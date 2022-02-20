@@ -32,7 +32,7 @@ router.get("/block-builder/ids", async (req, res) => {
             console.log(result);
 
             return result; // result is your array of ids
-        });
+        }).clone();
 
         console.log("idArray");
         console.log(idArray);

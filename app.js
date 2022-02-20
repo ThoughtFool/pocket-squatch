@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV === "development") {
+// if (process.env.NODE_ENV === "development") {
     require("dotenv").config();
-}
+// }
 
 const express = require("express");
 const mongojs = require("mongojs");
@@ -31,7 +31,7 @@ const app = express();
 const mongoose = require("mongoose");
 require("mongoose").set("debug", true);
 const MONGODB_URI =
-    process.env.DATABASE_URL || "mongodb://localhost/level_data";
+    process.env.DATABASE_URL;
 
 mongoose.connect(MONGODB_URI);
 const mongoose_DB = mongoose.connection;
@@ -88,16 +88,16 @@ db.on("error", (error) => {
 // ===========================  refactor  ============================
 // ===================================================================
 
-app.get("/levels/block-builder/ids", function (req, res) {
-    // app.get("/test-box", function (req, res) {
-    // console.log("mongoose_DB.find()");
-    // console.log(mongoose_DB.find());
+// app.get("/levels/block-builder/ids", function (req, res) {
+//     // app.get("/test-box", function (req, res) {
+//     // console.log("mongoose_DB.find()");
+//     // console.log(mongoose_DB.find());
 
-    res.render("block-builder", {
-        // levels: mongoose_DB.find()
-        idArray: idArray,
-    });
-});
+//     res.render("block-builder", {
+//         // levels: mongoose_DB.find()
+//         idArray: idArray,
+//     });
+// });
 
 app.post("/block-builder", function (req, res) {
     // let playerCreatedLevels = req.body["time-stamp-id"];
@@ -166,8 +166,8 @@ app.post("/submit", (req, res) => {
     });
 });
 
-app.get("/all", (req, res) => {
-    db.mySquatches.find({}, (error, data) => {
+app.get("/all", async (req, res) => {
+    await db.mySquatches.find({}, (error, data) => {
         if (error) {
             res.send(error);
         } else {
@@ -176,8 +176,8 @@ app.get("/all", (req, res) => {
     });
 });
 
-app.get("/find/:SpaceID", (req, res) => {
-    db.mySquatches.findOne(
+app.get("/find/:SpaceID", async (req, res, next) => {
+    await db.mySquatches.findOne(
         {
             // _id: mongojs.ObjectId(req.params.id)
             SpaceID: req.params.SpaceID,
@@ -189,11 +189,12 @@ app.get("/find/:SpaceID", (req, res) => {
                 res.send(data);
             }
         }
-    );
+    ).clone();
+    next();
 });
 
-app.post("/update/:id", (req, res) => {
-    db.mySquatches.update(
+app.post("/update/:id", async (req, res) => {
+    await db.mySquatches.update(
         {
             _id: mongojs.ObjectId(req.params.id),
         },
@@ -214,8 +215,8 @@ app.post("/update/:id", (req, res) => {
     );
 });
 
-app.delete("/delete/:id", (req, res) => {
-    db.mySquatches.remove(
+app.delete("/delete/:id", async (req, res) => {
+    await db.mySquatches.remove(
         {
             _id: mongojs.ObjectID(req.params.id),
         },
@@ -229,8 +230,8 @@ app.delete("/delete/:id", (req, res) => {
     );
 });
 
-app.delete("/clearall", (req, res) => {
-    db.mySquatches.remove({}, (error, response) => {
+app.delete("/clearall", async (req, res) => {
+    await db.mySquatches.remove({}, (error, response) => {
         if (error) {
             res.send(error);
         } else {
