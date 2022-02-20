@@ -1,12 +1,10 @@
-if (process.env.NODE_ENV === "development") {
 require("dotenv").config();
-}
 
 const express = require("express");
 const app = express();
 const PORT = 3001;
 const mongoose = require("mongoose");
-require("mongoose").set("debug", true);
+require('mongoose').set('debug', true)
 
 mongoose.connect(process.env.DATABASE_URL);
 const dbTest = mongoose.connection;
