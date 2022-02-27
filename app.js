@@ -287,16 +287,16 @@ app.post("/test-actions", function (req, res) {
     res.redirect("/test-actions");
 });
 
-app.get("/test-animations", function (req, res) {
-    res.render("test-animations", {
-        timer: parseInt(gameroom.timer), // create function to evalute timer on client with timer on server and update on change
-    });
-});
+// app.get("/test-animations", function (req, res) {
+//     res.render("test-animations", {
+//         timer: parseInt(gameroom.timer), // create function to evalute timer on client with timer on server and update on change
+//     });
+// });
 
-app.get("/login", function (req, res) {
-    // res.send(gamespace);
-    res.render("login", {});
-});
+// app.get("/login", function (req, res) {
+//     // res.send(gamespace);
+//     res.render("login", {});
+// });
 
 app.post("/enter-level", function (req, res) {
     let spriteName = req.body["createSprite"];

@@ -841,6 +841,10 @@ input {
   }
 }
 
+#create-sprite {
+  z-index: 1000;
+}
+
 /* create an enemy fear pose: frozen in terror with pulse effect */
 /* .move-fly-right:hover,
 .move-fly-left:hover,
