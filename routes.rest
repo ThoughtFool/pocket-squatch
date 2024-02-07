@@ -1,17 +1,17 @@
-GET http://localhost:3000/levels/block-builder/ids
+GET http://127.0.0.1:3000/levels/block-builder/ids
 
 ###
 
-GET http://localhost:3000/levels
+GET http://127.0.0.1:3000/levels
 
 ###
 
-GET http://localhost:3000/levels/60c85b253adc7f21c8b38aca
+GET http://127.0.0.1:3000/levels/60c85b253adc7f21c8b38aca
 
 
 ###
 
-POST http://localhost:3000/levels
+POST http://127.0.0.1:3000/levels
 Content-Type: application/json
 
 {
@@ -22,11 +22,11 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/levels/60c841ce59df7a1fd437e9d3
+DELETE http://127.0.0.1:3000/levels/60c841ce59df7a1fd437e9d3
 
 ###
 
-PATCH http://localhost:3000/levels/60c7e8774fc6d22e24f047f2
+PATCH http://127.0.0.1:3000/levels/60c7e8774fc6d22e24f047f2
 Content-Type: application/json
 
 {

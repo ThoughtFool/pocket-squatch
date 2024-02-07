@@ -128,7 +128,7 @@ const addStampToList = function () {
 let levelData = {
 
     data: {
-        001: {
+        "001": {
             blueprint: [
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                 1, 6, 6, 6, 6, 4, 4, 5, 0, 1,
@@ -150,7 +150,7 @@ let levelData = {
             ground: 150
         },
 
-        002: {
+        "002": {
             blueprint: [
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                 1, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 6, 4, 4, 5, 4, 5, 5, 5, 0, 0, 1,
@@ -186,7 +186,7 @@ let levelData = {
             groundDrag: 0.9, // ground movement
             ground: 150
         },
-        003: {
+        "003": {
             blueprint: [
                 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 6, 6, 1, 1, 1,
                 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 6, 6, 6, 4, 4, 1,
@@ -227,7 +227,7 @@ let levelData = {
         // console.log("timeStamp");
         // console.log(timeStamp);
         this.data[timeStamp] = {
-            blueprint: savedLevelArray,
+            blueprint: LevelArray,
             name: newLevelName,
             enemy: {},
             enemyTot: 5,
@@ -241,12 +241,12 @@ let levelData = {
     }
 };
 
-let levelID = 003;
+let levelID = "003";
 const contentBuilder = function (squareContentArray, contentIDArray, levelData, levelID) {
     for (let i = 0; i < contentIDArray.length; i++) {
         // let randomClass = Math.floor(Math.random() * 8);
         let contentSpace = document.getElementById(`${contentIDArray[i]}`);
-        let levelClass = levelData.loop(levelID, i);
+        let levelClass = String(levelData.loop(parseInt(levelID), i));
         contentSpace.classList.remove(contentSpace.classList[2]);
         contentSpace.classList.add(squareContentArray[levelClass]);
     };

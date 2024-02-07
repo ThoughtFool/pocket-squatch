@@ -2,7 +2,7 @@
     "name": "pocket-squatch",
     "version": "1.0.0",
     "engines": {
-        "node": "14.17.1"
+        "node": "18.x"
     },
     "description": "A simple, yet often complicated app that I am developing with my daughter.  It is based on a co-authored story about transformation and the hidden power within us all.",
     "main": "app.js",

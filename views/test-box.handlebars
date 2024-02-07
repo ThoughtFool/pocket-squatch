@@ -43,7 +43,7 @@
                                 <label for="createSprite">Choose a name for your
                                     Hero:</label><br>
                                 <input type="text" name="createSprite" id="create-sprite"
-                                    placeholder="Hero Name Here..." required>
+                                    value="Hero Name Here..." onfocus="this.value=''" required minlength="5">
                                 <button id="enter-game-btn">enter game</button><br>
                             </div>
 
@@ -64,7 +64,7 @@
             {{!-- <div>
                 <div>
                     <label style="color:blanchedalmond" for="createSprite">Choose a name for your Hero:</label><br>
-                    <input type="text" name="createSprite" id="create-sprite" placeholder="Hero Name Here..."
+                    <input type="text" name="createSprite" id="create-sprite" placeholder="Name Here..."
                         required><br>
                     <button id="enter-game-btn">enter game</button><br>
                 </div><br>

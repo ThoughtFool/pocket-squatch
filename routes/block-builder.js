@@ -6,7 +6,7 @@ const Level = require("../models/Level");
 router.get("/", async (req, res) => {
 
     try {
-        const levels = await Level.find();
+        const levels = await Level.find().clone();
         res.json(levels);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -91,7 +91,7 @@ async function getLevel(req, res, next) {
             };
             return level = data;
         };
-    });
+    }).clone();
 
     res.level = level;
     next();

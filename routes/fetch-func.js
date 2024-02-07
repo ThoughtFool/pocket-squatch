@@ -1,11 +1,11 @@
-module.exports = function (url, objParam) {
+module.exports = async function (url, objParam) {
     console.log("url");
     console.log(url);
     if (objParam != null) {
-        return fetch(url, objParam)
+        return await fetch(url, objParam)
             .then(res => {
                 console.log("this fired a res");
-                console.log(res);
+                console.info(res);
                 return res.json();
             });
     } else {

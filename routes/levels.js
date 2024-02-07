@@ -8,7 +8,7 @@ const level_data = require("../public/data/level-data");
 router.get("/", async (req, res) => {
 
     try {
-        const levels = await Level.find();
+        const levels = await Level.find().clone();
         console.log("levels");
         console.log(levels);
 
@@ -69,6 +69,9 @@ router.post("/", async (req, res) => {
         //     2, 2, 2, 4, 2, 2,
         // ]
     });
+
+    console.info("=== save level ===");
+    console.info(level);
 
     try {
         const newLevel = await level.save(
@@ -138,7 +141,7 @@ async function getLevel(req, res, next) {
             };
             return level = data;
         };
-    });
+    }).clone();
 
     res.level = level;
     next();

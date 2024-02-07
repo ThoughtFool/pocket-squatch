@@ -51,6 +51,10 @@ const enterGame = function (spriteName, player_data) {
 
     console.log(myGameInstance);
 
+    const btnDownUp = require("../sprite-logic/client/btn-down-up");
+    document.addEventListener("keydown", btnDownUp, false);
+    document.addEventListener("keyup", btnDownUp, false);
+
     ///////////////////////////////////////////////////////////////
     updateClientScreen(dataObj);
 

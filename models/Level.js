@@ -8,6 +8,7 @@ const levelSchema = new mongoose.Schema({
     },
     createdBy: {
         type: String,
+        // default: "Oberon Oakenshield",
         required: true
     },
     blueprint: [String],

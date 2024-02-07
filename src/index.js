@@ -208,18 +208,20 @@ if (saveNewLevelBtn !== null) {
 const enterGameBtn = document.getElementById("enter-game-btn");
 const enterLevelBtn = document.getElementById("enter-level-btn");
 const enemyBtn = document.getElementById("enemy-btn");
-const createSprite = document.getElementById("create-sprite");
+// const createSprite = document.getElementById("create-sprite");
 
 let myGameInfo;
 let transformTimer;
 
 if (enterGameBtn !== null) {
-    console.log(enterGameBtn)
+    console.info(enterGameBtn)
     enterGameBtn.addEventListener("click", function (event) {
         event.preventDefault();
         console.log("Entering game...");
 
         // testing ONLY (user input needed):
+        const createSprite = document.getElementById("create-sprite");
+
         let spriteName = createSprite.value;
         myGameInfo = enterGame(spriteName, player_data);
 
@@ -328,7 +330,7 @@ if (enterGameBtn !== null) {
     // event listener for moving player sprite(s):
     //////////////////////////////////////////////////////////////////
 
-    const btnDownUp = require("../public/logic/sprite-logic/client/btn-down-up");
-    document.addEventListener("keydown", btnDownUp, false);
-    document.addEventListener("keyup", btnDownUp, false);
+    // const btnDownUp = require("../public/logic/sprite-logic/client/btn-down-up");
+    // document.addEventListener("keydown", btnDownUp, false);
+    // document.addEventListener("keyup", btnDownUp, false);
 };
