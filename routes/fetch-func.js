@@ -9,7 +9,7 @@ module.exports = async function (url, objParam) {
                 return res.json();
             });
     } else {
-        return fetch(url)
+        return await fetch(url)
             .then(res => res.json());
     };
 };

@@ -3,7 +3,6 @@ const moveAndDisplay = require("../sprite-logic/move-and-display/move-and-displa
 const setGameField = require("../builder/set-game-field");
 
 const enterLevel = function (timeKeeper, myGameInfo) {
-
     // // test ONLY:
     // let groundTop = document.querySelector(".square-grass").getBoundingClientRect().top;
 
@@ -43,7 +42,7 @@ const enterLevel = function (timeKeeper, myGameInfo) {
         SpaceID,
         SpaceIndex,
         space_key,
-        myGameInstance
+        myGameInstance,
     } = myGameInfo;
 
     // let obstacleObject = gamespace.data[space_key.index].gameInstance.data.data.obstacleObject;
@@ -60,30 +59,45 @@ const enterLevel = function (timeKeeper, myGameInfo) {
     // promise
     //     .then(function (result) {
 
-    // TODO: add dynamic levelTheme instead of levelID:
-    setGameField(levelID = "60c9690e91e2ddf727f4ba7e", function (obstacleObject, newElem_ID) {
-        console.log("obstacleObject");
-        console.log(obstacleObject);
+    // TODO: add dynamic levelTheme instead of levelID
+    // TODO: add automatic level progression or random/user selection:
+    
+    setGameField(
+        (levelID = "60c9690e91e2ddf727f4ba7e"),
+        function (obstacleObject, newElem_ID) {
+            console.log("obstacleObject");
+            console.log(obstacleObject);
 
-        console.log("newElem_ID");
-        console.log(newElem_ID);
+            console.log("newElem_ID");
+            console.log(newElem_ID);
 
-        const myPhysics = new Sprite_Physics("my-grid", obstacleObject, newElem_ID);
-        // const myPhysics = new Sprite_Physics("game-screen", obstacleObject, newElem_ID);
+            const btnDownUp = require("../sprite-logic/client/btn-down-up");
+            document.addEventListener("keydown", btnDownUp, false);
+            document.addEventListener("keyup", btnDownUp, false);
 
-        gamespace.data[space_key.index].gameInstance.player.sprite.physics = myPhysics;
-        console.log(gamespace.data[space_key.index].gameInstance.player.sprite);
+            const myPhysics = new Sprite_Physics(
+                "my-grid",
+                obstacleObject,
+                newElem_ID
+            );
+            // const myPhysics = new Sprite_Physics("game-screen", obstacleObject, newElem_ID);
 
+            gamespace.data[space_key.index].gameInstance.player.sprite.physics =
+                myPhysics;
+            console.log(
+                gamespace.data[space_key.index].gameInstance.player.sprite
+            );
 
-        //////////////////////////////////////////////////////////////////
-        // testing enemy animation (gravity and velocity):
-        //////////////////////////////////////////////////////////////////
-        const animateFrame = require("./animate-frame");
+            //////////////////////////////////////////////////////////////////
+            // testing enemy animation (gravity and velocity):
+            //////////////////////////////////////////////////////////////////
+            const animateFrame = require("./animate-frame");
 
-        animateFrame(100, gamespace, space_key);
+            animateFrame(100, gamespace, space_key);
 
-        return setInterval(timeKeeper, 1000);
-    });
+            return setInterval(timeKeeper, 1000);
+        }
+    );
 
     // });
 };
